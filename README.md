@@ -10,9 +10,10 @@ End-to-end reverse-engineering of the [`command-code`](https://www.npmjs.com/pac
 | **[TOOL-REPAIR.md](TOOL-REPAIR.md)** | Deep-dive: how 6 repair rules shipped 36K+ fixes and made DeepSeek V4 Pro beat Opus 4.7 |
 | **[DESIGN-SKILLS.md](DESIGN-SKILLS.md)** | Deep-dive: the AI design partner — 16 tools, 24 reference docs, smell system |
 
-| Directory | Contents |
+| File / Directory | Contents |
 |---|---|
-| **[`source/`](source/)** | Extracted & beautified source code (model catalog, pricing, tool repair, agents, skill loader) |
+| **[`index.mjs`](index.mjs)** | Full beautified bundle (70,494 lines) — the complete decompiled source |
+| **[`source/`](source/)** | Extracted key source sections (model catalog, pricing, tool repair, agents, skill loader) |
 | **[`skills/`](skills/)** | Original bundled skill files — design system (389-line orchestrator + 24 references) and agent browser |
 | **[`vsix-extension/`](vsix-extension/)** | Decompiled VS Code extension (578-line IPC bridge) |
 
@@ -62,28 +63,27 @@ End-to-end reverse-engineering of the [`command-code`](https://www.npmjs.com/pac
 
 ## Architecture Overview
 
-```
-+--------------------------------------------------------------------+
-|  dist/index.mjs -- Single-file ESM CLI bundle (70,494 lines)       |
-+--------------------------------------------------------------------+
-|                                                                     |
-|  Layer 1:  Imports & Shims ................... Lines     1-160      |
-|  Layer 2:  Constants (models, pricing, API) .. Lines   160-1,320    |
-|  Layer 3:  Auth, Config, Input Components .... Lines 1,320-3,600    |
-|  Layer 4:  Utilities (model, telemetry, paths) Lines 3,600-5,800    |
-|  Layer 5:  Bundled ORM + DB Driver ........... Lines 5,800-23,400   |
-|  Layer 6:  API Client, Skills, MCP ........... Lines 23,400-27,900  |
-|  Layer 7:  OAuth Flows & Login ............... Lines 27,900-29,700  |
-|  Layer 8:  Memory (AGENTS.md), Taste, Settings Lines 29,700-31,500  |
-|  Layer 9:  AI Tool Implementations ........... Lines 31,500-34,200  |
-|  Layer 10: Agent System & SSE Streaming ...... Lines 34,200-37,700  |
-|  Layer 11: Hooks, Permissions, Learning ...... Lines 37,700-41,500  |
-|  Layer 12: ContextEngine (Core AI Loop) ...... Lines 41,500-44,500  |
-|  Layer 13: Onboarding, Updates, IDE .......... Lines 44,500-46,700  |
-|  Layer 14: Slash Commands & React TUI ........ Lines 46,700-62,500  |
-|  Layer 15: CLI Program & Commands ............ Lines 62,500-70,494  |
-|                                                                     |
-+--------------------------------------------------------------------+
+```mermaid
+block-beta
+  columns 1
+  block:bundle["dist/index.mjs — Single-file ESM CLI bundle (70,494 lines)"]
+    columns 3
+    L1["Layer 1\nImports & Shims\nLines 1–160"]
+    L2["Layer 2\nConstants (models, pricing, API)\nLines 160–1,320"]
+    L3["Layer 3\nAuth, Config, Input Components\nLines 1,320–3,600"]
+    L4["Layer 4\nUtilities (model, telemetry, paths)\nLines 3,600–5,800"]
+    L5["Layer 5\nBundled ORM + DB Driver\nLines 5,800–23,400"]
+    L6["Layer 6\nAPI Client, Skills, MCP\nLines 23,400–27,900"]
+    L7["Layer 7\nOAuth Flows & Login\nLines 27,900–29,700"]
+    L8["Layer 8\nMemory, Taste, Settings\nLines 29,700–31,500"]
+    L9["Layer 9\nAI Tool Implementations\nLines 31,500–34,200"]
+    L10["Layer 10\nAgent System & SSE Streaming\nLines 34,200–37,700"]
+    L11["Layer 11\nHooks, Permissions, Learning\nLines 37,700–41,500"]
+    L12["Layer 12\nContextEngine (Core AI Loop)\nLines 41,500–44,500"]
+    L13["Layer 13\nOnboarding, Updates, IDE\nLines 44,500–46,700"]
+    L14["Layer 14\nSlash Commands & React TUI\nLines 46,700–62,500"]
+    L15["Layer 15\nCLI Program & Commands\nLines 62,500–70,494"]
+  end
 ```
 
 **Key architectural observations:**
@@ -353,35 +353,40 @@ Autonomous sandbox execution mode. Gated behind `--experimental`.
 
 ## `.commandcode` Directory Structure
 
-```
-~/.commandcode/                          # Global root
-|-- auth.json                            # API credentials (chmod 0600)
-|-- config.json                          # User config (model, telemetry, etc.)
-|-- settings.json                        # User-level settings
-|-- AGENTS.md                            # User memory / instructions
-|-- history.jsonl                        # Conversation history (NDJSON)
-|-- mcp.json                             # User-level MCP config
-|-- trusted-hooks.json                   # Trusted hook fingerprints
-|-- updates.json                         # Update check state
-|-- logs/
-|   |-- command.log                      # Debug log
-|   +-- flicker.log                      # UI flicker debug log
-|-- skills/                              # Global skills
-|-- agents/                              # Global agents
-|-- taste/taste.md                       # Global taste data
-|-- ide/                                 # VS Code IPC socket tracking
-|-- file-history/<sessionId>/            # File backups per session
-|   +-- <sha256-hash>@v<N>              # Versioned backup files
-+-- projects/<hash>/                     # Per-project global data
+```mermaid
+graph LR
+  subgraph Global["~/.commandcode/ (Global root)"]
+    auth["auth.json — API credentials (chmod 0600)"]
+    config["config.json — User config (model, telemetry)"]
+    settings["settings.json — User-level settings"]
+    agents_md["AGENTS.md — User memory / instructions"]
+    history["history.jsonl — Conversation history (NDJSON)"]
+    mcp["mcp.json — User-level MCP config"]
+    hooks["trusted-hooks.json — Trusted hook fingerprints"]
+    updates["updates.json — Update check state"]
+    subgraph logs["logs/"]
+      cmd_log["command.log — Debug log"]
+      flicker["flicker.log — UI flicker debug"]
+    end
+    g_skills["skills/ — Global skills"]
+    g_agents["agents/ — Global agents"]
+    taste_g["taste/taste.md — Global taste data"]
+    ide["ide/ — VS Code IPC socket tracking"]
+    subgraph filehist["file-history/&lt;sessionId&gt;/"]
+      backup["&lt;sha256-hash&gt;@v&lt;N&gt; — Versioned backups"]
+    end
+    projects["projects/&lt;hash&gt;/ — Per-project global data"]
+  end
 
-<project>/.commandcode/                  # Project-local root
-|-- settings.json / settings.local.json
-|-- AGENTS.md
-|-- skills/ / agents/
-|-- taste/taste.md
-|-- plans/
-|-- commands/
-+-- design/                              # Design audit reports
+  subgraph Local["&lt;project&gt;/.commandcode/ (Project-local root)"]
+    l_settings["settings.json / settings.local.json"]
+    l_agents_md["AGENTS.md"]
+    l_skills["skills/ / agents/"]
+    l_taste["taste/taste.md"]
+    l_plans["plans/"]
+    l_commands["commands/"]
+    l_design["design/ — Design audit reports"]
+  end
 ```
 
 ---
@@ -503,47 +508,42 @@ The repair layer shipped **36,000+ repairs** in v0.28.0 and is the key infrastru
 
 ## Repository Structure
 
-```
-command-code/
-├── README.md                           # This file — full decompilation report
-├── TOOL-REPAIR.md                      # Deep-dive: tool-input repair system
-├── DESIGN-SKILLS.md                    # Deep-dive: AI design partner skill
-├── .gitignore
-│
-├── source/                             # Extracted & beautified source code
-│   ├── models/
-│   │   ├── catalog.js                  # 23 model definitions + legacy aliases + provider routing
-│   │   └── pricing.js                  # Per-model pricing & subscription plan limits
-│   ├── tool-repair/
-│   │   ├── repair-system.js            # Core validate-then-repair engine (6 post-validation rules)
-│   │   ├── pre-parse.js                # Pre-parse JSON repair (control chars, truncation)
-│   │   └── read-file-defaults.js       # Semantic defaults for read_file tool
-│   ├── tools/
-│   │   ├── self-knowledge.js           # get_self_knowledge tool (product docs, shortcuts, FAQs)
-│   │   └── skill-loader.js             # Skill discovery & resolution (search order, git root walk)
-│   └── agents/
-│       └── builtin-agents.js           # Built-in agent definitions (explore, plan)
-│
-├── skills/                             # Original bundled skill files (copied from npm package)
-│   ├── design/
-│   │   ├── SKILL.md                    # 389-line design orchestrator
-│   │   └── references/                 # 24 reference docs (~4,300 lines total)
-│   │       ├── color.md, typeset.md, layout.md, motion.md, ...
-│   │       ├── checkup.md, review.md, smell.md (audit tools)
-│   │       └── setup.md, create.md, finish.md, refine.md, ...
-│   └── agent-browser/
-│       └── SKILL.md                    # Browser automation skill
-│
-└── vsix-extension/                     # Decompiled VS Code extension
-    ├── extension.js                    # 578-line IPC bridge (CJS)
-    ├── package.json                    # Extension manifest
-    ├── icon.png, icons/                # Extension icons
-    ├── readme.md, changelog.md         # Extension docs
-    └── LICENSE.txt
-```
+```mermaid
+graph TD
+  ROOT["command-code/"]
 
-> **Note:** The full beautified bundle (`index.mjs`, 70,494 lines / 2.2 MB) is excluded from git.
-> Key sections are extracted into `source/` as readable, annotated files.
+  ROOT --> INDEX["index.mjs — Full beautified bundle (70,494 lines)"]
+  ROOT --> README["README.md — Full decompilation report"]
+  ROOT --> TOOLREPAIR["TOOL-REPAIR.md — Tool repair deep-dive"]
+  ROOT --> DESIGNSKILLS["DESIGN-SKILLS.md — Design skill deep-dive"]
+
+  ROOT --> SOURCE["source/"]
+  SOURCE --> MODELS["models/"]
+  MODELS --> CATALOG["catalog.js — 23 model definitions + legacy aliases"]
+  MODELS --> PRICING["pricing.js — Per-model pricing & plan limits"]
+  SOURCE --> TR["tool-repair/"]
+  TR --> REPAIR["repair-system.js — Validate-then-repair engine (6 rules)"]
+  TR --> PREPARSE["pre-parse.js — JSON repair (control chars, truncation)"]
+  TR --> READFILE["read-file-defaults.js — Semantic defaults"]
+  SOURCE --> TOOLS["tools/"]
+  TOOLS --> SELFKNOW["self-knowledge.js — Product docs, shortcuts, FAQs"]
+  TOOLS --> SKILLLOAD["skill-loader.js — Skill discovery & resolution"]
+  SOURCE --> AGENTS["agents/"]
+  AGENTS --> BUILTIN["builtin-agents.js — Built-in agents (explore, plan)"]
+
+  ROOT --> SKILLS["skills/"]
+  SKILLS --> DESIGN["design/"]
+  DESIGN --> SKILLMD["SKILL.md — 389-line orchestrator"]
+  DESIGN --> REFS["references/ — 24 docs (~4,300 lines)"]
+  SKILLS --> BROWSER["agent-browser/"]
+  BROWSER --> BROWSERSKILL["SKILL.md — Browser automation"]
+
+  ROOT --> VSIX["vsix-extension/"]
+  VSIX --> EXT["extension.js — 578-line IPC bridge"]
+  VSIX --> PKG["package.json — Extension manifest"]
+  VSIX --> ICONS["icon.png, icons/"]
+  VSIX --> DOCS["readme.md, changelog.md, LICENSE.txt"]
+```
 
 ---
 
