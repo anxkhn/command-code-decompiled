@@ -1,0 +1,82 @@
+{
+	"name": "commandcode-vscode",
+	"private": true,
+	"displayName": "Command Code for VS Code",
+	"description": "Stop fixing sloppy AI code. Command Code continuously learns your coding taste.",
+	"version": "0.0.1",
+	"publisher": "commandcode",
+	"license": "Apache-2.0",
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#1a1a2e",
+		"theme": "dark"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/commandCodeAI/command-code"
+	},
+	"homepage": "https://commandcode.ai",
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"AI",
+		"Chat",
+		"Machine Learning",
+		"Programming Languages",
+		"Other"
+	],
+	"keywords": [
+		"ai",
+		"assistant",
+		"claude",
+		"code",
+		"commandcode",
+		"context",
+		"coding",
+		"llm",
+		"terminal",
+		"agentic"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "commandcode.openInTerminal",
+				"title": "Open Command Code",
+				"category": "Command Code",
+				"icon": {
+					"light": "icons/icon-light.svg",
+					"dark": "icons/icon-dark.svg"
+				}
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "commandcode.openInTerminal",
+					"group": "navigation"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"package": "vsce package",
+		"publish": "vsce publish"
+	},
+	"devDependencies": {
+		"@types/node": "^20.0.0",
+		"@types/vscode": "^1.85.0",
+		"@vscode/vsce": "^3.7.1",
+		"tsup": "^8.0.0",
+		"typescript": "^5.3.0",
+		"vitest": "^3.2.4"
+	}
+}
