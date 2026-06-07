@@ -1,8 +1,23 @@
+        // ══════════════════════════════════════════════════════════
         // v0.33.0 — Model catalog (28 current models, +5 from v0.28.1)
-        // API spec types: an = "chatComplete", ln = "responses"
-        // Provider constants: Gt.ANTHROPIC, Gt.OPENAI, Kt = gateway (Vercel/Baseten/etc)
-        // Free tier default: cn = "Qwen/Qwen3.7-Max-Free"
-        (un = {
+        //
+        // Variable mapping:
+        //   un  = MODEL_CATALOG (main model registry object)
+        //   an  = SPEC_CHAT_COMPLETE ("chatComplete")
+        //   ln  = SPEC_RESPONSES ("responses")
+        //   on  = SPEC_CHAT_COMPLETE (alias, used for open models via gateway)
+        //   sn  = SPEC_RESPONSES (alias, used for OpenAI models)
+        //   Gt  = PROVIDER (enum: ANTHROPIC, OPENAI, VERCEL_AI_GATEWAY, BASETEN, etc.)
+        //   Wt  = PROVIDER (alias reference, same enum)
+        //   Qt  = PROVIDER.VERCEL_AI_GATEWAY (shorthand for open models)
+        //   Kt  = PROVIDER.VERCEL_AI_GATEWAY (shorthand for newer open models)
+        //   mn  = LEGACY_ALIASES (old model ID → current model ID)
+        //   ln  = PROVIDER_ROUTING (per-model provider routing table)
+        //   pn  = TASTE_ONBOARDING_MODEL (Kimi K2.5)
+        //   dn  = PROVIDER_DISPLAY_NAMES
+        //   cn  = FREE_TIER_DEFAULT_MODEL ("Qwen/Qwen3.7-Max-Free")
+        // ══════════════════════════════════════════════════════════
+        (un /* MODEL_CATALOG */ = {
           SONNET_4_6: {
             id: "claude-sonnet-4-6",
             inputModalities: ["text", "image"],    // NEW in v0.33.0
@@ -399,15 +414,15 @@
           },
         ]),
         // Legacy aliases — unchanged from v0.28.1
-        (mn = {
+        (mn /* LEGACY_ALIASES */ = {
           "claude-sonnet-4-20250514": un.SONNET_4_6.id,
           "claude-sonnet-4-5-20250929": un.SONNET_4_6.id,
           "claude-opus-4-5-20251101": un.OPUS_4_7.id,
           "claude-opus-4-6": un.OPUS_4_7.id,
           "claude-haiku-4-5": un.HAIKU_4_5.id,
         }),
-        (pn = un.KIMI_K2_5.id),
-        (dn = {
+        (pn /* TASTE_ONBOARDING_MODEL */ = un.KIMI_K2_5.id),
+        (dn /* PROVIDER_DISPLAY_NAMES */ = {
           [Gt.ANTHROPIC]: "Anthropic",
           [Gt.OPENAI]: "OpenAI",
           [Gt.BASETEN]: "Open Source",

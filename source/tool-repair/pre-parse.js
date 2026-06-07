@@ -1,67 +1,67 @@
-var Ek = { "\n": "\\n", "\r": "\\r", "\t": "\\t" },
-  vk = ['"}', '"}}', "}", '": ""}'];
-function isPlainObject(e) {
-  return "object" == typeof e && null !== e;
+var CONTROL_CHAR_MAP = { "\n": "\\n", "\r": "\\r", "\t": "\\t" },
+  TRUNCATION_SUFFIXES = ['"}', '"}}', "}", '": ""}'];
+function isPlainObject(value) {
+  return "object" == typeof value && null !== value;
 }
-function escapeControlCharsInJsonStrings(e) {
-  const t = [];
-  let n = !1,
-    r = 0;
-  for (; r < e.length; ) {
-    const o = e[r];
-    if (!n) {
-      ('"' === o && (n = !0), t.push(o), r++);
+function escapeControlCharsInJsonStrings(jsonStr) {
+  const result = [];
+  let inString = !1,
+    pos = 0;
+  for (; pos < jsonStr.length; ) {
+    const char = jsonStr[pos];
+    if (!inString) {
+      ('"' === char && (inString = !0), result.push(char), pos++);
       continue;
     }
-    if ("\\" === o) {
-      (t.push(o, e[r + 1] ?? ""), (r += 2));
+    if ("\\" === char) {
+      (result.push(char, jsonStr[pos + 1] ?? ""), (pos += 2));
       continue;
     }
-    if ('"' === o) {
-      ((n = !1), t.push(o), r++);
+    if ('"' === char) {
+      ((inString = !1), result.push(char), pos++);
       continue;
     }
-    const s = o.charCodeAt(0);
-    s >= 32
-      ? (t.push(o), r++)
-      : (t.push(Ek[o] ?? `\\u${s.toString(16).padStart(4, "0")}`), r++);
+    const charCode = char.charCodeAt(0);
+    charCode >= 32
+      ? (result.push(char), pos++)
+      : (result.push(CONTROL_CHAR_MAP[char] ?? `\\u${charCode.toString(16).padStart(4, "0")}`), pos++);
   }
-  return t.join("");
+  return result.join("");
 }
-function repairTruncatedJson(e) {
-  if (!e.startsWith("{")) return null;
-  for (const t of vk)
+function repairTruncatedJson(jsonStr) {
+  if (!jsonStr.startsWith("{")) return null;
+  for (const suffix of TRUNCATION_SUFFIXES)
     try {
-      const n = JSON.parse(e + t);
-      if (isPlainObject(n)) return n;
+      const parsed = JSON.parse(jsonStr + suffix);
+      if (isPlainObject(parsed)) return parsed;
     } catch {}
   return null;
 }
-function tryParseDirectly(e) {
+function tryParseDirectly(jsonStr) {
   try {
-    const t = JSON.parse(e);
-    if (isPlainObject(t)) return t;
-    if ("string" == typeof t) return parseToolArgs(t);
+    const parsed = JSON.parse(jsonStr);
+    if (isPlainObject(parsed)) return parsed;
+    if ("string" == typeof parsed) return parseToolArgs(parsed);
   } catch {}
   return null;
 }
-function tryParseAfterEscaping(e) {
+function tryParseAfterEscaping(jsonStr) {
   try {
-    const t = JSON.parse(escapeControlCharsInJsonStrings(e));
-    if (isPlainObject(t)) return t;
+    const parsed = JSON.parse(escapeControlCharsInJsonStrings(jsonStr));
+    if (isPlainObject(parsed)) return parsed;
   } catch {}
   return null;
 }
-function parseToolArgs(e) {
+function parseToolArgs(rawArgs) {
   return (
-    tryParseDirectly(e) ??
-    tryParseAfterEscaping(e) ??
-    repairTruncatedJson(e) ??
-    repairTruncatedJson(escapeControlCharsInJsonStrings(e))
+    tryParseDirectly(rawArgs) ??
+    tryParseAfterEscaping(rawArgs) ??
+    repairTruncatedJson(rawArgs) ??
+    repairTruncatedJson(escapeControlCharsInJsonStrings(rawArgs))
   );
 }
-function normalizeToolInput(e) {
-  return "string" != typeof e ? e : (parseToolArgs(e) ?? e);
+function normalizeToolInput(input) {
+  return "string" != typeof input ? input : (parseToolArgs(input) ?? input);
 }
 (__name(isPlainObject, "isPlainObject"),
   __name(escapeControlCharsInJsonStrings, "escapeControlCharsInJsonStrings"),
@@ -69,4 +69,4 @@ function normalizeToolInput(e) {
   __name(tryParseDirectly, "tryParseDirectly"),
   __name(tryParseAfterEscaping, "tryParseAfterEscaping"),
   __name(parseToolArgs, "parseToolArgs"),
-  __name(normalizeToolInput, "normalizeToolInput"),
+  __name(normalizeToolInput, "normalizeToolInput"));

@@ -1,4 +1,17 @@
-        (Yt = {
+        // ══════════════════════════════════════════════════════════
+        // v0.33.0 — Pricing & Subscription Plans
+        //
+        // Variable mapping:
+        //   Yt  = PRICING_TABLE (per-provider pricing arrays)
+        //   Wt  = PROVIDER (enum)
+        //   Jt  = PLAN_BUDGETS (per-plan budget limits)
+        //   Xt  = PLAN_DISPLAY_NAMES
+        //   Zt  = PLAN_RESTRICTIONS (allowed categories + blocked models)
+        //   en  = PLAN_ORDER (plan ID array)
+        //
+        // Pricing is per 1M tokens. Categories: "premium" | "opensource"
+        // ══════════════════════════════════════════════════════════
+        (Yt /* PRICING_TABLE */ = {
           [Wt.ANTHROPIC]: [
             {
               id: "anthropic:claude-sonnet-4-20250514",
@@ -169,21 +182,21 @@
           [Wt.OPENROUTER]: [],
         }),
         __name(getModelCategory, "getModelCategory"),
-        (Jt = {
+        (Jt /* PLAN_BUDGETS */ = {
           "individual-go": { premium: 0, opensource: 10, total: 10 },
           "individual-pro": { premium: 15, opensource: 15, total: 30 },
           "individual-max": { premium: 100, opensource: 50, total: 150 },
           "individual-ultra": { premium: 200, opensource: 100, total: 300 },
           "teams-pro": { premium: 40, opensource: 0, total: 40 },
         }),
-        (Xt = {
+        (Xt /* PLAN_DISPLAY_NAMES */ = {
           "individual-go": "Go",
           "individual-pro": "Pro",
           "individual-max": "Max",
           "individual-ultra": "Ultra",
           "teams-pro": "Teams Pro",
         }),
-        (Zt = {
+        (Zt /* PLAN_RESTRICTIONS */ = {
           "individual-go": { allowedCategories: ["opensource"] },
           "individual-pro": {
             allowedCategories: ["premium", "opensource"],
@@ -198,7 +211,7 @@
           "individual-ultra": { allowedCategories: ["premium", "opensource"] },
           "teams-pro": { allowedCategories: ["premium", "opensource"] },
         }),
-        (en = [
+        (en /* PLAN_ORDER */ = [
           "individual-go",
           "individual-pro",
           "individual-max",

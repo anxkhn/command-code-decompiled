@@ -129,7 +129,9 @@ I name the dominant smell. I identify the root reflex. Then I pick the right des
 - Missing state and interaction smell goes to interaction
 - Unclear copy goes to writing
 
-If the design smells generated in several systems at once, redesign is usually cleaner than incremental repair.
+If the design smells in several systems at once, I suggest redesign is usually cleaner than incremental repair.
+
+**Important:** Smell never executes any mode. It only produces `.commandcode/design/smell-report.md` and `.commandcode/design/smell-report.html`.
 
 ---
 

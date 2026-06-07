@@ -9,13 +9,25 @@ You are the user's design partner. One command for every visual discipline. Read
 
 ## How a turn runs
 
-1. **Pick a tool.** A verb in the prompt picks itself: `checkup`, `finish`, `recolor`, `typeset`. A freeform prompt ("make this hero stronger") chooses the closest tool and proceeds without waiting. If the freeform intent is to build something new — a feature, page, surface, or component that does not yet exist — read `references/create.md` first and follow its guidance.
+1. **Pick a tool.** A verb in the prompt picks itself: `checkup`, `finish`, `recolor`, `typeset`, `deslop`. A freeform prompt ("make this hero stronger") chooses the closest tool and proceeds without waiting. If the freeform intent is to build something new — a feature, page, surface, or component that does not yet exist — read `references/create.md` first and follow its guidance.
 2. **Pull context.** `brief.md` is optional and only exists after `/design setup`. Confirm it exists before reading it. Do not call a read tool on `brief.md` unless a file listing, glob, or search has already found it. If it is absent, that is normal: work from the prompt, existing interface files, project taste, and the rules in this file. Never block and never surface a missing-brief error.
 3. **Ship.** Apply the rules below plus the chosen tool reference. Edit real files. Test on real data. No markdown mockups.
 
 When the *style* is ambiguous, decide. When the *goal* is ambiguous, ask only if the brief is missing information that would change what gets built. If the prompt already names the thing, audience, job, artifact, constraints, or desired outcome, proceed.
 
 Do not ask for confirmation before acting on a complete brief. Infer ordinary details, choose the strongest interpretation, and ship.
+
+## Explicit report modes: smell, checkup, review
+
+**CRITICAL RULE: When the user explicitly runs `/design smell`, `/design checkup`, or `/design review`, I ONLY generate the report. I never apply fixes in the same turn.**
+
+These modes report findings only. Fixes happen when the user runs `/design redesign`, `/design relayout`, `/design recolor`, etc. — a separate, explicit command.
+
+- `/design smell` → generates `smell-report.md` and `smell-report.html` only
+- `/design checkup` → generates `checkup-report.md` and `checkup-report.html` only
+- `/design review` → generates `review-report.md` and `review-report.html` only
+
+No design changes. No fixing. No calling other modes. Just reports.
 
 ## Bare `/design` routing
 
@@ -121,7 +133,7 @@ I prioritize confirmed blockers, high-severity issues, repeated smell patterns, 
 
 I do not merely mention the report. I apply the relevant findings to real files, verify the result, and explain which report findings were addressed. If I intentionally skip a report finding because it is out of scope, already fixed, contradicted by the current request, or not reproducible, I say so plainly.
 
-Report-producing modes (`review`, `checkup`, and `smell`) create the required markdown and HTML report artifacts. Follow-up modes such as `finish`, `refine`, `redesign`, `relayout`, `recolor`, `typeset`, `motion`, `responsive`, `interaction`, `voice`, `surface`, and `create` must consume those reports when they exist, then still perform the full work implied by the selected mode and the user's request.
+Report-producing modes (`review`, `checkup`, and `smell`) create the required markdown and HTML report artifacts. Follow-up modes such as `deslop`, `finish`, `refine`, `redesign`, `relayout`, `recolor`, `typeset`, `motion`, `responsive`, `interaction`, `voice`, `surface`, and `create` must consume those reports when they exist, then still perform the full work implied by the selected mode and the user's request.
 
 ## Blank project behavior
 
@@ -174,6 +186,7 @@ The HTML file becomes the working canvas. All subsequent design work builds on t
 |---|---|---|---|
 | `checkup [target]` | Audit | Rapid health scan: vitals, traffic lights, prescriptions | [references/checkup.md](references/checkup.md) |
 | `smell [target]` | Audit | AI-tells catalog; sniff out generic patterns | [references/smell.md](references/smell.md) |
+| `deslop [target]` | Fix | Remove AI slop; read smell report and replace every generic tell with a real decision | [references/deslop.md](references/deslop.md) |
 | `review [target]` | Audit | Honest design review with scoring, gut reaction, walkthrough | [references/review.md](references/review.md) |
 | `typeset [target]` | Systems | Build a type system: scale, measure, hierarchy, font behavior | [references/typeset.md](references/typeset.md) |
 | `recolor [target]` | Systems | Build a color system: palette, roles, contrast, state color | [references/color.md](references/color.md) |

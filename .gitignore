@@ -5,3 +5,7 @@ vsix-decompiled/
 node_modules/
 .DS_Store
 *.vsix
+
+# Session artifacts
+.grok-*.md
+prompt.md

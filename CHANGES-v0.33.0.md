@@ -241,7 +241,132 @@ These were either added in v0.33.0 or between v0.28.1 and v0.33.0.
 
 ---
 
-## 8. What Didn't Change
+## 8. Taste System — The Neuro-Symbolic Learning Layer
+
+The taste system is powered by a model called **taste-1** — described as a "meta neuro-symbolic AI model with continuous reinforcement learning."
+
+### Architecture
+
+Three storage layers:
+
+| Type | Path | Purpose |
+|---|---|---|
+| Project | `.commandcode/taste/taste.md` | Codebase-specific learnings |
+| Global | `~/.commandcode/taste/` | Personal taste across all projects |
+| Remote | `commandcode.ai/username/taste` | Team sharing, cross-machine sync |
+
+### Database Schema
+
+```javascript
+taste_packages = {
+  id: uuid().primaryKey(),
+  name: text().notNull(),
+  description: text(),
+  type: taste_package_type.default("category"),  // "project" | "category"
+  ownerUserId: uuid().references(users.id),
+  ownerOrgId: uuid().references(orgs.id),
+  license: text(),
+  isPublic: boolean().default(false),
+  downloadCount: integer().default(0),
+  starCount: integer().default(0),
+};
+```
+
+### Demo Animation (onboarding)
+
+```javascript
+var oA = [
+  { type: "user",    text: "I always prefer pnpm", duration: 2000 },
+  { type: "learned", text: "LEARNED: pnpm (95% preference)",
+    details: ".commandcode/taste/taste.md", duration: 2000 },
+  { type: "user",    text: "I prefer commander over meow", duration: 2000 },
+  { type: "updated", text: "Updated: commander boosted (60%→95%), meow adjusted (90%→35%)",
+    details: ".commandcode/taste/cli/taste.md", duration: 2000 },
+];
+```
+
+### Dedicated Model
+
+Taste onboarding uses **Kimi K2.5** (`moonshotai/Kimi-K2.5`) — a cost-effective open model, consistent with the repair system's philosophy of using cheaper models where harness engineering compensates for capability gaps.
+
+---
+
+## 9. Context/Compaction System — Three-Tier Auto-Compaction
+
+### Tier Thresholds
+
+```javascript
+{
+  TIER_1_THRESHOLD: 0.5,    // 50% of context window
+  TIER_2_THRESHOLD: 0.8,    // 80%
+  TIER_3_THRESHOLD: 0.9,    // 90%
+  TIER_1_KEEP_COUNT: 20,    // keep last 20 tool calls
+  TIER_2_KEEP_COUNT: 10,    // keep last 10 tool calls
+  KEEP_RECENT_TOKENS: 30000,
+}
+```
+
+| Tier | Trigger | Action | Mode |
+|---|---|---|---|
+| Tier 1 | >50% context used | Remove old tool calls, keep last 20 | `"fast"` only |
+| Tier 2 | >80% context used | Remove old tool calls, keep last 10 | `"fast"` only |
+| Tier 3 | >90% context used | Full conversation summarization | Both modes |
+
+### CompactAgent
+
+Uses **DeepSeek V4 Pro** as the compaction model — sends the full conversation transcript and gets back a handoff brief covering: goal, user turns, in-flight work, pending tasks, files touched, decisions and constraints.
+
+Key compaction prompt rule: *"Be precise. Prefer concrete artifacts (paths, function names, exact strings) over paraphrase. When code is mid-edit, include the snippet verbatim — losing it loses the work."*
+
+---
+
+## 10. Retry/Fallback System
+
+### Two Retry Layers
+
+**Auxiliary API calls** (learning, compaction): 5 max attempts, `200ms × 2^attempt` backoff.
+
+**Main conversation loop**: 10 max attempts, `100ms × 2^attempt` clamped to `[1000, 10000]ms`, UI notification after attempt 3+.
+
+### Error Classification
+
+**Non-retryable**: User interrupt, insufficient credits, AbortError, 403 status.
+
+**Retryable**: SSE event ordering, fetch failures, ECONNRESET, ECONNREFUSED, ETIMEDOUT, ENOTFOUND, network errors, socket hang up, 5xx status codes.
+
+### Per-Attempt Telemetry
+
+```javascript
+"cmd.api.attempt.number",
+"cmd.api.attempt.delay_ms_before",
+"cmd.api.attempt.status",
+"cmd.api.attempt.http_status",
+"cmd.api.attempt.is_retryable",
+"cmd.api.attempt.error_type",
+"cmd.api.attempt.error_message",
+```
+
+### Stop Hook Retry
+
+When a "Stop" hook requests retry, capped at 3 retries with feedback injected as a user message.
+
+---
+
+## 11. New Slash Commands
+
+| Command | Function |
+|---|---|
+| `/pr-comments` | Fetches PR issue comments + review comments via `gh` CLI with diff hunks |
+| `/context` | Opens context usage view with tier thresholds and actionable tips |
+| `/extra` | Opens billing page for on-demand credit purchases |
+| `/courses` | Opens `commandcode.ai/courses` |
+| `/update` | Checks for and installs latest CLI version |
+| `/compact-mode` | Switches between `"default"` (Tier 3 only) and `"fast"` (all tiers) |
+| `/add-dir` | Registers additional workspace directories |
+
+---
+
+## 12. What Didn't Change
 
 - **Repair architecture** — Validate-then-repair pipeline is frozen
 - **Pre-parse layer** — Same 4 strategies, same order
