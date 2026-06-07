@@ -41,6 +41,16 @@
               cacheHitCost: 0.3,
             },
             {
+              id: "anthropic:claude-opus-4-8",        // NEW in v0.33.0
+              provider: "Anthropic",
+              category: "premium",
+              promptCost: 5,
+              completionCost: 25,
+              cacheWrite5mCost: 6.25,
+              cacheWrite1hCost: 10,
+              cacheHitCost: 0.5,
+            },
+            {
               id: "anthropic:claude-opus-4-7",
               provider: "Anthropic",
               category: "premium",
@@ -178,6 +188,7 @@
           "individual-pro": {
             allowedCategories: ["premium", "opensource"],
             blockedModels: [
+              "anthropic:claude-opus-4-8",             // NEW in v0.33.0
               "anthropic:claude-opus-4-7",
               "anthropic:claude-opus-4-6",
               "anthropic:claude-opus-4-5-20251101",

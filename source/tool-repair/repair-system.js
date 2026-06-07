@@ -210,7 +210,9 @@ var cv = __name(({ toolName: e, parent: t, key: n, value: r, issue: o }) => {
   );
 }, "parseJsonStringifiedArray");
 Ot();
-var uv = {
+// v0.33.0 — Field alias map (expanded from v0.28.1)
+// +3 new aliases for read_file, +5 each for edit_file old/newValue, +1 for glob
+var wv = {
     read_file: {
       absolutePath: [
         "path",
@@ -220,6 +222,9 @@ var uv = {
         "pathname",
         "target_file",
         "targetFile",
+        "file",                    // NEW in v0.33.0
+        "absolute_path",           // NEW in v0.33.0
+        "fileAbsolutePath",        // NEW in v0.33.0
       ],
     },
     grep: { pattern: ["query", "regex", "search", "q", "expression", "text"] },
@@ -245,8 +250,22 @@ var uv = {
         "target_file",
         "targetFile",
       ],
-      oldValue: ["old_string", "oldString", "old", "old_str", "oldStr", "from"],
-      newValue: ["new_string", "newString", "new", "new_str", "newStr", "to"],
+      oldValue: [
+        "old_string", "oldString", "old", "old_str", "oldStr", "from",
+        "old_value",               // NEW in v0.33.0
+        "oldText",                 // NEW in v0.33.0
+        "old_text",                // NEW in v0.33.0
+        "oldContent",              // NEW in v0.33.0
+        "old_content",             // NEW in v0.33.0
+      ],
+      newValue: [
+        "new_string", "newString", "new", "new_str", "newStr", "to",
+        "new_value",               // NEW in v0.33.0
+        "newText",                 // NEW in v0.33.0
+        "new_text",                // NEW in v0.33.0
+        "newContent",              // NEW in v0.33.0
+        "new_content",             // NEW in v0.33.0
+      ],
     },
     read_directory: {
       path: ["absolutePath", "directory", "dir", "folder", "directoryPath"],
@@ -257,7 +276,7 @@ var uv = {
     shell_command: {
       command: ["cmd", "bash", "shell", "script", "commandLine"],
     },
-    glob: { pattern: ["query", "glob", "expression", "search"] },
+    glob: { pattern: ["query", "glob", "expression", "search", "include"] },  // +1 NEW
   },
   dv = __name(({ toolName: e, parent: t, key: n, issue: r }) => {
     if ("string" != typeof n) return !1;
@@ -467,4 +486,21 @@ function withRepairNotes({ notes: e, toolOutput: t }) {
   return void 0 === e || 0 === e.length
     ? t
     : [...e.map((e) => `<repair_note>${e}</repair_note>`), t].join("\n");
+}
+
+// NEW in v0.33.0 — Round-trip: parse repair notes back out of tool output
+var Tv = /^<repair_note>([\s\S]*?)<\/repair_note>$/;
+function extractRepairNotes(toolOutput) {
+  const lines = toolOutput.split("\n");
+  const notes = [];
+  let noteCount = 0;
+  for (const line of lines) {
+    const match = line.match(Tv);
+    if (null === match) break;
+    notes.push(match[1] ?? "");
+    noteCount += 1;
+  }
+  return noteCount === 0
+    ? { notes: [], body: toolOutput }
+    : { notes, body: lines.slice(noteCount).join("\n") };
 }

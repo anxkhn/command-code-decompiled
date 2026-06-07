@@ -1,21 +1,39 @@
-        (an = {
+        // v0.33.0 — Model catalog (28 current models, +5 from v0.28.1)
+        // API spec types: an = "chatComplete", ln = "responses"
+        // Provider constants: Gt.ANTHROPIC, Gt.OPENAI, Kt = gateway (Vercel/Baseten/etc)
+        // Free tier default: cn = "Qwen/Qwen3.7-Max-Free"
+        (un = {
           SONNET_4_6: {
             id: "claude-sonnet-4-6",
-            provider: Wt.ANTHROPIC,
-            spec: on,
+            inputModalities: ["text", "image"],    // NEW in v0.33.0
+            provider: Gt.ANTHROPIC,
+            spec: an,  // "chatComplete"
             label: "Claude Sonnet 4.6",
             name: "Claude Sonnet 4.6",
             description: "best combo of speed & intelligence (recommended)",
             reasoningEfforts: ["low", "medium", "high", "xhigh", "max"],
             contextWindow: 1e6,
           },
+          OPUS_4_8: {                              // NEW in v0.33.0
+            id: "claude-opus-4-8",
+            inputModalities: ["text", "image"],
+            provider: Gt.ANTHROPIC,
+            spec: an,
+            label: "Claude Opus 4.8",
+            name: "Claude Opus 4.8",
+            description: "most intelligent for agents and coding",
+            reasoning: !0,
+            reasoningEfforts: ["low", "medium", "high", "xhigh", "max"],
+            contextWindow: 1e6,
+          },
           OPUS_4_7: {
             id: "claude-opus-4-7",
-            provider: Wt.ANTHROPIC,
-            spec: on,
+            inputModalities: ["text", "image"],
+            provider: Gt.ANTHROPIC,
+            spec: an,
             label: "Claude Opus 4.7",
             name: "Claude Opus 4.7",
-            description: "most intelligent for agents and coding",
+            description: "prev flagship, still strong for agents and coding",  // CHANGED
             reasoning: !0,
             reasoningEfforts: ["low", "medium", "high", "xhigh", "max"],
             contextWindow: 1e6,
@@ -107,18 +125,31 @@
             description: "multi-mode thinking & long-range planning",
             contextWindow: 2e5,
           },
+          MINIMAX_M3: {                              // NEW in v0.33.0
+            id: "MiniMaxAI/MiniMax-M3",
+            inputModalities: ["text", "image"],
+            provider: Kt,
+            spec: an,
+            label: "MiniMax M3",
+            name: "MiniMax M3",
+            description: "frontier coding, agents & native multimodality",
+            reasoning: !0,
+            contextWindow: 1e6,
+          },
           MINIMAX_M2_7: {
             id: "MiniMaxAI/MiniMax-M2.7",
-            provider: Qt,
-            spec: on,
+            inputModalities: ["text"],
+            provider: Kt,
+            spec: an,
             label: "MiniMax M2.7",
             name: "MiniMax M2.7",
             description: "end-to-end software engineering agent",
           },
           MINIMAX_M2_5: {
             id: "MiniMaxAI/MiniMax-M2.5",
-            provider: Qt,
-            spec: on,
+            inputModalities: ["text"],
+            provider: Kt,
+            spec: an,
             label: "MiniMax M2.5",
             name: "MiniMax M2.5",
             description: "cross-platform full-stack agentic dev",
@@ -166,18 +197,42 @@
           },
           QWEN_3_7_MAX: {
             id: "Qwen/Qwen3.7-Max",
-            provider: Qt,
-            spec: on,
+            inputModalities: ["text"],
+            provider: Kt,
+            spec: an,
             label: "Qwen 3.7 Max",
             name: "Qwen 3.7 Max",
             description: "frontier coding & long-horizon agent execution",
             reasoning: !0,
             contextWindow: 1e6,
           },
+          QWEN_3_7_PLUS: {                            // NEW in v0.33.0
+            id: "Qwen/Qwen3.7-Plus",
+            inputModalities: ["text", "image"],
+            provider: Kt,
+            spec: an,
+            label: "Qwen 3.7 Plus",
+            name: "Qwen 3.7 Plus",
+            description: "agentic coding & reasoning at lower cost",
+            reasoning: !0,
+            contextWindow: 1e6,
+          },
+          STEP_3_7_FLASH: {                            // NEW in v0.33.0
+            id: "stepfun/Step-3.7-Flash",
+            inputModalities: ["text", "image"],
+            provider: Kt,
+            spec: an,
+            label: "Step 3.7 Flash",
+            name: "Step 3.7 Flash",
+            description: "multimodal sparse-MoE reasoning",
+            reasoning: !0,
+            contextWindow: 256e3,
+          },
           STEP_3_5_FLASH: {
             id: "stepfun/Step-3.5-Flash",
-            provider: Qt,
-            spec: on,
+            inputModalities: ["text"],
+            provider: Kt,
+            spec: an,
             label: "Step 3.5 Flash",
             name: "Step 3.5 Flash",
             description: "fast sparse-MoE agentic reasoning",
@@ -217,8 +272,9 @@
           },
           GEMINI_3_1_FLASH_LITE: {
             id: "google/gemini-3.1-flash-lite",
-            provider: Qt,
-            spec: on,
+            inputModalities: ["text", "image"],
+            provider: Kt,
+            spec: an,
             label: "Gemini 3.1 Flash Lite",
             name: "Gemini 3.1 Flash Lite",
             description: "high-volume workhorse model with implicit caching",
@@ -227,9 +283,21 @@
             reasoningEfforts: ["low", "medium", "high"],
             contextWindow: 1e6,
           },
+          NEMOTRON_3_ULTRA: {                          // NEW in v0.33.0
+            id: "nvidia/nemotron-3-ultra-550b-a55b",
+            inputModalities: ["text"],
+            provider: Kt,
+            spec: an,
+            label: "Nemotron 3 Ultra",
+            name: "Nemotron 3 Ultra",
+            description: "open reasoning model for long-horizon autonomous agents",
+            reasoning: !0,
+            contextWindow: 1e6,
+          },
         }).SONNET_4_6.id,
-        an.OPUS_4_7.id,
-        an.HAIKU_4_5.id,
+        un.OPUS_4_8.id,
+        un.OPUS_4_7.id,
+        un.HAIKU_4_5.id,
         (ln = [
           {
             canonicalId: "zai-org/GLM-5",
@@ -288,12 +356,24 @@
             providers: { [Wt.VERCEL_AI_GATEWAY]: "alibaba/qwen3.7-max" },
           },
           {
+            canonicalId: "Qwen/Qwen3.7-Plus",                                   // NEW
+            providers: { [Gt.VERCEL_AI_GATEWAY]: "alibaba/qwen3.7-plus" },
+          },
+          {
+            canonicalId: "MiniMaxAI/MiniMax-M3",                                 // NEW
+            providers: { [Gt.VERCEL_AI_GATEWAY]: "minimax/minimax-m3" },
+          },
+          {
             canonicalId: "MiniMaxAI/MiniMax-M2.7",
-            providers: { [Wt.VERCEL_AI_GATEWAY]: "minimax/minimax-m2.7" },
+            providers: { [Gt.VERCEL_AI_GATEWAY]: "minimax/minimax-m2.7" },
+          },
+          {
+            canonicalId: "stepfun/Step-3.7-Flash",                               // NEW
+            providers: { [Gt.VERCEL_AI_GATEWAY]: "stepfun/step-3.7-flash" },
           },
           {
             canonicalId: "stepfun/Step-3.5-Flash",
-            providers: { [Wt.OPENROUTER]: "stepfun/step-3.5-flash" },
+            providers: { [Gt.OPENROUTER]: "stepfun/step-3.5-flash" },
           },
           {
             canonicalId: "xiaomi/mimo-v2.5-pro",
@@ -310,20 +390,25 @@
           {
             canonicalId: "google/gemini-3.1-flash-lite",
             providers: {
-              [Wt.VERCEL_AI_GATEWAY]: "google/gemini-3.1-flash-lite",
+              [Gt.VERCEL_AI_GATEWAY]: "google/gemini-3.1-flash-lite",
             },
           },
+          {
+            canonicalId: "nvidia/nemotron-3-ultra-550b-a55b",                    // NEW
+            providers: { [Gt.VERCEL_AI_GATEWAY]: "nvidia/nemotron-3-ultra-550b-a55b" },
+          },
         ]),
-        (cn = {
-          "claude-sonnet-4-20250514": an.SONNET_4_6.id,
-          "claude-sonnet-4-5-20250929": an.SONNET_4_6.id,
-          "claude-opus-4-5-20251101": an.OPUS_4_7.id,
-          "claude-opus-4-6": an.OPUS_4_7.id,
-          "claude-haiku-4-5": an.HAIKU_4_5.id,
+        // Legacy aliases — unchanged from v0.28.1
+        (mn = {
+          "claude-sonnet-4-20250514": un.SONNET_4_6.id,
+          "claude-sonnet-4-5-20250929": un.SONNET_4_6.id,
+          "claude-opus-4-5-20251101": un.OPUS_4_7.id,
+          "claude-opus-4-6": un.OPUS_4_7.id,
+          "claude-haiku-4-5": un.HAIKU_4_5.id,
         }),
-        (un = an.KIMI_K2_5.id),
+        (pn = un.KIMI_K2_5.id),
         (dn = {
-          [Wt.ANTHROPIC]: "Anthropic",
-          [Wt.OPENAI]: "OpenAI",
-          [Wt.BASETEN]: "Open Source",
-          [Wt.VERCEL_AI_GATEWAY]: "Open Source",
+          [Gt.ANTHROPIC]: "Anthropic",
+          [Gt.OPENAI]: "OpenAI",
+          [Gt.BASETEN]: "Open Source",
+          [Gt.VERCEL_AI_GATEWAY]: "Open Source",
