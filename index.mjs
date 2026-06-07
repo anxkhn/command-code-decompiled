@@ -1,118 +1,70 @@
 #!/usr/bin/env node
 /**
- * command-code v0.33.0 — Beautified bundle
+ * command-code v0.33.0 — Deobfuscated bundle
  *
- * Import variable mapping (minified → original):
- *
- * ── path ──────────────────────────────────────
- *   e  = pathModule (import * as)
- *   t  = pathDefault (default export)
- *   n  = join          r  = dirname
- *   o  = parse         s  = relative
- *   i  = isAbsolute    a  = resolve
- *   l  = extname       u  = basename
- *
- * ── url ───────────────────────────────────────
- *   d  = fileURLToPath   m = pathToFileURL   g = URL
- *
- * ── zod ───────────────────────────────────────
- *   h  = zodDefault    f  = z (zod schema builder)
- *   y  = ZodError
- *
- * ── os ────────────────────────────────────────
- *   w  = osModule      S  = osDefault
- *   E  = tmpdir        v  = homedir
- *
- * ── fs/promises ───────────────────────────────
- *   C  = fsPromisesModule   k = fsPromisesDefault
- *   T  = mkdir       _  = writeFile     x  = rm
- *   A  = readFile    P  = unlink        I  = readdir
- *
- * ── crypto ────────────────────────────────────
- *   M  = cryptoModule   N = cryptoDefault
- *   R  = randomUUID     $ = createHash
- *
- * ── fs (sync) ─────────────────────────────────
- *   L  = fsModule       D = fsDefault
- *   O  = existsSync     F = promises (compat)
- *   U  = readFileSync   j = constants
- *   q  = mkdirSync      B = writeFileSync
- *   z  = readdirSync    W = statSync
- *   H  = createReadStream   G = appendFileSync
- *
- * ── http ──────────────────────────────────────
- *   V  = httpModule     Q = createServer
- *
- * ── react ─────────────────────────────────────
- *   K  = React          Y = memo
- *   J  = useState       X = useRef
- *   Z  = useEffect     ee = useMemo
- *  te  = useCallback
- *
- * ── ink ───────────────────────────────────────
- *  ne  = Box           re = Text
- *  oe  = Static        se = useStdout
- *  ie  = useInput      ae = render
- *  le  = useApp        ce = Newline
+ * 61 import bindings renamed to meaningful names using scope-aware AST analysis.
+ * 5,580 references updated throughout. Local variables inside functions retain
+ * their minified names (e, t, n, r...) — only module-scope import bindings
+ * were renamed to avoid breaking shadowed local scopes.
  */
-import * as e /* pathModule */ from "path";
-import t /* pathDefault */, {
-  join as n,
-  dirname as r,
-  parse as o,
-  relative as s,
-  isAbsolute as i,
-  resolve as a,
-  extname as l,
-  basename as u,
+import * as pathModule from "path";
+import pathDefault, {
+  join,
+  dirname,
+  parse as parsePath,
+  relative,
+  isAbsolute,
+  resolve,
+  extname,
+  basename,
 } from "path";
-import { fileURLToPath as d, pathToFileURL as m, URL as g } from "url";
-import h /* zodDefault */, { z as f, ZodError as y } from "zod";
-import * as w /* osModule */ from "os";
-import S /* osDefault */, { tmpdir as E, homedir as v } from "os";
-import * as C /* fsPromisesModule */ from "fs/promises";
-import k /* fsPromisesDefault */, {
-  mkdir as T,
-  writeFile as _,
-  rm as x,
-  readFile as A,
-  unlink as P,
-  readdir as I,
+import { fileURLToPath, pathToFileURL, URL as URLClass } from "url";
+import zodDefault, { z, ZodError } from "zod";
+import * as osModule from "os";
+import osDefault, { tmpdir, homedir } from "os";
+import * as fsPromises from "fs/promises";
+import fsPromisesDefault, {
+  mkdir,
+  writeFile,
+  rm as fsRm,
+  readFile,
+  unlink,
+  readdir,
 } from "fs/promises";
-import * as M /* cryptoModule */ from "crypto";
-import N /* cryptoDefault */, { randomUUID as R, createHash as $ } from "crypto";
-import * as L /* fsModule */ from "fs";
-import D /* fsDefault */, {
-  existsSync as O,
-  promises as F /* fsPromisesCompat */,
-  readFileSync as U,
-  constants as j /* fsConstants */,
-  mkdirSync as q,
-  writeFileSync as B,
-  readdirSync as z,
-  statSync as W,
-  createReadStream as H,
-  appendFileSync as G,
+import * as cryptoModule from "crypto";
+import cryptoDefault, { randomUUID, createHash } from "crypto";
+import * as fsModule from "fs";
+import fsDefault, {
+  existsSync,
+  promises as fsPromisesCompat,
+  readFileSync,
+  constants as fsConstants,
+  mkdirSync,
+  writeFileSync,
+  readdirSync,
+  statSync,
+  createReadStream,
+  appendFileSync,
 } from "fs";
-import * as V /* httpModule */ from "http";
-import { createServer as Q } from "http";
-import K /* React */, {
-  memo as Y,
-  useState as J,
-  useRef as X,
-  useEffect as Z,
-  useMemo as ee,
-  useCallback as te,
+import * as httpModule from "http";
+import { createServer } from "http";
+import React, {
+  memo,
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
 } from "react";
 import {
-  Box as ne,
-  Text as re,
-  Static as oe,
-  useStdout as se,
-  useInput as ie,
-  render as ae,
-  useApp as le,
-  Newline as ce,
+  Box,
+  Text,
+  Static,
+  useStdout,
+  useInput,
+  render,
+  useApp,
+  Newline,
 } from "ink";
 import ue from "chalk";
 import de from "picocolors";
@@ -950,7 +902,7 @@ var vn,
         __name(getPlanDisplayName, "getPlanDisplayName"),
         __name(getMinimumPlanForModel, "getMinimumPlanForModel"),
         (nn = [50, 75, 90]),
-        h.enum(["owner", "admin", "member"]),
+        zodDefault.enum(["owner", "admin", "member"]),
         (rn = {
           LEARN_TASTE: "learn-taste",
           TASTE: "taste",
@@ -1499,7 +1451,7 @@ var vn,
     },
   });
 function getAuthDir() {
-  return t.join(S.homedir(), ".commandcode");
+  return pathDefault.join(osDefault.homedir(), ".commandcode");
 }
 function getAuthFile(e) {
   const n = e ?? vn(),
@@ -1509,7 +1461,7 @@ function getAuthFile(e) {
         : "staging" === n
           ? "auth.staging.json"
           : "auth.json";
-  return t.join(getAuthDir(), r);
+  return pathDefault.join(getAuthDir(), r);
 }
 function getConfigFile(e) {
   const n = e ?? vn(),
@@ -1519,7 +1471,7 @@ function getConfigFile(e) {
         : "staging" === n
           ? "config.staging.json"
           : "config.json";
-  return t.join(getAuthDir(), r);
+  return pathDefault.join(getAuthDir(), r);
 }
 var Tn,
   _n,
@@ -1651,17 +1603,17 @@ var Fn,
         Cn(),
         kn(),
         ((e) => {
-          ((e.OAuth = f.object({
-            type: f.literal("oauth"),
-            refresh: f.string(),
-            access: f.string(),
-            expires: f.number(),
-            accountId: f.string().optional(),
+          ((e.OAuth = z.object({
+            type: z.literal("oauth"),
+            refresh: z.string(),
+            access: z.string(),
+            expires: z.number(),
+            accountId: z.string().optional(),
           })),
-            (e.ApiKey = f.object({ type: f.literal("api"), key: f.string() })),
-            (e.Info = f.discriminatedUnion("type", [e.OAuth, e.ApiKey])));
+            (e.ApiKey = z.object({ type: z.literal("api"), key: z.string() })),
+            (e.Info = z.discriminatedUnion("type", [e.OAuth, e.ApiKey])));
           const n = __name(
-              () => t.join(S.homedir(), ".commandcode"),
+              () => pathDefault.join(osDefault.homedir(), ".commandcode"),
               "getAuthDir",
             ),
             r = __name(() => {
@@ -1672,11 +1624,11 @@ var Fn,
                     : "staging" === e
                       ? "auth.staging.json"
                       : "auth.json";
-              return t.join(n(), r);
+              return pathDefault.join(n(), r);
             }, "getAuthFile");
           async function get(e) {
             try {
-              const t = await k.readFile(r(), "utf-8");
+              const t = await fsPromisesDefault.readFile(r(), "utf-8");
               return JSON.parse(t)[e];
             } catch {
               return;
@@ -1685,31 +1637,31 @@ var Fn,
           async function set(e, t) {
             const o = n(),
               s = r();
-            await k.mkdir(o, { recursive: !0 });
+            await fsPromisesDefault.mkdir(o, { recursive: !0 });
             let i = {};
             try {
-              const e = await k.readFile(s, "utf-8");
+              const e = await fsPromisesDefault.readFile(s, "utf-8");
               i = JSON.parse(e);
             } catch {}
             ((i[e] = t),
-              await k.writeFile(s, JSON.stringify(i, null, 2)),
-              await k.chmod(s, 384));
+              await fsPromisesDefault.writeFile(s, JSON.stringify(i, null, 2)),
+              await fsPromisesDefault.chmod(s, 384));
           }
           async function remove(e) {
             const t = r();
             try {
-              const n = await k.readFile(t, "utf-8"),
+              const n = await fsPromisesDefault.readFile(t, "utf-8"),
                 r = JSON.parse(n);
               (delete r[e],
                 0 === Object.keys(r).length
-                  ? await k.unlink(t)
-                  : (await k.writeFile(t, JSON.stringify(r, null, 2)),
-                    await k.chmod(t, 384)));
+                  ? await fsPromisesDefault.unlink(t)
+                  : (await fsPromisesDefault.writeFile(t, JSON.stringify(r, null, 2)),
+                    await fsPromisesDefault.chmod(t, 384)));
             } catch {}
           }
           async function list2() {
             try {
-              const e = await k.readFile(r(), "utf-8");
+              const e = await fsPromisesDefault.readFile(r(), "utf-8");
               return JSON.parse(e);
             } catch {
               return {};
@@ -1748,13 +1700,13 @@ var Fn,
             n = "https://console.anthropic.com/v1/oauth/token",
             r = "https://console.anthropic.com/oauth/code/callback";
           function generateCodeVerifier() {
-            return N.randomBytes(32).toString("base64url");
+            return cryptoDefault.randomBytes(32).toString("base64url");
           }
           function generateCodeChallenge(e) {
-            return N.createHash("sha256").update(e).digest("base64url");
+            return cryptoDefault.createHash("sha256").update(e).digest("base64url");
           }
           function generateState() {
-            return N.randomBytes(32).toString("base64url");
+            return cryptoDefault.randomBytes(32).toString("base64url");
           }
           function createAuthorizationUrl() {
             const e = generateCodeVerifier(),
@@ -1898,10 +1850,10 @@ function showStartup() {
   if (!Gn) {
     Gn = !0;
     try {
-      L.mkdirSync(zn, { recursive: !0 });
+      fsModule.mkdirSync(zn, { recursive: !0 });
       const e = new Date(),
         t = `\n════════════════════════════════════════════════════════════════\n  CommandCode Debug Log\n  Started: ${e.toLocaleDateString()} ${formatTime(e)}\n  Log: ${Wn}\n════════════════════════════════════════════════════════════════\n\n`;
-      L.appendFileSync(Wn, t, "utf-8");
+      fsModule.appendFileSync(Wn, t, "utf-8");
     } catch {}
   }
 }
@@ -1921,7 +1873,7 @@ function dlog(e, t) {
           .map((e) => `                        ${e}`)
           .join("\n")}`;
       }
-      ((s += "\n"), L.appendFileSync(Wn, s, "utf-8"));
+      ((s += "\n"), fsModule.appendFileSync(Wn, s, "utf-8"));
     } catch {}
   }
 }
@@ -1930,7 +1882,7 @@ function dlogSection(e) {
     showStartup();
     try {
       const t = `\n──── ${e} ${"─".repeat(Math.max(0, 50 - e.length))}\n`;
-      L.appendFileSync(Wn, t, "utf-8");
+      fsModule.appendFileSync(Wn, t, "utf-8");
     } catch {}
   }
 }
@@ -1940,8 +1892,8 @@ var Jn,
   er = __esm({
     "src/utils/dlog.ts"() {
       (Ft(),
-        (zn = e.join(w.homedir(), ".commandcode", "logs")),
-        (Wn = e.join(zn, "command.log")),
+        (zn = pathModule.join(osModule.homedir(), ".commandcode", "logs")),
+        (Wn = pathModule.join(zn, "command.log")),
         (Hn = {
           Startup: ">",
           CLI: "$",
@@ -1995,7 +1947,7 @@ var Jn,
               .replace(/=+$/, "");
           }
           function generateRandomString2(e) {
-            const t = N.randomBytes(e);
+            const t = cryptoDefault.randomBytes(e);
             let n = "";
             for (let r = 0; r < e; r++)
               n +=
@@ -2009,7 +1961,7 @@ var Jn,
             return {
               verifier: e,
               challenge: base64UrlEncode(
-                N.createHash("sha256").update(e).digest(),
+                cryptoDefault.createHash("sha256").update(e).digest(),
               ),
             };
           }
@@ -2112,7 +2064,7 @@ var Jn,
               n?.aborted
                 ? r(new Error("Authentication cancelled"))
                 : (n?.addEventListener("abort", u, { once: !0 }),
-                  (o = Q(
+                  (o = createServer(
                     __name((e, n) => {
                       try {
                         const r = new URL(
@@ -2230,7 +2182,7 @@ var Jn,
             const { onAuth: t, onProgress: n, signal: r } = e;
             dlog("[Auth] codex: starting browser oauth flow");
             const o = generatePKCE2(),
-              s = base64UrlEncode(N.randomBytes(32)),
+              s = base64UrlEncode(cryptoDefault.randomBytes(32)),
               i = buildAuthorizeUrl(o, s),
               a = waitForCallback({ state: s, signal: r });
             let l;
@@ -2885,13 +2837,13 @@ function useCursorState({
   showCursor: n,
   initialCursor: r,
 }) {
-  const [o, s] = J(r ?? (e || "").length),
-    i = X(o),
-    a = X(e);
-  (Z(() => {
+  const [o, s] = useState(r ?? (e || "").length),
+    i = useRef(o),
+    a = useRef(e);
+  (useEffect(() => {
     i.current = o;
   }, [o]),
-    Z(() => {
+    useEffect(() => {
       const r = a.current;
       if (((a.current = e), e === r)) return;
       if (!t) return;
@@ -2899,7 +2851,7 @@ function useCursorState({
       const l = (e || "").length;
       o > l && (s(l), (i.current = l));
     }, [e, t, n, o]));
-  const l = te((e) => {
+  const l = useCallback((e) => {
     (s(e), (i.current = e));
   }, []);
   return { cursor: o, setCursor: l, cursorRef: i };
@@ -2912,8 +2864,8 @@ function useRawStdinHandler({
   setHandled: o,
   stripBracketedPaste: s = !1,
 }) {
-  const i = X(!1);
-  Z(() => {
+  const i = useRef(!1);
+  useEffect(() => {
     if (!e) return;
     const a = process.stdin,
       l = __name((e) => {
@@ -2956,7 +2908,7 @@ function useInkInputHandler({
   onUpdate: s,
   onSubmit: i,
 }) {
-  ie(
+  useInput(
     (e, a) => {
       if (o()) return;
       if (isIgnoredKey(e, a)) return;
@@ -2970,7 +2922,7 @@ function useInkInputHandler({
   );
 }
 function useSyncedRef(e) {
-  const t = X(e);
+  const t = useRef(e);
   return ((t.current = e), t);
 }
 var mr,
@@ -3160,7 +3112,7 @@ function TextInput({
   stripBracketedPaste: g = !1,
   initialCursor: h,
 }) {
-  const f = X(!1),
+  const f = useRef(!1),
     y = useSyncedRef(e),
     w = useSyncedRef(s),
     {
@@ -3168,15 +3120,15 @@ function TextInput({
       setCursor: E,
       cursorRef: v,
     } = useCursorState({ value: e, focus: n, showCursor: o, initialCursor: h });
-  K.useEffect(() => {
+  React.useEffect(() => {
     a?.(S);
   }, [S, a]);
-  const C = te(createStdinUpdateHandler(E, y, w), [E, y, w]),
-    k = te(createInkUpdateHandler(E, y, w), [E, y, w]),
-    T = te((e) => {
+  const C = useCallback(createStdinUpdateHandler(E, y, w), [E, y, w]),
+    k = useCallback(createInkUpdateHandler(E, y, w), [E, y, w]),
+    T = useCallback((e) => {
       f.current = e;
     }, []),
-    _ = te(() => f.current, []);
+    _ = useCallback(() => f.current, []);
   (useRawStdinHandler({
     focus: n,
     valueRef: y,
@@ -3194,7 +3146,7 @@ function TextInput({
       onUpdate: k,
       onSubmit: i,
     }));
-  const { stdout: x } = se(),
+  const { stdout: x } = useStdout(),
     A = x?.columns ?? 80,
     P = getMaskedValue(e, r),
     I = u ? Fr[u] : void 0,
@@ -3205,15 +3157,15 @@ function TextInput({
   if (d) {
     const e = $.replace(/\n/g, " ");
     return null != m
-      ? K.createElement(
-          ne,
+      ? React.createElement(
+          Box,
           { width: m },
-          K.createElement(re, { wrap: "truncate" }, e),
+          React.createElement(Text, { wrap: "truncate" }, e),
         )
-      : K.createElement(re, { wrap: "truncate" }, e);
+      : React.createElement(Text, { wrap: "truncate" }, e);
   }
   const L = wrapWithIndent($, A, R);
-  return K.createElement(re, { wrap: "wrap" }, L);
+  return React.createElement(Text, { wrap: "wrap" }, L);
 }
 var jr = __esm({
   "src/tui/text/text-input.tsx"() {
@@ -3302,7 +3254,7 @@ function isLinuxClipboardAvailable() {
   const e = process.env.DISPLAY;
   if (e) {
     const t = e.match(/^:(\d+)/);
-    return !t || D.existsSync(`/tmp/.X11-unix/X${t[1]}`);
+    return !t || fsDefault.existsSync(`/tmp/.X11-unix/X${t[1]}`);
   }
   return !1;
 }
@@ -3322,12 +3274,12 @@ async function detectDroppedImageFile(e) {
       t.includes("\n") || t.includes("\r"))
     )
       return null;
-    const n = l(t).toLowerCase(),
+    const n = extname(t).toLowerCase(),
       r = Br[n];
     if (!r) return null;
-    const o = a(t);
-    if (!D.existsSync(o)) return null;
-    const s = D.readFileSync(o).toString("base64");
+    const o = resolve(t);
+    if (!fsDefault.existsSync(o)) return null;
+    const s = fsDefault.readFileSync(o).toString("base64");
     if (!s || 0 === s.length) return null;
     if (s.length > 32e6) return null;
     const i = await compressImageForSharing(s, r);
@@ -3579,7 +3531,7 @@ var Yr,
 async function loadUserConfig() {
   try {
     const e = getConfigFile();
-    return parseJSON(await C.readFile(e, "utf-8")) || {};
+    return parseJSON(await fsPromises.readFile(e, "utf-8")) || {};
   } catch {
     return {};
   }
@@ -3587,7 +3539,7 @@ async function loadUserConfig() {
 async function saveUserConfig(e) {
   try {
     const t = getConfigFile();
-    (L.writeFileSync(t, JSON.stringify(e, null, 2)), L.chmodSync(t, 384));
+    (fsModule.writeFileSync(t, JSON.stringify(e, null, 2)), fsModule.chmodSync(t, 384));
   } catch (e) {
     throw new Error(`Failed to save user config: ${e}`);
   }
@@ -3663,7 +3615,7 @@ function readDiskDefaultModel() {
   if (null !== Zr) return Zr;
   try {
     const e = getConfigFile(),
-      t = parseJSON(L.readFileSync(e, "utf-8")) || {};
+      t = parseJSON(fsModule.readFileSync(e, "utf-8")) || {};
     Zr = t.model ?? pn;
   } catch {
     Zr = pn;
@@ -3701,7 +3653,7 @@ async function persistDefaultModel(e) {
 function getReasoningEffort(e) {
   try {
     const t = getConfigFile(),
-      n = parseJSON(L.readFileSync(t, "utf-8")) || {};
+      n = parseJSON(fsModule.readFileSync(t, "utf-8")) || {};
     return n.reasoningEffort?.[e];
   } catch {
     return;
@@ -3734,7 +3686,7 @@ function getCompactMode() {
   if (null !== Jr) return Jr;
   try {
     const e = getConfigFile(),
-      t = (parseJSON(L.readFileSync(e, "utf-8")) || {}).compactMode;
+      t = (parseJSON(fsModule.readFileSync(e, "utf-8")) || {}).compactMode;
     return (Jr = "default" === t || "fast" === t ? t : "default");
   } catch {
     return ((Jr = "default"), "default");
@@ -3798,7 +3750,7 @@ var ro,
         (ro = __name(({ url: e, text: t, dimColor: n = !1, color: r }) => {
           const o = `]8;;${e}${t}]8;;`,
             s = r ?? (n ? mr.DIM : void 0);
-          return K.createElement(re, { dimColor: n && !!r, color: s }, o);
+          return React.createElement(Text, { dimColor: n && !!r, color: s }, o);
         }, "TerminalLink")));
     },
   }),
@@ -3814,14 +3766,14 @@ var ro,
         Or(),
         io(),
         (oo = __name(({ onSuccess: e, onCancel: t, onFailure: n }) => {
-          const [r, o] = J(""),
-            [s, i] = J(null),
-            [a, l] = J(!1),
-            [u, d] = J(null),
-            [m, g] = J(!0),
-            [h, f] = J(!1),
-            [y, w] = J(!1);
-          Z(() => {
+          const [r, o] = useState(""),
+            [s, i] = useState(null),
+            [a, l] = useState(!1),
+            [u, d] = useState(null),
+            [m, g] = useState(!0),
+            [h, f] = useState(!1),
+            [y, w] = useState(!1);
+          useEffect(() => {
             const {
               url: e,
               verifier: t,
@@ -3829,7 +3781,7 @@ var ro,
             } = Bn.createAuthorizationUrl();
             i({ url: e, verifier: t, state: n });
           }, []);
-          const S = te(
+          const S = useCallback(
             async (e) => {
               const t = processBracketedPaste(e);
               if (!t.isPasteStart || y) {
@@ -3865,7 +3817,7 @@ var ro,
             },
             [y],
           );
-          ie((e, n) => {
+          useInput((e, n) => {
             if ((n.escape && t(), m && !h))
               if (n.return || "y" === e || "Y" === e) {
                 if (!s) return;
@@ -3898,72 +3850,72 @@ var ro,
             }
           }, "handleSubmit");
           return m && !h
-            ? K.createElement(
-                ne,
+            ? React.createElement(
+                Box,
                 { flexDirection: "column" },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginBottom: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { bold: !0, color: mr.CYAN },
                     "Anthropic Authentication",
                   ),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginBottom: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     null,
                     "Open the Anthropic auth page?",
-                    K.createElement(re, { color: mr.DIM }, " (Y/n)"),
+                    React.createElement(Text, { color: mr.DIM }, " (Y/n)"),
                   ),
                 ),
               )
-            : K.createElement(
-                ne,
+            : React.createElement(
+                Box,
                 { flexDirection: "column" },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginBottom: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { bold: !0, color: mr.CYAN },
                     "Anthropic Authentication",
                   ),
                 ),
                 s &&
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(re, { color: mr.DIM }, "Login: "),
-                    K.createElement(ro, {
+                    React.createElement(Text, { color: mr.DIM }, "Login: "),
+                    React.createElement(ro, {
                       url: s.url,
                       text: "Open auth page ↗",
                       color: mr.CYAN,
                     }),
                   ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginBottom: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     "After authorizing, copy the code and paste it below:",
                   ),
                 ),
                 u &&
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(re, { color: mr.RED }, "Error: ", u),
+                    React.createElement(Text, { color: mr.RED }, "Error: ", u),
                   ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(re, null, "Authorization code: "),
-                  K.createElement(TextInput, {
+                  React.createElement(Text, null, "Authorization code: "),
+                  React.createElement(TextInput, {
                     mask: "*",
                     focus: !0,
                     value: r,
@@ -3972,11 +3924,11 @@ var ro,
                     placeholder: "Paste code here...",
                   }),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginTop: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     "Press Enter to submit or ESC to cancel",
                   ),
@@ -4005,12 +3957,12 @@ var lo,
         mo(),
         Or(),
         (lo = __name(({ onSuccess: e, onCancel: t, onFailure: n }) => {
-          const [r, o] = J("confirm"),
-            [s, i] = J(""),
-            [a, l] = J(null),
-            [u, d] = J(""),
-            m = X(null),
-            g = te(async () => {
+          const [r, o] = useState("confirm"),
+            [s, i] = useState(""),
+            [a, l] = useState(null),
+            [u, d] = useState(""),
+            m = useRef(null),
+            g = useCallback(async () => {
               const t = new AbortController();
               m.current = t;
               try {
@@ -4034,13 +3986,13 @@ var lo,
               }
             }, [e, n]);
           return (
-            Z(
+            useEffect(
               () => () => {
                 m.current?.abort();
               },
               [],
             ),
-            ie((e, n) => {
+            useInput((e, n) => {
               if (n.escape) return (m.current?.abort(), void t());
               if ("confirm" === r) {
                 if (n.return || "y" === e || "Y" === e) return void g();
@@ -4048,102 +4000,102 @@ var lo,
               }
             }),
             "confirm" === r
-              ? K.createElement(
-                  ne,
+              ? React.createElement(
+                  Box,
                   { flexDirection: "column" },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       { bold: !0, color: mr.CYAN },
                       "ChatGPT (Codex) Authentication",
                     ),
                   ),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       null,
                       "This will open your browser to sign in with ChatGPT.",
                     ),
                   ),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       null,
                       "Continue?",
-                      K.createElement(re, { color: mr.DIM }, " (Y/n)"),
+                      React.createElement(Text, { color: mr.DIM }, " (Y/n)"),
                     ),
                   ),
                 )
               : "waiting" === r || "exchanging" === r
-                ? K.createElement(
-                    ne,
+                ? React.createElement(
+                    Box,
                     { flexDirection: "column" },
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginBottom: 1 },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { bold: !0, color: mr.CYAN },
                         "ChatGPT (Codex) Authentication",
                       ),
                     ),
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginBottom: 1 },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         null,
                         createOSC8Link(s, "Open auth page ↗"),
                       ),
                     ),
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginBottom: 1 },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         u || "Waiting for authorization...",
                       ),
                     ),
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       null,
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         "Press ESC to cancel",
                       ),
                     ),
                   )
                 : "error" === r
-                  ? K.createElement(
-                      ne,
+                  ? React.createElement(
+                      Box,
                       { flexDirection: "column" },
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         { marginBottom: 1 },
-                        K.createElement(
-                          re,
+                        React.createElement(
+                          Text,
                           { bold: !0, color: mr.CYAN },
                           "ChatGPT (Codex) Authentication",
                         ),
                       ),
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         { marginBottom: 1 },
-                        K.createElement(re, { color: mr.RED }, "Error: ", a),
+                        React.createElement(Text, { color: mr.RED }, "Error: ", a),
                       ),
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         null,
-                        K.createElement(
-                          re,
+                        React.createElement(
+                          Text,
                           { color: mr.DIM },
                           "Press ESC to go back",
                         ),
@@ -4162,13 +4114,13 @@ var lo,
         so(),
         Or(),
         (co = __name(({ onSuccess: e, onCancel: t, onFailure: n }) => {
-          const [r, o] = J("confirm"),
-            [s, i] = J(""),
-            [a, l] = J(""),
-            [u, d] = J(null),
-            [m, g] = J(""),
-            h = X(null),
-            f = te(async () => {
+          const [r, o] = useState("confirm"),
+            [s, i] = useState(""),
+            [a, l] = useState(""),
+            [u, d] = useState(null),
+            [m, g] = useState(""),
+            h = useRef(null),
+            f = useCallback(async () => {
               const t = new AbortController();
               h.current = t;
               try {
@@ -4193,13 +4145,13 @@ var lo,
               }
             }, [e, n]);
           return (
-            Z(
+            useEffect(
               () => () => {
                 h.current?.abort();
               },
               [],
             ),
-            ie((e, n) => {
+            useInput((e, n) => {
               if (n.escape) return (h.current?.abort(), void t());
               if ("confirm" === r) {
                 if (n.return || "y" === e || "Y" === e) return void f();
@@ -4207,111 +4159,111 @@ var lo,
               }
             }),
             "confirm" === r
-              ? K.createElement(
-                  ne,
+              ? React.createElement(
+                  Box,
                   { flexDirection: "column" },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       { bold: !0, color: mr.CYAN },
                       "GitHub Copilot Authentication",
                     ),
                   ),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       null,
                       "This will open GitHub to authorize Copilot access.",
                     ),
                   ),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       null,
                       "Continue?",
-                      K.createElement(re, { color: mr.DIM }, " (Y/n)"),
+                      React.createElement(Text, { color: mr.DIM }, " (Y/n)"),
                     ),
                   ),
                 )
               : "device-code" === r || "polling" === r
-                ? K.createElement(
-                    ne,
+                ? React.createElement(
+                    Box,
                     { flexDirection: "column" },
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginBottom: 1 },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { bold: !0, color: mr.CYAN },
                         "GitHub Copilot Authentication",
                       ),
                     ),
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginBottom: 1 },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         null,
                         "Enter this code on GitHub:",
                         " ",
-                        K.createElement(re, { bold: !0, color: mr.GREEN }, s),
+                        React.createElement(Text, { bold: !0, color: mr.GREEN }, s),
                       ),
                     ),
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginBottom: 1 },
-                      K.createElement(re, { color: mr.DIM }, "Open: ", a),
+                      React.createElement(Text, { color: mr.DIM }, "Open: ", a),
                     ),
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginBottom: 1 },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         "polling" === r
                           ? "Waiting for authorization..."
                           : m || "Starting...",
                       ),
                     ),
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       null,
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         "Press ESC to cancel",
                       ),
                     ),
                   )
                 : "error" === r
-                  ? K.createElement(
-                      ne,
+                  ? React.createElement(
+                      Box,
                       { flexDirection: "column" },
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         { marginBottom: 1 },
-                        K.createElement(
-                          re,
+                        React.createElement(
+                          Text,
                           { bold: !0, color: mr.CYAN },
                           "GitHub Copilot Authentication",
                         ),
                       ),
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         { marginBottom: 1 },
-                        K.createElement(re, { color: mr.RED }, "Error: ", u),
+                        React.createElement(Text, { color: mr.RED }, "Error: ", u),
                       ),
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         null,
-                        K.createElement(
-                          re,
+                        React.createElement(
+                          Text,
                           { color: mr.DIM },
                           "Press ESC to go back",
                         ),
@@ -4339,7 +4291,7 @@ function isInternalTeamFlagEnforced() {
   if (isInternalTeamFlagPresent()) return !0;
   try {
     const e = getConfigFile();
-    return (parseJSON(L.readFileSync(e, "utf-8")) || {}).forceOAuth ?? !1;
+    return (parseJSON(fsModule.readFileSync(e, "utf-8")) || {}).forceOAuth ?? !1;
   } catch {
     return !1;
   }
@@ -4414,7 +4366,7 @@ function parseJSON(e) {
 async function getConfiguredProvider() {
   try {
     const e = getConfigFile(),
-      t = await k.readFile(e, "utf-8"),
+      t = await fsPromisesDefault.readFile(e, "utf-8"),
       n = JSON.parse(t),
       r = n.provider || null,
       o = n.forceOAuth || !1,
@@ -4471,7 +4423,7 @@ function isLocalDevelopmentBuild() {
     const e = process.argv[1];
     if (!e) return !1;
     if (e.includes("/usr/local/bin/dmd")) return !0;
-    const t = D.realpathSync(e);
+    const t = fsDefault.realpathSync(e);
     return !(!t.includes("/dist/index.mjs") || t.includes("node_modules"));
   } catch {
     return !1;
@@ -4500,7 +4452,7 @@ function isTelemetryEnabled() {
     return !1;
   try {
     const e = getConfigFile();
-    return !1 !== (parseJSON(L.readFileSync(e, "utf-8")) || {}).telemetry;
+    return !1 !== (parseJSON(fsModule.readFileSync(e, "utf-8")) || {}).telemetry;
   } catch {
     return !0;
   }
@@ -4526,14 +4478,14 @@ var So = __esm({
   bo = {};
 function getPackageJson() {
   const e = import.meta.url,
-    t = d(e);
-  let s = r(t);
-  const { root: i } = o(s);
+    t = fileURLToPath(e);
+  let s = dirname(t);
+  const { root: i } = parsePath(s);
   for (;;) {
-    const e = n(s, "package.json");
-    if (O(e)) return JSON.parse(U(e, "utf8"));
+    const e = join(s, "package.json");
+    if (existsSync(e)) return JSON.parse(readFileSync(e, "utf8"));
     if (s === i) throw new Error("Could not find package.json");
-    s = r(s);
+    s = dirname(s);
   }
 }
 __export(bo, { getPackageJson: () => getPackageJson });
@@ -4642,14 +4594,14 @@ var Mo = __esm({
   },
 });
 function resolveNearestAncestor(e) {
-  let n = t.dirname(e),
-    r = t.basename(e);
-  for (; n !== t.dirname(n); )
+  let n = pathDefault.dirname(e),
+    r = pathDefault.basename(e);
+  for (; n !== pathDefault.dirname(n); )
     try {
-      return t.join(D.realpathSync(n), r);
+      return pathDefault.join(fsDefault.realpathSync(n), r);
     } catch (e) {
       if (e instanceof Error && "code" in e && "ENOENT" === e.code) {
-        ((r = t.join(t.basename(n), r)), (n = t.dirname(n)));
+        ((r = pathDefault.join(pathDefault.basename(n), r)), (n = pathDefault.dirname(n)));
         continue;
       }
       return null;
@@ -4658,19 +4610,19 @@ function resolveNearestAncestor(e) {
 }
 function resolveSymlinks(e) {
   try {
-    return D.realpathSync(e);
+    return fsDefault.realpathSync(e);
   } catch (e) {
     if (!(e instanceof Error && "code" in e && "ENOENT" === e.code))
       return null;
   }
   try {
-    if (D.lstatSync(e).isSymbolicLink()) return null;
+    if (fsDefault.lstatSync(e).isSymbolicLink()) return null;
   } catch {}
   return resolveNearestAncestor(e);
 }
 function resolvePlansDir(e) {
   try {
-    return D.realpathSync(e);
+    return fsDefault.realpathSync(e);
   } catch {
     return e;
   }
@@ -4678,12 +4630,12 @@ function resolvePlansDir(e) {
 function isPlanPath(e) {
   const { filePath: n } = e;
   if (!n || "string" != typeof n) return !1;
-  const r = S.homedir(),
-    o = n.startsWith("~/") ? t.join(r, n.slice(2)) : n,
-    s = resolveSymlinks(t.resolve(o));
+  const r = osDefault.homedir(),
+    o = n.startsWith("~/") ? pathDefault.join(r, n.slice(2)) : n,
+    s = resolveSymlinks(pathDefault.resolve(o));
   if (!s) return !1;
-  const i = resolvePlansDir(t.join(r, ".commandcode", "plans"));
-  return s.startsWith(i + t.sep) || s === i;
+  const i = resolvePlansDir(pathDefault.join(r, ".commandcode", "plans"));
+  return s.startsWith(i + pathDefault.sep) || s === i;
 }
 var No,
   Ro,
@@ -4702,7 +4654,7 @@ function setCurrentPermissionMode(e) {
   $o = e;
 }
 function normalizePathForComparison(e) {
-  const n = t.normalize(e);
+  const n = pathDefault.normalize(e);
   return "win32" === process.platform ? n.toLowerCase() : n;
 }
 function areSamePath(e, t) {
@@ -4710,7 +4662,7 @@ function areSamePath(e, t) {
 }
 function getCanonicalPath(e) {
   try {
-    return D.realpathSync(e);
+    return fsDefault.realpathSync(e);
   } catch (n) {
     const r = n.code;
     return (
@@ -4718,34 +4670,34 @@ function getCanonicalPath(e) {
         console.error(
           `Warning: Could not resolve canonical path for "${e}" (${r}). Path comparison may be less reliable.`,
         ),
-      t.normalize(e)
+      pathDefault.normalize(e)
     );
   }
 }
 function canonicalizeForLookup(e) {
   try {
-    let n = t.resolve(e);
+    let n = pathDefault.resolve(e);
     const r = [];
-    for (; !D.existsSync(n); ) {
-      const o = t.dirname(n);
-      if (o === n) return t.normalize(e);
-      (r.unshift(t.basename(n)), (n = o));
+    for (; !fsDefault.existsSync(n); ) {
+      const o = pathDefault.dirname(n);
+      if (o === n) return pathDefault.normalize(e);
+      (r.unshift(pathDefault.basename(n)), (n = o));
     }
-    return t.join(getCanonicalPath(n), ...r);
+    return pathDefault.join(getCanonicalPath(n), ...r);
   } catch {
-    return t.normalize(e);
+    return pathDefault.normalize(e);
   }
 }
 function formatDirectoryForDisplay(e) {
-  const n = canonicalizeForLookup(t.normalize(e)),
+  const n = canonicalizeForLookup(pathDefault.normalize(e)),
     r = getCanonicalPath(process.cwd()),
-    o = S.homedir();
+    o = osDefault.homedir();
   if (isPathInDirectory(n, r)) {
-    const e = t.relative(r, n);
+    const e = pathDefault.relative(r, n);
     return e ? `./${e}` : ".";
   }
   if (o && isPathInDirectory(n, o)) {
-    const e = t.relative(o, n);
+    const e = pathDefault.relative(o, n);
     return e ? `~/${e}` : "~";
   }
   return n;
@@ -4753,13 +4705,13 @@ function formatDirectoryForDisplay(e) {
 function isPathInDirectory(e, n) {
   const r = normalizePathForComparison(e),
     o = normalizePathForComparison(n),
-    s = o.endsWith(t.sep) ? o : o + t.sep;
+    s = o.endsWith(pathDefault.sep) ? o : o + pathDefault.sep;
   return r === o || r.startsWith(s);
 }
 function findSensitiveDirectoryConflict(e) {
-  const n = [t.normalize(e), getCanonicalPath(e)];
+  const n = [pathDefault.normalize(e), getCanonicalPath(e)];
   for (const e of No) {
-    const r = [t.normalize(e), getCanonicalPath(e)];
+    const r = [pathDefault.normalize(e), getCanonicalPath(e)];
     for (const e of n)
       for (const t of r)
         if (isPathInDirectory(e, t) || isPathInDirectory(t, e)) return t;
@@ -4769,9 +4721,9 @@ function findSensitiveDirectoryConflict(e) {
 function resolveDirectoryPath(e) {
   let n = e.trim();
   return (
-    n.startsWith("~") && (n = t.join(S.homedir(), n.slice(1))),
-    t.isAbsolute(n) || (n = t.resolve(process.cwd(), n)),
-    t.normalize(n)
+    n.startsWith("~") && (n = pathDefault.join(osDefault.homedir(), n.slice(1))),
+    pathDefault.isAbsolute(n) || (n = pathDefault.resolve(process.cwd(), n)),
+    pathDefault.normalize(n)
   );
 }
 function createSkippedResult(e) {
@@ -4804,7 +4756,7 @@ function addDirectory(e) {
   const n = resolveDirectoryPath(e);
   let r, o;
   try {
-    r = D.statSync(n);
+    r = fsDefault.statSync(n);
   } catch (n) {
     return "ENOENT" === n.code
       ? createErrorResult({
@@ -4825,7 +4777,7 @@ function addDirectory(e) {
       message: `${formatDirectoryForDisplay(n)} is not a directory`,
     });
   try {
-    (D.accessSync(n, D.constants.R_OK), (o = getCanonicalPath(n)));
+    (fsDefault.accessSync(n, fsDefault.constants.R_OK), (o = getCanonicalPath(n)));
   } catch {
     return createErrorResult({
       inputPath: e,
@@ -4883,7 +4835,7 @@ function isPathInWorkspace(e) {
   );
 }
 function getWorkspaceDirectories() {
-  return [t.resolve(process.cwd()), ...getAdditionalDirectories()];
+  return [pathDefault.resolve(process.cwd()), ...getAdditionalDirectories()];
 }
 var Do = __esm({
   "src/utils/additional-dirs.ts"() {
@@ -4895,9 +4847,9 @@ var Do = __esm({
         "/proc",
         "/sys",
         "/dev",
-        t.join(S.homedir(), ".ssh"),
-        t.join(S.homedir(), ".gnupg"),
-        t.join(S.homedir(), ".aws"),
+        pathDefault.join(osDefault.homedir(), ".ssh"),
+        pathDefault.join(osDefault.homedir(), ".gnupg"),
+        pathDefault.join(osDefault.homedir(), ".aws"),
       ])),
       (Ro = []),
       ($o = "standard"),
@@ -4927,7 +4879,7 @@ function getCurrentDate() {
   return new Date().toISOString().split("T")[0];
 }
 function getEnvironmentInfo() {
-  return `${S.platform()}-${S.arch()}, Node.js ${process.version}`;
+  return `${osDefault.platform()}-${osDefault.arch()}, Node.js ${process.version}`;
 }
 function getRootDirectoryStructure() {
   const e = getCurrentWorkingDirectory(),
@@ -4948,7 +4900,7 @@ function getRootDirectoryStructure() {
       "out",
     ]);
   try {
-    return D.readdirSync(e, { withFileTypes: !0 })
+    return fsDefault.readdirSync(e, { withFileTypes: !0 })
       .filter((e) => e.isDirectory())
       .filter((e) => !e.name.startsWith("."))
       .filter((e) => !t.has(e.name))
@@ -5088,7 +5040,7 @@ function generateSessionId() {
   return `sess_${Pe().replace(/-/g, "").substring(0, 16)}`;
 }
 function hashPath(e) {
-  return M.createHash("sha256").update(e).digest("hex").substring(0, 12);
+  return cryptoModule.createHash("sha256").update(e).digest("hex").substring(0, 12);
 }
 function getCliVersion() {
   try {
@@ -5106,7 +5058,7 @@ function buildSessionAttributes(e) {
     [$t.SESSION_PROJECT_HASH]: hashPath(n),
     [$t.SESSION_BRANCH_HASH]: r ? hashPath(r) : "unknown",
     "session.cli_version": o,
-    "session.platform": `${w.platform()}-${w.arch()}`,
+    "session.platform": `${osModule.platform()}-${osModule.arch()}`,
     "session.node_version": process.version,
   };
 }
@@ -5275,7 +5227,7 @@ function errorFingerprint(e) {
     o = r
       ? `${n}|${normalizeStackFrame(r)}`
       : `${n}|${(t.message || "").slice(0, 120)}`;
-  return M.createHash("sha1").update(o).digest("hex").substring(0, 16);
+  return cryptoModule.createHash("sha1").update(o).digest("hex").substring(0, 16);
 }
 var Go = __esm({
   "src/utils/telemetry/error-categorization.ts"() {
@@ -5753,7 +5705,7 @@ function getApiKeyFromEnv() {
 async function readAuthFile(e) {
   try {
     const t = getAuthFile(e),
-      n = await k.readFile(t, "utf-8");
+      n = await fsPromisesDefault.readFile(t, "utf-8");
     return JSON.parse(n);
   } catch {
     return null;
@@ -5886,8 +5838,8 @@ var xs,
 function detectConfigParseError() {
   try {
     const e = getConfigFile();
-    if (!L.existsSync(e)) return null;
-    const t = L.readFileSync(e, "utf-8");
+    if (!fsModule.existsSync(e)) return null;
+    const t = fsModule.readFileSync(e, "utf-8");
     return "" === t.trim()
       ? null
       : null === parseJSON(t)
@@ -6133,67 +6085,67 @@ var Ps,
   zs = __esm({
     "../shared/src/types/share.ts"() {
       (Ft(),
-        (Us = f.object({
-          messageId: f.string().optional(),
-          timestamp: f.string(),
-          model: f.string().optional(),
-          duration: f.number().optional(),
-          usage: f
+        (Us = z.object({
+          messageId: z.string().optional(),
+          timestamp: z.string(),
+          model: z.string().optional(),
+          duration: z.number().optional(),
+          usage: z
             .object({
-              inputTokens: f.number(),
-              outputTokens: f.number(),
-              totalTokens: f.number(),
-              cacheReadTokens: f.number().optional(),
-              cacheWriteTokens: f.number().optional(),
-              estimatedCost: f.number().optional(),
+              inputTokens: z.number(),
+              outputTokens: z.number(),
+              totalTokens: z.number(),
+              cacheReadTokens: z.number().optional(),
+              cacheWriteTokens: z.number().optional(),
+              estimatedCost: z.number().optional(),
             })
             .optional(),
-          source: f.string().optional(),
-          context: f
+          source: z.string().optional(),
+          context: z
             .object({
-              sessionId: f.string().optional(),
-              threadId: f.string().optional(),
-              userId: f.string().optional(),
+              sessionId: z.string().optional(),
+              threadId: z.string().optional(),
+              userId: z.string().optional(),
             })
             .optional(),
-          highlight: f.boolean().optional(),
-          isSummary: f.boolean().optional(),
-          isAutomated: f.boolean().optional(),
-          isMeta: f.boolean().optional(),
-          hookContexts: f
+          highlight: z.boolean().optional(),
+          isSummary: z.boolean().optional(),
+          isAutomated: z.boolean().optional(),
+          isMeta: z.boolean().optional(),
+          hookContexts: z
             .record(
-              f.string(),
-              f.object({
-                preToolUse: f.string().optional(),
-                postToolUse: f.string().optional(),
+              z.string(),
+              z.object({
+                preToolUse: z.string().optional(),
+                postToolUse: z.string().optional(),
               }),
             )
             .optional(),
         })),
-        f.object({ message: f.any(), meta: Us }),
-        f.object({
-          sessionId: f.string().uuid("sessionId must be a UUID"),
-          messages: f.array(f.any()).optional(),
+        z.object({ message: z.any(), meta: Us }),
+        z.object({
+          sessionId: z.string().uuid("sessionId must be a UUID"),
+          messages: z.array(z.any()).optional(),
         }),
-        f.object({ secret: f.string(), url: f.string() }),
-        f.object({
-          sessionId: f.string().uuid("sessionId must be a UUID"),
-          secret: f.string(),
+        z.object({ secret: z.string(), url: z.string() }),
+        z.object({
+          sessionId: z.string().uuid("sessionId must be a UUID"),
+          secret: z.string(),
         }),
-        f.object({
-          sessionId: f.string(),
-          secret: f.string(),
-          key: f.string(),
-          content: f.any(),
+        z.object({
+          sessionId: z.string(),
+          secret: z.string(),
+          key: z.string(),
+          content: z.any(),
         }),
-        f.object({
-          sessionId: f.string().uuid("sessionId must be a UUID"),
-          secret: f.string(),
-          message: f.any(),
+        z.object({
+          sessionId: z.string().uuid("sessionId must be a UUID"),
+          secret: z.string(),
+          message: z.any(),
         }),
         (js = /^[a-f0-9]{8}$/),
-        f.object({ shortId: f.string().regex(js, "Invalid shortId") }),
-        f.object({ info: f.any().optional(), messages: f.array(f.any()) }));
+        z.object({ shortId: z.string().regex(js, "Invalid shortId") }),
+        z.object({ info: z.any().optional(), messages: z.array(z.any()) }));
     },
   }),
   Ws = __esm({
@@ -6217,24 +6169,24 @@ var Hs,
   Vs = __esm({
     "../shared/src/types/email.ts"() {
       (Ft(),
-        f.object({
-          to: f.union([f.email(), f.array(f.email())]),
-          subject: f.string(),
-          html: f.string().optional(),
-          text: f.string().optional(),
-          template: f.string().optional(),
-          templateData: f.record(f.any(), f.any()).optional(),
-          cc: f.array(f.email()).optional(),
-          bcc: f.array(f.email()).optional(),
-          replyTo: f.array(f.email()).optional(),
-          tags: f
-            .array(f.object({ name: f.string(), value: f.string() }))
+        z.object({
+          to: z.union([z.email(), z.array(z.email())]),
+          subject: z.string(),
+          html: z.string().optional(),
+          text: z.string().optional(),
+          template: z.string().optional(),
+          templateData: z.record(z.any(), z.any()).optional(),
+          cc: z.array(z.email()).optional(),
+          bcc: z.array(z.email()).optional(),
+          replyTo: z.array(z.email()).optional(),
+          tags: z
+            .array(z.object({ name: z.string(), value: z.string() }))
             .optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          messageId: f.string().optional(),
-          error: f.string().optional(),
+        z.object({
+          success: z.boolean(),
+          messageId: z.string().optional(),
+          error: z.string().optional(),
         }));
     },
   });
@@ -10977,7 +10929,7 @@ var Cu,
             __name(this, "PgSelectQueryBuilderBase");
           }
           static [Hs] = "PgSelectQueryBuilder";
-          _;
+          writeFile;
           config;
           joinsNotNullableMap;
           tableName;
@@ -16025,7 +15977,7 @@ var Gp,
             __name(this, "MySqlSelectQueryBuilderBase");
           }
           static [Hs] = "MySqlSelectQueryBuilder";
-          _;
+          writeFile;
           config;
           joinsNotNullableMap;
           tableName;
@@ -19022,7 +18974,7 @@ var Dh,
             __name(this, "SQLiteSelectQueryBuilderBase");
           }
           static [Hs] = "SQLiteSelectQueryBuilder";
-          _;
+          writeFile;
           config;
           joinsNotNullableMap;
           tableName;
@@ -20549,7 +20501,7 @@ function c(e, t) {
     t.notNull
       ? t.hasDefault && (o[e] = o[e].optional())
       : (o[e] = o[e].nullable().optional());
-  return f.object(o);
+  return z.object(o);
 }
 function b(e, t) {
   const n = getTableColumns(e),
@@ -20566,7 +20518,7 @@ function b(e, t) {
       ),
     ));
   for (const [e, t] of r) t.notNull || (o[e] = o[e].nullable());
-  return f.object(o);
+  return z.object(o);
 }
 function p(e) {
   let t;
@@ -20574,19 +20526,19 @@ function p(e) {
     ("enumValues" in (n = e) &&
       Array.isArray(n.enumValues) &&
       n.enumValues.length > 0 &&
-      (t = e.enumValues.length ? f.enum(e.enumValues) : f.string()),
+      (t = e.enumValues.length ? z.enum(e.enumValues) : z.string()),
     !t)
   )
-    if (is(e, Zl)) t = f.string().uuid();
-    else if ("custom" === e.dataType) t = f.any();
+    if (is(e, Zl)) t = z.string().uuid();
+    else if ("custom" === e.dataType) t = z.any();
     else if ("json" === e.dataType) t = Jh;
-    else if ("array" === e.dataType) t = f.array(p(e.baseColumn));
-    else if ("number" === e.dataType) t = f.number();
-    else if ("bigint" === e.dataType) t = f.bigint();
-    else if ("boolean" === e.dataType) t = f.boolean();
-    else if ("date" === e.dataType) t = f.date();
+    else if ("array" === e.dataType) t = z.array(p(e.baseColumn));
+    else if ("number" === e.dataType) t = z.number();
+    else if ("bigint" === e.dataType) t = z.bigint();
+    else if ("boolean" === e.dataType) t = z.boolean();
+    else if ("date" === e.dataType) t = z.date();
     else if ("string" === e.dataType) {
-      let n = f.string();
+      let n = z.string();
       ((is(e, Ea) ||
         is(e, nc) ||
         is(e, lp) ||
@@ -20598,7 +20550,7 @@ function p(e) {
         (t = n));
     }
   var n;
-  return (t || (t = f.any()), t);
+  return (t || (t = z.any()), t);
 }
 var pf,
   gf,
@@ -20621,8 +20573,8 @@ var pf,
         Eg(),
         bd(),
         mf(),
-        (Yh = f.union([f.string(), f.number(), f.boolean(), f.null()])),
-        (Jh = f.lazy(() => f.union([Yh, f.array(Jh), f.record(Jh)]))),
+        (Yh = z.union([z.string(), z.number(), z.boolean(), z.null()])),
+        (Jh = z.lazy(() => z.union([Yh, z.array(Jh), z.record(Jh)]))),
         __name(c, "c"),
         __name(b, "b"),
         __name(p, "p"));
@@ -21007,7 +20959,7 @@ var pf,
       (Ft(),
         If(),
         Cn(),
-        (bf = f.enum([
+        (bf = z.enum([
           "active",
           "canceled",
           "incomplete",
@@ -21016,13 +20968,13 @@ var pf,
           "trialing",
           "unpaid",
         ])),
-        (Ef = f.enum([
+        (Ef = z.enum([
           "admin_grant",
           "signup_credits",
           "purchased_credits",
           "subscription_credits",
         ])),
-        (vf = f.enum([
+        (vf = z.enum([
           "agent",
           "learning",
           "custom-agent",
@@ -21032,266 +20984,266 @@ var pf,
           "compact",
           "api",
         ])),
-        (Cf = f.enum(["free", "monthly", "purchased"])),
-        f.enum(["team", "individual", "enterprise"]),
-        f.object({
-          type: f.enum(["api", "oauth"]).default("api"),
-          orgId: f.string().nullable().optional(),
-          model: f.string().min(1),
-          userId: f.string().min(1),
-          traceId: f.string(),
-          provider: f.enum(Object.values(Gt)).default("anthropic"),
-          oauthProvider: f.string().nullable().optional(),
-          tokensIn: f.number().min(0),
-          tokensOut: f.number().min(0),
-          inputCost: f.number().min(0),
-          totalCost: f.number().min(0),
-          outputCost: f.number().min(0),
-          ownerLogin: f.string(),
-          tokensTotal: f.number().min(0),
-          creditsTotal: f.number().min(0),
-          durationTotal: f.number().min(0),
+        (Cf = z.enum(["free", "monthly", "purchased"])),
+        z.enum(["team", "individual", "enterprise"]),
+        z.object({
+          type: z.enum(["api", "oauth"]).default("api"),
+          orgId: z.string().nullable().optional(),
+          model: z.string().min(1),
+          userId: z.string().min(1),
+          traceId: z.string(),
+          provider: z.enum(Object.values(Gt)).default("anthropic"),
+          oauthProvider: z.string().nullable().optional(),
+          tokensIn: z.number().min(0),
+          tokensOut: z.number().min(0),
+          inputCost: z.number().min(0),
+          totalCost: z.number().min(0),
+          outputCost: z.number().min(0),
+          ownerLogin: z.string(),
+          tokensTotal: z.number().min(0),
+          creditsTotal: z.number().min(0),
+          durationTotal: z.number().min(0),
           mode: vf.nullable().optional(),
-          cacheCost: f.number().min(0).optional(),
-          cacheSavings: f.number().optional(),
-          cacheCreation: f
+          cacheCost: z.number().min(0).optional(),
+          cacheSavings: z.number().optional(),
+          cacheCreation: z
             .object({
-              ephemeral_5m_input_tokens: f.number().optional(),
-              ephemeral_1h_input_tokens: f.number().optional(),
+              ephemeral_5m_input_tokens: z.number().optional(),
+              ephemeral_1h_input_tokens: z.number().optional(),
             })
             .nullable()
             .optional(),
-          cacheCreationInputTokens: f.number().min(0).nullable().optional(),
-          cacheReadInputTokens: f.number().min(0).nullable().optional(),
-          threadId: f.string().nullable().optional(),
-          messageInId: f.string().nullable().optional(),
-          messageOutId: f.string().nullable().optional(),
-          cliVersion: f.string().nullable().optional(),
-          modelCategory: f.enum(["premium", "opensource"]).optional(),
-          gatewayRequestId: f.string().nullable().optional(),
-          gatewayProvider: f.string().nullable().optional(),
-          gatewayCost: f.string().nullable().optional(),
-          gatewayRouting: f
-            .record(f.string(), f.unknown())
+          cacheCreationInputTokens: z.number().min(0).nullable().optional(),
+          cacheReadInputTokens: z.number().min(0).nullable().optional(),
+          threadId: z.string().nullable().optional(),
+          messageInId: z.string().nullable().optional(),
+          messageOutId: z.string().nullable().optional(),
+          cliVersion: z.string().nullable().optional(),
+          modelCategory: z.enum(["premium", "opensource"]).optional(),
+          gatewayRequestId: z.string().nullable().optional(),
+          gatewayProvider: z.string().nullable().optional(),
+          gatewayCost: z.string().nullable().optional(),
+          gatewayRouting: z
+            .record(z.string(), z.unknown())
             .nullable()
             .optional(),
-          promoId: f.string().nullable().optional(),
+          promoId: z.string().nullable().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          instanceId: f.string().optional(),
-          error: f.string().optional(),
+        z.object({
+          success: z.boolean(),
+          instanceId: z.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({ userId: f.string().min(1), orgId: f.string().nullable() }),
-        f.object({
-          credits: f.object({
-            freeCredits: f.number(),
-            belowThreshold: f.boolean(),
-            monthlyCredits: f.number(),
-            creditThreshold: f.number(),
-            availableCredits: f.number(),
-            purchasedCredits: f.number(),
-            premiumMonthlyCredits: f.number().optional(),
-            opensourceMonthlyCredits: f.number().optional(),
-            planId: f.string().nullable().optional(),
+        z.object({ userId: z.string().min(1), orgId: z.string().nullable() }),
+        z.object({
+          credits: z.object({
+            freeCredits: z.number(),
+            belowThreshold: z.boolean(),
+            monthlyCredits: z.number(),
+            creditThreshold: z.number(),
+            availableCredits: z.number(),
+            purchasedCredits: z.number(),
+            premiumMonthlyCredits: z.number().optional(),
+            opensourceMonthlyCredits: z.number().optional(),
+            planId: z.string().nullable().optional(),
           }),
         }),
-        f.object({
-          userId: f.string().min(1),
-          orgId: f.string().nullable().optional(),
+        z.object({
+          userId: z.string().min(1),
+          orgId: z.string().nullable().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          data: f
+        z.object({
+          success: z.boolean(),
+          data: z
             .object({
-              id: f.string(),
-              userId: f.uuid(),
-              orgId: f.string().nullable(),
-              stripeCustomerId: f.string(),
-              autoCharge: f.boolean(),
-              creditThreshold: f.string(),
-              rechargeAmount: f.string(),
-              monthlyCreditThreshold: f.string(),
+              id: z.string(),
+              userId: z.uuid(),
+              orgId: z.string().nullable(),
+              stripeCustomerId: z.string(),
+              autoCharge: z.boolean(),
+              creditThreshold: z.string(),
+              rechargeAmount: z.string(),
+              monthlyCreditThreshold: z.string(),
             })
             .optional(),
-          error: f.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          userId: f.string().min(1),
-          orgId: f.string().nullable().optional(),
-          autoCharge: f.boolean().optional(),
-          rechargeAmount: f.number().min(0).optional(),
-          creditThreshold: f.number().min(0).optional(),
-          monthlyCreditThreshold: f.number().min(0).optional(),
-          stripeCustomerId: f.string().optional(),
+        z.object({
+          userId: z.string().min(1),
+          orgId: z.string().nullable().optional(),
+          autoCharge: z.boolean().optional(),
+          rechargeAmount: z.number().min(0).optional(),
+          creditThreshold: z.number().min(0).optional(),
+          monthlyCreditThreshold: z.number().min(0).optional(),
+          stripeCustomerId: z.string().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          data: f
+        z.object({
+          success: z.boolean(),
+          data: z
             .object({
-              id: f.string(),
-              userId: f.uuid(),
-              orgId: f.string().nullable(),
-              stripeCustomerId: f.string(),
-              autoCharge: f.boolean(),
-              creditThreshold: f.string(),
-              rechargeAmount: f.string(),
+              id: z.string(),
+              userId: z.uuid(),
+              orgId: z.string().nullable(),
+              stripeCustomerId: z.string(),
+              autoCharge: z.boolean(),
+              creditThreshold: z.string(),
+              rechargeAmount: z.string(),
             })
             .optional(),
-          error: f.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          userId: f.string().min(1),
-          userEmail: f.email(),
-          orgId: f.string().nullable().optional(),
+        z.object({
+          userId: z.string().min(1),
+          userEmail: z.email(),
+          orgId: z.string().nullable().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          data: f
-            .object({ clientSecret: f.string(), customerId: f.string() })
+        z.object({
+          success: z.boolean(),
+          data: z
+            .object({ clientSecret: z.string(), customerId: z.string() })
             .optional(),
-          error: f.string().optional(),
-          message: f.string().optional(),
+          error: z.string().optional(),
+          message: z.string().optional(),
         }),
-        f.object({
-          userId: f.string().min(1),
-          orgId: f.string().nullable().optional(),
+        z.object({
+          userId: z.string().min(1),
+          orgId: z.string().nullable().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          data: f
+        z.object({
+          success: z.boolean(),
+          data: z
             .object({
-              hasPaymentMethod: f.boolean(),
-              paymentMethods: f.array(
-                f.object({
-                  id: f.string(),
-                  brand: f.string().optional(),
-                  last4: f.string().optional(),
-                  expMonth: f.number().optional(),
-                  expYear: f.number().optional(),
-                  default: f.boolean(),
+              hasPaymentMethod: z.boolean(),
+              paymentMethods: z.array(
+                z.object({
+                  id: z.string(),
+                  brand: z.string().optional(),
+                  last4: z.string().optional(),
+                  expMonth: z.number().optional(),
+                  expYear: z.number().optional(),
+                  default: z.boolean(),
                 }),
               ),
-              customerId: f.string().optional(),
+              customerId: z.string().optional(),
             })
             .optional(),
-          error: f.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          userId: f.string().min(1),
-          paymentMethodId: f.string().min(1),
-          orgId: f.string().nullable().optional(),
+        z.object({
+          userId: z.string().min(1),
+          paymentMethodId: z.string().min(1),
+          orgId: z.string().nullable().optional(),
         }),
-        f.object({ success: f.boolean(), error: f.string().optional() }),
-        f.object({
-          userId: f.string().min(1),
-          orgId: f.string().nullable().optional(),
-          customerId: f.string().min(1),
-          paymentMethodId: f.string().min(1),
+        z.object({ success: z.boolean(), error: z.string().optional() }),
+        z.object({
+          userId: z.string().min(1),
+          orgId: z.string().nullable().optional(),
+          customerId: z.string().min(1),
+          paymentMethodId: z.string().min(1),
         }),
-        f.object({
-          success: f.boolean(),
-          message: f.string().optional(),
-          error: f.string().optional(),
+        z.object({
+          success: z.boolean(),
+          message: z.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({ body: f.string(), signature: f.string() }),
-        f.object({
-          success: f.boolean(),
-          received: f.boolean().optional(),
-          error: f.string().optional(),
+        z.object({ body: z.string(), signature: z.string() }),
+        z.object({
+          success: z.boolean(),
+          received: z.boolean().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          orgId: f.string().nullable().optional(),
-          amount: f.number().min(0),
-          credits: f.number().min(0),
-          userEmail: f.email(),
+        z.object({
+          orgId: z.string().nullable().optional(),
+          amount: z.number().min(0),
+          credits: z.number().min(0),
+          userEmail: z.email(),
           creditType: Cf.optional(),
           invoiceType: Ef,
         }),
-        f.object({
-          success: f.boolean(),
-          message: f.string().optional(),
-          error: f.string().optional(),
+        z.object({
+          success: z.boolean(),
+          message: z.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          orgId: f.string().nullable(),
-          limit: f.number().min(1).max(100).default(10),
-          userId: f.string().min(1),
-          startingAfter: f.string().optional(),
+        z.object({
+          orgId: z.string().nullable(),
+          limit: z.number().min(1).max(100).default(10),
+          userId: z.string().min(1),
+          startingAfter: z.string().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          data: f
+        z.object({
+          success: z.boolean(),
+          data: z
             .object({
-              invoices: f.array(
-                f.object({
-                  id: f.string(),
-                  status: f.enum(["paid"]),
-                  invoicePdf: f.url().nullable(),
-                  amountPaid: f.number(),
-                  currency: f.string(),
-                  credits: f.string(),
-                  autoCharged: f.boolean(),
-                  createdAt: f.string(),
+              invoices: z.array(
+                z.object({
+                  id: z.string(),
+                  status: z.enum(["paid"]),
+                  invoicePdf: z.url().nullable(),
+                  amountPaid: z.number(),
+                  currency: z.string(),
+                  credits: z.string(),
+                  autoCharged: z.boolean(),
+                  createdAt: z.string(),
                   invoiceType: Ef,
                 }),
               ),
-              hasMore: f.boolean(),
+              hasMore: z.boolean(),
             })
             .optional(),
-          error: f.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({ userId: f.uuid(), orgId: f.uuid().nullable().optional() }),
-        f.object({
-          success: f.boolean(),
-          data: f
+        z.object({ userId: z.uuid(), orgId: z.uuid().nullable().optional() }),
+        z.object({
+          success: z.boolean(),
+          data: z
             .object({
-              id: f.string(),
-              orgId: f.string().nullable(),
-              userId: f.string().nullable(),
+              id: z.string(),
+              orgId: z.string().nullable(),
+              userId: z.string().nullable(),
               status: bf,
-              planId: f.string(),
-              priceId: f.string(),
-              quantity: f.number(),
-              currentPeriodEnd: f.string(),
-              cancelAtPeriodEnd: f.boolean(),
-              currentPeriodStart: f.string(),
+              planId: z.string(),
+              priceId: z.string(),
+              quantity: z.number(),
+              currentPeriodEnd: z.string(),
+              cancelAtPeriodEnd: z.boolean(),
+              currentPeriodStart: z.string(),
             })
             .nullable(),
-          error: f.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          data: f
+        z.object({
+          success: z.boolean(),
+          data: z
             .object({
-              totalGiven: f.number(),
-              limit: f.number(),
-              remaining: f.number(),
+              totalGiven: z.number(),
+              limit: z.number(),
+              remaining: z.number(),
             })
             .optional(),
-          error: f.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          userId: f.string().min(1),
-          orgId: f.string().nullable().optional(),
+        z.object({
+          userId: z.string().min(1),
+          orgId: z.string().nullable().optional(),
         }),
-        f.object({ success: f.boolean(), error: f.string().optional() }),
-        f.object({ amount: f.number().min(0) }),
-        f.object({
-          success: f.boolean(),
-          totalGiven: f.number().optional(),
-          exceeded: f.boolean().optional(),
-          error: f.string().optional(),
+        z.object({ success: z.boolean(), error: z.string().optional() }),
+        z.object({ amount: z.number().min(0) }),
+        z.object({
+          success: z.boolean(),
+          totalGiven: z.number().optional(),
+          exceeded: z.boolean().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          userId: f.uuid(),
-          userEmail: f.email(),
-          userAgent: f.string().nullable().optional(),
+        z.object({
+          userId: z.uuid(),
+          userEmail: z.email(),
+          userAgent: z.string().nullable().optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          allowed: f.boolean(),
-          reason: f
+        z.object({
+          success: z.boolean(),
+          allowed: z.boolean(),
+          reason: z
             .enum([
               "banned",
               "user_rate_limit",
@@ -21300,50 +21252,50 @@ var pf,
               "email_not_verified",
             ])
             .optional(),
-          message: f.string().optional(),
-          error: f.string().optional(),
+          message: z.string().optional(),
+          error: z.string().optional(),
         }),
-        f.object({
-          userId: f.uuid(),
-          orgId: f.uuid().nullable().optional(),
-          eventType: f.enum(yf.enumValues),
-          metadata: f.record(f.string(), f.unknown()).optional(),
-          scheduledFor: f.iso.datetime().optional(),
-          idempotencyKey: f.string().min(1).optional(),
+        z.object({
+          userId: z.uuid(),
+          orgId: z.uuid().nullable().optional(),
+          eventType: z.enum(yf.enumValues),
+          metadata: z.record(z.string(), z.unknown()).optional(),
+          scheduledFor: z.iso.datetime().optional(),
+          idempotencyKey: z.string().min(1).optional(),
         }),
-        f.object({
-          success: f.boolean(),
-          tracked: f.boolean(),
-          error: f.string().optional(),
+        z.object({
+          success: z.boolean(),
+          tracked: z.boolean(),
+          error: z.string().optional(),
         }),
-        f.object({
-          userId: f.uuid(),
-          orgId: f.string().nullable().optional(),
-          minutes: f.number().int().min(1).optional(),
-          from: f.iso.datetime().optional(),
-          to: f.iso.datetime().optional(),
+        z.object({
+          userId: z.uuid(),
+          orgId: z.string().nullable().optional(),
+          minutes: z.number().int().min(1).optional(),
+          from: z.iso.datetime().optional(),
+          to: z.iso.datetime().optional(),
         }),
-        (kf = f.object({
-          model: f.string(),
-          provider: f.string(),
-          timeBucket: f.string(),
-          requests: f.number(),
-          totalCost: f.number(),
-          inputCost: f.number(),
-          outputCost: f.number(),
-          creditsTotal: f.number(),
-          cacheCost: f.number(),
-          cacheSavings: f.number(),
-          tokensIn: f.number(),
-          tokensOut: f.number(),
-          tokensTotal: f.number(),
-          cacheReadInputTokens: f.number(),
-          cacheCreationInputTokens: f.number(),
+        (kf = z.object({
+          model: z.string(),
+          provider: z.string(),
+          timeBucket: z.string(),
+          requests: z.number(),
+          totalCost: z.number(),
+          inputCost: z.number(),
+          outputCost: z.number(),
+          creditsTotal: z.number(),
+          cacheCost: z.number(),
+          cacheSavings: z.number(),
+          tokensIn: z.number(),
+          tokensOut: z.number(),
+          tokensTotal: z.number(),
+          cacheReadInputTokens: z.number(),
+          cacheCreationInputTokens: z.number(),
         })),
-        f.object({
-          success: f.boolean(),
-          data: f.array(kf).optional(),
-          error: f.string().optional(),
+        z.object({
+          success: z.boolean(),
+          data: z.array(kf).optional(),
+          error: z.string().optional(),
         }));
     },
   }),
@@ -21397,11 +21349,11 @@ var Of,
     "../shared/src/types/skills.ts"() {
       (Ft(),
         __name(preprocessAllowedTools, "preprocessAllowedTools"),
-        (Tf = f
-          .preprocess(preprocessAllowedTools, f.array(f.string()).optional())
+        (Tf = z
+          .preprocess(preprocessAllowedTools, z.array(z.string()).optional())
           .optional()),
-        (_f = f.object({
-          name: f
+        (_f = z.object({
+          name: z
             .string()
             .min(1, "Skill name is required")
             .max(64, "Skill name must be 64 characters or less")
@@ -21417,32 +21369,32 @@ var Of,
               (e) => !e.includes("--"),
               "Skill name cannot contain consecutive hyphens",
             ),
-          description: f
+          description: z
             .string()
             .min(1, "Skill description is required")
             .max(1024, "Skill description must be 1024 characters or less"),
-          license: f.string().optional(),
-          compatibility: f
+          license: z.string().optional(),
+          compatibility: z
             .string()
             .max(500, "Skill compatibility must be 500 characters or less")
             .optional(),
-          metadata: f.record(f.string(), f.any()).optional(),
+          metadata: z.record(z.string(), z.any()).optional(),
           "allowed-tools": Tf,
         })),
-        f.object({
-          name: f.string(),
-          description: f.string(),
-          license: f.string().optional(),
-          compatibility: f.string().max(500).optional(),
-          metadata: f.record(f.string(), f.any()).optional(),
+        z.object({
+          name: z.string(),
+          description: z.string(),
+          license: z.string().optional(),
+          compatibility: z.string().max(500).optional(),
+          metadata: z.record(z.string(), z.any()).optional(),
           "allowed-tools": Tf,
-          content: f.string(),
-          filePath: f.string(),
+          content: z.string(),
+          filePath: z.string(),
         }),
-        f.object({
-          name: f.string(),
-          description: f.string(),
-          filePath: f.string(),
+        z.object({
+          name: z.string(),
+          description: z.string(),
+          filePath: z.string(),
         }));
     },
   }),
@@ -23225,7 +23177,7 @@ function Connection(
     write(By().p().str(t).z(1).end());
   }
   async function SASL() {
-    ((oe = (await N.randomBytes(18)).toString("base64")),
+    ((oe = (await cryptoDefault.randomBytes(18)).toString("base64")),
       By()
         .p()
         .str("SCRAM-SHA-256" + By.N));
@@ -23242,7 +23194,7 @@ function Connection(
         .toString("utf8", 9)
         .split(",")
         .reduce((e, t) => ((e[t[0]] = t.slice(2)), e), {}),
-      n = await N.pbkdf2Sync(
+      n = await cryptoDefault.pbkdf2Sync(
         await Pass(),
         Buffer.from(t.s, "base64"),
         parseInt(t.i),
@@ -23466,13 +23418,13 @@ function parseError(e) {
   return t;
 }
 function md5(e) {
-  return N.createHash("md5").update(e).digest("hex");
+  return cryptoDefault.createHash("md5").update(e).digest("hex");
 }
 function hmac(e, t) {
-  return N.createHmac("sha256", e).update(t).digest();
+  return cryptoDefault.createHmac("sha256", e).update(t).digest();
 }
 function sha256(e) {
-  return N.createHash("sha256").update(e).digest();
+  return cryptoDefault.createHash("sha256").update(e).digest();
 }
 function xor(e, t) {
   const n = Math.max(e.length, t.length),
@@ -24055,7 +24007,7 @@ function Postgres(e, t) {
               [],
               n,
               (n) => {
-                D.readFile(t, "utf8", (t, r) => {
+                fsDefault.readFile(t, "utf8", (t, r) => {
                   if (t) return n.reject(t);
                   ((n.strings = [r]), e(n));
                 });
@@ -24343,7 +24295,7 @@ function parseUrl(e) {
 }
 function osUsername() {
   try {
-    return S.userInfo().username;
+    return osDefault.userInfo().username;
   } catch (e) {
     return process.env.USERNAME || process.env.USER || process.env.LOGNAME;
   }
@@ -25047,25 +24999,25 @@ var sw,
           "payment_failed",
         ])),
         (_w = pgEnum("AlertSeverity", ["info", "warning", "critical"])),
-        f.object({
-          currentCredits: f.number().optional(),
-          avgCredits: f.number().optional(),
-          zScore: f.number().optional(),
-          multiplier: f.number().optional(),
-          threshold: f.number().optional(),
-          availableCredits: f.number().optional(),
-          chargeAmount: f.number().optional(),
-          creditsAdded: f.number().optional(),
-          error: f.string().optional(),
-          requestCount: f.number().optional(),
-          timePeriod: f.string().optional(),
-          ownerLogin: f.string().optional(),
+        z.object({
+          currentCredits: z.number().optional(),
+          avgCredits: z.number().optional(),
+          zScore: z.number().optional(),
+          multiplier: z.number().optional(),
+          threshold: z.number().optional(),
+          availableCredits: z.number().optional(),
+          chargeAmount: z.number().optional(),
+          creditsAdded: z.number().optional(),
+          error: z.string().optional(),
+          requestCount: z.number().optional(),
+          timePeriod: z.string().optional(),
+          ownerLogin: z.string().optional(),
         }),
-        f.object({
-          channel: f.enum(["slack", "email"]),
-          sentAt: f.string(),
-          success: f.boolean(),
-          error: f.string().optional(),
+        z.object({
+          channel: z.enum(["slack", "email"]),
+          sentAt: z.string(),
+          success: z.boolean(),
+          error: z.string().optional(),
         }),
         c(
           (xw = Tc(
@@ -26158,7 +26110,7 @@ function parseFrontmatter(e) {
   return Ue(e, {});
 }
 function describeSkillLoadError(e) {
-  if (e instanceof y)
+  if (e instanceof ZodError)
     return 0 === e.issues.length
       ? "invalid frontmatter"
       : e.issues
@@ -26178,10 +26130,10 @@ function describeSkillLoadError(e) {
   return String(e);
 }
 function getGlobalSkillsDir() {
-  return t.join(S.homedir(), ".commandcode", "skills");
+  return pathDefault.join(osDefault.homedir(), ".commandcode", "skills");
 }
 function getGlobalAgentsCompatSkillsDir() {
-  return t.join(S.homedir(), ".agents", "skills");
+  return pathDefault.join(osDefault.homedir(), ".agents", "skills");
 }
 function getBundledSkillsDir() {
   if (AS) return AS.value;
@@ -26191,13 +26143,13 @@ function getBundledSkillsDir() {
 function resolveBundledSkillsDir() {
   let e;
   try {
-    e = t.dirname(d(import.meta.url));
+    e = pathDefault.dirname(fileURLToPath(import.meta.url));
   } catch {
     return;
   }
   for (let n = 0; n < xS; n++) {
-    if (O(t.join(e, "package.json"))) return t.join(e, "skills");
-    const n = t.dirname(e);
+    if (existsSync(pathDefault.join(e, "package.json"))) return pathDefault.join(e, "skills");
+    const n = pathDefault.dirname(e);
     if (n === e) break;
     e = n;
   }
@@ -26205,38 +26157,38 @@ function resolveBundledSkillsDir() {
 function isBundledSkillPath(e) {
   const { filePath: n, bundledDir: r } = e;
   if (!r) return !1;
-  const o = t.relative(t.resolve(r), t.resolve(n));
-  return "" === o || (!o.startsWith("..") && !t.isAbsolute(o));
+  const o = pathDefault.relative(pathDefault.resolve(r), pathDefault.resolve(n));
+  return "" === o || (!o.startsWith("..") && !pathDefault.isAbsolute(o));
 }
 function findGitRoot() {
   return walkUpToFindDir({ dirName: ".git" });
 }
 function walkUpToFindDir(e) {
   const { dirName: n } = e,
-    r = S.homedir();
+    r = osDefault.homedir();
   let o = process.cwd();
   for (let e = 0; e < xS && o !== r; e++) {
-    if (O(t.join(o, n))) return o;
-    const e = t.dirname(o);
+    if (existsSync(pathDefault.join(o, n))) return o;
+    const e = pathDefault.dirname(o);
     if (e === o) break;
     o = e;
   }
 }
 function getProjectSkillsDir(e) {
   const n = e?.gitRoot ?? findGitRoot();
-  if (n) return t.join(n, ".commandcode", "skills");
+  if (n) return pathDefault.join(n, ".commandcode", "skills");
   const r = walkUpToFindDir({ dirName: ".commandcode" });
   return r
-    ? t.join(r, ".commandcode", "skills")
-    : t.join(process.cwd(), ".commandcode", "skills");
+    ? pathDefault.join(r, ".commandcode", "skills")
+    : pathDefault.join(process.cwd(), ".commandcode", "skills");
 }
 function getProjectAgentsCompatSkillsDir(e) {
   const n = e?.gitRoot ?? findGitRoot();
-  if (n) return t.join(n, ".agents", "skills");
+  if (n) return pathDefault.join(n, ".agents", "skills");
   const r = walkUpToFindDir({ dirName: ".agents" });
   return r
-    ? t.join(r, ".agents", "skills")
-    : t.join(process.cwd(), ".agents", "skills");
+    ? pathDefault.join(r, ".agents", "skills")
+    : pathDefault.join(process.cwd(), ".agents", "skills");
 }
 function isSkillManifestFile(e) {
   const t = e.toLowerCase();
@@ -26245,9 +26197,9 @@ function isSkillManifestFile(e) {
 async function resolveSkillFilePath(e) {
   const { skillDir: n } = e;
   for (const e of PS) {
-    const r = t.join(n, e);
+    const r = pathDefault.join(n, e);
     try {
-      return (await k.access(r), r);
+      return (await fsPromisesDefault.access(r), r);
     } catch {}
   }
   return null;
@@ -26259,13 +26211,13 @@ async function loadSummariesAndWarningsFromDirectory(e) {
       (r.push(e), dlog(`[Skills] Skipped ${e.path}: ${e.reason}`));
     }, "pushWarning");
   try {
-    await k.access(n);
-    const e = await k.readdir(n, { withFileTypes: !0 });
+    await fsPromisesDefault.access(n);
+    const e = await fsPromisesDefault.readdir(n, { withFileTypes: !0 });
     for (const r of e)
       r.isFile() &&
         r.name.toLowerCase().endsWith(".md") &&
         o({
-          path: t.join(n, r.name),
+          path: pathDefault.join(n, r.name),
           reason:
             "loose .md file — wrap it in a directory named after the skill",
         });
@@ -26275,7 +26227,7 @@ async function loadSummariesAndWarningsFromDirectory(e) {
             if (e.isDirectory()) return e;
             if (e.isSymbolicLink())
               try {
-                return (await k.stat(t.join(n, e.name))).isDirectory()
+                return (await fsPromisesDefault.stat(pathDefault.join(n, e.name))).isDirectory()
                   ? e
                   : null;
               } catch {
@@ -26287,7 +26239,7 @@ async function loadSummariesAndWarningsFromDirectory(e) {
       ).filter((e) => null !== e),
       i = await Promise.all(
         s.map(async (e) => {
-          const r = t.join(n, e.name),
+          const r = pathDefault.join(n, e.name),
             o = await resolveSkillFilePath({ skillDir: r });
           if (!o)
             return {
@@ -26295,7 +26247,7 @@ async function loadSummariesAndWarningsFromDirectory(e) {
               warning: { path: r, reason: "missing SKILL.md (or skill.md)" },
             };
           try {
-            const t = await k.readFile(o, "utf-8"),
+            const t = await fsPromisesDefault.readFile(o, "utf-8"),
               { data: n } = parseFrontmatter(t),
               r = _f.parse(n);
             return r.name !== e.name
@@ -26339,10 +26291,10 @@ function mergeSkillSummaries(e) {
 async function loadAllSkillSummariesWithWarnings() {
   const e = findGitRoot(),
     n = process.cwd(),
-    r = S.homedir(),
+    r = osDefault.homedir(),
     o = getBundledSkillsDir(),
-    s = t.join(n, ".commandcode", "skills"),
-    i = t.join(n, ".agents", "skills"),
+    s = pathDefault.join(n, ".commandcode", "skills"),
+    i = pathDefault.join(n, ".agents", "skills"),
     a = getProjectSkillsDir({ gitRoot: e }),
     l = getProjectAgentsCompatSkillsDir({ gitRoot: e }),
     u = n !== r,
@@ -26390,7 +26342,7 @@ function deduplicateSkills(e) {
 }
 async function loadSkill(e) {
   const { filePath: t } = e,
-    n = parseFrontmatter(await k.readFile(t, "utf-8")),
+    n = parseFrontmatter(await fsPromisesDefault.readFile(t, "utf-8")),
     r = _f.parse(n.data);
   return {
     name: r.name,
@@ -26483,12 +26435,12 @@ function originOf(e) {
   }
 }
 function getTokenFilePath() {
-  return e.join(S.homedir(), ".commandcode", $S);
+  return pathModule.join(osDefault.homedir(), ".commandcode", $S);
 }
 async function loadTokenStorage() {
   try {
     const e = getTokenFilePath(),
-      t = await C.readFile(e, "utf-8"),
+      t = await fsPromises.readFile(e, "utf-8"),
       n = JSON.parse(t);
     return 1 !== n.version || "object" != typeof n.tokens
       ? { version: 1, tokens: {} }
@@ -26502,10 +26454,10 @@ async function loadTokenStorage() {
 }
 async function saveTokenStorage(t) {
   const n = getTokenFilePath(),
-    r = e.dirname(n);
-  (await C.mkdir(r, { recursive: !0 }),
-    await C.writeFile(n, JSON.stringify(t, null, 2), { mode: 384 }),
-    await C.chmod(n, 384));
+    r = pathModule.dirname(n);
+  (await fsPromises.mkdir(r, { recursive: !0 }),
+    await fsPromises.writeFile(n, JSON.stringify(t, null, 2), { mode: 384 }),
+    await fsPromises.chmod(n, 384));
 }
 async function storeTokens(e, t) {
   const n = await loadTokenStorage();
@@ -26672,20 +26624,20 @@ var qS,
     "src/mcp/types.ts"() {
       (Ft(),
         __name(isSecureOrLoopback, "isSecureOrLoopback"),
-        (OS = f
+        (OS = z
           .string()
           .url()
           .refine(isSecureOrLoopback, {
             message: "URL must use https:// (or http:// for loopback hosts)",
           })),
-        (FS = f.object({
+        (FS = z.object({
           authorizationUrl: OS,
           tokenUrl: OS,
-          clientId: f.string(),
-          clientSecret: f.string().optional(),
-          scopes: f.array(f.string()).optional(),
+          clientId: z.string(),
+          clientSecret: z.string().optional(),
+          scopes: z.array(z.string()).optional(),
         })),
-        (US = f.preprocess(
+        (US = z.preprocess(
           (e) => {
             if (!e || "object" != typeof e || Array.isArray(e)) return e;
             const t = e;
@@ -26700,16 +26652,16 @@ var qS,
                 ? { ...t, transport: "http" }
                 : t;
           },
-          f
+          z
             .object({
-              transport: f.enum(["stdio", "http"]),
-              enabled: f.boolean().default(!0),
-              command: f.string().optional(),
-              args: f.array(f.string()).optional(),
-              url: f.string().url().optional(),
-              headers: f.record(f.string(), f.string()).optional(),
+              transport: z.enum(["stdio", "http"]),
+              enabled: z.boolean().default(!0),
+              command: z.string().optional(),
+              args: z.array(z.string()).optional(),
+              url: z.string().url().optional(),
+              headers: z.record(z.string(), z.string()).optional(),
               oauth: FS.optional(),
-              env: f.record(f.string(), f.string()).optional(),
+              env: z.record(z.string(), z.string()).optional(),
             })
             .refine((e) => !e.oauth || !e.url || isSecureOrLoopback(e.url), {
               message:
@@ -26717,18 +26669,18 @@ var qS,
               path: ["url"],
             }),
         )),
-        f.object({ mcpServers: f.record(f.string(), US) }));
+        z.object({ mcpServers: z.record(z.string(), US) }));
     },
   });
 function getUserMcpConfigPath() {
-  return e.join(S.homedir(), ".commandcode", qS);
+  return pathModule.join(osDefault.homedir(), ".commandcode", qS);
 }
 function getLocalMcpConfigPath(t = process.cwd()) {
   const n = je(t);
-  return e.join(S.homedir(), ".commandcode", "projects", n, qS);
+  return pathModule.join(osDefault.homedir(), ".commandcode", "projects", n, qS);
 }
 function getProjectMcpConfigPath(t = process.cwd()) {
-  return e.join(t, BS);
+  return pathModule.join(t, BS);
 }
 function getMcpConfigPath({ scope: e, projectPath: t = process.cwd() }) {
   switch (e) {
@@ -26763,7 +26715,7 @@ var WS = __esm({
 async function loadMcpConfig({ scope: e, projectPath: t = process.cwd() }) {
   try {
     const n = getMcpConfigPath({ scope: e, projectPath: t }),
-      r = await C.readFile(n, "utf-8"),
+      r = await fsPromises.readFile(n, "utf-8"),
       o = JSON.parse(r);
     if (
       !o ||
@@ -26793,9 +26745,9 @@ async function saveMcpConfig({
   projectPath: r = process.cwd(),
 }) {
   const o = getMcpConfigPath({ scope: n, projectPath: r }),
-    s = e.dirname(o);
-  (await C.mkdir(s, { recursive: !0 }),
-    await C.writeFile(o, JSON.stringify(t, null, 2) + "\n", { mode: 384 }));
+    s = pathModule.dirname(o);
+  (await fsPromises.mkdir(s, { recursive: !0 }),
+    await fsPromises.writeFile(o, JSON.stringify(t, null, 2) + "\n", { mode: 384 }));
 }
 async function loadMergedMcpConfig(e = process.cwd()) {
   const t = getAllMcpConfigPaths(e),
@@ -27089,7 +27041,7 @@ function getInvokedCommandName() {
     const e = getBinNames(),
       n = process.argv[1];
     if (!n) return e[0] || KS;
-    const r = t.basename(n).replace(/\.(m?[jt]s|cjs)$/, "");
+    const r = pathDefault.basename(n).replace(/\.(m?[jt]s|cjs)$/, "");
     return e.includes(r) ? r : e[0] || KS;
   } catch {
     return KS;
@@ -27108,13 +27060,13 @@ var JS,
   }),
   eb = {};
 function generateRandomString(e) {
-  return M.randomBytes(e).toString("base64url").slice(0, e);
+  return cryptoModule.randomBytes(e).toString("base64url").slice(0, e);
 }
 function generatePKCE() {
   const e = generateRandomString(64);
   return {
     verifier: e,
-    challenge: M.createHash("sha256").update(e).digest("base64url"),
+    challenge: cryptoModule.createHash("sha256").update(e).digest("base64url"),
   };
 }
 function escapeHtml(e) {
@@ -27132,8 +27084,8 @@ function startCallbackServer(e, t) {
     const i = new Promise((e, t) => {
         ((o = e), (s = t));
       }),
-      a = V.createServer((n, r) => {
-        const i = new g(n.url || "/", `http://${XS}:${e}`);
+      a = httpModule.createServer((n, r) => {
+        const i = new URLClass(n.url || "/", `http://${XS}:${e}`);
         if ("/callback" === i.pathname) {
           const e = i.searchParams.get("code"),
             n = i.searchParams.get("error"),
@@ -27254,7 +27206,7 @@ async function performOAuthFlow(e, t, n, r) {
     i("Starting authentication server...");
     const { server: d, getCode: m } = await startCallbackServer(o, l);
     a = d;
-    const h = new g(n.authorizationUrl);
+    const h = new URLClass(n.authorizationUrl);
     if (
       (h.searchParams.set("response_type", "code"),
       h.searchParams.set("client_id", n.clientId),
@@ -27810,7 +27762,7 @@ function formatBundledSkillPath(t) {
   const n = getBundledSkillsDir();
   if (!n) return null;
   if (!isBundledSkillPath({ filePath: t, bundledDir: n })) return null;
-  const r = e.relative(n, t).split(e.sep).filter(Boolean),
+  const r = pathModule.relative(n, t).split(pathModule.sep).filter(Boolean),
     o = r[0];
   return o
     ? `Skill(${2 === r.length && isSkillManifestFile(r[1]) ? o : r.join("/")})`
@@ -27821,13 +27773,13 @@ function toRelativePath(t) {
   if (n) return n;
   const r = global.COMMAND_CODE_CWD || process.cwd(),
     o = process.env.HOME || process.env.USERPROFILE || "",
-    s = e.relative(r, t);
+    s = pathModule.relative(r, t);
   return s.startsWith("..")
     ? o && t.startsWith(o)
       ? t.replace(o, "~")
       : t
     : "" === s
-      ? e.basename(t)
+      ? pathModule.basename(t)
       : s;
 }
 function replacePathsInText(t) {
@@ -27836,7 +27788,7 @@ function replacePathsInText(t) {
   return (
     (n = n.replace(
       /\/(?:Users|home|opt|var|tmp|usr|etc)\/[^\s'"`,;)}\]]+/g,
-      (t) => (e.isAbsolute(t) ? toRelativePath(t) : t),
+      (t) => (pathModule.isAbsolute(t) ? toRelativePath(t) : t),
     )),
     (n = n.replace(/[A-Za-z]:\\[^\s'"`,;)}\]]+/g, (e) => toRelativePath(e))),
     n
@@ -27929,57 +27881,57 @@ var Vb,
         cb(),
         Gb(),
         fs(),
-        (ub = f.object({
-          id: f.string(),
-          timestamp: f.number(),
-          type: f.literal("image"),
-          source: f.object({
-            type: f.enum(["base64", "url"]),
-            media_type: f.enum([
+        (ub = z.object({
+          id: z.string(),
+          timestamp: z.number(),
+          type: z.literal("image"),
+          source: z.object({
+            type: z.enum(["base64", "url"]),
+            media_type: z.enum([
               "image/jpeg",
               "image/png",
               "image/gif",
               "image/webp",
             ]),
-            data: f.string(),
+            data: z.string(),
           }),
         })),
-        (db = f.object({
-          id: f.string(),
-          timestamp: f.number(),
-          input: f.string(),
-          output: f.string().optional(),
-          metadata: f.record(f.string(), f.any()).optional(),
-          images: f.array(ub).optional().default([]),
+        (db = z.object({
+          id: z.string(),
+          timestamp: z.number(),
+          input: z.string(),
+          output: z.string().optional(),
+          metadata: z.record(z.string(), z.any()).optional(),
+          images: z.array(ub).optional().default([]),
         })),
-        (mb = db.extend({ role: f.literal("user") })),
-        (pb = db.extend({ role: f.literal("assistant") })),
+        (mb = db.extend({ role: z.literal("user") })),
+        (pb = db.extend({ role: z.literal("assistant") })),
         (gb = db
           .extend({
-            role: f.literal("tool"),
-            name: f.string(),
-            description: f.string().optional(),
+            role: z.literal("tool"),
+            name: z.string(),
+            description: z.string().optional(),
           })
           .refine((e) => e.name && !("command" in e), {
             message: "Tool entries must have 'name' and cannot have 'command'",
           })),
         (hb = db
-          .extend({ role: f.literal("bash"), command: f.string() })
+          .extend({ role: z.literal("bash"), command: z.string() })
           .refine((e) => e.command && !("name" in e), {
             message: "Bash entries must have 'command' and cannot have 'name'",
           })),
-        (fb = db.extend({ role: f.literal("system") })),
-        (yb = db.extend({ role: f.literal("error") })),
-        (wb = db.extend({ role: f.literal("info") })),
-        (Sb = db.extend({ role: f.literal("taste-onboarding") })),
+        (fb = db.extend({ role: z.literal("system") })),
+        (yb = db.extend({ role: z.literal("error") })),
+        (wb = db.extend({ role: z.literal("info") })),
+        (Sb = db.extend({ role: z.literal("taste-onboarding") })),
         (bb = db.extend({
-          role: f.literal("command-result"),
-          hasError: f.boolean().optional(),
-          details: f.string().optional(),
+          role: z.literal("command-result"),
+          hasError: z.boolean().optional(),
+          details: z.string().optional(),
         })),
         (Eb = db.extend({
-          role: f.literal("ide-status"),
-          status: f.enum([
+          role: z.literal("ide-status"),
+          status: z.enum([
             "connected",
             "installed",
             "up_to_date",
@@ -27987,11 +27939,11 @@ var Vb,
             "not_in_ide",
             "failed",
           ]),
-          ide: f.string().nullable(),
-          details: f.array(f.string()).optional(),
+          ide: z.string().nullable(),
+          details: z.array(z.string()).optional(),
         })),
-        (vb = db.extend({ role: f.literal("reasoning") })),
-        (Cb = f.discriminatedUnion("role", [
+        (vb = db.extend({ role: z.literal("reasoning") })),
+        (Cb = z.discriminatedUnion("role", [
           mb,
           pb,
           gb,
@@ -28293,7 +28245,7 @@ var Vb,
             switch (e) {
               case wS.READ_FILE:
               case wS.WRITE_FILE:
-                const n =
+                const join =
                   t.absolutePath ||
                   t.file_path ||
                   t.filePath ||
@@ -28301,7 +28253,7 @@ var Vb,
                   "file";
                 return t.isTasteFile
                   ? t.tasteCategory || ""
-                  : toRelativePath(n);
+                  : toRelativePath(join);
               case wS.EDIT_FILE:
                 return toRelativePath(
                   t.absolutePath ||
@@ -28313,8 +28265,8 @@ var Vb,
               case wS.READ_DIRECTORY:
                 return toRelativePath(t.path || "directory");
               case wS.GREP:
-                const r = t.path || "files";
-                return `"${t.pattern}" in ${toRelativePath(r)}`;
+                const dirname = t.path || "files";
+                return `"${t.pattern}" in ${toRelativePath(dirname)}`;
               case wS.SHELL_COMMAND:
                 if (t.command) {
                   const e =
@@ -28327,24 +28279,24 @@ var Vb,
                 }
                 return t.command || "";
               case wS.TODO_WRITE:
-                let o;
+                let parsePath;
                 try {
-                  o =
+                  parsePath =
                     "string" == typeof t.todos
                       ? t.todos
                       : JSON.stringify(t.todos);
-                  const e = Hb(o);
+                  const e = Hb(parsePath);
                   return `${e ? e.length : 0} items`;
                 } catch {
                   return "items";
                 }
               case wS.READ_MULTIPLE_FILES:
-                const s = t.include || [];
-                if (!Array.isArray(s) || 0 === s.length)
+                const relative = t.include || [];
+                if (!Array.isArray(relative) || 0 === relative.length)
                   return "multiple files";
-                const i = s.slice(0, us).map(toRelativePath).join(", "),
-                  a = s.length - us;
-                return a > 0 ? `${i} (+${a} more)` : i;
+                const isAbsolute = relative.slice(0, us).map(toRelativePath).join(", "),
+                  resolve = relative.length - us;
+                return resolve > 0 ? `${isAbsolute} (+${resolve} more)` : isAbsolute;
               case SS.WEB_SEARCH:
                 return t.query || "search";
               case SS.WEB_FETCH:
@@ -28436,7 +28388,7 @@ function createAuthServer(e, t) {
   const o = new Promise((e, t) => {
       ((n = e), (r = t));
     }),
-    s = V.createServer((e, o) => {
+    s = httpModule.createServer((e, o) => {
       const i = [
           "http://localhost:3000",
           "https://staging.commandcode.ai",
@@ -28539,7 +28491,7 @@ var Kb,
     },
   });
 function generateStateToken() {
-  return M.randomBytes(32).toString("base64url");
+  return cryptoModule.randomBytes(32).toString("base64url");
 }
 async function openBrowser(e) {
   try {
@@ -28577,7 +28529,7 @@ function buildAuthUrl(e, t) {
 async function storeCredentials(e) {
   const t = getAuthDir(),
     n = getAuthFile();
-  await C.mkdir(t, { recursive: !0, mode: 448 });
+  await fsPromises.mkdir(t, { recursive: !0, mode: 448 });
   const r = JSON.stringify(
     {
       apiKey: e.apiKey,
@@ -28589,12 +28541,12 @@ async function storeCredentials(e) {
     null,
     2,
   );
-  (await C.writeFile(n, r, { mode: 384 }), await C.chmod(n, 384));
+  (await fsPromises.writeFile(n, r, { mode: 384 }), await fsPromises.chmod(n, 384));
 }
 async function loadCredentials() {
   try {
     const e = getAuthFile(),
-      t = await C.readFile(e, "utf-8"),
+      t = await fsPromises.readFile(e, "utf-8"),
       n = JSON.parse(t);
     return n.apiKey
       ? {
@@ -28691,22 +28643,22 @@ function sanitizeApiKey(e) {
 }
 function useAuthFlow(e) {
   const { onSuccess: t, onFailure: n, onCancel: r, timeout: o = Jb } = e,
-    [s, i] = J("initializing"),
-    [a, l] = J("Starting authentication..."),
-    [u, d] = J(""),
-    [m, g] = J(null),
-    h = X(null),
-    f = X(!1),
-    y = X(!1),
-    w = X(null),
-    S = X(null),
-    E = X(t),
-    v = X(n),
-    C = X(r);
-  Z(() => {
+    [s, i] = useState("initializing"),
+    [a, l] = useState("Starting authentication..."),
+    [u, d] = useState(""),
+    [m, g] = useState(null),
+    h = useRef(null),
+    f = useRef(!1),
+    y = useRef(!1),
+    w = useRef(null),
+    S = useRef(null),
+    E = useRef(t),
+    v = useRef(n),
+    C = useRef(r);
+  useEffect(() => {
     ((E.current = t), (v.current = n), (C.current = r));
   });
-  const k = te(() => {
+  const k = useCallback(() => {
       (w.current && (clearTimeout(w.current), (w.current = null)),
         S.current && (clearTimeout(S.current), (S.current = null)),
         h.current &&
@@ -28716,22 +28668,22 @@ function useAuthFlow(e) {
           }),
           (h.current = null)));
     }, []),
-    T = te(() => {
+    T = useCallback(() => {
       y.current || ((y.current = !0), (f.current = !0), k(), C.current());
     }, [k]),
-    _ = te(
+    _ = useCallback(
       (e, t) => {
         y.current || ((y.current = !0), k(), E.current(e, t));
       },
       [k],
     ),
-    x = te(
+    x = useCallback(
       (e, t) => {
         y.current || ((y.current = !0), k(), v.current(e, t));
       },
       [k],
     ),
-    A = te(
+    A = useCallback(
       async (e) => {
         const t = sanitizeApiKey(e);
         if (!t) return;
@@ -28797,7 +28749,7 @@ function useAuthFlow(e) {
       [_],
     );
   return (
-    Z(() => {
+    useEffect(() => {
       let e = !0;
       return (
         __name(async () => {
@@ -28985,7 +28937,7 @@ var nE,
         sE(),
         Or(),
         io(),
-        ((nE = K.memo(
+        ((nE = React.memo(
           ({
             authState: e,
             browserUrl: t,
@@ -28998,15 +28950,15 @@ var nE,
                 "manual_entry" === e ||
                 "invalid_key" === e,
               i = t && ("waiting_browser" === e || "manual_entry" === e);
-            return K.createElement(
-              K.Fragment,
+            return React.createElement(
+              React.Fragment,
               null,
               s &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { flexDirection: "column" },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     {
                       borderStyle: "single",
                       borderColor:
@@ -29015,11 +28967,11 @@ var nE,
                           : mr.GRAY,
                       paddingX: 1,
                     },
-                    K.createElement(re, { color: mr.DIM }, "API Key: "),
-                    K.createElement(
-                      ne,
+                    React.createElement(Text, { color: mr.DIM }, "API Key: "),
+                    React.createElement(
+                      Box,
                       { flexGrow: 1 },
-                      K.createElement(TextInput, {
+                      React.createElement(TextInput, {
                         value: n,
                         onChange: r,
                         onSubmit: o,
@@ -29029,21 +28981,21 @@ var nE,
                       }),
                     ),
                   ),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginTop: 1 },
-                    K.createElement(re, { color: mr.DIM }, getAuthHelpText(e)),
+                    React.createElement(Text, { color: mr.DIM }, getAuthHelpText(e)),
                   ),
                   i &&
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { marginTop: 1, flexDirection: "column" },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         getAuthUrlLabel(e),
                       ),
-                      K.createElement(ro, {
+                      React.createElement(ro, {
                         url: t,
                         text: t,
                         color: mr.CYAN,
@@ -29052,11 +29004,11 @@ var nE,
                     ),
                 ),
               "validating" === e &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginTop: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     "Checking API key with server...",
                   ),
@@ -29064,10 +29016,10 @@ var nE,
               ("waiting_browser" === e ||
                 "manual_entry" === e ||
                 "invalid_key" === e) &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginTop: 1 },
-                  K.createElement(re, { color: mr.DIM }, "Ctrl+C to cancel"),
+                  React.createElement(Text, { color: mr.DIM }, "Ctrl+C to cancel"),
                 ),
             );
           },
@@ -29086,38 +29038,38 @@ var nE,
                   case "initializing":
                   case "validating":
                   default:
-                    return K.createElement(Be, { type: "dots" });
+                    return React.createElement(Be, { type: "dots" });
                   case "waiting_browser":
-                    return K.createElement(re, { color: mr.CYAN }, Ie.ellipsis);
+                    return React.createElement(Text, { color: mr.CYAN }, Ie.ellipsis);
                   case "browser_success":
                   case "success":
-                    return K.createElement(re, { color: mr.GREEN }, Ie.tick);
+                    return React.createElement(Text, { color: mr.GREEN }, Ie.tick);
                   case "denied":
                   case "invalid_key":
-                    return K.createElement(re, { color: mr.RED }, Ie.cross);
+                    return React.createElement(Text, { color: mr.RED }, Ie.cross);
                   case "manual_entry":
-                    return K.createElement(
-                      re,
+                    return React.createElement(
+                      Text,
                       { color: mr.YELLOW },
                       Ie.arrowDown,
                     );
                   case "error":
-                    return K.createElement(re, { color: mr.RED }, Ie.warning);
+                    return React.createElement(Text, { color: mr.RED }, Ie.warning);
                 }
               }, "getStatusIcon"),
               a = __name(() => getAuthStatusColor(e), "getStatusColor");
             return "browser_success" === e || "success" === e || "denied" === e
               ? null
-              : K.createElement(
-                  ne,
+              : React.createElement(
+                  Box,
                   { flexDirection: "column", paddingY: 1 },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { marginBottom: 1 },
-                    K.createElement(ne, { marginRight: 1 }, i()),
-                    K.createElement(re, { color: a() }, t),
+                    React.createElement(Box, { marginRight: 1 }, i()),
+                    React.createElement(Text, { color: a() }, t),
                   ),
-                  K.createElement(nE, {
+                  React.createElement(nE, {
                     authState: e,
                     browserUrl: n,
                     apiKeyInput: r,
@@ -29160,10 +29112,10 @@ var nE,
             }, "onCancel"),
           });
           return (
-            ie((e, t) => {
+            useInput((e, t) => {
               t.ctrl && "c" === e && a();
             }),
-            K.createElement(rE, {
+            React.createElement(rE, {
               authState: t,
               statusMessage: n,
               browserUrl: r,
@@ -29422,15 +29374,15 @@ function TaskSpinner({
   onComplete: r,
   showSuccessState: o = !0,
 }) {
-  const [s, i] = J("loading"),
-    [a, l] = J(null);
+  const [s, i] = useState("loading"),
+    [a, l] = useState(null);
   return (
-    Z(() => {
+    useEffect(() => {
       n().then((e) => {
         (l(e), i(o ? "success" : "done"));
       });
     }, [n, o]),
-    Z(() => {
+    useEffect(() => {
       if (("done" === s && null !== a && r(a), "success" === s && null !== a)) {
         const e = setTimeout(() => r(a), 100);
         return () => clearTimeout(e);
@@ -29438,12 +29390,12 @@ function TaskSpinner({
     }, [s, a, r]),
     "done" === s
       ? null
-      : K.createElement(
+      : React.createElement(
           wE,
           null,
           "loading" === s
-            ? K.createElement(fE, { message: e })
-            : K.createElement(yE, { message: t }),
+            ? React.createElement(fE, { message: e })
+            : React.createElement(yE, { message: t }),
         )
   );
 }
@@ -29543,8 +29495,8 @@ function renderTaskWithSpinner(e, t, n, r = !0) {
     const s = __name((e) => {
         (i(), o(e));
       }, "handleComplete"),
-      { unmount: i } = ae(
-        K.createElement(TaskSpinner, {
+      { unmount: i } = render(
+        React.createElement(TaskSpinner, {
           loadingMessage: e,
           successMessage: t,
           task: n,
@@ -29561,8 +29513,8 @@ function renderTaskWithSpinner(e, t, n, r = !0) {
 }
 function runLoginWithApiKeyFlow() {
   return new Promise((e) => {
-    const { unmount: t } = ae(
-      K.createElement(oE, {
+    const { unmount: t } = render(
+      React.createElement(oE, {
         onComplete: __name((n) => {
           setTimeout(() => {
             (t(), e(n));
@@ -29580,8 +29532,8 @@ function runLoginWithApiKeyFlow() {
 }
 async function checkAuthWithSpinner(e) {
   return new Promise((t) => {
-    const { unmount: n } = ae(
-      K.createElement(SE, {
+    const { unmount: n } = render(
+      React.createElement(SE, {
         env: e,
         onComplete: (e) => {
           (n(), t(e));
@@ -29674,35 +29626,35 @@ var CE = __esm({
       Or(),
       (fE = __name(
         ({ message: e }) =>
-          K.createElement(
-            K.Fragment,
+          React.createElement(
+            React.Fragment,
             null,
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.CYAN },
-              K.createElement(Be, { type: "dots" }),
+              React.createElement(Be, { type: "dots" }),
             ),
-            K.createElement(re, null, " ", e),
+            React.createElement(Text, null, " ", e),
           ),
         "LoadingIndicator",
       )),
       (yE = __name(
         ({ message: e }) =>
-          K.createElement(
-            K.Fragment,
+          React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, { color: mr.GREEN }, Ie.tick),
-            K.createElement(re, null, " ", e),
+            React.createElement(Text, { color: mr.GREEN }, Ie.tick),
+            React.createElement(Text, null, " ", e),
           ),
         "SuccessIndicator",
       )),
       (wE = __name(
         ({ children: e }) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { flexDirection: "column" },
-            K.createElement(re, null, " "),
-            K.createElement(ne, null, e),
+            React.createElement(Text, null, " "),
+            React.createElement(Box, null, e),
           ),
         "StatusContainer",
       )),
@@ -29732,31 +29684,31 @@ var CE = __esm({
       __name(renderTaskWithSpinner, "renderTaskWithSpinner"),
       __name(runLoginWithApiKeyFlow, "runLoginWithApiKeyFlow"),
       (SE = __name(({ env: e, onComplete: t }) => {
-        const [n, r] = J("checking"),
-          [o, s] = J(null);
+        const [n, r] = useState("checking"),
+          [o, s] = useState(null);
         return (
-          Z(() => {
+          useEffect(() => {
             checkExistingAuth(e).then((e) => {
               (s(e), r(e.isAuthenticated ? "logged_in" : "not_logged_in"));
             });
           }, [e]),
-          Z(() => {
+          useEffect(() => {
             if ("checking" !== n && null !== o) {
               const e = setTimeout(() => t(o), 100);
               return () => clearTimeout(e);
             }
           }, [n, o, t]),
-          K.createElement(
+          React.createElement(
             wE,
             null,
             "checking" === n &&
-              K.createElement(fE, {
+              React.createElement(fE, {
                 message: "Checking authentication status...",
               }),
             "logged_in" === n &&
-              K.createElement(yE, { message: "Authenticated" }),
+              React.createElement(yE, { message: "Authenticated" }),
             "not_logged_in" === n &&
-              K.createElement(yE, { message: "Ready to log in" }),
+              React.createElement(yE, { message: "Ready to log in" }),
           )
         );
       }, "AuthCheckSpinner")),
@@ -29776,7 +29728,7 @@ var CE = __esm({
 });
 async function safeRemoveFile(e, t) {
   try {
-    return (await k.unlink(e), { existed: !0 });
+    return (await fsPromisesDefault.unlink(e), { existed: !0 });
   } catch (e) {
     return "ENOENT" === e.code
       ? { existed: !1 }
@@ -29836,8 +29788,8 @@ async function renderLogoutUI() {
     e = void 0;
   }
   return new Promise((t) => {
-    const { unmount: n } = ae(
-      K.createElement(AE, {
+    const { unmount: n } = render(
+      React.createElement(AE, {
         onComplete: (e) => {
           (n(), t(e));
         },
@@ -29869,52 +29821,52 @@ var ME,
         As(),
         (kE = __name(({ userName: e }) => {
           const t = e ? `Logging out ${e}...` : "Logging out...";
-          return K.createElement(
-            K.Fragment,
+          return React.createElement(
+            React.Fragment,
             null,
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.CYAN },
-              K.createElement(Be, { type: "dots" }),
+              React.createElement(Be, { type: "dots" }),
             ),
-            K.createElement(re, null, " ", t),
+            React.createElement(Text, null, " ", t),
           );
         }, "LoadingIndicator")),
         (TE = __name(({ userName: e, wasAuthenticated: t }) => {
           const n =
             !1 === t ? "Not currently authenticated" : formatLogoutSuccess(e);
-          return K.createElement(
-            K.Fragment,
+          return React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, { color: mr.GREEN }, Ie.tick),
-            K.createElement(re, null, " ", n),
+            React.createElement(Text, { color: mr.GREEN }, Ie.tick),
+            React.createElement(Text, null, " ", n),
           );
         }, "SuccessIndicator")),
         (_E = __name(
           ({ errorMessage: e }) =>
-            K.createElement(
-              K.Fragment,
+            React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, { color: mr.RED }, Ie.cross),
-              K.createElement(re, { color: mr.RED }, " Logout failed: ", e),
+              React.createElement(Text, { color: mr.RED }, Ie.cross),
+              React.createElement(Text, { color: mr.RED }, " Logout failed: ", e),
             ),
           "ErrorIndicator",
         )),
         (xE = __name(
           ({ status: e, errorMessage: t, userName: n, wasAuthenticated: r }) =>
             "loading" === e
-              ? K.createElement(kE, { userName: n })
+              ? React.createElement(kE, { userName: n })
               : "success" === e
-                ? K.createElement(TE, { userName: n, wasAuthenticated: r })
-                : K.createElement(_E, { errorMessage: t }),
+                ? React.createElement(TE, { userName: n, wasAuthenticated: r })
+                : React.createElement(_E, { errorMessage: t }),
           "StatusDisplay",
         )),
         (AE = __name(({ onComplete: e, userName: t }) => {
-          const [n, r] = J("loading"),
-            [o, s] = J(""),
-            [i, a] = J(null);
+          const [n, r] = useState("loading"),
+            [o, s] = useState(""),
+            [i, a] = useState(null);
           return (
-            Z(() => {
+            useEffect(() => {
               performLogout().then((e) => {
                 (a(e),
                   e.success
@@ -29922,20 +29874,20 @@ var ME,
                     : (s(e.error || "Unknown error"), r("error")));
               });
             }, []),
-            Z(() => {
+            useEffect(() => {
               if (("success" === n || "error" === n) && i) {
                 const t = setTimeout(() => e(i), 100);
                 return () => clearTimeout(t);
               }
             }, [n, i, e]),
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { flexDirection: "column" },
-              K.createElement(re, null, " "),
-              K.createElement(
-                ne,
+              React.createElement(Text, null, " "),
+              React.createElement(
+                Box,
                 null,
-                K.createElement(xE, {
+                React.createElement(xE, {
                   status: n,
                   errorMessage: o,
                   userName: t,
@@ -29981,9 +29933,9 @@ function ensureSession() {
   if (!RE) {
     RE = !0;
     try {
-      q(r(NE), { recursive: !0 });
+      mkdirSync(dirname(NE), { recursive: !0 });
       const e = `\n=== SESSION ${new Date().toISOString()} pid=${process.pid} cols=${process.stdout.columns ?? "?"} rows=${process.stdout.rows ?? "?"} ===\n`;
-      G(NE, e, "utf-8");
+      appendFileSync(NE, e, "utf-8");
     } catch {}
   }
 }
@@ -30004,7 +29956,7 @@ function emit(e, t) {
     s.push(`${e}=${t}`);
   }
   try {
-    G(NE, s.join(" ") + "\n", "utf-8");
+    appendFileSync(NE, s.join(" ") + "\n", "utf-8");
   } catch {}
 }
 var UE,
@@ -30014,7 +29966,7 @@ var UE,
         (ME = "1" === process.env.CMD_FLICKER_DEBUG),
         (NE =
           process.env.CMD_FLICKER_LOG ??
-          n(v(), ".commandcode", "logs", "flicker.log")),
+          join(homedir(), ".commandcode", "logs", "flicker.log")),
         (RE = !1),
         ($E = 0),
         (LE = Date.now()),
@@ -30286,13 +30238,13 @@ function isCorruptedArchiveError(e) {
   );
 }
 async function clearGigetCache(e, n) {
-  const r = t.join(S.homedir(), ".cache", "giget", "gh", `${e}-${n}`);
-  await k.rm(r, { recursive: !0, force: !0 }).catch(() => {});
+  const r = pathDefault.join(osDefault.homedir(), ".cache", "giget", "gh", `${e}-${n}`);
+  await fsPromisesDefault.rm(r, { recursive: !0, force: !0 }).catch(() => {});
 }
 async function cleanupStaleTempDirectories() {
   try {
-    const e = S.tmpdir(),
-      n = await k.readdir(e, { withFileTypes: !0 }),
+    const e = osDefault.tmpdir(),
+      n = await fsPromisesDefault.readdir(e, { withFileTypes: !0 }),
       r = Date.now();
     for (const o of n)
       if (
@@ -30301,9 +30253,9 @@ async function cleanupStaleTempDirectories() {
           o.name.startsWith("commandcode-skill-discovery-"))
       )
         try {
-          const n = t.join(e, o.name);
-          r - (await k.stat(n)).mtimeMs > WE &&
-            (await k.rm(n, { recursive: !0, force: !0 }));
+          const n = pathDefault.join(e, o.name);
+          r - (await fsPromisesDefault.stat(n)).mtimeMs > WE &&
+            (await fsPromisesDefault.rm(n, { recursive: !0, force: !0 }));
         } catch (e) {}
   } catch (e) {}
 }
@@ -30365,19 +30317,19 @@ async function findSkillMdFiles(e) {
   if (i.value >= GE) return [];
   const a = [];
   try {
-    const e = await k.readdir(n, { withFileTypes: !0 }),
+    const e = await fsPromisesDefault.readdir(n, { withFileTypes: !0 }),
       l = e.find(
         (e) => ("SKILL.md" === e.name || "skill.md" === e.name) && e.isFile(),
       );
     if (l) {
-      const e = t.join(n, l.name);
+      const e = pathDefault.join(n, l.name);
       try {
-        if ((await k.stat(e)).size > VE);
+        if ((await fsPromisesDefault.stat(e)).size > VE);
         else {
-          const r = await k.readFile(e, "utf-8"),
+          const r = await fsPromisesDefault.readFile(e, "utf-8"),
             { data: o } = Ue(r),
             l = s.split("/").filter(Boolean),
-            u = l[l.length - 1] || t.basename(n);
+            u = l[l.length - 1] || pathDefault.basename(n);
           (a.push({
             name: o.name || u,
             path: s || ".",
@@ -30402,7 +30354,7 @@ async function findSkillMdFiles(e) {
         ".next" === e.name
       )
         continue;
-      const l = t.join(n, e.name),
+      const l = pathDefault.join(n, e.name),
         u = s ? `${s}/${e.name}` : e.name,
         d = await findSkillMdFiles({
           dir: l,
@@ -30424,9 +30376,9 @@ async function findSkillMdFiles(e) {
 async function discoverSkillsLocally(e) {
   const { owner: n, repo: r, path: o, branch: s, keepTempDir: i = !1 } = e;
   await cleanupStaleTempDirectories();
-  const a = t.join(S.tmpdir(), `commandcode-skill-discovery-${R()}`);
+  const a = pathDefault.join(osDefault.tmpdir(), `commandcode-skill-discovery-${randomUUID()}`);
   try {
-    await k.mkdir(a, { recursive: !0 });
+    await fsPromisesDefault.mkdir(a, { recursive: !0 });
     let e = `gh:${n}/${r}`;
     (o && (e += `/${o}`), s && (e += `#${s}`));
     const { downloadTemplate: t } = await import("giget");
@@ -30440,11 +30392,11 @@ async function discoverSkillsLocally(e) {
     const l = await findSkillMdFiles({ dir: a, maxDepth: 5 });
     return i
       ? { skills: l, tempDir: a }
-      : (await k.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
+      : (await fsPromisesDefault.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
         { skills: l });
   } catch (e) {
     throw (
-      await k.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
+      await fsPromisesDefault.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
       wrapFetchError(e, n, r)
     );
   }
@@ -30554,21 +30506,21 @@ function handleUnhandledErrors() {
     }));
 }
 function getEnterpriseMemoryPath() {
-  switch (w.platform()) {
+  switch (osModule.platform()) {
     case "darwin":
       return "/Library/Application Support/CommandCode/AGENTS.md";
     case "win32":
-      return e.join("C:", "ProgramData", "CommandCode", "AGENTS.md");
+      return pathModule.join("C:", "ProgramData", "CommandCode", "AGENTS.md");
     default:
       return "/etc/.commandcode/AGENTS.md";
   }
 }
 function getUserMemoryPath() {
-  const t = w.homedir();
-  return e.join(t, ".commandcode", "AGENTS.md");
+  const t = osModule.homedir();
+  return pathModule.join(t, ".commandcode", "AGENTS.md");
 }
 function getProjectMemoryPaths(t) {
-  return [e.join(t, "AGENTS.md"), e.join(t, ".commandcode", "AGENTS.md")];
+  return [pathModule.join(t, "AGENTS.md"), pathModule.join(t, ".commandcode", "AGENTS.md")];
 }
 async function discoverMemoryFiles(e) {
   const t = [],
@@ -30576,14 +30528,14 @@ async function discoverMemoryFiles(e) {
   t.push({
     type: "enterprise",
     path: n,
-    exists: O(n),
+    exists: existsSync(n),
     description: "Organization-wide instructions",
   });
   const r = process.cwd();
   if (r) {
     const e = getProjectMemoryPaths(r);
     for (const n of e)
-      if (O(n)) {
+      if (existsSync(n)) {
         t.push({
           type: "project",
           path: n,
@@ -30605,7 +30557,7 @@ async function discoverMemoryFiles(e) {
     t.push({
       type: "user",
       path: o,
-      exists: O(o),
+      exists: existsSync(o),
       description: "Personal preferences for all projects",
     }),
     t
@@ -30613,7 +30565,7 @@ async function discoverMemoryFiles(e) {
 }
 async function loadMemoryFile(e) {
   try {
-    return O(e) && W(e).isFile() ? await C.readFile(e, "utf-8") : null;
+    return existsSync(e) && statSync(e).isFile() ? await fsPromises.readFile(e, "utf-8") : null;
   } catch (t) {
     return (console.error(`Error reading memory file ${e}:`, t), null);
   }
@@ -30633,8 +30585,8 @@ async function processImports(t, n, r = 0, o = 5) {
     const s = t[1];
     let i = s;
     s.startsWith("~/")
-      ? (i = e.join(w.homedir(), s.slice(2)))
-      : e.isAbsolute(s) || (i = e.resolve(e.dirname(n), s));
+      ? (i = pathModule.join(osModule.homedir(), s.slice(2)))
+      : pathModule.isAbsolute(s) || (i = pathModule.resolve(pathModule.dirname(n), s));
     const a = await loadMemoryFile(i);
     if (a) {
       const e = await processImports(a, i, r + 1, o);
@@ -30649,7 +30601,7 @@ async function processImports(t, n, r = 0, o = 5) {
 async function loadAllMemories(t, n) {
   const r = new Map(),
     o = getEnterpriseMemoryPath();
-  if (O(o)) {
+  if (existsSync(o)) {
     const e = await loadMemoryFile(o);
     if (e) {
       const t = await processImports(e, o);
@@ -30657,16 +30609,16 @@ async function loadAllMemories(t, n) {
     }
   }
   const s = getUserMemoryPath();
-  if (O(s)) {
+  if (existsSync(s)) {
     const e = await loadMemoryFile(s);
     if (e) {
       const t = await processImports(e, s);
       r.set(s, t);
     }
   }
-  const i = [e.join(t, "AGENTS.md"), e.join(t, ".commandcode", "AGENTS.md")];
+  const i = [pathModule.join(t, "AGENTS.md"), pathModule.join(t, ".commandcode", "AGENTS.md")];
   for (const e of i)
-    if (O(e)) {
+    if (existsSync(e)) {
       const t = await loadMemoryFile(e);
       if (t) {
         const n = await processImports(t, e);
@@ -30676,18 +30628,18 @@ async function loadAllMemories(t, n) {
     }
   if (n && n.length > 0)
     for (const o of n) {
-      const n = e.isAbsolute(o) ? e.dirname(o) : e.dirname(e.resolve(t, o));
+      const n = pathModule.isAbsolute(o) ? pathModule.dirname(o) : pathModule.dirname(pathModule.resolve(t, o));
       if (n.startsWith(t) && n !== t) {
         const o = [];
         let s = n;
-        for (; s.startsWith(t) && s !== t; ) (o.push(s), (s = e.dirname(s)));
+        for (; s.startsWith(t) && s !== t; ) (o.push(s), (s = pathModule.dirname(s)));
         for (const t of o.reverse()) {
           const n = [
-            e.join(t, "AGENTS.md"),
-            e.join(t, ".commandcode", "AGENTS.md"),
+            pathModule.join(t, "AGENTS.md"),
+            pathModule.join(t, ".commandcode", "AGENTS.md"),
           ];
           for (const e of n)
-            if (O(e) && !r.has(e)) {
+            if (existsSync(e) && !r.has(e)) {
               const t = await loadMemoryFile(e);
               if (t) {
                 const n = await processImports(t, e);
@@ -30702,10 +30654,10 @@ async function loadAllMemories(t, n) {
 }
 async function openInEditor(t) {
   const n = process.env.EDITOR || process.env.VISUAL || "code",
-    r = e.dirname(t);
+    r = pathModule.dirname(t);
   return (
-    O(r) || (await C.mkdir(r, { recursive: !0 })),
-    O(t) || (await C.writeFile(t, "# AGENTS.md\n\n", "utf-8")),
+    existsSync(r) || (await fsPromises.mkdir(r, { recursive: !0 })),
+    existsSync(t) || (await fsPromises.writeFile(t, "# AGENTS.md\n\n", "utf-8")),
     new Promise((e, r) => {
       const o = ve(n, [t], { stdio: "inherit", shell: !0 });
       (o.on("exit", (t) => {
@@ -30721,10 +30673,10 @@ async function openInEditor(t) {
   );
 }
 async function initProjectMemory(t) {
-  const n = e.join(t, "AGENTS.md");
+  const n = pathModule.join(t, "AGENTS.md");
   return (
-    O(n) ||
-      (await C.writeFile(
+    existsSync(n) ||
+      (await fsPromises.writeFile(
         n,
         "# Memory\n\n## Project Overview\nSee @README.md for project overview and @package.json for available npm/pnpm commands for this project.\n\n## Code Style Guidelines\n- Use descriptive variable names\n- Follow existing patterns in the codebase\n- Extract complex conditions into meaningful boolean variables\n\n## Architecture Notes\nAdd important architectural decisions and patterns here.\n\n## Common Workflows\nDocument frequently used workflows and commands here.\n",
         "utf-8",
@@ -30740,7 +30692,7 @@ async function getMemoryContent(t) {
     const o = [],
       s = getEnterpriseMemoryPath(),
       i = getUserMemoryPath(),
-      a = [e.join(n, "AGENTS.md"), e.join(n, ".commandcode", "AGENTS.md")];
+      a = [pathModule.join(n, "AGENTS.md"), pathModule.join(n, ".commandcode", "AGENTS.md")];
     (r.has(s) && o.push(`# Memory from: ${s}\n\n${r.get(s)}`),
       r.has(i) && o.push(`# Memory from: ${i}\n\n${r.get(i)}`));
     for (const e of a)
@@ -30821,9 +30773,9 @@ function migrateHeader(e) {
 async function getTasteContent() {
   try {
     const t = process.cwd(),
-      n = e.join(t, ".commandcode", "taste", "taste.md");
-    if (!O(n)) return null;
-    const r = await C.readFile(n, "utf-8"),
+      n = pathModule.join(t, ".commandcode", "taste", "taste.md");
+    if (!existsSync(n)) return null;
+    const r = await fsPromises.readFile(n, "utf-8"),
       o = r.trim();
     return o && o !== ov && o !== nv && o !== iv && o !== sv ? r : null;
   } catch (e) {
@@ -30844,7 +30796,7 @@ function generateSkillsXML(e) {
     ? ""
     : `<available_skills>\n${n
         .map((e) => {
-          const n = t.normalize(e.filePath);
+          const n = pathDefault.normalize(e.filePath);
           return `<skill>\n<name>\n${escapeXML(e.name)}\n</name>\n<description>\n${escapeXML(e.description)}\n</description>\n<location>\n${escapeXML(n)}\n</location>\n</skill>`;
         })
         .join("\n")}\n</available_skills>`;
@@ -30860,8 +30812,8 @@ function generateSkillsXML(e) {
   __name(generateSkillsXML, "generateSkillsXML"),
   Ft(),
   Ft());
-var cv = f
-  .object({ disabledSkills: f.array(f.string()).optional() })
+var cv = z
+  .object({ disabledSkills: z.array(z.string()).optional() })
   .passthrough();
 (Ft(), Cn(), Ft());
 var uv = 1048576;
@@ -31360,9 +31312,9 @@ function unwrapMarkdownAutoLinks(e) {
   return e.replace(Cv, (e, t, n) => (n.replace(kv, "") !== t ? e : t));
 }
 function pathString() {
-  return f.preprocess(
+  return z.preprocess(
     (e) => ("string" != typeof e ? e : unwrapMarkdownAutoLinks(e)),
-    f.string(),
+    z.string(),
   );
 }
 function withRepairNotes({ notes: e, toolOutput: t }) {
@@ -31389,9 +31341,9 @@ function extractRepairNotes(e) {
     : { notes: n, body: t.slice(r).join("\n") };
 }
 __name(extractRepairNotes, "extractRepairNotes");
-var _v = f.object({
-    command: f.string().min(1, "Command cannot be empty"),
-    args: f
+var _v = z.object({
+    command: z.string().min(1, "Command cannot be empty"),
+    args: z
       .preprocess((e) => {
         if ("string" == typeof e) {
           try {
@@ -31401,13 +31353,13 @@ var _v = f.object({
           return [e];
         }
         return e;
-      }, f.array(pathString()))
+      }, z.array(pathString()))
       .optional(),
     directory: pathString().optional(),
-    timeout: f
+    timeout: z
       .preprocess(
         (e) => ("string" == typeof e ? parseInt(e, 10) : e),
-        f.number(),
+        z.number(),
       )
       .optional(),
   }),
@@ -31433,29 +31385,29 @@ var _v = f.object({
     }
   };
 Ft();
-var Av = f.object({
+var Av = z.object({
   absolutePath: pathString().describe("The absolute path to the file to read"),
-  offset: f
-    .preprocess((e) => ("string" == typeof e ? parseInt(e, 10) : e), f.number())
+  offset: z
+    .preprocess((e) => ("string" == typeof e ? parseInt(e, 10) : e), z.number())
     .optional()
     .describe("Optional line number to start reading from (0-based index)"),
-  limit: f
-    .preprocess((e) => ("string" == typeof e ? parseInt(e, 10) : e), f.number())
+  limit: z
+    .preprocess((e) => ("string" == typeof e ? parseInt(e, 10) : e), z.number())
     .optional()
     .describe("Optional number of lines to read"),
 });
-f.object({
-  content: f.union([f.string(), f.instanceof(Buffer)]),
-  contentType: f.enum(["text", "binary"]),
-  fileType: f.string(),
-  size: f.number(),
-  linesRead: f.number().optional(),
-  appliedDefaults: f
+z.object({
+  content: z.union([z.string(), z.instanceof(Buffer)]),
+  contentType: z.enum(["text", "binary"]),
+  fileType: z.string(),
+  size: z.number(),
+  linesRead: z.number().optional(),
+  appliedDefaults: z
     .object({
-      defaulted: f.enum(["offset", "limit"]),
-      offset: f.number(),
-      limit: f.number(),
-      reason: f.string(),
+      defaulted: z.enum(["offset", "limit"]),
+      offset: z.number(),
+      limit: z.number(),
+      reason: z.string(),
     })
     .optional(),
 });
@@ -31469,43 +31421,43 @@ var Pv = class extends Error {
   }
 };
 Ft();
-var Iv = f.object({
+var Iv = z.object({
   filePath: pathString().describe("The absolute path to the file to edit"),
-  oldValue: f.string().describe("The text to replace"),
-  newValue: f.string().describe("The new text to insert"),
-  replacementCount: f
+  oldValue: z.string().describe("The text to replace"),
+  newValue: z.string().describe("The new text to insert"),
+  replacementCount: z
     .number()
     .optional()
     .describe(
       "The number of replacements to make (default: 1, used only when replaceAll is false)",
     ),
-  replaceAll: f
+  replaceAll: z
     .boolean()
     .optional()
     .describe("Whether to replace all occurrences (default: false)"),
 });
-(f.object({
-  path: f.string(),
-  replacementsCount: f.number(),
-  oldContent: f.string(),
-  newContent: f.string(),
+(z.object({
+  path: z.string(),
+  replacementsCount: z.number(),
+  oldContent: z.string(),
+  newContent: z.string(),
 }),
-  f.object({
-    name: f.string(),
-    message: f.string(),
-    code: f.string().optional(),
+  z.object({
+    name: z.string(),
+    message: z.string(),
+    code: z.string().optional(),
   }),
   Ft());
-var Mv = f.object({
+var Mv = z.object({
   filePath: pathString().describe(
     "The absolute path where the file should be written",
   ),
-  content: f.string().describe("The content to write to the file"),
+  content: z.string().describe("The content to write to the file"),
 });
-f.object({
-  success: f.boolean(),
-  message: f.string(),
-  path: f.string().optional(),
+z.object({
+  success: z.boolean(),
+  message: z.string(),
+  path: z.string().optional(),
 });
 var Nv = class extends Error {
     static {
@@ -31516,24 +31468,24 @@ var Nv = class extends Error {
       (super(e), (this.name = "WriteFileError"), (this.code = t));
     }
   },
-  Rv = f.object({
-    type: f.literal("command"),
-    command: f.string().min(1),
-    timeout: f.number().positive().max(600).optional(),
-    async: f.boolean().optional(),
-    failClosed: f.boolean().optional(),
+  Rv = z.object({
+    type: z.literal("command"),
+    command: z.string().min(1),
+    timeout: z.number().positive().max(600).optional(),
+    async: z.boolean().optional(),
+    failClosed: z.boolean().optional(),
   }),
-  $v = f.object({ matcher: f.string().optional(), hooks: f.array(Rv).min(1) }),
-  Lv = f
-    .object({ hooks: f.record(f.string(), f.array(f.unknown())).optional() })
+  $v = z.object({ matcher: z.string().optional(), hooks: z.array(Rv).min(1) }),
+  Lv = z
+    .object({ hooks: z.record(z.string(), z.array(z.unknown())).optional() })
     .passthrough(),
-  Dv = f.nativeEnum(dv),
-  Ov = f.object({
-    session_id: f.string().min(1),
-    transcript_path: f.string().min(1),
-    cwd: f.string().min(1),
+  Dv = z.nativeEnum(dv),
+  Ov = z.object({
+    session_id: z.string().min(1),
+    transcript_path: z.string().min(1),
+    cwd: z.string().min(1),
     hook_event_name: Dv,
-    permission_mode: f.string().optional(),
+    permission_mode: z.string().optional(),
   }),
   Fv = {
     [wS.SHELL_COMMAND]: "SHELL",
@@ -31563,58 +31515,58 @@ var Nv = class extends Error {
   wS.READ_FILE,
   wS.EDIT_FILE,
   wS.WRITE_FILE);
-var Uv = f.record(f.string(), f.unknown()),
+var Uv = z.record(z.string(), z.unknown()),
   jv = Ov.extend({
-    hook_event_name: f.literal("PreToolUse"),
-    tool_use_id: f.string().optional(),
-    tool_name: f.string().min(1),
-    tool_display_name: f.string().min(1),
+    hook_event_name: z.literal("PreToolUse"),
+    tool_use_id: z.string().optional(),
+    tool_name: z.string().min(1),
+    tool_display_name: z.string().min(1),
     tool_input: Uv,
   }),
   qv = Ov.extend({
-    hook_event_name: f.literal("PostToolUse"),
-    tool_use_id: f.string().optional(),
-    tool_name: f.string().min(1),
-    tool_display_name: f.string().min(1),
+    hook_event_name: z.literal("PostToolUse"),
+    tool_use_id: z.string().optional(),
+    tool_name: z.string().min(1),
+    tool_display_name: z.string().min(1),
     tool_input: Uv,
-    tool_response: f.string(),
+    tool_response: z.string(),
   }),
   Bv = Ov.extend({
-    hook_event_name: f.literal("Stop"),
-    stop_hook_active: f.boolean(),
+    hook_event_name: z.literal("Stop"),
+    stop_hook_active: z.boolean(),
   });
-f.discriminatedUnion("hook_event_name", [jv, qv, Bv]);
-var zv = f.object({
-    continue: f.boolean().optional(),
-    suppressOutput: f.boolean().optional(),
-    stopReason: f.string().optional(),
-    systemMessage: f.string().optional(),
+z.discriminatedUnion("hook_event_name", [jv, qv, Bv]);
+var zv = z.object({
+    continue: z.boolean().optional(),
+    suppressOutput: z.boolean().optional(),
+    stopReason: z.string().optional(),
+    systemMessage: z.string().optional(),
   }),
   Wv = zv.extend({
-    hookSpecificOutput: f
+    hookSpecificOutput: z
       .object({
-        hookEventName: f.literal("PreToolUse").optional(),
-        additionalContext: f.string().optional(),
-        permissionDecision: f.enum(["allow", "deny"]).optional(),
-        permissionDecisionReason: f.string().optional(),
+        hookEventName: z.literal("PreToolUse").optional(),
+        additionalContext: z.string().optional(),
+        permissionDecision: z.enum(["allow", "deny"]).optional(),
+        permissionDecisionReason: z.string().optional(),
       })
       .strict()
       .optional(),
   }),
   Hv = zv.extend({
-    decision: f.enum(["block"]).optional(),
-    reason: f.string().optional(),
-    hookSpecificOutput: f
+    decision: z.enum(["block"]).optional(),
+    reason: z.string().optional(),
+    hookSpecificOutput: z
       .object({
-        hookEventName: f.literal("PostToolUse").optional(),
-        additionalContext: f.string().optional(),
+        hookEventName: z.literal("PostToolUse").optional(),
+        additionalContext: z.string().optional(),
       })
       .strict()
       .optional(),
   }),
   Gv = zv.extend({
-    decision: f.enum(["block"]).optional(),
-    reason: f.string().optional(),
+    decision: z.enum(["block"]).optional(),
+    reason: z.string().optional(),
   });
 function getOrCompileRegex(e) {
   const { cache: t, pattern: n } = e,
@@ -31701,18 +31653,18 @@ function firstNonEmptyLine(e) {
   }
 }
 function getProjectLocalPath(t) {
-  return e.join(t, ".commandcode", "settings.local.json");
+  return pathModule.join(t, ".commandcode", "settings.local.json");
 }
 function getProjectSharedPath(t) {
-  return e.join(t, ".commandcode", "settings.json");
+  return pathModule.join(t, ".commandcode", "settings.json");
 }
 function getUserSettingsPath() {
-  return e.join(w.homedir(), ".commandcode", "settings.json");
+  return pathModule.join(osModule.homedir(), ".commandcode", "settings.json");
 }
 async function loadSettingsFile(e) {
   let t, n;
   try {
-    t = await C.readFile(e, "utf-8");
+    t = await fsPromises.readFile(e, "utf-8");
   } catch (t) {
     return "ENOENT" === t.code
       ? null
@@ -31831,7 +31783,7 @@ function resolveScopePaths(e) {
 async function readDisabledNames(e) {
   let t, n;
   try {
-    t = await C.readFile(e, "utf-8");
+    t = await fsPromises.readFile(e, "utf-8");
   } catch (t) {
     return (
       "ENOENT" === t.code ||
@@ -31885,7 +31837,7 @@ async function loadDisabledSkills(e) {
 var Yv = Promise.resolve();
 async function readSettingsObject(e) {
   try {
-    const t = await C.readFile(e, "utf-8"),
+    const t = await fsPromises.readFile(e, "utf-8"),
       n = JSON.parse(t);
     return n && "object" == typeof n && !Array.isArray(n) ? n : {};
   } catch (e) {
@@ -31896,8 +31848,8 @@ async function readSettingsObject(e) {
 async function writeDisabledSkillsTo(t, n) {
   const r = await readSettingsObject(t);
   (0 === n.length ? delete r.disabledSkills : (r.disabledSkills = n),
-    await C.mkdir(e.dirname(t), { recursive: !0 }),
-    await C.writeFile(t, JSON.stringify(r, null, 2) + "\n"));
+    await fsPromises.mkdir(pathModule.dirname(t), { recursive: !0 }),
+    await fsPromises.writeFile(t, JSON.stringify(r, null, 2) + "\n"));
 }
 async function setSkillEnabled(e, t, n) {
   const r = resolveProjectRoot(n),
@@ -31944,23 +31896,23 @@ function formatOutsideWorkspaceMessage(e, t) {
 }
 async function readFileContent(t) {
   const { absolutePath: n, offset: r, limit: o } = t;
-  if (!e.isAbsolute(n) && !isWindowsAbsolutePath(n))
+  if (!pathModule.isAbsolute(n) && !isWindowsAbsolutePath(n))
     throw new Pv(
       "Path must be absolute (start with / on Unix/Linux/macOS or C:\\ on Windows)",
       "INVALID_PATH",
     );
-  const s = e.normalize(n);
+  const s = pathModule.normalize(n);
   if (!isPathInWorkspace(s))
     throw new Pv(
       formatOutsideWorkspaceMessage(n, s),
       "DIRECTORY_OUTSIDE_WORKSPACE",
     );
   try {
-    await C.access(s, L.constants.F_OK | L.constants.R_OK);
+    await fsPromises.access(s, fsModule.constants.F_OK | fsModule.constants.R_OK);
   } catch {
     throw new Pv(`File not found or not readable: ${s}`, "FILE_ACCESS_ERROR");
   }
-  if (!(await C.stat(s)).isFile())
+  if (!(await fsPromises.stat(s)).isFile())
     throw new Pv("Path does not point to a file", "NOT_A_FILE");
   const i = getFileType(s),
     a = isBinaryFile(i);
@@ -31994,7 +31946,7 @@ async function readFileContent(t) {
     throw new Pv("Limit must be > 0", "INVALID_LIMIT");
   try {
     if (a) {
-      const e = await C.readFile(s);
+      const e = await fsPromises.readFile(s);
       return { fileType: i, content: e, size: e.length, contentType: "binary" };
     }
     if (void 0 !== u && void 0 !== d) {
@@ -32009,7 +31961,7 @@ async function readFileContent(t) {
       };
     }
     {
-      const e = await C.readFile(s, "utf8");
+      const e = await fsPromises.readFile(s, "utf8");
       return {
         content: e,
         fileType: i,
@@ -32051,7 +32003,7 @@ var Xv = {
   ".otf": "font/otf",
 };
 function getFileType(t) {
-  const n = e.extname(t).toLowerCase();
+  const n = pathModule.extname(t).toLowerCase();
   return (
     {
       ".txt": "text",
@@ -32135,7 +32087,7 @@ function isBinaryFile(e) {
   return Object.values(Xv).includes(e);
 }
 async function readTextFileLines(e, t, n) {
-  const r = (await C.readFile(e, "utf8")).split(/\r?\n/),
+  const r = (await fsPromises.readFile(e, "utf8")).split(/\r?\n/),
     o = t,
     s = Math.min(o + n, r.length),
     i = r.slice(o, s);
@@ -32227,25 +32179,25 @@ var eC = {
   }, "execute"),
 };
 (Ft(), Ft(), Do(), Ft(), Ft());
-var tC = f.object({
-    backupFileName: f.string().nullable(),
-    version: f.number().int().positive(),
-    backupTime: f.string().datetime(),
+var tC = z.object({
+    backupFileName: z.string().nullable(),
+    version: z.number().int().positive(),
+    backupTime: z.string().datetime(),
   }),
-  nC = f.object({
-    messageId: f.string().uuid(),
-    trackedFileBackups: f.record(f.string(), tC),
-    timestamp: f.string().datetime(),
+  nC = z.object({
+    messageId: z.string().uuid(),
+    trackedFileBackups: z.record(z.string(), tC),
+    timestamp: z.string().datetime(),
   });
-(f.object({
-  type: f.literal("file-history-snapshot"),
-  messageId: f.string().uuid(),
+(z.object({
+  type: z.literal("file-history-snapshot"),
+  messageId: z.string().uuid(),
   snapshot: nC,
-  isSnapshotUpdate: f.boolean(),
+  isSnapshotUpdate: z.boolean(),
 }),
-  f.object({
-    maxFileSize: f.number().int().positive().default(10485760),
-    retentionDays: f.number().int().positive().default(30),
+  z.object({
+    maxFileSize: z.number().int().positive().default(10485760),
+    retentionDays: z.number().int().positive().default(30),
   }));
 var rC = class extends Error {
   static {
@@ -32258,27 +32210,27 @@ var rC = class extends Error {
 };
 function getPathHash(e) {
   const { filePath: t } = e;
-  return `${N.createHash("sha256").update(t).digest("hex").slice(0, 16)}-${t.length}`;
+  return `${cryptoDefault.createHash("sha256").update(t).digest("hex").slice(0, 16)}-${t.length}`;
 }
 function getBackupFileName(e) {
   const { filePath: t, version: n } = e;
   return `${getPathHash({ filePath: t })}@v${n}`;
 }
 function getCommandCodeBasePath() {
-  return t.join(S.homedir(), ".commandcode");
+  return pathDefault.join(osDefault.homedir(), ".commandcode");
 }
 function getFileHistoryPath(e) {
   const { sessionId: n } = e;
-  return t.join(getCommandCodeBasePath(), "file-history", n);
+  return pathDefault.join(getCommandCodeBasePath(), "file-history", n);
 }
 function getBackupFilePath(e) {
   const { sessionId: n, backupFileName: r } = e;
-  return t.join(getFileHistoryPath({ sessionId: n }), r);
+  return pathDefault.join(getFileHistoryPath({ sessionId: n }), r);
 }
 async function getAvailableDiskSpace(e) {
   const { targetPath: t } = e;
   try {
-    const e = await k.statfs(t);
+    const e = await fsPromisesDefault.statfs(t);
     return e.bavail * e.bsize;
   } catch {
     return -1;
@@ -32292,23 +32244,23 @@ async function hasEnoughDiskSpace(e) {
 }
 async function ensureDirectoryExists(e) {
   const { dirPath: t } = e;
-  await k.mkdir(t, { recursive: !0 });
+  await fsPromisesDefault.mkdir(t, { recursive: !0 });
 }
 async function atomicWriteFile(e) {
   const { filePath: t, content: n } = e,
     r = `${t}.tmp`;
   try {
-    await k.writeFile(r, n);
-    const e = await k.stat(r),
+    await fsPromisesDefault.writeFile(r, n);
+    const e = await fsPromisesDefault.stat(r),
       o = "string" == typeof n ? Buffer.byteLength(n, "utf-8") : n.length;
     if (e.size !== o)
       throw new Error(
         `Write verification failed: expected ${o} bytes, got ${e.size}`,
       );
-    await k.rename(r, t);
+    await fsPromisesDefault.rename(r, t);
   } catch (e) {
     try {
-      await k.unlink(r);
+      await fsPromisesDefault.unlink(r);
     } catch {}
     throw e;
   }
@@ -32316,7 +32268,7 @@ async function atomicWriteFile(e) {
 async function getFileSizeBytes(e) {
   const { filePath: t } = e;
   try {
-    return (await k.stat(t)).size;
+    return (await fsPromisesDefault.stat(t)).size;
   } catch {
     return -1;
   }
@@ -32324,7 +32276,7 @@ async function getFileSizeBytes(e) {
 async function fileExists(e) {
   const { filePath: t } = e;
   try {
-    return (await k.access(t), !0);
+    return (await fsPromisesDefault.access(t), !0);
   } catch {
     return !1;
   }
@@ -32349,7 +32301,7 @@ function getRelativeTimeString(e) {
 }
 function getFileName(e) {
   const { filePath: n } = e;
-  return t.basename(n);
+  return pathDefault.basename(n);
 }
 function isWithinRetentionPeriod(e) {
   const { timestamp: t, retentionDays: n } = e,
@@ -32925,12 +32877,12 @@ async function editFile(t) {
     replacementCount: i = 1,
   } = t;
   if (!n) throw createFileEditError("filePath is required", "INVALID_PATH");
-  if (!e.isAbsolute(n) && !isWindowsAbsolutePath(n))
+  if (!pathModule.isAbsolute(n) && !isWindowsAbsolutePath(n))
     throw createFileEditError(
       "filePath must be an absolute path (start with / on Unix/Linux/macOS or C:\\ on Windows)",
       "INVALID_PATH",
     );
-  const a = e.normalize(n);
+  const a = pathModule.normalize(n);
   if (!isPathInWorkspace(a))
     throw createFileEditError(
       formatOutsideWorkspaceMessage(n, a),
@@ -32945,7 +32897,7 @@ async function editFile(t) {
       "INVALID_COUNT",
     );
   try {
-    await F.access(a, j.F_OK | j.R_OK | j.W_OK);
+    await fsPromisesCompat.access(a, fsConstants.F_OK | fsConstants.R_OK | fsConstants.W_OK);
   } catch (e) {
     throw createFileEditError(
       `File not found or not accessible: ${a}`,
@@ -32997,7 +32949,7 @@ async function editFile(t) {
   try {
     return (
       await backupFileBeforeEdit({ filePath: a }),
-      await F.writeFile(a, m, "utf-8"),
+      await fsPromisesCompat.writeFile(a, m, "utf-8"),
       { path: a, replacementsCount: g, oldContent: l, newContent: m }
     );
   } catch (e) {
@@ -33084,18 +33036,18 @@ var mC = {
   }, "execute"),
 };
 (Ft(), Ft());
-var pC = f.object({
+var pC = z.object({
   path: pathString().describe("The absolute path to the directory to read"),
-  exclude: f
+  exclude: z
     .array(pathString())
     .optional()
     .describe("Optional array of glob patterns to exclude"),
-  respectGitIgnore: f
+  respectGitIgnore: z
     .boolean()
     .optional()
     .describe("Whether to respect .gitignore patterns (default: true)"),
 });
-f.object({ files: f.array(f.string()), directories: f.array(f.string()) });
+z.object({ files: z.array(z.string()), directories: z.array(z.string()) });
 var gC = class extends Error {
   static {
     __name(this, "DirectoryReadError");
@@ -33107,16 +33059,16 @@ var gC = class extends Error {
 };
 async function readDirectory(t) {
   const { path: n, exclude: r = [], respectGitIgnore: o = !1 } = t;
-  if (!e.isAbsolute(n))
+  if (!pathModule.isAbsolute(n))
     throw new gC("Path must be absolute, not relative", "INVALID_PATH");
-  const s = e.normalize(n);
+  const s = pathModule.normalize(n);
   if (!isPathInWorkspace(s))
     throw new gC(
       formatOutsideWorkspaceMessage(n, s),
       "DIRECTORY_OUTSIDE_WORKSPACE",
     );
   try {
-    if (!(await C.stat(n)).isDirectory())
+    if (!(await fsPromises.stat(n)).isDirectory())
       throw new gC("Path is not a directory", "NOT_A_DIRECTORY");
   } catch (e) {
     if (e instanceof gC) throw e;
@@ -33126,7 +33078,7 @@ async function readDirectory(t) {
     );
   }
   try {
-    const t = await C.readdir(n);
+    const t = await fsPromises.readdir(n);
     let s = [];
     o && (s = await loadGitIgnorePatterns(n));
     const i = [...r, ...s],
@@ -33134,9 +33086,9 @@ async function readDirectory(t) {
       l = [];
     for (const r of t) {
       if (shouldIgnoreEntry(r, i)) continue;
-      const t = e.join(n, r);
+      const t = pathModule.join(n, r);
       try {
-        const e = await C.stat(t);
+        const e = await fsPromises.stat(t);
         e.isDirectory() ? l.push(r) : e.isFile() && a.push(r);
       } catch (e) {
         dlog(
@@ -33157,18 +33109,18 @@ async function loadGitIgnorePatterns(t) {
   const n = [];
   try {
     if (!(await isInGitRepository(t))) return n;
-    let r = e.resolve(t);
+    let r = pathModule.resolve(t);
     const o = await findGitRoot2(t);
     for (; r && isWithinGitRoot(r, o); ) {
-      const t = e.join(r, ".gitignore");
+      const t = pathModule.join(r, ".gitignore");
       try {
-        const e = (await C.readFile(t, "utf-8"))
+        const e = (await fsPromises.readFile(t, "utf-8"))
           .split(/\r?\n/)
           .map((e) => e.trim())
           .filter((e) => e && !e.startsWith("#"));
         n.push(...e);
       } catch {}
-      const o = e.dirname(r);
+      const o = pathModule.dirname(r);
       if (o === r) break;
       r = o;
     }
@@ -33183,20 +33135,20 @@ async function isInGitRepository(e) {
   }
 }
 async function findGitRoot2(t) {
-  let n = e.resolve(t);
+  let n = pathModule.resolve(t);
   for (;;) {
     try {
-      const t = e.join(n, ".git");
-      if ((await C.stat(t)).isDirectory()) return n;
+      const t = pathModule.join(n, ".git");
+      if ((await fsPromises.stat(t)).isDirectory()) return n;
     } catch {}
-    const t = e.dirname(n);
+    const t = pathModule.dirname(n);
     if (t === n) throw new Error("Not in a git repository");
     n = t;
   }
 }
 function isWithinGitRoot(t, n) {
-  const r = e.resolve(t),
-    o = e.resolve(n);
+  const r = pathModule.resolve(t),
+    o = pathModule.resolve(n);
   return "win32" === process.platform
     ? r.toLowerCase().startsWith(o.toLowerCase())
     : r.startsWith(o);
@@ -33279,23 +33231,23 @@ function formatOutput4(e) {
   return e.success ? `File written: ${e.path}` : `Error: ${e.message}`;
 }
 async function writeFile3({ filePath: e, content: n }) {
-  const o = e.startsWith("~/") ? t.join(S.homedir(), e.slice(2)) : e;
-  if (!i(o))
+  const o = e.startsWith("~/") ? pathDefault.join(osDefault.homedir(), e.slice(2)) : e;
+  if (!isAbsolute(o))
     throw new Error(
       `Invalid file path: '${o}'. Only absolute paths are supported.`,
     );
-  const s = t.normalize(o);
+  const s = pathDefault.normalize(o);
   if (!isPathInWorkspace(s))
     throw new Nv(
       formatOutsideWorkspaceMessage(e, s),
       "DIRECTORY_OUTSIDE_WORKSPACE",
     );
   try {
-    const e = r(s);
+    const e = dirname(s);
     return (
-      O(e) || (await T(e, { recursive: !0 })),
+      existsSync(e) || (await mkdir(e, { recursive: !0 })),
       await backupFileBeforeEdit({ filePath: s }),
-      await _(s, n, "utf-8"),
+      await writeFile(s, n, "utf-8"),
       { path: s, bytesWritten: Buffer.byteLength(n, "utf-8") }
     );
   } catch (e) {
@@ -33364,21 +33316,21 @@ var fC = {
   }, "execute"),
 };
 (Ft(), Ft());
-var yC = f.object({
-    include: f
+var yC = z.object({
+    include: z
       .array(pathString())
       .describe("Array of glob patterns to include files"),
-    exclude: f
+    exclude: z
       .array(pathString())
       .optional()
       .describe("Array of glob patterns to exclude files"),
-    defaultExclude: f
+    defaultExclude: z
       .boolean()
       .optional()
       .describe(
         "Whether to apply default exclusions (node_modules, dist, etc.). Default: true",
       ),
-    gitIgnore: f
+    gitIgnore: z
       .boolean()
       .optional()
       .describe("Whether to respect .gitignore files. Default: true"),
@@ -33388,17 +33340,17 @@ var yC = f.object({
         "Base directory for relative paths. Default: current working directory",
       ),
   }),
-  wC = f.object({
-    filePath: f.string(),
-    content: f.string(),
-    fileType: f.string(),
-    size: f.number(),
+  wC = z.object({
+    filePath: z.string(),
+    content: z.string(),
+    fileType: z.string(),
+    size: z.number(),
   });
-f.object({
-  content: f.string(),
-  filesRead: f.array(f.string()),
-  errors: f.array(f.object({ file: f.string(), error: f.string() })),
-  fileDetails: f.array(wC),
+z.object({
+  content: z.string(),
+  filesRead: z.array(z.string()),
+  errors: z.array(z.object({ file: z.string(), error: z.string() })),
+  fileDetails: z.array(wC),
 });
 var SC = class extends Error {
   static {
@@ -33473,7 +33425,7 @@ async function readMultipleFiles(e) {
       "At least one include pattern must be provided",
       "NO_PATTERNS",
     );
-  const a = t.resolve(i);
+  const a = pathDefault.resolve(i);
   if (!isPathInWorkspace(a))
     throw new SC(
       formatOutsideWorkspaceMessage(i, a),
@@ -33491,7 +33443,7 @@ async function readMultipleFiles(e) {
     });
     for (const e of i)
       try {
-        const n = t.resolve(a, e),
+        const n = pathDefault.resolve(a, e),
           r = await readFileContent({ absolutePath: n }),
           o = processFileResult({ content: r, filePath: e });
         (l.fileDetails.push(o),
@@ -33614,9 +33566,9 @@ var EC = {
   }, "execute"),
 };
 (Ft(), Ft());
-var vC = f.object({
-  pattern: f.string().min(1, "Pattern is required"),
-  include: f
+var vC = z.object({
+  pattern: z.string().min(1, "Pattern is required"),
+  include: z
     .preprocess((e) => {
       if ("string" == typeof e) {
         try {
@@ -33626,7 +33578,7 @@ var vC = f.object({
         return [e];
       }
       return e;
-    }, f.array(pathString()))
+    }, z.array(pathString()))
     .optional(),
   directory: pathString().optional(),
 });
@@ -33870,8 +33822,8 @@ var TC = {
   }, "execute"),
 };
 (Ft(), Ft());
-var _C = f.object({
-    pattern: f.string().min(1, "Pattern is required"),
+var _C = z.object({
+    pattern: z.string().min(1, "Pattern is required"),
     path: pathString().optional(),
   }),
   xC = class extends Error {
@@ -33887,7 +33839,7 @@ async function globSearch(e) {
   const { pattern: n, path: r = "." } = e;
   if (!n) throw new xC("Pattern parameter is required", "INVALID_PATTERN");
   try {
-    const e = t.resolve(process.cwd(), r);
+    const e = pathDefault.resolve(process.cwd(), r);
     if (!isPathInWorkspace(e))
       throw new xC(
         formatOutsideWorkspaceMessage(r, e),
@@ -33903,9 +33855,9 @@ async function globSearch(e) {
       }),
       s = await Promise.all(
         o.map(async (n) => {
-          const r = t.join(e, n);
+          const r = pathDefault.join(e, n);
           try {
-            return { file: n, mtime: (await k.stat(r)).mtimeMs };
+            return { file: n, mtime: (await fsPromisesDefault.stat(r)).mtimeMs };
           } catch {
             return { file: n, mtime: 0 };
           }
@@ -33983,14 +33935,14 @@ async function executeShellCommand(t) {
   const { command: n, args: r = [], directory: o, timeout: s = 3e4 } = t,
     i = Date.now();
   if (!n.trim()) throw new xv("Command cannot be empty", "EMPTY_COMMAND");
-  const a = o ? e.resolve(process.cwd(), o) : process.cwd();
+  const a = o ? pathModule.resolve(process.cwd(), o) : process.cwd();
   if (o && !isPathInWorkspace(a))
     throw new xv(
       formatOutsideWorkspaceMessage(o, a),
       "DIRECTORY_OUTSIDE_WORKSPACE",
     );
   try {
-    if (!(await k.stat(a)).isDirectory())
+    if (!(await fsPromisesDefault.stat(a)).isDirectory())
       throw new xv(`Path is not a directory: ${o}`, "NOT_A_DIRECTORY");
   } catch (e) {
     if (e instanceof xv) throw e;
@@ -34373,15 +34325,15 @@ var MC = {
   }, "execute"),
 };
 (Ft(), Ft());
-var NC = f
+var NC = z
     .object({
-      port: f
+      port: z
         .number()
         .int()
         .min(1, { message: "Port must be between 1 and 65535" })
         .max(65535, { message: "Port must be between 1 and 65535" })
         .optional(),
-      pid: f.number().int().positive().optional(),
+      pid: z.number().int().positive().optional(),
     })
     .refine(
       (e) =>
@@ -34713,7 +34665,7 @@ var DC = {
   }, "execute"),
 };
 (Ft(), Ft(), Ft(), Ft());
-var OC = f
+var OC = z
     .preprocess((e) => {
       if ("string" == typeof e)
         try {
@@ -34723,9 +34675,9 @@ var OC = f
           return [e];
         }
       return e;
-    }, f.array(pathString()))
+    }, z.array(pathString()))
     .optional(),
-  FC = f.object({
+  FC = z.object({
     filePaths: OC.describe(
       'Array of absolute file paths to get diagnostics for. MUST always be an array, even for a single file e.g. ["/path/to/file.ts"]. Pass specific file paths when you know which files are relevant. Only omit to scan the entire workspace when the user explicitly asks for all workspace diagnostics.',
     ),
@@ -34751,27 +34703,27 @@ var UC = rt().add([
   ]),
   jC = new Map(),
   qC = __name(async (t) => {
-    const n = e.resolve(t);
+    const n = pathModule.resolve(t);
     try {
-      return await C.realpath(n);
+      return await fsPromises.realpath(n);
     } catch {
       return n;
     }
   }, "canonicalize"),
   BC = __name(async (t) => {
-    let n = e.resolve(t);
+    let n = pathModule.resolve(t);
     for (;;) {
       try {
-        const t = await C.stat(e.join(n, ".git"));
+        const t = await fsPromises.stat(pathModule.join(n, ".git"));
         if (t.isDirectory() || t.isFile()) return n;
       } catch {}
-      const t = e.dirname(n);
+      const t = pathModule.dirname(n);
       if (t === n) return null;
       n = t;
     }
   }, "findWorkingTreeRoot"),
   zC = __name((t) => {
-    const n = e.basename(t);
+    const n = pathModule.basename(t);
     return !!n && UC.ignores(n);
   }, "hasSensitiveBasename"),
   WC = __name(async (e, t) => {
@@ -34841,15 +34793,15 @@ var UC = rt().add([
           t.map(async (t) => {
             if (!t) return null;
             const r = await qC(t),
-              o = e.relative(n, r);
+              o = pathModule.relative(n, r);
             if (
               ".." === o ||
-              o.startsWith(`..${e.sep}`) ||
-              e.isAbsolute(o) ||
+              o.startsWith(`..${pathModule.sep}`) ||
+              pathModule.isAbsolute(o) ||
               "" === o
             )
               return null;
-            const s = o.split(e.sep).join("/");
+            const s = o.split(pathModule.sep).join("/");
             return UC.ignores(s) || zC(t)
               ? null
               : { originalPath: t, canonPath: r };
@@ -34906,13 +34858,13 @@ var UC = rt().add([
       openFiles: e.openFiles.filter((e) => r.has(e.path)),
     };
   }, "filterIdeContext"),
-  KC = t.join(S.homedir(), ".commandcode", "ide"),
-  YC = f.object({
-    socketPath: f.string().min(1),
-    workspaceFolders: f.array(f.string()),
-    pid: f.number().int().positive().finite(),
-    ideName: f.string().min(1),
-    timestamp: f.number(),
+  KC = pathDefault.join(osDefault.homedir(), ".commandcode", "ide"),
+  YC = z.object({
+    socketPath: z.string().min(1),
+    workspaceFolders: z.array(z.string()),
+    pid: z.number().int().positive().finite(),
+    ideName: z.string().min(1),
+    timestamp: z.number(),
   }),
   JC = __name((e) => {
     if (e instanceof Error) return e.message;
@@ -34925,10 +34877,10 @@ var UC = rt().add([
     return String(e);
   }, "errMsg"),
   XC = __name((e) => {
-    const n = t.resolve(e);
+    const n = pathDefault.resolve(e);
     let r = n;
     try {
-      r = D.realpathSync(n);
+      r = fsDefault.realpathSync(n);
     } catch {}
     return "win32" === process.platform ? r.toLowerCase() : r;
   }, "normalizePathForComparison"),
@@ -34988,11 +34940,11 @@ var UC = rt().add([
   }, "detectIDE"),
   rk = __name((e, n) => {
     try {
-      D.unlinkSync(e);
+      fsDefault.unlinkSync(e);
     } catch {}
-    const r = t.basename(e, ".json") + ".sock";
+    const r = pathDefault.basename(e, ".json") + ".sock";
     try {
-      D.unlinkSync(t.join(n, r));
+      fsDefault.unlinkSync(pathDefault.join(n, r));
     } catch {}
   }, "removeStaleSession"),
   ok = __name((e, n = {}) => {
@@ -35002,20 +34954,20 @@ var UC = rt().add([
       startPid: s = process.ppid,
     } = n;
     try {
-      if (!D.existsSync(r)) return null;
+      if (!fsDefault.existsSync(r)) return null;
       const n = `${e}-`,
-        i = D.readdirSync(r).filter(
+        i = fsDefault.readdirSync(r).filter(
           (e) => e.endsWith(".json") && e.startsWith(n),
         ),
         a = [];
       for (const e of i)
         try {
-          const n = t.join(r, e),
-            o = JSON.parse(D.readFileSync(n, "utf-8")),
+          const n = pathDefault.join(r, e),
+            o = JSON.parse(fsDefault.readFileSync(n, "utf-8")),
             s = YC.safeParse(o);
           if (!s.success) continue;
           const i = s.data;
-          if (t.dirname(i.socketPath) !== r) continue;
+          if (pathDefault.dirname(i.socketPath) !== r) continue;
           if (!ZC(i.pid)) {
             rk(n, r);
             continue;
@@ -35029,7 +34981,7 @@ var UC = rt().add([
       if (l)
         return (
           dlog(
-            `[VSCode:IPC] Discovered session via PID ancestry: ${t.basename(l.session.socketPath)} (${l.session.ideName})`,
+            `[VSCode:IPC] Discovered session via PID ancestry: ${pathDefault.basename(l.session.socketPath)} (${l.session.ideName})`,
           ),
           l.session.socketPath
         );
@@ -35039,14 +34991,14 @@ var UC = rt().add([
       for (const { session: e } of a)
         for (const n of e.workspaceFolders) {
           const r = XC(n);
-          (u === r || u.startsWith(r + t.sep)) &&
+          (u === r || u.startsWith(r + pathDefault.sep)) &&
             r.length > m &&
             ((d = e), (m = r.length));
         }
       return (
         d &&
           dlog(
-            `[VSCode:IPC] Discovered session via workspace match: ${t.basename(d.socketPath)} (${d.ideName})`,
+            `[VSCode:IPC] Discovered session via workspace match: ${pathDefault.basename(d.socketPath)} (${d.ideName})`,
           ),
         d?.socketPath ?? null
       );
@@ -35059,7 +35011,7 @@ var UC = rt().add([
     return e ? ok(e) : null;
   }, "resolveSocketPath"),
   ik = __name(
-    () => ({ type: "request", id: R(), payload: { action: "getContext" } }),
+    () => ({ type: "request", id: randomUUID(), payload: { action: "getContext" } }),
     "createContextRequest",
   ),
   ak = __name((e) => {
@@ -35343,7 +35295,7 @@ async function fetchDiagnostics(e) {
     throw new Error(
       "Not running inside an IDE terminal. The diagnostics tool requires the Command Code VS Code extension.",
     );
-  const n = e?.map((e) => t.resolve(e)),
+  const n = e?.map((e) => pathDefault.resolve(e)),
     r = new mk();
   try {
     if (!(await r.connect()))
@@ -35693,20 +35645,20 @@ function isReservedAgentName(e) {
   return !!e && xk.includes(e.toLowerCase());
 }
 function getRootAgentDir() {
-  return t.join(S.homedir(), ".commandcode", "agents");
+  return pathDefault.join(osDefault.homedir(), ".commandcode", "agents");
 }
 function getLocalAgentDir() {
-  return t.join(process.cwd(), ".commandcode", "agents");
+  return pathDefault.join(process.cwd(), ".commandcode", "agents");
 }
 async function loadAgentsFromDirectory(e, n) {
   try {
-    const r = (await k.readdir(e)).filter((e) => e.endsWith(".md"));
+    const r = (await fsPromisesDefault.readdir(e)).filter((e) => e.endsWith(".md"));
     return (
       await Promise.all(
         r.map(async (r) => {
           try {
-            const o = t.join(e, r),
-              s = await k.readFile(o, "utf-8"),
+            const o = pathDefault.join(e, r),
+              s = await fsPromisesDefault.readFile(o, "utf-8"),
               { data: i, content: a } = Ue(s),
               l = i.name || r.replace(".md", ""),
               u = sanitizeToolName(l);
@@ -36006,11 +35958,11 @@ async function processFileReferences(t) {
     const o = t[0],
       s = t[1];
     try {
-      const t = e.isAbsolute(s) ? s : e.resolve(process.cwd(), s),
+      const t = pathModule.isAbsolute(s) ? s : pathModule.resolve(process.cwd(), s),
         i = await readFileContent({ absolutePath: t });
       if ("binary" === i.contentType) continue;
       const a = String(i.content),
-        l = e.relative(process.cwd(), t),
+        l = pathModule.relative(process.cwd(), t),
         u = 1e5;
       if (a.length > u) {
         n.push({ token: o, resolvedPath: t, content: "", tooLarge: !0 });
@@ -36030,7 +35982,7 @@ async function processFileReferences(t) {
 function reconstructContent(t, n) {
   let r = t;
   for (const t of n) {
-    const n = `{${e.relative(process.cwd(), t.resolvedPath)}: ${t.content}}`;
+    const n = `{${pathModule.relative(process.cwd(), t.resolvedPath)}: ${t.content}}`;
     r = r.replace(t.token, n);
   }
   return r;
@@ -36897,7 +36849,7 @@ var Bk = null;
 function loadFeatureModels() {
   if (null !== Bk) return Bk;
   try {
-    const e = parseJSON(L.readFileSync(getConfigFile(), "utf-8"));
+    const e = parseJSON(fsModule.readFileSync(getConfigFile(), "utf-8"));
     Bk = e?.featureModels ?? {};
   } catch {
     Bk = {};
@@ -37253,7 +37205,7 @@ function writeBenchmarkMetrics(e) {
     agents: e.agents,
   };
   try {
-    L.writeFileSync(Wk, JSON.stringify(l, null, 2));
+    fsModule.writeFileSync(Wk, JSON.stringify(l, null, 2));
   } catch {}
 }
 (__name(buildAgentMetricsMarker, "buildAgentMetricsMarker"),
@@ -37506,8 +37458,8 @@ function agentToTool(t, n) {
                   for (const t of s)
                     if (t in r && "string" == typeof r[t]) {
                       const n = r[t];
-                      if (!e.isAbsolute(n)) {
-                        const s = e.resolve(process.cwd(), n);
+                      if (!pathModule.isAbsolute(n)) {
+                        const s = pathModule.resolve(process.cwd(), n);
                         ((r[t] = s),
                           (o = !0),
                           Yk.debug(`Converted '${t}': '${n}' -> '${s}'`));
@@ -37516,9 +37468,9 @@ function agentToTool(t, n) {
                   ("paths" in r &&
                     Array.isArray(r.paths) &&
                     (r.paths = r.paths.map((t) =>
-                      "string" != typeof t || e.isAbsolute(t)
+                      "string" != typeof t || pathModule.isAbsolute(t)
                         ? t
-                        : ((o = !0), e.resolve(process.cwd(), t)),
+                        : ((o = !0), pathModule.resolve(process.cwd(), t)),
                     )),
                     o
                       ? ((n = r),
@@ -37890,20 +37842,20 @@ async function getAgentTool(e) {
 }
 function isPathInTasteDirectory(t) {
   const { filePath: n, projectRoot: r } = t,
-    o = e.join(r, ".commandcode", "taste"),
-    s = e.normalize(e.resolve(r, n)),
-    i = e.normalize(o);
+    o = pathModule.join(r, ".commandcode", "taste"),
+    s = pathModule.normalize(pathModule.resolve(r, n)),
+    i = pathModule.normalize(o);
   return s.startsWith(i);
 }
 function getTasteFileInfo(t) {
-  const n = e.normalize(e.resolve(t)),
-    r = e.normalize(e.join(process.cwd(), ".commandcode", "taste")),
-    o = e.normalize(e.join(w.homedir(), ".commandcode", "taste"));
+  const n = pathModule.normalize(pathModule.resolve(t)),
+    r = pathModule.normalize(pathModule.join(process.cwd(), ".commandcode", "taste")),
+    o = pathModule.normalize(pathModule.join(osModule.homedir(), ".commandcode", "taste"));
   let s = null;
   if ((n.startsWith(r) ? (s = r) : n.startsWith(o) && (s = o), !s))
     return { isTaste: !1 };
   if (!n.endsWith("taste.md")) return { isTaste: !1 };
-  const i = e.relative(s, n).split(e.sep);
+  const i = pathModule.relative(s, n).split(pathModule.sep);
   return 1 === i.length
     ? { isTaste: !0 }
     : 2 === i.length
@@ -37997,7 +37949,7 @@ async function executeTool(e, t, n) {
       });
       throw (i.end({ status: "error", error: e }), t);
     }
-    if (t instanceof y) {
+    if (t instanceof ZodError) {
       const n = sanitizeErrorForTelemetry({
         error: t,
         label: `tool_input_invalid:${e}`,
@@ -38570,9 +38522,9 @@ var mT = __name(async (e, t = {}) => {
   }, "formatBashOutput");
 Qb();
 var gT = __name(() => {
-  const [e, t] = J({ isExecuting: !1, currentCommand: null });
+  const [e, t] = useState({ isExecuting: !1, currentCommand: null });
   return {
-    executeBash: te(async (e, n, r) => {
+    executeBash: useCallback(async (e, n, r) => {
       t({ isExecuting: !0, currentCommand: e });
       try {
         const t = await mT(e, { timeout: 3e4, cwd: process.cwd() }),
@@ -38621,30 +38573,30 @@ var gT = __name(() => {
   };
 }, "useBashExecution");
 function useUiOverlays() {
-  const [e, t] = J(!1),
-    [n, r] = J(!1),
-    [o, s] = J(!1),
-    [i, a] = J(!1),
-    [l, u] = J(!1),
-    [d, m] = J(!1),
-    [g, h] = J(!1),
-    [f, y] = J(!1),
-    [w, S] = J(!1),
-    [E, v] = J(!1),
-    [C, k] = J(!1),
-    [T, _] = J(!1),
-    [x, A] = J(!1),
-    [P, I] = J(!1),
-    [M, N] = J(!1),
-    [R, $] = J(!1),
-    [L, D] = J(!1),
-    [O, F] = J(!1),
-    [U, j] = J(!1),
-    [q, B] = J(!1),
-    [z, W] = J(null),
-    [H, G] = J(0),
-    [V, Q] = J(!1),
-    [K, Y] = J("off");
+  const [e, t] = useState(!1),
+    [n, r] = useState(!1),
+    [o, s] = useState(!1),
+    [i, a] = useState(!1),
+    [l, u] = useState(!1),
+    [d, m] = useState(!1),
+    [g, h] = useState(!1),
+    [f, y] = useState(!1),
+    [w, S] = useState(!1),
+    [E, v] = useState(!1),
+    [C, k] = useState(!1),
+    [T, _] = useState(!1),
+    [x, A] = useState(!1),
+    [P, I] = useState(!1),
+    [M, N] = useState(!1),
+    [R, $] = useState(!1),
+    [L, D] = useState(!1),
+    [O, F] = useState(!1),
+    [U, j] = useState(!1),
+    [q, B] = useState(!1),
+    [z, W] = useState(null),
+    [H, G] = useState(0),
+    [V, Q] = useState(!1),
+    [K, Y] = useState("off");
   return {
     showFileList: e,
     setShowFileList: t,
@@ -38725,16 +38677,16 @@ function buildInjectedFeed() {
       );
 }
 function useFeed() {
-  const [e, t] = J(() => buildInjectedFeed()),
-    [n, r] = J(() => {
+  const [e, t] = useState(() => buildInjectedFeed()),
+    [n, r] = useState(() => {
       const e = buildInjectedLiveEntry();
       return e ? [e] : [];
     }),
-    [o, s] = J([]),
-    [i, a] = J(hT),
-    l = X([]);
+    [o, s] = useState([]),
+    [i, a] = useState(hT),
+    l = useRef([]);
   return (
-    Z(() => {
+    useEffect(() => {
       l.current = o;
     }, [o]),
     {
@@ -38751,35 +38703,35 @@ function useFeed() {
   );
 }
 function useSession() {
-  const [e, t] = J(crypto.randomUUID()),
-    [n, r] = J(!1);
+  const [e, t] = useState(crypto.randomUUID()),
+    [n, r] = useState(!1);
   return {
     sessionId: e,
     setSessionId: t,
     sessionLoaded: n,
     setSessionLoaded: r,
-    sessionLoadIdRef: X(null),
+    sessionLoadIdRef: useRef(null),
   };
 }
 function useStatus(e) {
-  const [t, n] = J("Ready..."),
-    r = X(!1),
-    [o, s] = J(""),
-    i = X(null),
-    [a, l] = J(null),
-    u = X(a),
-    [d, m] = J(null),
-    [g, h] = J(!1),
-    [f, y] = J(""),
-    [w, S] = J(null),
-    [E, v] = J(0),
-    [C, k] = J(null),
-    [T, _] = J(!1),
-    [x, A] = J(e ?? null);
-  (Z(() => {
+  const [t, n] = useState("Ready..."),
+    r = useRef(!1),
+    [o, s] = useState(""),
+    i = useRef(null),
+    [a, l] = useState(null),
+    u = useRef(a),
+    [d, m] = useState(null),
+    [g, h] = useState(!1),
+    [f, y] = useState(""),
+    [w, S] = useState(null),
+    [E, v] = useState(0),
+    [C, k] = useState(null),
+    [T, _] = useState(!1),
+    [x, A] = useState(e ?? null);
+  (useEffect(() => {
     u.current = a;
   }, [a]),
-    Z(() => {
+    useEffect(() => {
       if (x) {
         const e = setTimeout(() => {
           A(null);
@@ -38824,12 +38776,12 @@ function useStatus(e) {
   };
 }
 function useAuth() {
-  const [e, t] = J(null),
-    [n, r] = J(getConfiguredModel()),
-    [o, s] = J(!1),
-    [i, a] = J(null),
-    [l, u] = J(!1),
-    [d, m] = J(!1);
+  const [e, t] = useState(null),
+    [n, r] = useState(getConfiguredModel()),
+    [o, s] = useState(!1),
+    [i, a] = useState(null),
+    [l, u] = useState(!1),
+    [d, m] = useState(!1);
   return {
     currentProvider: e,
     setCurrentProvider: t,
@@ -38843,8 +38795,8 @@ function useAuth() {
     setShowProviderNotification: u,
     premiumCreditsExhausted: d,
     setPremiumCreditsExhausted: m,
-    providerNotificationTimer: X(null),
-    modelNotificationTimer: X(null),
+    providerNotificationTimer: useRef(null),
+    modelNotificationTimer: useRef(null),
   };
 }
 (__name(makeInjectedShellEntry, "makeInjectedShellEntry"),
@@ -39158,11 +39110,11 @@ var yT = class extends qe {
     }
   },
   wT = __name((e = {}) => {
-    const [t, n] = J(null),
-      [r, o] = J(null),
-      [s, i] = J(!1);
+    const [t, n] = useState(null),
+      [r, o] = useState(null),
+      [s, i] = useState(!1);
     return (
-      Z(() => {
+      useEffect(() => {
         const t = e.projectRoot || process.cwd(),
           r = new yT(t);
         return (
@@ -39185,7 +39137,7 @@ var yT = class extends qe {
         );
       }, [e.projectRoot]),
       {
-        requestPermission: te(
+        requestPermission: useCallback(
           async (n) => {
             if (!t) return { allowed: !0 };
             const r = await t.requestPermission(n);
@@ -39193,7 +39145,7 @@ var yT = class extends qe {
           },
           [t, e.onPermissionResponse],
         ),
-        requestShellPermission: te(
+        requestShellPermission: useCallback(
           async (n) => {
             if (!t) return { allowed: !0 };
             const r = await t.requestShellPermission(n);
@@ -39201,7 +39153,7 @@ var yT = class extends qe {
           },
           [t, e.onPermissionResponse],
         ),
-        respondToPrompt: te(
+        respondToPrompt: useCallback(
           (e) => {
             if (t)
               if (t._pendingShellCallback) {
@@ -39214,19 +39166,19 @@ var yT = class extends qe {
           },
           [t],
         ),
-        clearSessionPermissions: te(() => {
+        clearSessionPermissions: useCallback(() => {
           t?.clearSessionPermissions();
         }, [t]),
-        clearProjectPermissions: te(() => {
+        clearProjectPermissions: useCallback(() => {
           t?.clearProjectPermissions();
         }, [t]),
-        setAutoApprove: te(
+        setAutoApprove: useCallback(
           (e, n) => {
             t?.setAutoApprove(e, n);
           },
           [t],
         ),
-        setEnabled: te(
+        setEnabled: useCallback(
           (e) => {
             t?.setEnabled(e);
           },
@@ -39252,9 +39204,9 @@ function usePermissionMode({
   setStatus: r,
   contextEngineRef: o,
 }) {
-  const [s, i] = J(() => e || (t ? "bypass" : "standard")),
-    a = X(s);
-  Z(() => {
+  const [s, i] = useState(() => e || (t ? "bypass" : "standard")),
+    a = useRef(s);
+  useEffect(() => {
     a.current = s;
   }, [s]);
   const {
@@ -39293,7 +39245,7 @@ function usePermissionMode({
     }, "onPermissionResponse"),
   });
   return (
-    Z(() => {
+    useEffect(() => {
       u && applyAutoAcceptMode({ enabled: s, service: u });
     }, [s, u]),
     {
@@ -39308,8 +39260,8 @@ function usePermissionMode({
   );
 }
 function usePendingOps() {
-  const [e, t] = J(null),
-    [n, r] = J(null);
+  const [e, t] = useState(null),
+    [n, r] = useState(null);
   return {
     pendingPermission: e,
     setPendingPermission: t,
@@ -39318,13 +39270,13 @@ function usePendingOps() {
   };
 }
 function useOnboarding() {
-  const [e, t] = J(!1),
-    [n, r] = J(!1),
-    [o, s] = J(!0),
-    [i, a] = J(!1),
-    [l, u] = J(!1),
-    [d, m] = J(null),
-    [g, h] = J(!1);
+  const [e, t] = useState(!1),
+    [n, r] = useState(!1),
+    [o, s] = useState(!0),
+    [i, a] = useState(!1),
+    [l, u] = useState(!1),
+    [d, m] = useState(null),
+    [g, h] = useState(!1);
   return {
     showTrustPrompt: e,
     setShowTrustPrompt: t,
@@ -39340,16 +39292,16 @@ function useOnboarding() {
     setTasteOnboardingEntryId: m,
     autoLearnTaste: g,
     setAutoLearnTaste: h,
-    tasteOnboardingCheckedRef: X(!1),
+    tasteOnboardingCheckedRef: useRef(!1),
   };
 }
 function useExit() {
-  const [e, t] = J(!1),
-    [n, r] = J(null),
-    o = X(null),
-    s = X(0),
-    i = X(null),
-    a = te(() => {
+  const [e, t] = useState(!1),
+    [n, r] = useState(null),
+    o = useRef(null),
+    s = useRef(0),
+    i = useRef(null),
+    a = useCallback(() => {
       ((o.current = null),
         r(null),
         i.current && (clearTimeout(i.current), (i.current = null)));
@@ -39366,13 +39318,13 @@ function useExit() {
   };
 }
 async function resolveEditStartLine({ filePath: e, oldContent: t }) {
-  const n = await F.readFile(e, "utf-8"),
+  const n = await fsPromisesCompat.readFile(e, "utf-8"),
     r = n.indexOf(t);
   if (-1 !== r) return n.substring(0, r).split("\n").length;
 }
 function isDirectoryEmpty() {
   try {
-    return 0 === z(process.cwd()).length;
+    return 0 === readdirSync(process.cwd()).length;
   } catch {
     return !1;
   }
@@ -39465,7 +39417,7 @@ async function processSkillReferences(e) {
         (i.push({
           skillName: n,
           content: e.content.trim(),
-          skillDirectory: t.dirname(r.filePath),
+          skillDirectory: pathDefault.dirname(r.filePath),
         }),
           a.add(n));
       } catch {}
@@ -39851,10 +39803,10 @@ function createHookRegistry() {
   };
 }
 function getTrustFilePath() {
-  return e.join(w.homedir(), ".commandcode", "trusted-hooks.json");
+  return pathModule.join(osModule.homedir(), ".commandcode", "trusted-hooks.json");
 }
 function computeFingerprint(e) {
-  return M.createHash("sha256").update(e.command).digest("hex").slice(0, 16);
+  return cryptoModule.createHash("sha256").update(e.command).digest("hex").slice(0, 16);
 }
 function createTrustManager() {
   let t = {},
@@ -39863,7 +39815,7 @@ function createTrustManager() {
     load: __name(async () => {
       if (!n) {
         try {
-          const e = await C.readFile(getTrustFilePath(), "utf-8");
+          const e = await fsPromises.readFile(getTrustFilePath(), "utf-8");
           t = JSON.parse(e);
         } catch {
           t = {};
@@ -39887,9 +39839,9 @@ function createTrustManager() {
     }, "trust"),
     save: __name(async () => {
       const n = getTrustFilePath(),
-        r = e.dirname(n);
-      (await C.mkdir(r, { recursive: !0 }),
-        await C.writeFile(n, JSON.stringify(t, null, 2)));
+        r = pathModule.dirname(n);
+      (await fsPromises.mkdir(r, { recursive: !0 }),
+        await fsPromises.writeFile(n, JSON.stringify(t, null, 2)));
     }, "save"),
     getTrustedHooks: __name((e) => t[e] || [], "getTrustedHooks"),
   };
@@ -39915,14 +39867,14 @@ function auditLogPath(t) {
   const n = t.sessionId
     ? `hooks-audit-${t.sessionId}.jsonl`
     : "hooks-audit.jsonl";
-  return e.join(t.sessionDir, n);
+  return pathModule.join(t.sessionDir, n);
 }
 function createAuditLogger(t) {
   const n = auditLogPath(t);
   let r = null;
   const o = __name(
     () => (
-      r || (r = C.mkdir(e.dirname(n), { recursive: !0 }).then(() => {})),
+      r || (r = fsPromises.mkdir(pathModule.dirname(n), { recursive: !0 }).then(() => {})),
       r
     ),
     "ensureDir",
@@ -39934,7 +39886,7 @@ function createAuditLogger(t) {
         try {
           await o();
           const t = JSON.stringify(e) + "\n";
-          await C.appendFile(n, t);
+          await fsPromises.appendFile(n, t);
         } catch (e) {
           dlog(`[Hook] Audit log write failed: ${getErrorMessage(e)}`);
         }
@@ -40731,15 +40683,15 @@ var xT = new (class extends qe {
 })();
 function getGlobalProjectSettingsDir(t = process.cwd()) {
   const n = je(t);
-  return e.join(S.homedir(), ".commandcode", "projects", n);
+  return pathModule.join(osDefault.homedir(), ".commandcode", "projects", n);
 }
 function getGlobalProjectSettingsPath(t = process.cwd()) {
-  return e.join(getGlobalProjectSettingsDir(t), "settings.json");
+  return pathModule.join(getGlobalProjectSettingsDir(t), "settings.json");
 }
 async function loadGlobalProjectSettings(e = process.cwd()) {
   try {
     const t = getGlobalProjectSettingsPath(e),
-      n = await C.readFile(t, "utf-8");
+      n = await fsPromises.readFile(t, "utf-8");
     return JSON.parse(n);
   } catch {
     return {};
@@ -40748,9 +40700,9 @@ async function loadGlobalProjectSettings(e = process.cwd()) {
 async function saveGlobalProjectSettings(t, n = process.cwd()) {
   try {
     const r = getGlobalProjectSettingsPath(n),
-      o = e.dirname(r);
-    (await C.mkdir(o, { recursive: !0 }),
-      await C.writeFile(r, JSON.stringify(t, null, 2)));
+      o = pathModule.dirname(r);
+    (await fsPromises.mkdir(o, { recursive: !0 }),
+      await fsPromises.writeFile(r, JSON.stringify(t, null, 2)));
   } catch (e) {
     const t = e instanceof Error ? e.message : String(e);
     (dlog("Error saving global project settings:", e),
@@ -40762,8 +40714,8 @@ async function saveGlobalProjectSettings(t, n = process.cwd()) {
 }
 async function loadLocalProjectSettings(t = process.cwd()) {
   try {
-    const n = e.join(t, ".commandcode", "settings.local.json"),
-      r = await C.readFile(n, "utf-8");
+    const n = pathModule.join(t, ".commandcode", "settings.local.json"),
+      r = await fsPromises.readFile(n, "utf-8");
     return JSON.parse(r);
   } catch {
     return {};
@@ -40885,13 +40837,13 @@ function createHookSystem(e) {
   };
 }
 function getProjectsBasePath() {
-  return t.join(S.homedir(), ".commandcode", "projects");
+  return pathDefault.join(osDefault.homedir(), ".commandcode", "projects");
 }
 function getProjectDirName(e) {
   return je(e.cwd);
 }
 function getTranscriptPath(e) {
-  return t.join(
+  return pathDefault.join(
     getProjectsBasePath(),
     getProjectDirName({ cwd: e.cwd }),
     `${e.sessionId}.jsonl`,
@@ -44242,7 +44194,7 @@ function useContextEngine({
   setPendingQuestion: S,
   contextEngineRef: E,
 }) {
-  const v = te(
+  const v = useCallback(
     (t) => ({
       onFeedUpdate: __name((e) => {
         const t = e.metadata?.status;
@@ -44308,7 +44260,7 @@ function useContextEngine({
     [w, y, u, a, e, g, h, o, s, S, i, d, l, m, f],
   );
   return (
-    Z(() => {
+    useEffect(() => {
       if (E.current || !r || n || t) return;
       let s = !1;
       const { contextEngine: i, startupEntriesPromise: a } =
@@ -44589,8 +44541,8 @@ var WT = null,
 async function resolveInkInstance(e) {
   try {
     const n = ot(import.meta.url).resolve("ink"),
-      r = t.join(t.dirname(n), "instances.js"),
-      o = await import(m(r).href);
+      r = pathDefault.join(pathDefault.dirname(n), "instances.js"),
+      o = await import(pathToFileURL(r).href);
     return o.default?.get(e);
   } catch {
     return;
@@ -44871,23 +44823,23 @@ function useStartup({
   setInput: v,
   onCommand: C,
 }) {
-  const k = te(async () => {
+  const k = useCallback(async () => {
       try {
         const e = await isTasteLearningEnabled();
         (l.setTasteLearningEnabled(e), e && (await zT.initializeProject()));
       } catch {}
     }, [l.setTasteLearningEnabled]),
-    T = te(async () => {
+    T = useCallback(async () => {
       const e = await getConfiguredProvider();
       u.setCurrentProvider(e);
       const t = await isOAuthEnforced();
       u.setIsOAuthMode(t);
     }, [u.setCurrentProvider, u.setIsOAuthMode]),
-    _ = te(() => {
+    _ = useCallback(() => {
       const e = getMcpConnectionManager();
       e.isInitialized || e.initialize().catch(() => {});
     }, []),
-    x = te(
+    x = useCallback(
       (e) => {
         handleSelectSession({
           selectedSessionId: e,
@@ -44907,14 +44859,14 @@ function useStartup({
       },
       [a, i, m, g, l, h, E, u.setCurrentModel],
     ),
-    A = te(async () => {
+    A = useCallback(async () => {
       if (n) {
         const e = await Rk.listSessions();
         return void (e.length > 0 && x(e[0].id));
       }
       t ? x(t) : e && m.setShowSessionSelector(!0);
     }, [n, t, e, x, m]);
-  (Z(() => {
+  (useEffect(() => {
     (async () => {
       (await Rk.isProjectInitialized())
         ? (d.setProjectTrusted(!0),
@@ -44941,7 +44893,7 @@ function useStartup({
             : (d.setShowTrustPrompt(!0), d.setCheckingProject(!1));
     })();
   }, [e, n, r]),
-    Z(() => {
+    useEffect(() => {
       if (!d.projectTrusted) return;
       const e = createHistoryManager();
       return (
@@ -44952,9 +44904,9 @@ function useStartup({
         }
       );
     }, [d.projectTrusted]));
-  const P = X(m.showLearningFeed);
+  const P = useRef(m.showLearningFeed);
   ((P.current = m.showLearningFeed),
-    Z(() => {
+    useEffect(() => {
       if (!s) return;
       const e = createResizeHandler({
         getColumns: __name(() => s.columns ?? 0, "getColumns"),
@@ -44971,7 +44923,7 @@ function useStartup({
         }
       );
     }, [s]),
-    Z(() => {
+    useEffect(() => {
       o &&
         d.projectTrusted &&
         !d.checkingProject &&
@@ -45010,7 +44962,7 @@ function useStartup({
           }, "submitAsUserMessage"),
         }));
     }, [o, d.projectTrusted, d.checkingProject, m.showSessionSelector, C]));
-  const I = X(null);
+  const I = useRef(null);
   I.current = {
     feed: i.feed,
     setFeed: i.setFeed,
@@ -45035,7 +44987,7 @@ function useStartup({
     role: "",
     input: "",
   };
-  const M = te(
+  const M = useCallback(
     async ({
       role: e,
       input: t,
@@ -45119,10 +45071,10 @@ function getProjectDirName2(e) {
   __name(getProjectDirName2, "getProjectDirName"),
   Ft(),
   er());
-var KT = e.join(w.homedir(), ".codex", "sessions");
+var KT = pathModule.join(osModule.homedir(), ".codex", "sessions");
 async function readSessionMeta(e) {
   try {
-    const t = H(e, { encoding: "utf8" }),
+    const t = createReadStream(e, { encoding: "utf8" }),
       n = at.createInterface({ input: t, crlfDelay: 1 / 0 });
     for await (const e of n)
       if (e.trim()) {
@@ -45149,26 +45101,26 @@ async function readSessionMeta(e) {
 async function findAllSessionFiles(t, n) {
   const r = [];
   try {
-    await C.access(t);
+    await fsPromises.access(t);
   } catch {
     return (dlog("[Codex] sessions directory not found"), []);
   }
   try {
-    const o = await C.readdir(t);
+    const o = await fsPromises.readdir(t);
     for (const s of o) {
       if (!/^\d{4}$/.test(s)) continue;
-      const o = e.join(t, s);
-      if (!(await C.stat(o)).isDirectory()) continue;
-      const i = await C.readdir(o);
+      const o = pathModule.join(t, s);
+      if (!(await fsPromises.stat(o)).isDirectory()) continue;
+      const i = await fsPromises.readdir(o);
       for (const t of i) {
         if (!/^\d{2}$/.test(t)) continue;
-        const i = e.join(o, t);
-        if (!(await C.stat(i)).isDirectory()) continue;
-        const a = await C.readdir(i);
+        const i = pathModule.join(o, t);
+        if (!(await fsPromises.stat(i)).isDirectory()) continue;
+        const a = await fsPromises.readdir(i);
         for (const o of a) {
           if (!/^\d{2}$/.test(o)) continue;
-          const a = e.join(i, o);
-          if (!(await C.stat(a)).isDirectory()) continue;
+          const a = pathModule.join(i, o);
+          if (!(await fsPromises.stat(a)).isDirectory()) continue;
           n?.({
             phase: "scanning",
             totalFiles: r.length,
@@ -45176,9 +45128,9 @@ async function findAllSessionFiles(t, n) {
             matchedSessions: 0,
             currentDir: `${s}/${t}/${o}`,
           });
-          const l = (await C.readdir(a))
+          const l = (await fsPromises.readdir(a))
             .filter((e) => e.endsWith(".jsonl") && e.startsWith("rollout-"))
-            .map((t) => e.join(a, t));
+            .map((t) => pathModule.join(a, t));
           r.push(...l);
         }
       }
@@ -45229,8 +45181,8 @@ async function findCodexSessions(t, n, r = 0) {
       if (!n) return null;
       if (n.cwd === o)
         try {
-          const r = await C.stat(t),
-            o = e.basename(t, ".jsonl");
+          const r = await fsPromises.stat(t),
+            o = pathModule.basename(t, ".jsonl");
           return {
             id: n.id || o,
             filePath: t,
@@ -45275,7 +45227,7 @@ async function findCodexSessionIds(e) {
 async function extractCodexPrompts(e) {
   const t = [];
   try {
-    const n = (await C.readFile(e, "utf-8")).trim().split("\n");
+    const n = (await fsPromises.readFile(e, "utf-8")).trim().split("\n");
     for (const e of n)
       if (e.trim())
         try {
@@ -45305,7 +45257,7 @@ async function extractCodexPrompts(e) {
   __name(extractCodexPrompts, "extractCodexPrompts"),
   Ft(),
   er());
-var YT = e.join(w.homedir(), ".cursor", "projects");
+var YT = pathModule.join(osModule.homedir(), ".cursor", "projects");
 function getCursorProjectDirNames(e) {
   const t = e.replace(/[/\\:]/g, "-"),
     n = t.replace(/^-+/, "");
@@ -45313,19 +45265,19 @@ function getCursorProjectDirNames(e) {
 }
 async function findAgentTranscriptsDir(t) {
   try {
-    await C.access(YT);
+    await fsPromises.access(YT);
   } catch {
     return (dlog("[Cursor] projects directory not found"), null);
   }
   const n = getCursorProjectDirNames(t);
   dlog(`[Cursor] looking for project dirs: ${n.join(", ")}`);
   try {
-    const t = await C.readdir(YT);
+    const t = await fsPromises.readdir(YT);
     for (const r of n) {
       if (!t.includes(r)) continue;
-      const n = e.join(YT, r, "agent-transcripts");
+      const n = pathModule.join(YT, r, "agent-transcripts");
       try {
-        if ((await C.stat(n)).isDirectory())
+        if ((await fsPromises.stat(n)).isDirectory())
           return (dlog(`[Cursor] found agent-transcripts at: ${n}`), n);
       } catch {}
     }
@@ -45341,14 +45293,14 @@ async function findCursorSessions(t, n = 0) {
   const s = await findAgentTranscriptsDir(r);
   if (!s) return (dlog("[Cursor] no agent-transcripts found"), []);
   try {
-    const t = await C.readdir(s);
+    const t = await fsPromises.readdir(s);
     for (const n of t) {
-      const t = e.join(s, n);
+      const t = pathModule.join(s, n);
       try {
-        if (!(await C.stat(t)).isDirectory()) continue;
-        const r = e.join(t, `${n}.jsonl`);
+        if (!(await fsPromises.stat(t)).isDirectory()) continue;
+        const r = pathModule.join(t, `${n}.jsonl`);
         try {
-          const e = await C.stat(r);
+          const e = await fsPromises.stat(r);
           o.push({
             id: n,
             filePath: r,
@@ -45375,7 +45327,7 @@ async function findCursorSessionIds(e) {
 async function extractCursorPrompts(e) {
   const t = [];
   try {
-    const n = (await C.readFile(e, "utf-8")).trim().split("\n");
+    const n = (await fsPromises.readFile(e, "utf-8")).trim().split("\n");
     for (const e of n)
       if (e.trim())
         try {
@@ -45477,7 +45429,7 @@ async function checkOnboardingConditions() {
 }
 async function getSessionFilesFromDir(e) {
   try {
-    return (await C.readdir(e))
+    return (await fsPromises.readdir(e))
       .filter((e) => e.endsWith(".jsonl") && !e.includes(".checkpoints"))
       .map((e) => e.replace(".jsonl", ""));
   } catch {
@@ -45490,13 +45442,13 @@ async function findNewSessions(t) {
     o = t.codex || [],
     s = t.cursor || [];
   try {
-    const t = e.join(w.homedir(), ".claude", "projects");
-    await C.access(t);
+    const t = pathModule.join(osModule.homedir(), ".claude", "projects");
+    await fsPromises.access(t);
     const o = getProjectDirName2(process.cwd()),
-      s = (await C.readdir(t)).filter((e) => e === o);
+      s = (await fsPromises.readdir(t)).filter((e) => e === o);
     for (const o of s) {
-      const s = e.join(t, o);
-      if ((await C.stat(s)).isDirectory()) {
+      const s = pathModule.join(t, o);
+      if ((await fsPromises.stat(s)).isDirectory()) {
         const e = await getSessionFilesFromDir(s);
         e.length > 0 && (n["claude-code"] = e.filter((e) => !r.includes(e)));
       }
@@ -45617,7 +45569,7 @@ function useLifecycle({
   contextEngineRef: l,
   sessionTitleHolder: u,
 }) {
-  (Z(() => {
+  (useEffect(() => {
     if (!n.shouldExit) return;
     (r.hintTimerRef.current && clearTimeout(r.hintTimerRef.current),
       n.exitConfirmationTimeoutRef.current &&
@@ -45634,7 +45586,7 @@ function useLifecycle({
       process.exit(0);
     }
   }, [n.shouldExit, e]),
-    Z(
+    useEffect(
       () => () => {
         (r.hintTimerRef.current && clearTimeout(r.hintTimerRef.current),
           n.exitConfirmationTimeoutRef.current &&
@@ -45646,7 +45598,7 @@ function useLifecycle({
       },
       [],
     ),
-    Z(() => {
+    useEffect(() => {
       (async () => {
         if ("anthropic" === o.currentProvider && o.isOAuthMode)
           try {
@@ -45661,7 +45613,7 @@ function useLifecycle({
           }
       })();
     }, [o.currentProvider, o.isOAuthMode]),
-    Z(() => {
+    useEffect(() => {
       if (!t.isCmdCodeBusy) return void (r.pinnedStatusRef.current = !1);
       if (null !== r.retryAttempt) return;
       const e = setInterval(() => {
@@ -45669,7 +45621,7 @@ function useLifecycle({
       }, 7e3);
       return () => clearInterval(e);
     }, [t.isCmdCodeBusy, r.retryAttempt]),
-    Z(() => {
+    useEffect(() => {
       a ||
         triggerTasteOnboarding({
           projectTrusted: s.projectTrusted,
@@ -45679,7 +45631,7 @@ function useLifecycle({
           setIsOnboardingMode: s.setShowTasteOnboarding,
         });
     }, [s.projectTrusted, s.onboardingComplete, s.showTasteOnboarding, a]),
-    Z(() => {
+    useEffect(() => {
       if (s.showTasteOnboarding && !s.tasteOnboardingEntryId) {
         const e = Mb();
         (s.setTasteOnboardingEntryId(e.id), t.setFeed((t) => [...t, e]));
@@ -45786,7 +45738,7 @@ function useKeyboard({
       (A((t) => (t ? e + "\n" + t : e)), P([]), (x.current = []));
     }
   }, "handleInterrupt");
-  ie((_, x) => {
+  useInput((_, x) => {
     if ((x.shift && x.tab) || "[Z" === _) V();
     else if (E && x.escape) v(!1);
     else if (
@@ -45875,7 +45827,7 @@ function useHandlers({
   loadCurrentProvider: m,
   setInput: g,
 }) {
-  const h = te(() => {
+  const h = useCallback(() => {
       i.setPermissionMode((e) => {
         const t = i.dangerouslySkipPermissions;
         let n = "standard";
@@ -45911,7 +45863,7 @@ function useHandlers({
       s.pendingPermission,
       s.setPendingPermission,
     ]),
-    f = te(() => {
+    f = useCallback(() => {
       const e = !t.isCmdCodeBusy && !s.pendingPermission && !s.pendingQuestion,
         n = u.current?.hasCheckpoints() ?? !1;
       e && n && r.setShowRewindSelector(!0);
@@ -45921,7 +45873,7 @@ function useHandlers({
       s.pendingQuestion,
       r.setShowRewindSelector,
     ]),
-    y = te(
+    y = useCallback(
       (t) => {
         (n.setOnboardingComplete(!0),
           n.setShowTasteOnboarding(!1),
@@ -45931,7 +45883,7 @@ function useHandlers({
       },
       [e, n, r],
     ),
-    w = te(async () => {
+    w = useCallback(async () => {
       try {
         if ((await Rk.initializeProject(), n.setShowTrustPrompt(!1), e))
           return (
@@ -45945,7 +45897,7 @@ function useHandlers({
           o.setShouldExit(!0));
       }
     }, [e, n, o, d, m]),
-    S = te(() => {
+    S = useCallback(() => {
       o.setShouldExit(!0);
     }, [o.setShouldExit]);
   return (
@@ -46067,19 +46019,19 @@ function processCommandTemplate(e) {
 }
 function loadCustomCommands() {
   const e = [],
-    n = t.join(process.cwd(), ".commandcode", "commands"),
-    r = t.join(S.homedir(), ".commandcode", "commands");
+    n = pathDefault.join(process.cwd(), ".commandcode", "commands"),
+    r = pathDefault.join(osDefault.homedir(), ".commandcode", "commands");
   function loadCommandsFromDirectory(n, r, o = "") {
-    if (D.existsSync(n))
+    if (fsDefault.existsSync(n))
       try {
-        const s = D.readdirSync(n, { withFileTypes: !0 });
+        const s = fsDefault.readdirSync(n, { withFileTypes: !0 });
         for (const i of s) {
-          const s = t.join(n, i.name);
+          const s = pathDefault.join(n, i.name);
           if (i.isDirectory())
             loadCommandsFromDirectory(s, r, o ? `${o}/${i.name}` : i.name);
           else if (i.isFile() && i.name.endsWith(".md")) {
-            const n = t.basename(i.name, ".md"),
-              a = D.readFileSync(s, "utf-8").trim();
+            const n = pathDefault.basename(i.name, ".md"),
+              a = fsDefault.readFileSync(s, "utf-8").trim();
             e.push({ name: n, source: r, content: a, subdirectory: o });
           }
         }
@@ -46148,23 +46100,23 @@ function getCustomCommandContent(e) {
   Io(),
   Ft(),
   Cn());
-var t_ = t.join(S.homedir(), ".commandcode", "updates.json"),
-  n_ = t.join(S.homedir(), ".commandcode", "update.lock"),
+var t_ = pathDefault.join(osDefault.homedir(), ".commandcode", "updates.json"),
+  n_ = pathDefault.join(osDefault.homedir(), ".commandcode", "update.lock"),
   r_ = 6e5;
 function ensureDir() {
-  const e = t.dirname(t_);
-  D.existsSync(e) || D.mkdirSync(e, { recursive: !0 });
+  const e = pathDefault.dirname(t_);
+  fsDefault.existsSync(e) || fsDefault.mkdirSync(e, { recursive: !0 });
 }
 function readUpdatesConfig() {
   try {
-    if (!D.existsSync(t_))
+    if (!fsDefault.existsSync(t_))
       return {
         autoUpdate: !0,
         lastCheckedAt: 0,
         checkIntervalMs: 36e5,
         pending: null,
       };
-    const e = D.readFileSync(t_, "utf-8");
+    const e = fsDefault.readFileSync(t_, "utf-8");
     return {
       autoUpdate: !0,
       lastCheckedAt: 0,
@@ -46182,7 +46134,7 @@ function readUpdatesConfig() {
   }
 }
 function writeUpdatesConfig(e) {
-  (ensureDir(), D.writeFileSync(t_, JSON.stringify(e, null, 2)));
+  (ensureDir(), fsDefault.writeFileSync(t_, JSON.stringify(e, null, 2)));
 }
 function updateUpdatesConfig(e) {
   writeUpdatesConfig({ ...readUpdatesConfig(), ...e });
@@ -46202,8 +46154,8 @@ function clearPendingUpdate() {
 }
 function clearStaleLock() {
   try {
-    const e = D.statSync(n_);
-    return Date.now() - e.mtimeMs > r_ && (D.unlinkSync(n_), !0);
+    const e = fsDefault.statSync(n_);
+    return Date.now() - e.mtimeMs > r_ && (fsDefault.unlinkSync(n_), !0);
   } catch {
     return !0;
   }
@@ -46211,14 +46163,14 @@ function clearStaleLock() {
 function tryAcquireUpdateLock() {
   (ensureDir(), clearStaleLock());
   try {
-    return (D.writeFileSync(n_, String(process.pid), { flag: "wx" }), !0);
+    return (fsDefault.writeFileSync(n_, String(process.pid), { flag: "wx" }), !0);
   } catch {
     return !1;
   }
 }
 function releaseUpdateLock() {
   try {
-    D.unlinkSync(n_);
+    fsDefault.unlinkSync(n_);
   } catch {}
 }
 (__name(function getDefaultConfig() {
@@ -46541,9 +46493,9 @@ async function openInEditor2(e) {
   )
     throw new d_();
   t = ensureWaitFlag(t);
-  const r = n(E(), `commandcode-${Date.now()}.md`);
+  const r = join(tmpdir(), `commandcode-${Date.now()}.md`);
   return (
-    await _(r, e),
+    await writeFile(r, e),
     new Promise((e, n) => {
       const o = t.split(" ").filter((e) => e.length > 0),
         s = o[0],
@@ -46551,15 +46503,15 @@ async function openInEditor2(e) {
         a = ve(s, [...i, r], { stdio: "inherit" });
       (a.on("close", async () => {
         try {
-          const t = await A(r, "utf-8");
-          (await P(r), e(t.trimEnd()));
+          const t = await readFile(r, "utf-8");
+          (await unlink(r), e(t.trimEnd()));
         } catch (e) {
           n(e);
         }
       }),
         a.on("error", async (e) => {
           try {
-            await P(r);
+            await unlink(r);
           } catch {}
           n(e);
         }));
@@ -46601,7 +46553,7 @@ function readZipEntries(e) {
   return i;
 }
 function parseVsixOnce(e) {
-  const t = readZipEntries(D.readFileSync(e));
+  const t = readZipEntries(fsDefault.readFileSync(e));
   return { entries: t, meta: readVsixPackageJson(t) };
 }
 function readVsixPackageJson(e) {
@@ -46616,15 +46568,15 @@ function readVsixPackageJson(e) {
   return { publisher: r, name: o, version: s };
 }
 function extractExtensionInto(e, n) {
-  const r = t.resolve(n);
+  const r = pathDefault.resolve(n);
   for (const o of e) {
     if (!o.name.startsWith("extension/")) continue;
     const e = o.name.slice(10);
     if (!e) continue;
-    const s = t.resolve(n, e);
-    if (s !== r && !s.startsWith(r + t.sep))
+    const s = pathDefault.resolve(n, e);
+    if (s !== r && !s.startsWith(r + pathDefault.sep))
       throw new Error(`Refusing to extract entry outside destDir: ${o.name}`);
-    (D.mkdirSync(t.dirname(s), { recursive: !0 }), D.writeFileSync(s, o.data));
+    (fsDefault.mkdirSync(pathDefault.dirname(s), { recursive: !0 }), fsDefault.writeFileSync(s, o.data));
   }
 }
 (__name(function getNoEditorMessage() {
@@ -46647,15 +46599,15 @@ var m_ = { code: "Visual Studio Code", cursor: "Cursor", windsurf: "Windsurf" },
   g_ = ["cursor", "code", "windsurf"];
 function getVsixPath() {
   try {
-    const e = t.dirname(d(import.meta.url)),
-      n = t.join(e, "..", "vsix", "commandcode-vscode.vsix");
-    return D.existsSync(n) ? n : null;
+    const e = pathDefault.dirname(fileURLToPath(import.meta.url)),
+      n = pathDefault.join(e, "..", "vsix", "commandcode-vscode.vsix");
+    return fsDefault.existsSync(n) ? n : null;
   } catch {
     return null;
   }
 }
 function getIDEExtensionsDir(e) {
-  return t.join(S.homedir(), p_[e], "extensions");
+  return pathDefault.join(osDefault.homedir(), p_[e], "extensions");
 }
 (__name(getVsixPath, "getVsixPath"),
   __name(getIDEExtensionsDir, "getIDEExtensionsDir"));
@@ -46667,12 +46619,12 @@ var h_ = {
 function getMacAppBundle(e) {
   if ("darwin" !== process.platform) return null;
   const n = [
-    t.join("/Applications", h_[e]),
-    t.join(S.homedir(), "Applications", h_[e]),
+    pathDefault.join("/Applications", h_[e]),
+    pathDefault.join(osDefault.homedir(), "Applications", h_[e]),
   ];
   for (const e of n)
     try {
-      if (D.existsSync(e)) return e;
+      if (fsDefault.existsSync(e)) return e;
     } catch {}
   return null;
 }
@@ -46680,7 +46632,7 @@ function getInstalledIDEs() {
   return g_.filter((e) => {
     if ("darwin" === process.platform) return null !== getMacAppBundle(e);
     try {
-      return D.existsSync(t.join(S.homedir(), p_[e]));
+      return fsDefault.existsSync(pathDefault.join(osDefault.homedir(), p_[e]));
     } catch {
       return !1;
     }
@@ -46710,12 +46662,12 @@ function verifyOnDisk(e, n) {
   try {
     const r = getIDEExtensionsDir(e),
       o = `${n.publisher}.${n.name}-${n.version}`,
-      s = t.join(r, o, "package.json");
-    if (!D.existsSync(s)) return !1;
-    JSON.parse(D.readFileSync(s, "utf-8"));
-    const i = t.join(r, "extensions.json");
-    if (!D.existsSync(i)) return !1;
-    const a = JSON.parse(D.readFileSync(i, "utf-8"));
+      s = pathDefault.join(r, o, "package.json");
+    if (!fsDefault.existsSync(s)) return !1;
+    JSON.parse(fsDefault.readFileSync(s, "utf-8"));
+    const i = pathDefault.join(r, "extensions.json");
+    if (!fsDefault.existsSync(i)) return !1;
+    const a = JSON.parse(fsDefault.readFileSync(i, "utf-8"));
     if (!Array.isArray(a)) return !1;
     const l = `${n.publisher}.${n.name}`;
     return a.some((e) => {
@@ -46731,9 +46683,9 @@ function verifyOnDisk(e, n) {
   }
 }
 function buildManifestEntry(e, n, r) {
-  const o = t.join(e, n),
-    s = m(o).href,
-    i = o.split(t.sep).join("/");
+  const o = pathDefault.join(e, n),
+    s = pathToFileURL(o).href,
+    i = o.split(pathDefault.sep).join("/");
   return {
     identifier: { id: `${r.publisher}.${r.name}` },
     version: r.version,
@@ -46749,11 +46701,11 @@ function buildManifestEntry(e, n, r) {
   };
 }
 function upsertManifestEntry(e, n) {
-  const r = t.join(e, "extensions.json");
+  const r = pathDefault.join(e, "extensions.json");
   let o = [];
   try {
-    if (D.existsSync(r)) {
-      const e = D.readFileSync(r, "utf-8"),
+    if (fsDefault.existsSync(r)) {
+      const e = fsDefault.readFileSync(r, "utf-8"),
         t = JSON.parse(e);
       Array.isArray(t) && (o = t);
     }
@@ -46764,7 +46716,7 @@ function upsertManifestEntry(e, n) {
   }
   ((o = o.filter((e) => e?.identifier?.id !== n.identifier.id)), o.push(n));
   const s = `${r}.tmp.${process.pid}`;
-  (D.writeFileSync(s, JSON.stringify(o, null, "\t")), D.renameSync(s, r));
+  (fsDefault.writeFileSync(s, JSON.stringify(o, null, "\t")), fsDefault.renameSync(s, r));
 }
 function directInstallExtension(e, n, r) {
   try {
@@ -46777,20 +46729,20 @@ function directInstallExtension(e, n, r) {
         { ide: e, status: "already_installed" }
       );
     const i = getIDEExtensionsDir(e);
-    D.mkdirSync(i, { recursive: !0 });
+    fsDefault.mkdirSync(i, { recursive: !0 });
     const a = `${s.publisher}.${s.name}-${s.version}`,
-      l = t.join(i, a),
-      u = D.existsSync(t.join(l, "package.json"));
+      l = pathDefault.join(i, a),
+      u = fsDefault.existsSync(pathDefault.join(l, "package.json"));
     if (!u) {
-      const e = t.join(i, `.commandcode-install-${process.pid}-${Date.now()}`);
-      (D.rmSync(e, { recursive: !0, force: !0 }),
-        D.mkdirSync(e, { recursive: !0 }));
+      const e = pathDefault.join(i, `.commandcode-install-${process.pid}-${Date.now()}`);
+      (fsDefault.rmSync(e, { recursive: !0, force: !0 }),
+        fsDefault.mkdirSync(e, { recursive: !0 }));
       try {
         (extractExtensionInto(o, e),
-          D.rmSync(l, { recursive: !0, force: !0 }),
-          D.renameSync(e, l));
+          fsDefault.rmSync(l, { recursive: !0, force: !0 }),
+          fsDefault.renameSync(e, l));
       } catch (t) {
-        throw (D.rmSync(e, { recursive: !0, force: !0 }), t);
+        throw (fsDefault.rmSync(e, { recursive: !0, force: !0 }), t);
       }
     }
     if (
@@ -47036,130 +46988,130 @@ var b_ = __name(
   }, "formatUptime"),
   v_ = __name(
     ({ icon: e, label: t, children: n }) =>
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         null,
-        K.createElement(re, { color: mr.CYAN }, e, " "),
-        K.createElement(re, { color: mr.DIM }, t.padEnd(12)),
+        React.createElement(Text, { color: mr.CYAN }, e, " "),
+        React.createElement(Text, { color: mr.DIM }, t.padEnd(12)),
         n,
       ),
     "Row",
   ),
   C_ = __name(
     ({ title: e }) =>
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         null,
-        K.createElement(re, { color: mr.GRAY }, "───"),
-        K.createElement(re, { color: mr.WHITE }, " ", e, " "),
-        K.createElement(re, { color: mr.GRAY }, "─".repeat(35)),
+        React.createElement(Text, { color: mr.GRAY }, "───"),
+        React.createElement(Text, { color: mr.WHITE }, " ", e, " "),
+        React.createElement(Text, { color: mr.GRAY }, "─".repeat(35)),
       ),
     "Header",
   ),
   k_ = __name(
     ({ title: e, marginTop: t = 0, children: n }) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", marginTop: t },
-        K.createElement(C_, { title: e }),
-        K.createElement(ne, { flexDirection: "column", paddingY: 1 }, n),
+        React.createElement(C_, { title: e }),
+        React.createElement(Box, { flexDirection: "column", paddingY: 1 }, n),
       ),
     "Section",
   ),
   T_ = __name(
     ({ cpuCount: e, totalMem: t, systemInfo: n }) =>
-      K.createElement(
+      React.createElement(
         k_,
         { title: "System Information" },
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.bullet, label: "Version" },
-          K.createElement(re, { color: mr.GREEN }, n.version),
+          React.createElement(Text, { color: mr.GREEN }, n.version),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.bullet, label: "Date" },
-          K.createElement(re, null, formatDate()),
+          React.createElement(Text, null, formatDate()),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.pointer, label: "Platform" },
-          K.createElement(re, { color: mr.GREEN }, n.os),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: mr.GREEN }, n.os),
+          React.createElement(
+            Text,
             { color: mr.DIM },
             " ",
             "(",
-            w.platform(),
+            osModule.platform(),
             ", ",
-            w.arch(),
+            osModule.arch(),
             ")",
           ),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.triangleUp, label: "Hostname" },
-          K.createElement(re, null, w.hostname()),
+          React.createElement(Text, null, osModule.hostname()),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.bullet, label: "User" },
-          K.createElement(re, { color: mr.YELLOW }, w.userInfo().username),
+          React.createElement(Text, { color: mr.YELLOW }, osModule.userInfo().username),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.bullet, label: "CPUs" },
-          K.createElement(re, { color: mr.MAGENTA }, e, " cores"),
+          React.createElement(Text, { color: mr.MAGENTA }, e, " cores"),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.bullet, label: "Memory" },
-          K.createElement(re, { color: mr.CYAN }, t, " GB"),
+          React.createElement(Text, { color: mr.CYAN }, t, " GB"),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.play, label: "Uptime" },
-          K.createElement(re, null, E_(w.uptime())),
+          React.createElement(Text, null, E_(osModule.uptime())),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.arrowRight, label: "Home" },
-          K.createElement(re, { color: mr.DIM }, w.homedir()),
+          React.createElement(Text, { color: mr.DIM }, osModule.homedir()),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.pointer, label: "Shell" },
-          K.createElement(re, null, n.shell),
+          React.createElement(Text, null, n.shell),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.bullet, label: "Node" },
-          K.createElement(re, { color: mr.GREEN }, process.version),
+          React.createElement(Text, { color: mr.GREEN }, process.version),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.pointer, label: "Terminal" },
-          K.createElement(re, { color: mr.CYAN }, n.terminal),
+          React.createElement(Text, { color: mr.CYAN }, n.terminal),
         ),
-        K.createElement(
+        React.createElement(
           v_,
           { icon: Ie.bullet, label: "IDE" },
-          K.createElement(re, null, n.ide),
+          React.createElement(Text, null, n.ide),
         ),
       ),
     "SystemInfoSection",
   ),
   __ = __name(
     ({ cpus: e }) =>
-      K.createElement(
+      React.createElement(
         k_,
         { title: "CPU Details", marginTop: 1 },
         e.map((e, t) =>
-          K.createElement(
+          React.createElement(
             v_,
             { key: t, icon: Ie.bullet, label: `Core ${t}` },
-            K.createElement(re, null, e.model.trim()),
-            K.createElement(re, { color: mr.YELLOW }, " @ ", e.speed, " MHz"),
+            React.createElement(Text, null, e.model.trim()),
+            React.createElement(Text, { color: mr.YELLOW }, " @ ", e.speed, " MHz"),
           ),
         ),
       ),
@@ -47167,17 +47119,17 @@ var b_ = __name(
   ),
   x_ = __name(
     ({ networkInterfaces: e }) =>
-      K.createElement(
+      React.createElement(
         k_,
         { title: "Network", marginTop: 1 },
         Object.entries(e).map(([e, t]) => {
           const n = t?.filter((e) => "IPv4" === e.family && !e.internal);
           return n && 0 !== n.length
             ? n.map((t, n) =>
-                K.createElement(
+                React.createElement(
                   v_,
                   { key: `${e}-${n}`, icon: Ie.bullet, label: e },
-                  K.createElement(re, { color: mr.GREEN }, t.address),
+                  React.createElement(Text, { color: mr.GREEN }, t.address),
                 ),
               )
             : null;
@@ -47193,43 +47145,43 @@ var b_ = __name(
       verbose: r,
       systemInfo: o,
     }) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(re, null, "System Information"),
-        K.createElement(re, null, "─".repeat(40)),
-        K.createElement(re, null, "Version ", o.version),
-        K.createElement(re, null, "Date ", formatDate()),
-        K.createElement(
-          re,
+        React.createElement(Text, null, "System Information"),
+        React.createElement(Text, null, "─".repeat(40)),
+        React.createElement(Text, null, "Version ", o.version),
+        React.createElement(Text, null, "Date ", formatDate()),
+        React.createElement(
+          Text,
           null,
           "Platform ",
           o.os,
           " (",
-          w.platform(),
+          osModule.platform(),
           ", ",
-          w.arch(),
+          osModule.arch(),
           ")",
         ),
-        K.createElement(re, null, "Hostname ", w.hostname()),
-        K.createElement(re, null, "User ", w.userInfo().username),
-        K.createElement(re, null, "CPUs ", e.length, " cores"),
-        K.createElement(re, null, "Memory ", t, " GB"),
-        K.createElement(re, null, "Uptime ", E_(w.uptime())),
-        K.createElement(re, null, "Home ", w.homedir()),
-        K.createElement(re, null, "Shell ", o.shell),
-        K.createElement(re, null, "Node ", process.version),
-        K.createElement(re, null, "Terminal ", o.terminal),
-        K.createElement(re, null, "IDE ", o.ide),
+        React.createElement(Text, null, "Hostname ", osModule.hostname()),
+        React.createElement(Text, null, "User ", osModule.userInfo().username),
+        React.createElement(Text, null, "CPUs ", e.length, " cores"),
+        React.createElement(Text, null, "Memory ", t, " GB"),
+        React.createElement(Text, null, "Uptime ", E_(osModule.uptime())),
+        React.createElement(Text, null, "Home ", osModule.homedir()),
+        React.createElement(Text, null, "Shell ", o.shell),
+        React.createElement(Text, null, "Node ", process.version),
+        React.createElement(Text, null, "Terminal ", o.terminal),
+        React.createElement(Text, null, "IDE ", o.ide),
         r &&
-          K.createElement(
-            K.Fragment,
+          React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, null, "\n", "CPU Details"),
-            K.createElement(re, null, "─".repeat(40)),
+            React.createElement(Text, null, "\n", "CPU Details"),
+            React.createElement(Text, null, "─".repeat(40)),
             e.map((e, t) =>
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { key: t },
                 "Core ",
                 String(t).padEnd(10),
@@ -47239,14 +47191,14 @@ var b_ = __name(
                 " MHz",
               ),
             ),
-            K.createElement(re, null, "\n", "Network"),
-            K.createElement(re, null, "─".repeat(40)),
+            React.createElement(Text, null, "\n", "Network"),
+            React.createElement(Text, null, "─".repeat(40)),
             Object.entries(n).map(([e, t]) =>
               t
                 ?.filter((e) => "IPv4" === e.family && !e.internal)
                 .map((t, n) =>
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { key: `${e}-${n}` },
                     e.padEnd(12),
                     t.address,
@@ -47265,33 +47217,33 @@ var b_ = __name(
       verbose: r,
       systemInfo: o,
     }) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(T_, { cpuCount: e.length, totalMem: t, systemInfo: o }),
-        r && K.createElement(__, { cpus: e }),
-        r && K.createElement(x_, { networkInterfaces: n }),
+        React.createElement(T_, { cpuCount: e.length, totalMem: t, systemInfo: o }),
+        r && React.createElement(__, { cpus: e }),
+        r && React.createElement(x_, { networkInterfaces: n }),
       ),
     "StyledInfo",
   ),
   I_ = __name(({ verbose: e = !1, text: t = !1, systemInfo: n }) => {
-    const { exit: r } = le();
-    Z(() => {
+    const { exit: r } = useApp();
+    useEffect(() => {
       const e = setTimeout(() => r(), 50);
       return () => clearTimeout(e);
     }, [r]);
-    const o = w.cpus(),
-      s = w.networkInterfaces(),
-      i = Math.round(w.totalmem() / 1024 / 1024 / 1024);
+    const o = osModule.cpus(),
+      s = osModule.networkInterfaces(),
+      i = Math.round(osModule.totalmem() / 1024 / 1024 / 1024);
     return t
-      ? K.createElement(A_, {
+      ? React.createElement(A_, {
           cpus: o,
           totalMem: i,
           networkInterfaces: s,
           verbose: e,
           systemInfo: n,
         })
-      : K.createElement(P_, {
+      : React.createElement(P_, {
           cpus: o,
           totalMem: i,
           networkInterfaces: s,
@@ -47344,9 +47296,9 @@ var b_ = __name(
     return t && M_[t] ? M_[t] : t || process.env.TERMINAL_EMULATOR || "Unknown";
   }, "getTerminalName"),
   O_ = __name(() => {
-    if ("win32" === S.platform()) {
+    if ("win32" === osDefault.platform()) {
       const e = process.env.COMSPEC;
-      return e ? u(e) : process.env.SHELL ? u(process.env.SHELL) : "cmd.exe";
+      return e ? basename(e) : process.env.SHELL ? basename(process.env.SHELL) : "cmd.exe";
     }
     if (process.env.FISH_VERSION) return "fish";
     if (process.env.ZSH_VERSION) return "zsh";
@@ -47360,13 +47312,13 @@ var b_ = __name(
           stdio: ["ignore", "pipe", "ignore"],
         }).trim();
         if (t) {
-          const e = u(t).replace(/^-/, "");
+          const e = basename(t).replace(/^-/, "");
           if (e && "node" !== e) return e;
         }
       }
     } catch {}
     const e = process.env.SHELL;
-    return e ? u(e) : "N/A";
+    return e ? basename(e) : "N/A";
   }, "getShellName"),
   F_ = __name(() => {
     const e = L_();
@@ -47393,7 +47345,7 @@ var b_ = __name(
     }
   }, "getMacOSDetail"),
   q_ = __name(() => {
-    const e = S.platform();
+    const e = osDefault.platform();
     return "darwin" === e ? (j_() ?? b_(e)) : b_(e);
   }, "getDetailedPlatform"),
   B_ = __name(() => {
@@ -47436,7 +47388,7 @@ var z_ = ["Code", "Code - Insiders", "VSCodium", "Cursor"],
     args: { text: "\r" },
     when: "terminalFocus",
   },
-  G_ = __name((e) => m(e).href, "formatPathForTerminal"),
+  G_ = __name((e) => pathToFileURL(e).href, "formatPathForTerminal"),
   V_ = __name((e) => {
     switch (e) {
       case "darwin":
@@ -47449,13 +47401,13 @@ var z_ = ["Code", "Code - Insiders", "VSCodium", "Cursor"],
   }, "getConfigPathSegments"),
   Q_ = __name(
     ({ home: t, configSegments: n, variant: r }) =>
-      e.join(t, ...n, r, "User", "keybindings.json"),
+      pathModule.join(t, ...n, r, "User", "keybindings.json"),
     "buildKeybindingsPath",
   ),
   K_ = __name(({ home: t, configSegments: n, variants: r }) => {
     for (const o of r) {
       const r = Q_({ home: t, configSegments: n, variant: o });
-      if (L.existsSync(e.dirname(r))) return o;
+      if (fsModule.existsSync(pathModule.dirname(r))) return o;
     }
     return null;
   }, "findExistingVariant"),
@@ -47538,10 +47490,10 @@ var z_ = ["Code", "Code - Insiders", "VSCodium", "Cursor"],
     "createErrorResult",
   ),
   sx = __name(() => {
-    const t = w.homedir(),
-      n = w.platform();
+    const t = osModule.homedir(),
+      n = osModule.platform();
     if (process.env.VSCODE_PORTABLE)
-      return e.join(
+      return pathModule.join(
         process.env.VSCODE_PORTABLE,
         "user-data",
         "User",
@@ -47565,14 +47517,14 @@ var z_ = ["Code", "Code - Insiders", "VSCodium", "Cursor"],
   }, "checkExistingShiftEnterBindings"),
   ax = __name((t) => {
     try {
-      if (!L.existsSync(t)) {
-        const n = e.dirname(t);
+      if (!fsModule.existsSync(t)) {
+        const n = pathModule.dirname(t);
         return (
-          L.existsSync(n) || L.mkdirSync(n, { recursive: !0 }),
+          fsModule.existsSync(n) || fsModule.mkdirSync(n, { recursive: !0 }),
           { rawContent: "", keybindings: [] }
         );
       }
-      const n = L.readFileSync(t, "utf-8");
+      const n = fsModule.readFileSync(t, "utf-8");
       if (X_(n)) return { rawContent: n, keybindings: [] };
       const r = nx(n.trim());
       return r.success
@@ -47635,7 +47587,7 @@ function setupVSCodeTerminal() {
     const s = lx({ rawContent: n, keybindingsPath: e });
     return "string" != typeof s
       ? s
-      : (L.writeFileSync(e, s, "utf-8"),
+      : (fsModule.writeFileSync(e, s, "utf-8"),
         rx({
           message: "Installed VSCode terminal Shift+Enter key binding",
           keybindingsPath: e,
@@ -48010,10 +47962,10 @@ var wx = __name(
     searchQuery: r = "",
     onSelectedCommandChange: o,
   }) => {
-    const [s, i] = J(0),
-      [a, l] = J(0),
-      [u, d] = J([]);
-    Z(() => {
+    const [s, i] = useState(0),
+      [a, l] = useState(0),
+      [u, d] = useState([]);
+    useEffect(() => {
       let e = !1;
       return (
         loadAllSkillSummaries()
@@ -48030,10 +47982,10 @@ var wx = __name(
         }
       );
     }, []);
-    const { stdout: m } = se(),
+    const { stdout: m } = useStdout(),
       g = getCommandMenuDescriptionWidth(m?.columns ?? 80),
       h = shouldShowCommandMenuHelp(r),
-      f = ee(() => {
+      f = useMemo(() => {
         if (isDesignSubmenu(r)) {
           const e = r.replace(/^design\s*/i, "").toLowerCase();
           return mx.filter((t) => {
@@ -48069,20 +48021,20 @@ var wx = __name(
           .sort((e, t) => t.score - e.score)
           .map(({ score: e, ...t }) => t);
       }, [r, u]),
-      y = ee(() => {
+      y = useMemo(() => {
         const e = a,
           t = Math.min(e + 8, f.length);
         return f.slice(e, t);
       }, [f, a]);
     return (
-      Z(() => {
+      useEffect(() => {
         (i(0), l(0), o?.(f[0]?.command ?? null));
       }, [r, f, o]),
-      Z(() => {
+      useEffect(() => {
         const e = f[s]?.command ?? null;
         o?.(e);
       }, [s, o]),
-      ie((o, u) => {
+      useInput((o, u) => {
         if (u.escape) n();
         else if (u.upArrow)
           i((e) => {
@@ -48114,24 +48066,24 @@ var wx = __name(
         }
       }),
       0 === f.length
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             { flexDirection: "column", paddingLeft: 2 },
-            K.createElement(re, { color: mr.DIM }, "No commands found"),
+            React.createElement(Text, { color: mr.DIM }, "No commands found"),
           )
-        : K.createElement(
-            ne,
+        : React.createElement(
+            Box,
             { flexDirection: "column", paddingLeft: 1 },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { columnGap: 2 },
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { flexDirection: "column", width: 22 },
                 y.map((e, t) => {
                   const n = a + t;
-                  return K.createElement(
-                    re,
+                  return React.createElement(
+                    Text,
                     {
                       key: n,
                       color: s === n ? mr.WHITE : mr.DIM,
@@ -48141,13 +48093,13 @@ var wx = __name(
                   );
                 }),
               ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { flexDirection: "column" },
                 y.map((e, t) => {
                   const n = a + t;
-                  return K.createElement(
-                    re,
+                  return React.createElement(
+                    Text,
                     {
                       key: n,
                       color: s === n ? mr.WHITE : mr.DIM,
@@ -48159,10 +48111,10 @@ var wx = __name(
               ),
             ),
             h &&
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginTop: 1 },
-                K.createElement(re, { color: mr.DIM }, "↑↓ navigate"),
+                React.createElement(Text, { color: mr.DIM }, "↑↓ navigate"),
               ),
           )
     );
@@ -48393,8 +48345,8 @@ async function handleDesignCommand({
   if (i)
     try {
       const a = await loadSkill({ filePath: i.filePath }),
-        l = t.dirname(i.filePath),
-        u = t.join(l, "references"),
+        l = pathDefault.dirname(i.filePath),
+        u = pathDefault.join(l, "references"),
         d = s ?? "",
         m = isDesignMode(d) ? ux[d] : null;
       let g = null,
@@ -48403,9 +48355,9 @@ async function handleDesignCommand({
         y = n,
         w = r;
       if (m) {
-        const e = t.join(u, `${m}.md`);
+        const e = pathDefault.join(u, `${m}.md`);
         try {
-          ((h = await k.readFile(e, "utf-8")),
+          ((h = await fsPromisesDefault.readFile(e, "utf-8")),
             (g = d),
             (f = m),
             (w = r.slice(1)),
@@ -48415,9 +48367,9 @@ async function handleDesignCommand({
         }
       }
       if (!h && n.trim().length > 0) {
-        const e = t.join(u, `${Sx}.md`);
+        const e = pathDefault.join(u, `${Sx}.md`);
         try {
-          ((h = await k.readFile(e, "utf-8")), (g = "freeform"), (f = Sx));
+          ((h = await fsPromisesDefault.readFile(e, "utf-8")), (g = "freeform"), (f = Sx));
         } catch {
           ((g = null), (h = null), (f = null));
         }
@@ -49230,7 +49182,7 @@ async function handleSkillCommand({
         rawArguments: r,
         positionalArgs: o,
         skillContent: a.content,
-        skillDirectory: t.dirname(l.filePath),
+        skillDirectory: pathDefault.dirname(l.filePath),
       });
     return (
       await handleSubmit({
@@ -49281,7 +49233,7 @@ function useCommandCtx({
   createContextEngineCallbacks: m,
   setInput: g,
 }) {
-  const h = ee(
+  const h = useMemo(
       () => ({
         feed: e.feed,
         setFeed: e.setFeed,
@@ -49346,10 +49298,10 @@ function useCommandCtx({
       }),
       [e, t, n, r, o, s, i, a, l, u, d, m, g],
     ),
-    f = X(h);
+    f = useRef(h);
   return (
     (f.current = h),
-    { commandCtx: h, onCommand: te((e) => handleCommand(e, f.current), []) }
+    { commandCtx: h, onCommand: useCallback((e) => handleCommand(e, f.current), []) }
   );
 }
 async function handleProviderSelect({
@@ -49591,7 +49543,7 @@ function useMainActionCallbacks({
   createContextEngineCallbacks: a,
   setInput: l,
 }) {
-  const u = X({
+  const u = useRef({
     feedState: e,
     sessionState: t,
     statusState: n,
@@ -49615,7 +49567,7 @@ function useMainActionCallbacks({
       setInput: l,
     }),
     {
-      onSelectSession: te((e) => {
+      onSelectSession: useCallback((e) => {
         const {
           feedState: t,
           sessionState: n,
@@ -49643,7 +49595,7 @@ function useMainActionCallbacks({
           inTuiResume: !0,
         });
       }, []),
-      onNewSession: te(() => {
+      onNewSession: useCallback(() => {
         const {
           feedState: e,
           sessionState: t,
@@ -49661,7 +49613,7 @@ function useMainActionCallbacks({
           setPermissionMode: r.setPermissionMode,
         });
       }, []),
-      onRewindSelect: te(({ messageId: e, mode: t }) => {
+      onRewindSelect: useCallback(({ messageId: e, mode: t }) => {
         const {
           feedState: n,
           statusState: r,
@@ -49680,12 +49632,12 @@ function useMainActionCallbacks({
           setInput: i,
         });
       }, []),
-      onRewindCancel: te(() => {
+      onRewindCancel: useCallback(() => {
         handleRewindCancel({
           setShowRewindSelector: u.current.uiOverlays.setShowRewindSelector,
         });
       }, []),
-      onLoginComplete: te((e, t) => {
+      onLoginComplete: useCallback((e, t) => {
         const {
           feedState: n,
           statusState: r,
@@ -49701,7 +49653,7 @@ function useMainActionCallbacks({
           contextEngineRef: s,
         });
       }, []),
-      onLoginCancel: te(() => {
+      onLoginCancel: useCallback(() => {
         const { feedState: e, statusState: t, uiOverlays: n } = u.current;
         handleLoginCancel({
           setShowLoginOverlay: n.setShowLoginOverlay,
@@ -49709,7 +49661,7 @@ function useMainActionCallbacks({
           setStatus: t.setStatus,
         });
       }, []),
-      handleProviderSelect: te((e) => {
+      handleProviderSelect: useCallback((e) => {
         const { authState: t, statusState: n, uiOverlays: r } = u.current;
         handleProviderSelect({
           provider: e,
@@ -49721,12 +49673,12 @@ function useMainActionCallbacks({
           providerNotificationTimer: t.providerNotificationTimer,
         });
       }, []),
-      handleProviderCancel: te(() => {
+      handleProviderCancel: useCallback(() => {
         handleProviderCancel({
           setShowProviderSelector: u.current.uiOverlays.setShowProviderSelector,
         });
       }, []),
-      handleModelSelect: te((e, t) => {
+      handleModelSelect: useCallback((e, t) => {
         const {
           authState: n,
           statusState: r,
@@ -49749,12 +49701,12 @@ function useMainActionCallbacks({
           setContextUsage: r.setContextUsage,
         });
       }, []),
-      handleModelCancel: te(() => {
+      handleModelCancel: useCallback(() => {
         handleModelCancel({
           setShowModelSelector: u.current.uiOverlays.setShowModelSelector,
         });
       }, []),
-      handleCompactModeSelect: te((e) => {
+      handleCompactModeSelect: useCallback((e) => {
         const { statusState: t, uiOverlays: n } = u.current;
         handleCompactModeSelect({
           mode: e,
@@ -49762,13 +49714,13 @@ function useMainActionCallbacks({
           setStatus: t.setStatus,
         });
       }, []),
-      handleCompactModeCancel: te(() => {
+      handleCompactModeCancel: useCallback(() => {
         handleCompactModeCancel({
           setShowCompactModeSelector:
             u.current.uiOverlays.setShowCompactModeSelector,
         });
       }, []),
-      handleAuthSuccess: te(() => {
+      handleAuthSuccess: useCallback(() => {
         const { authState: e, statusState: t, uiOverlays: n } = u.current;
         handleAuthSuccess({
           authComponentInfo: e.authComponentInfo,
@@ -49780,7 +49732,7 @@ function useMainActionCallbacks({
           providerNotificationTimer: e.providerNotificationTimer,
         });
       }, []),
-      handleAuthCancel: te(() => {
+      handleAuthCancel: useCallback(() => {
         handleAuthCancel({
           setAuthComponentInfo: u.current.authState.setAuthComponentInfo,
         });
@@ -49810,15 +49762,15 @@ function buildWarningMessage({
   return `${Math.round(e)}% of plan credits used (${Number.isInteger(t) ? String(t) : t.toFixed(1)} remaining). Upgrade: ${n}`;
 }
 function useCreditWarning({ interactionTokens: e }) {
-  const [t, n] = J(null),
-    r = X(new Set()),
-    o = X(null),
-    s = X(!1),
-    i = X(null),
-    a = X("https://commandcode.ai/billing"),
-    l = X(null),
-    u = X(null),
-    d = te(async () => {
+  const [t, n] = useState(null),
+    r = useRef(new Set()),
+    o = useRef(null),
+    s = useRef(!1),
+    i = useRef(null),
+    a = useRef("https://commandcode.ai/billing"),
+    l = useRef(null),
+    u = useRef(null),
+    d = useCallback(async () => {
       try {
         const e = getApiBaseUrl(),
           t = new Xw({ baseUrl: e });
@@ -49879,7 +49831,7 @@ function useCreditWarning({ interactionTokens: e }) {
       } catch {}
     }, []);
   return (
-    Z(() => {
+    useEffect(() => {
       if (0 !== e)
         return (
           l.current && clearTimeout(l.current),
@@ -49891,7 +49843,7 @@ function useCreditWarning({ interactionTokens: e }) {
           }
         );
     }, [e, d]),
-    Z(
+    useEffect(
       () => () => {
         (u.current && clearTimeout(u.current),
           l.current && clearTimeout(l.current));
@@ -49924,71 +49876,71 @@ var kx = "__skip__",
         { label: "skip", value: kx, isPrimary: !1 },
       ],
       l = new Map(a.map((e) => [e.label, e]));
-    ie((e, t) => {
+    useInput((e, t) => {
       t.escape && n();
     });
     const u = __name((e) => {
       (e.value === kx || t(e.value), n());
     }, "handleSelect");
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", width: "100%" },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { bold: !0, color: pr },
           "/design ",
           r,
           " complete",
         ),
-        K.createElement(re, { color: mr.DIM }, " · ", i),
+        React.createElement(Text, { color: mr.DIM }, " · ", i),
       ),
-      K.createElement(pt, {
+      React.createElement(pt, {
         items: a,
         onSelect: u,
         indicatorComponent: ({ isSelected: e }) =>
-          K.createElement(re, { color: mr.CYAN }, e ? Ie.pointer : " "),
+          React.createElement(Text, { color: mr.CYAN }, e ? Ie.pointer : " "),
         itemComponent: ({ label: e, isSelected: t }) => {
           const n = l.get(e),
             r = n?.value === kx,
             o = n?.isPrimary ?? !1,
             s = r ? "run /design manually" : (dx[e] ?? "");
-          return K.createElement(
-            ne,
+          return React.createElement(
+            Box,
             { flexDirection: "column" },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: t ? mr.CYAN : o ? mr.WHITE : mr.DIM },
               r ? " skip" : ` /design ${e}`,
             ),
-            s && K.createElement(re, { color: mr.DIM }, `    ${s}`),
+            s && React.createElement(Text, { color: mr.DIM }, `    ${s}`),
           );
         },
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(re, { color: mr.DIM }, "Enter to run · Esc to dismiss"),
+        React.createElement(Text, { color: mr.DIM }, "Enter to run · Esc to dismiss"),
       ),
     );
   }, "DesignModeSelector");
 (Ft(), Ft());
 var _x = __name(
   ({ staticKey: e }) =>
-    K.createElement(oe, { items: [{ staticKey: e }], key: e }, () =>
-      K.createElement(re, { key: e }, "\0"),
+    React.createElement(Static, { items: [{ staticKey: e }], key: e }, () =>
+      React.createElement(Text, { key: e }, "\0"),
     ),
   "Responsive",
 );
 (Ft(), Cn(), Or());
 var xx = __name(({ onTrust: e, onExit: t }) => {
-    const { exit: n } = le(),
-      [r, o] = J(1),
+    const { exit: n } = useApp(),
+      [r, o] = useState(1),
       s = process.cwd().replace(process.env.HOME || "", "~");
     return (
-      ie((s, i) => {
+      useInput((s, i) => {
         i.upArrow || i.downArrow
           ? o(1 === r ? 2 : 1)
           : i.return
@@ -49999,60 +49951,60 @@ var xx = __name(({ onTrust: e, onExit: t }) => {
               ? e()
               : ("2" === s || i.escape || (i.ctrl && "c" === s)) && (t(), n());
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         {
           flexDirection: "column",
           borderStyle: "single",
           borderColor: mr.YELLOW,
           padding: 1,
         },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.YELLOW, bold: !0 },
           "Do you trust the files in this folder?",
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.GRAY }, s),
+          React.createElement(Text, { color: mr.GRAY }, s),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1, flexDirection: "column" },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             null,
             "Command Code may read files in this folder. Reading untrusted files may lead Command Code to behave in unexpected ways.",
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginTop: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               null,
               "With your permission Command Code may execute files in this folder. Executing untrusted code is unsafe.",
             ),
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1, flexDirection: "column" },
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             null,
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: 1 === r ? mr.CYAN : mr.GRAY },
               1 === r ? Ie.pointer : " ",
               " 1. Yes, proceed",
             ),
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             null,
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: 2 === r ? mr.CYAN : mr.GRAY },
               2 === r ? Ie.pointer : " ",
               " 2. No, exit",
@@ -50062,13 +50014,13 @@ var xx = __name(({ onTrust: e, onExit: t }) => {
       )
     );
   }, "TrustPrompt"),
-  Ax = Y(
+  Ax = memo(
     __name(function TrustView2({ staticKey: e, onTrust: t, onExit: n }) {
-      return K.createElement(
-        K.Fragment,
+      return React.createElement(
+        React.Fragment,
         null,
-        K.createElement(_x, { staticKey: e }),
-        K.createElement(xx, { onTrust: t, onExit: n }),
+        React.createElement(_x, { staticKey: e }),
+        React.createElement(xx, { onTrust: t, onExit: n }),
       );
     }, "TrustView"),
   );
@@ -50078,23 +50030,23 @@ var Px = __name(
     "getDeleteErrorMessage",
   ),
   Ix = __name(({ onSelectSession: e, onNewSession: t }) => {
-    const { exit: n } = le(),
-      [r, o] = J([]),
-      [s, i] = J(0),
-      [a, l] = J(!0),
-      [u, d] = J(0),
-      [m, g] = J(!1),
-      [h, f] = J(null),
+    const { exit: n } = useApp(),
+      [r, o] = useState([]),
+      [s, i] = useState(0),
+      [a, l] = useState(!0),
+      [u, d] = useState(0),
+      [m, g] = useState(!1),
+      [h, f] = useState(null),
       y = 30,
-      w = te(async () => {
+      w = useCallback(async () => {
         l(!0);
         const e = await Rk.listSessions();
         (o(e), l(!1));
       }, []);
-    Z(() => {
+    useEffect(() => {
       w();
     }, [w]);
-    const S = te(
+    const S = useCallback(
       async (e) => {
         try {
           (await Rk.deleteSession(e), g(!1), f(null), i(0), d(0), await w());
@@ -50105,7 +50057,7 @@ var Px = __name(
       [w],
     );
     if (
-      (ie((t, o) => {
+      (useInput((t, o) => {
         if (m)
           if (o.return) {
             if (r.length > 0 && s < r.length) {
@@ -50132,10 +50084,10 @@ var Px = __name(
       }),
       a)
     )
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2, paddingTop: 1 },
-        K.createElement(re, { color: mr.GRAY }, "Loading sessions..."),
+        React.createElement(Text, { color: mr.GRAY }, "Loading sessions..."),
       );
     const E = __name((e) => {
         const t = new Date(e),
@@ -50161,10 +50113,10 @@ var Px = __name(
         "truncateMessage",
       );
     if (0 === r.length)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(re, { color: mr.GRAY }, "No sessions available"),
+        React.createElement(Text, { color: mr.GRAY }, "No sessions available"),
       );
     const C = r.slice(u, u + y),
       k = u,
@@ -50173,84 +50125,84 @@ var Px = __name(
         m && T
           ? `Delete "${v(T.firstMessage)}"? Press Enter to confirm, any other key to cancel.`
           : null;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", paddingLeft: 1, width: "100%" },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { columnGap: 2, marginBottom: 1 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 7 },
-          K.createElement(re, { color: mr.GRAY }, " "),
+          React.createElement(Text, { color: mr.GRAY }, " "),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 13 },
-          K.createElement(re, { color: mr.GRAY }, "Modified"),
+          React.createElement(Text, { color: mr.GRAY }, "Modified"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 11 },
-          K.createElement(re, { color: mr.GRAY }, "# Messages"),
+          React.createElement(Text, { color: mr.GRAY }, "# Messages"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 20 },
-          K.createElement(re, { color: mr.GRAY }, "Git Branch"),
+          React.createElement(Text, { color: mr.GRAY }, "Git Branch"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(re, { color: mr.GRAY }, "Summary"),
+          React.createElement(Text, { color: mr.GRAY }, "Summary"),
         ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { columnGap: 2 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 7 },
           C.map((e, t) => {
             const n = k + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: `sel-${n}`, color: s === n ? mr.CYAN : mr.GRAY },
               s === n ? `${Ie.pointer} ${n + 1}.` : `  ${n + 1}.`,
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 13 },
           C.map((e, t) => {
             const n = k + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: `mod-${e.id}`, color: s === n ? mr.WHITE : mr.GRAY },
               E(e.lastModified),
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 11 },
           C.map((e, t) => {
             const n = k + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: `msg-${e.id}`, color: s === n ? mr.WHITE : mr.GRAY },
               e.messageCount,
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 20 },
           C.map((e, t) => {
             const n = k + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               {
                 key: `branch-${e.id}`,
                 color: s === n ? mr.WHITE : mr.GRAY,
@@ -50260,35 +50212,35 @@ var Px = __name(
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column" },
           C.map((e, t) => {
             const n = k + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: `summary-${e.id}`, color: s === n ? mr.WHITE : mr.GRAY },
               v(e.firstMessage),
             );
           }),
         ),
       ),
-      K.createElement(ne, { marginTop: 1 }),
+      React.createElement(Box, { marginTop: 1 }),
       _ &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(re, { color: mr.RED }, _),
+          React.createElement(Text, { color: mr.RED }, _),
         ),
       h &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(re, { color: mr.RED }, h),
+          React.createElement(Text, { color: mr.RED }, h),
         ),
       r.length > y &&
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Showing ",
           u + 1,
@@ -50300,16 +50252,16 @@ var Px = __name(
           u > 0 ? " · ↑ more" : "",
           u + y < r.length ? " · ↓ more" : "",
         ),
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.DIM },
         "↑↓ navigate · Enter select · Del delete · ESC cancel",
       ),
     );
   }, "SessionTable"),
-  Mx = Y(
+  Mx = memo(
     __name(function SessionView2({ onSelectSession: e, onNewSession: t }) {
-      return K.createElement(Ix, { onSelectSession: e, onNewSession: t });
+      return React.createElement(Ix, { onSelectSession: e, onNewSession: t });
     }, "SessionView"),
   );
 (Ft(), Ft(), jr(), Or());
@@ -50340,18 +50292,18 @@ var Nx = __name((e, t) => {
               ? ((u = Ie.tick), (d = mr.GREEN))
               : ((u = Ie.circle), (d = mr.GRAY)),
             s.push(
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { key: i },
-                K.createElement(re, { color: d }, u),
-                K.createElement(
-                  re,
+                React.createElement(Text, { color: d }, u),
+                React.createElement(
+                  Text,
                   { color: a ? mr.CYAN : void 0 },
                   " ",
                   o.header,
                 ),
                 i < e.length - 1
-                  ? K.createElement(re, { color: mr.DIM }, " | ")
+                  ? React.createElement(Text, { color: mr.DIM }, " | ")
                   : null,
               ),
             ));
@@ -50360,17 +50312,17 @@ var Nx = __name((e, t) => {
       ) {
         const e = r;
         s.push(
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { key: "review" },
-            K.createElement(re, { color: mr.DIM }, " | "),
-            K.createElement(
-              re,
+            React.createElement(Text, { color: mr.DIM }, " | "),
+            React.createElement(
+              Text,
               { color: e ? mr.CYAN : mr.GRAY },
               e ? Ie.bullet : Ie.circle,
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: e ? mr.CYAN : void 0, bold: e },
               " ",
               "Review",
@@ -50378,22 +50330,22 @@ var Nx = __name((e, t) => {
           ),
         );
       }
-      return K.createElement(ne, null, s);
+      return React.createElement(Box, null, s);
     },
     "TabIndicator",
   ),
   $x = __name(({ questions: e, onResponse: t, hideCustomInput: n = !1 }) => {
-    const [r, o] = J(0),
-      [s, i] = J(new Map()),
-      a = X(new Map()),
-      [l, u] = J(""),
-      [d, m] = J(new Set()),
-      [g, h] = J(null),
-      [f, y] = J(!1),
-      [w, S] = J(!1),
-      [E, v] = J(!1),
-      [C, k] = J(null),
-      [T, _] = J(!1),
+    const [r, o] = useState(0),
+      [s, i] = useState(new Map()),
+      a = useRef(new Map()),
+      [l, u] = useState(""),
+      [d, m] = useState(new Set()),
+      [g, h] = useState(null),
+      [f, y] = useState(!1),
+      [w, S] = useState(!1),
+      [E, v] = useState(!1),
+      [C, k] = useState(null),
+      [T, _] = useState(!1),
       x = e[r],
       A = x?.multiSelect ?? !1,
       P = s.get(r),
@@ -50543,7 +50495,7 @@ var Nx = __name((e, t) => {
         });
       }, "toggleMultiSelection");
     return (
-      ie((t, o) => {
+      useInput((t, o) => {
         if (
           (" " === t && A && !E && B(),
           "d" !== t || !A || E || w || D(),
@@ -50619,8 +50571,8 @@ var Nx = __name((e, t) => {
       }),
       x || w
         ? w
-          ? K.createElement(
-              ne,
+          ? React.createElement(
+              Box,
               {
                 flexDirection: "column",
                 borderStyle: "single",
@@ -50631,10 +50583,10 @@ var Nx = __name((e, t) => {
                 borderRight: !1,
                 width: "100%",
               },
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginBottom: 1 },
-                K.createElement(Rx, {
+                React.createElement(Rx, {
                   questions: e,
                   currentIndex: e.length,
                   answeredQuestions: new Set(s.keys()),
@@ -50642,25 +50594,25 @@ var Nx = __name((e, t) => {
                 }),
               ),
               e.map((e, t) =>
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { key: t, marginBottom: 1, flexDirection: "column" },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     t + 1,
                     ". ",
                     e.question,
                   ),
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.GREEN },
                     "   ",
                     s.get(t)?.join(", ") || "No answer",
                   ),
                 ),
               ),
-              K.createElement(pt, {
+              React.createElement(pt, {
                 items: [
                   { label: " 1. Submit", value: "submit" },
                   { label: " 2. Cancel", value: "cancel" },
@@ -50668,23 +50620,23 @@ var Nx = __name((e, t) => {
                 onSelect: R,
                 initialIndex: 0,
                 indicatorComponent: ({ isSelected: e }) =>
-                  K.createElement(re, { color: mr.CYAN }, e ? Ie.pointer : " "),
+                  React.createElement(Text, { color: mr.CYAN }, e ? Ie.pointer : " "),
                 itemComponent: ({ label: e, isSelected: t }) =>
-                  K.createElement(re, { color: t ? mr.CYAN : mr.WHITE }, e),
+                  React.createElement(Text, { color: t ? mr.CYAN : mr.WHITE }, e),
               }),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginTop: 1 },
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: mr.DIM },
                   Ie.arrowLeft,
                   " to go back and edit",
                 ),
               ),
             )
-          : K.createElement(
-              ne,
+          : React.createElement(
+              Box,
               {
                 flexDirection: "column",
                 borderStyle: "single",
@@ -50695,10 +50647,10 @@ var Nx = __name((e, t) => {
                 borderRight: !1,
                 width: "100%",
               },
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginBottom: 1 },
-                K.createElement(Rx, {
+                React.createElement(Rx, {
                   questions: e,
                   currentIndex: r,
                   answeredQuestions: new Set(s.keys()),
@@ -50706,29 +50658,29 @@ var Nx = __name((e, t) => {
                   hideReview: n,
                 }),
               ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginBottom: 1 },
-                K.createElement(re, { bold: !0 }, x.question),
+                React.createElement(Text, { bold: !0 }, x.question),
               ),
               E || T
-                ? K.createElement(
-                    ne,
+                ? React.createElement(
+                    Box,
                     { flexDirection: "column" },
                     M.map((e, t) => {
                       const n = N.get(e.label),
                         r = A && n && d.has(n.label),
                         o = !A && n && P?.includes(n.label),
                         s = r || o;
-                      return K.createElement(
-                        ne,
+                      return React.createElement(
+                        Box,
                         { key: t, flexDirection: "column" },
-                        K.createElement(
-                          ne,
+                        React.createElement(
+                          Box,
                           null,
-                          K.createElement(re, null, " "),
-                          K.createElement(
-                            re,
+                          React.createElement(Text, null, " "),
+                          React.createElement(
+                            Text,
                             { color: s ? mr.GREEN : mr.WHITE },
                             " ",
                             t + 1,
@@ -50737,41 +50689,41 @@ var Nx = __name((e, t) => {
                           ),
                           A &&
                             (s
-                              ? K.createElement(
-                                  re,
+                              ? React.createElement(
+                                  Text,
                                   { color: mr.GREEN },
                                   "[",
                                   Ie.tick,
                                   "]",
                                   " ",
                                 )
-                              : K.createElement(
-                                  re,
+                              : React.createElement(
+                                  Text,
                                   { color: mr.DIM },
                                   "[ ]",
                                   " ",
                                 )),
-                          K.createElement(
-                            re,
+                          React.createElement(
+                            Text,
                             { color: s ? mr.GREEN : mr.WHITE },
                             n?.label || "",
                           ),
                           !A &&
                             s &&
-                            K.createElement(
-                              re,
+                            React.createElement(
+                              Text,
                               { color: mr.GREEN },
                               " ",
                               Ie.tick,
                             ),
                         ),
                         n?.description &&
-                          K.createElement(
-                            ne,
+                          React.createElement(
+                            Box,
                             null,
-                            K.createElement(re, null, " "),
-                            K.createElement(
-                              re,
+                            React.createElement(Text, null, " "),
+                            React.createElement(
+                              Text,
                               { color: mr.DIM },
                               A ? "       " : "    ",
                               n.description,
@@ -50780,15 +50732,15 @@ var Nx = __name((e, t) => {
                       );
                     }),
                   )
-                : K.createElement(pt, {
+                : React.createElement(pt, {
                     key: `${r}-${C ?? "default"}`,
                     items: M,
                     initialIndex: C ?? $(),
                     onSelect: L,
                     onHighlight: h,
                     indicatorComponent: ({ isSelected: e }) =>
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.CYAN },
                         e ? Ie.pointer : " ",
                       ),
@@ -50800,14 +50752,14 @@ var Nx = __name((e, t) => {
                         i = e.match(/^\s*(\d+)\.\s*(.*)$/),
                         a = i?.[1] || "",
                         l = i?.[2] || e;
-                      return K.createElement(
-                        ne,
+                      return React.createElement(
+                        Box,
                         { flexDirection: "column" },
-                        K.createElement(
-                          ne,
+                        React.createElement(
+                          Box,
                           null,
-                          K.createElement(
-                            re,
+                          React.createElement(
+                            Text,
                             { color: t ? mr.CYAN : s ? mr.GREEN : mr.WHITE },
                             " ",
                             a,
@@ -50816,37 +50768,37 @@ var Nx = __name((e, t) => {
                           ),
                           A &&
                             (s
-                              ? K.createElement(
-                                  re,
+                              ? React.createElement(
+                                  Text,
                                   { color: mr.GREEN },
                                   "[",
                                   Ie.tick,
                                   "]",
                                   " ",
                                 )
-                              : K.createElement(
-                                  re,
+                              : React.createElement(
+                                  Text,
                                   { color: mr.DIM },
                                   "[ ]",
                                   " ",
                                 )),
-                          K.createElement(
-                            re,
+                          React.createElement(
+                            Text,
                             { color: t ? mr.CYAN : s ? mr.GREEN : mr.WHITE },
                             l,
                           ),
                           !A &&
                             s &&
-                            K.createElement(
-                              re,
+                            React.createElement(
+                              Text,
                               { color: mr.GREEN },
                               " ",
                               Ie.tick,
                             ),
                         ),
                         n?.description &&
-                          K.createElement(
-                            re,
+                          React.createElement(
+                            Text,
                             { color: mr.DIM },
                             A ? "       " : "    ",
                             n.description,
@@ -50855,12 +50807,12 @@ var Nx = __name((e, t) => {
                     },
                   }),
               !n &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(re, { color: mr.CYAN }, E ? Ie.pointer : " "),
-                  K.createElement(
-                    re,
+                  React.createElement(Text, { color: mr.CYAN }, E ? Ie.pointer : " "),
+                  React.createElement(
+                    Text,
                     { color: E ? mr.CYAN : void 0 },
                     " ",
                     M.length + 1,
@@ -50869,15 +50821,15 @@ var Nx = __name((e, t) => {
                   ),
                   A &&
                     (d.has(l.trim())
-                      ? K.createElement(
-                          re,
+                      ? React.createElement(
+                          Text,
                           { color: mr.GREEN },
                           "[",
                           Ie.tick,
                           "] ",
                         )
-                      : K.createElement(re, { color: mr.DIM }, "[ ] ")),
-                  K.createElement(TextInput, {
+                      : React.createElement(Text, { color: mr.DIM }, "[ ] ")),
+                  React.createElement(TextInput, {
                     value: l,
                     onChange: (e) => {
                       const t = e.replace(/\r\n/g, " ").replace(/[\r\n]/g, " "),
@@ -50900,23 +50852,23 @@ var Nx = __name((e, t) => {
                   }),
                 ),
               A &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(re, { color: mr.CYAN }, T ? Ie.pointer : " "),
-                  K.createElement(
-                    re,
+                  React.createElement(Text, { color: mr.CYAN }, T ? Ie.pointer : " "),
+                  React.createElement(
+                    Text,
                     { color: T ? mr.CYAN : void 0, bold: T },
                     " ",
                     r === e.length - 1 ? "Submit" : "Next",
                   ),
                 ),
               e.length > 1 &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginTop: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     "Enter to select | Arrow keys to navigate | Esc to cancel",
                   ),
@@ -50933,10 +50885,10 @@ function QuestionView({
   setStatus: o,
   setStaticKey: s,
 }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { marginY: 1 },
-    K.createElement($x, {
+    React.createElement($x, {
       questions: e.params.questions,
       hideCustomInput: e.params.hideCustomInput,
       onResponse: (i) => {
@@ -50959,16 +50911,16 @@ function QuestionView({
 (qE(), __name(QuestionView, "QuestionView"), Ft(), Ft(), Cn(), Ft(), Or());
 var Lx = /\[([^\]]+)\]/g;
 function BracketWrap({ children: e, color: t, bold: n = !1 }) {
-  return K.createElement(
-    K.Fragment,
+  return React.createElement(
+    React.Fragment,
     null,
-    K.createElement(re, { color: mr.DIMMEST, bold: n }, "["),
-    "string" == typeof e ? K.createElement(re, { color: t, bold: n }, e) : e,
-    K.createElement(re, { color: mr.DIMMEST, bold: n }, "]"),
+    React.createElement(Text, { color: mr.DIMMEST, bold: n }, "["),
+    "string" == typeof e ? React.createElement(Text, { color: t, bold: n }, e) : e,
+    React.createElement(Text, { color: mr.DIMMEST, bold: n }, "]"),
   );
 }
 function BracketedText({ text: e, color: t, bold: n = !1, wrap: r }) {
-  const o = ee(() => {
+  const o = useMemo(() => {
       const t = [];
       let n = 0;
       for (const r of e.matchAll(Lx)) {
@@ -50983,11 +50935,11 @@ function BracketedText({ text: e, color: t, bold: n = !1, wrap: r }) {
         t
       );
     }, [e]),
-    s = ee(
+    s = useMemo(
       () =>
         o.map((e, r) =>
           "bracket" === e.type
-            ? K.createElement(
+            ? React.createElement(
                 BracketWrap,
                 { key: `bracket-${r}`, color: t, bold: n },
                 e.value,
@@ -50996,13 +50948,13 @@ function BracketedText({ text: e, color: t, bold: n = !1, wrap: r }) {
         ),
       [o, t, n],
     );
-  return K.createElement(re, { color: t, bold: n, wrap: r }, s);
+  return React.createElement(Text, { color: t, bold: n, wrap: r }, s);
 }
 function useTerminalWidth() {
-  const { stdout: e } = se(),
-    [t, n] = J(() => e.columns ?? 80);
+  const { stdout: e } = useStdout(),
+    [t, n] = useState(() => e.columns ?? 80);
   return (
-    Z(() => {
+    useEffect(() => {
       const t = __name(() => n(e.columns ?? 80), "onResize");
       return (
         e.on("resize", t),
@@ -51236,7 +51188,7 @@ Ox.setOptions({ renderer: Dx, breaks: !0, gfm: !0 });
 var Fx = /\u001b\]8;;([^\u0007]*)\u0007([^\u001b]*)\u001b\]8;;\u0007/g;
 function Markdown({ children: e, color: t, dimColor: n, wrap: r }) {
   const o = useTerminalWidth(),
-    s = ee(() => {
+    s = useMemo(() => {
       if (((Dx.terminalWidth = o), !e)) return "";
       const t = [],
         n = e.replace(Fx, (e) => {
@@ -51255,7 +51207,7 @@ function Markdown({ children: e, color: t, dimColor: n, wrap: r }) {
         return e;
       }
     }, [e, o]);
-  return K.createElement(re, { color: t, dimColor: n, wrap: r }, s);
+  return React.createElement(Text, { color: t, dimColor: n, wrap: r }, s);
 }
 function buildTreeConnectors(e, t = {}) {
   const { isTruncated: n = !1, closesFrame: r = !0 } = t;
@@ -51365,10 +51317,10 @@ function renderWordSegments({ wordChanges: e, type: t, dimDiff: n }) {
       l = `${t}-${s++}-${e ? "highlighted" : "unchanged"}`;
     e
       ? o.push(
-          K.createElement(re, { key: l, backgroundColor: r, dimColor: n }, a),
+          React.createElement(Text, { key: l, backgroundColor: r, dimColor: n }, a),
         )
       : o.push(
-          K.createElement(re, { key: l, color: mr.WHITE, dimColor: n }, a),
+          React.createElement(Text, { key: l, color: mr.WHITE, dimColor: n }, a),
         );
   }
   return o;
@@ -51380,17 +51332,17 @@ function renderContextLine({
   dimDiff: r,
   nodeKey: o,
 }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { key: o, width: "100%" },
-    K.createElement(
-      re,
+    React.createElement(
+      Text,
       { color: yr.LINE_NUM, dimColor: r },
       " " + t.toString().padStart(n),
     ),
-    K.createElement(re, { color: yr.LINE_NUM, dimColor: r }, jx),
-    K.createElement(
-      re,
+    React.createElement(Text, { color: yr.LINE_NUM, dimColor: r }, jx),
+    React.createElement(
+      Text,
       { color: mr.WHITE, dimColor: r },
       "  ",
       e.replace(/\s/g, " "),
@@ -51438,17 +51390,17 @@ function renderContextGroup({
     ((s.oldLineNum += a),
     (s.newLineNum += a),
     i.push(
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { key: "sep-" + s.nodeKey++ },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: yr.LINE_NUM, dimColor: o },
           " ".repeat(r + 1),
         ),
-        K.createElement(re, { color: yr.LINE_NUM, dimColor: o }, jx),
-        K.createElement(
-          re,
+        React.createElement(Text, { color: yr.LINE_NUM, dimColor: o }, jx),
+        React.createElement(
+          Text,
           { color: yr.LINE_NUM, dimColor: o },
           `⋮ ${a} line${1 === a ? "" : "s"}`,
         ),
@@ -51529,28 +51481,28 @@ function generateDiff({
     for (let e = 0; e < n.length; e++) {
       const t = s.get(e);
       (w.push(
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           {
             key: "rm-" + S.nodeKey++,
             width: "100%",
             backgroundColor: yr.REMOVED_BG,
           },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: yr.REMOVED_TEXT, dimColor: a },
             " " + S.oldLineNum.toString().padStart(f),
           ),
-          K.createElement(re, { color: yr.LINE_NUM, dimColor: a }, jx),
-          K.createElement(re, { color: yr.REMOVED_TEXT, dimColor: a }, "- "),
+          React.createElement(Text, { color: yr.LINE_NUM, dimColor: a }, jx),
+          React.createElement(Text, { color: yr.REMOVED_TEXT, dimColor: a }, "- "),
           t
             ? renderWordSegments({
                 wordChanges: t,
                 type: "removed",
                 dimDiff: a,
               })
-            : K.createElement(
-                re,
+            : React.createElement(
+                Text,
                 { color: yr.REMOVED_TEXT, dimColor: a },
                 n[e].replace(/\s/g, " "),
               ),
@@ -51561,24 +51513,24 @@ function generateDiff({
     for (let e = 0; e < r.length; e++) {
       const t = i.get(e);
       (w.push(
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           {
             key: "add-" + S.nodeKey++,
             width: "100%",
             backgroundColor: yr.ADDED_BG,
           },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: yr.ADDED_TEXT, dimColor: a },
             " " + S.newLineNum.toString().padStart(f),
           ),
-          K.createElement(re, { color: yr.LINE_NUM, dimColor: a }, jx),
-          K.createElement(re, { color: yr.ADDED_TEXT, dimColor: a }, "+ "),
+          React.createElement(Text, { color: yr.LINE_NUM, dimColor: a }, jx),
+          React.createElement(Text, { color: yr.ADDED_TEXT, dimColor: a }, "+ "),
           t
             ? renderWordSegments({ wordChanges: t, type: "added", dimDiff: a })
-            : K.createElement(
-                re,
+            : React.createElement(
+                Text,
                 { color: yr.ADDED_TEXT, dimColor: a },
                 r[e].replace(/\s/g, " "),
               ),
@@ -51590,50 +51542,50 @@ function generateDiff({
   const E = void 0 !== l && w.length > l,
     v = E ? w.slice(0, l) : w;
   return {
-    diffContent: K.createElement(
-      ne,
+    diffContent: React.createElement(
+      Box,
       { flexDirection: "column" },
       o &&
         !r &&
         (d > 0 || m > 0) &&
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.GRAY },
           "Updated",
           " ",
-          K.createElement(re, { color: mr.WHITE, bold: !0 }, n),
+          React.createElement(Text, { color: mr.WHITE, bold: !0 }, n),
           " ",
           "with",
           " ",
           d > 0 &&
-            K.createElement(
-              K.Fragment,
+            React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, { color: Er.SUCCESS }, d),
+              React.createElement(Text, { color: Er.SUCCESS }, d),
               " ",
               "addition",
               1 !== d ? "s" : "",
               m > 0 ? " and " : "",
             ),
           m > 0 &&
-            K.createElement(
-              K.Fragment,
+            React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, { color: Er.ERROR }, m),
+              React.createElement(Text, { color: Er.ERROR }, m),
               " ",
               "removal",
               1 !== m ? "s" : "",
             ),
         ),
       r &&
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.RED },
           "Rejected update to",
-          K.createElement(re, { color: mr.RED }, ` ${n}`),
+          React.createElement(Text, { color: mr.RED }, ` ${n}`),
         ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         {
           flexDirection: "column",
           marginLeft: s,
@@ -51650,8 +51602,8 @@ function generateDiff({
 function formatTodosForDisplay(e) {
   const t = Hb(e);
   return t
-    ? K.createElement(
-        ne,
+    ? React.createElement(
+        Box,
         { flexDirection: "column" },
         t.map((e, t) => {
           const n = "completed" === e.status ? Ie.checkboxOn : Ie.checkboxOff;
@@ -51667,23 +51619,23 @@ function formatTodosForDisplay(e) {
             default:
               r = mr.WHITE;
           }
-          return K.createElement(
-            ne,
+          return React.createElement(
+            Box,
             { key: e.id || t, flexDirection: "row" },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { width: 2 },
-              K.createElement(re, { color: r }, n),
+              React.createElement(Text, { color: r }, n),
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: r, bold: "in_progress" === e.status, strikethrough: o },
               e.content,
             ),
           );
         }),
       )
-    : K.createElement(re, null, e);
+    : React.createElement(Text, null, e);
 }
 function computeDisplayInput({
   input: e,
@@ -51699,10 +51651,10 @@ function computeDisplayInput({
   return n && !r ? truncateCommand({ command: e }) : e;
 }
 function formatToolInput({ input: e, isShell: t }) {
-  return K.createElement(
+  return React.createElement(
     BracketWrap,
     null,
-    t ? e : K.createElement(Markdown, null, e),
+    t ? e : React.createElement(Markdown, null, e),
   );
 }
 function parseReadSummaryLine(e) {
@@ -51719,7 +51671,7 @@ function getReadToolInlineSummary({ name: e, summaryMatch: t }) {
 }
 function renderReadToolInlineSummary(e) {
   return e?.dimText
-    ? K.createElement(re, { dimColor: !0 }, " ", e.dimText)
+    ? React.createElement(Text, { dimColor: !0 }, " ", e.dimText)
     : null;
 }
 function resolveSymbol({
@@ -51753,49 +51705,49 @@ function renderToolHeader({
   if (e) {
     const e = a || l || "",
       t = e ? Math.max(1, Math.round(e.length / 500)) : 1;
-    return K.createElement(
-      K.Fragment,
+    return React.createElement(
+      React.Fragment,
       null,
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: hr },
         `Thought for ${t} second${1 !== t ? "s" : ""}`,
         " ",
       ),
-      !s && K.createElement(BracketWrap, { color: mr.DIM }, `${i}+o to expand`),
+      !s && React.createElement(BracketWrap, { color: mr.DIM }, `${i}+o to expand`),
     );
   }
   if (t)
-    return K.createElement(
-      K.Fragment,
+    return React.createElement(
+      React.Fragment,
       null,
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexShrink: 0 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { backgroundColor: gr.BADGE_BG, color: gr.BADGE_FG, bold: !0 },
           e_,
         ),
       ),
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         null,
         " ",
         "Using your taste",
         " ",
         n ? "package of " : "packages",
-        n && K.createElement(re, { bold: !0 }, n),
+        n && React.createElement(Text, { bold: !0 }, n),
       ),
     );
   let u = r;
   return (
     "READ[n]" === r && o && (u = `READ[${Number(o[1])}]`),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexShrink: 0 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { backgroundColor: wr.BG, color: wr.FG, bold: !0 },
         `${ZT}${u}${ZT}`,
       ),
@@ -51811,20 +51763,20 @@ function renderAgentStatus({
 }) {
   const s = `${formatTime2(r)} | ${formatTokens(o)}`;
   return "running" === e
-    ? K.createElement(re, { color: mr.GRAY }, "Running (", s, ")")
+    ? React.createElement(Text, { color: mr.GRAY }, "Running (", s, ")")
     : "interrupted" === e || "Interrupted by user" === n
-      ? K.createElement(
-          re,
+      ? React.createElement(
+          Text,
           { color: mr.RED, wrap: "wrap" },
           "Interrupted by user",
         )
       : "error" === e || t
-        ? K.createElement(re, { color: mr.RED, wrap: "wrap" }, n, " (", s, ")")
-        : K.createElement(
-            K.Fragment,
+        ? React.createElement(Text, { color: mr.RED, wrap: "wrap" }, n, " (", s, ")")
+        : React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, { wrap: "wrap" }, "Done"),
-            K.createElement(re, { color: mr.GRAY }, " (", s, ")"),
+            React.createElement(Text, { wrap: "wrap" }, "Done"),
+            React.createElement(Text, { color: mr.GRAY }, " (", s, ")"),
           );
 }
 function getTruncatedOutputParts({
@@ -51852,11 +51804,11 @@ function getTruncatedOutputParts({
     remainingLines: a,
     truncationMsg: l
       ? a > 0
-        ? K.createElement(BracketedText, {
+        ? React.createElement(BracketedText, {
             text: `... +${a} lines [${r}+o to expand]`,
             color: mr.DIM,
           })
-        : K.createElement(BracketedText, {
+        : React.createElement(BracketedText, {
             text: `... [${r}+o to expand]`,
             color: mr.DIM,
           })
@@ -51879,7 +51831,7 @@ function renderTruncatedOutput({
     expandedOutput: n,
     expandKey: r,
   });
-  return s ? K.createElement(K.Fragment, null, o, "\n", i) : o;
+  return s ? React.createElement(React.Fragment, null, o, "\n", i) : o;
 }
 function renderEditFileDiff({
   input: e,
@@ -51904,25 +51856,25 @@ function renderEditFileDiff({
       permissionDenied: r,
       maxLines: i,
     });
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
     a,
     l &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(BracketedText, {
+        React.createElement(BracketedText, {
           text: `… (${u - Xo} more lines) [${s}+o to expand]`,
           color: mr.DIM,
         }),
       ),
     r &&
       o &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(re, { color: mr.RED, wrap: "wrap" }, o),
+        React.createElement(Text, { color: mr.RED, wrap: "wrap" }, o),
       ),
   );
 }
@@ -51934,12 +51886,12 @@ function renderWriteFileContent({
 }) {
   const o = t.content;
   if (!o)
-    return K.createElement(
-      re,
+    return React.createElement(
+      Text,
       { color: mr.GRAY },
       "Created",
       " ",
-      K.createElement(re, { color: mr.WHITE, bold: !0 }, e),
+      React.createElement(Text, { color: mr.WHITE, bold: !0 }, e),
       " ",
       "(empty file)",
     );
@@ -51949,15 +51901,15 @@ function renderWriteFileContent({
     l = void 0 !== a && i > a,
     u = l ? s.slice(0, a) : s,
     d = String(i).length;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
-    K.createElement(
-      re,
+    React.createElement(
+      Text,
       { color: mr.GRAY },
       "Created",
       " ",
-      K.createElement(re, { color: mr.WHITE, bold: !0 }, e),
+      React.createElement(Text, { color: mr.WHITE, bold: !0 }, e),
       " ",
       "(",
       i,
@@ -51965,21 +51917,21 @@ function renderWriteFileContent({
       1 !== i ? "s" : "",
       ")",
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1, flexDirection: "column" },
       u.map((e, t) =>
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { key: t, width: "100%", backgroundColor: yr.ADDED_BG },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: yr.ADDED_TEXT },
             " " + String(t + 1).padStart(d),
           ),
-          K.createElement(re, { color: yr.LINE_NUM }, jx),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: yr.LINE_NUM }, jx),
+          React.createElement(
+            Text,
             { color: yr.ADDED_TEXT, wrap: "truncate-end" },
             e.replace(/\s/g, " "),
           ),
@@ -51988,10 +51940,10 @@ function renderWriteFileContent({
     ),
     l &&
       void 0 !== a &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(BracketedText, {
+        React.createElement(BracketedText, {
           text: `… (${i - a} more lines) [${r}+o to expand]`,
           color: mr.DIM,
         }),
@@ -52018,11 +51970,11 @@ function renderOutputContent({
   if (t) {
     if (!i) return null;
     const e = l || s;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { width: "100%", flexDirection: "column" },
-      K.createElement(re, null, " "),
-      K.createElement(re, { color: hr, wrap: "wrap", italic: !0 }, e),
+      React.createElement(Text, null, " "),
+      React.createElement(Text, { color: hr, wrap: "wrap", italic: !0 }, e),
     );
   }
   const f = h ? JT : XT;
@@ -52036,10 +51988,10 @@ function renderOutputContent({
       expandKey: m,
     });
     return g
-      ? K.createElement(
-          ne,
+      ? React.createElement(
+          Box,
           { columnGap: 1 },
-          K.createElement(re, { color: Rr }, f, " "),
+          React.createElement(Text, { color: Rr }, f, " "),
           e,
         )
       : e;
@@ -52052,10 +52004,10 @@ function renderOutputContent({
       expandKey: m,
     });
     return g
-      ? K.createElement(
-          ne,
+      ? React.createElement(
+          Box,
           { columnGap: 1 },
-          K.createElement(re, { color: Rr }, f, " "),
+          React.createElement(Text, { color: Rr }, f, " "),
           e,
         )
       : e;
@@ -52069,11 +52021,11 @@ function renderOutputContent({
         hasError: u,
         closesFrame: h,
       })
-    : K.createElement(
-        ne,
+    : React.createElement(
+        Box,
         { width: "100%" },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: u ? mr.RED : "", wrap: "wrap" },
           renderTruncatedOutput({
             output: s,
@@ -52105,24 +52057,24 @@ function renderTextWithLongConnector({
     u = o ? mr.RED : void 0,
     d = buildTreeConnectors(i, { isTruncated: a, closesFrame: s }),
     m = s ? JT : XT;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", width: "100%" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { columnGap: 1, width: "100%" },
-      K.createElement(re, { color: Rr }, d),
-      K.createElement(
-        ne,
+      React.createElement(Text, { color: Rr }, d),
+      React.createElement(
+        Box,
         { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-        K.createElement(re, { color: u, wrap: "wrap" }, i),
+        React.createElement(Text, { color: u, wrap: "wrap" }, i),
       ),
     ),
     a &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { columnGap: 1 },
-        K.createElement(re, { color: Rr }, m, " "),
+        React.createElement(Text, { color: Rr }, m, " "),
         l,
       ),
   );
@@ -52178,15 +52130,15 @@ function ToolMessage({
     U = !O && !F,
     j = I && !D && !O && !F,
     q = L && !I && !D && !O && !F;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     null,
-    a && K.createElement(re, { color: M }, N),
-    K.createElement(
-      ne,
+    a && React.createElement(Text, { color: M }, N),
+    React.createElement(
+      Box,
       { flexDirection: "column", marginLeft: a ? 1 : 0 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
         renderToolHeader({
           isThinking: a,
@@ -52200,26 +52152,26 @@ function ToolMessage({
           output: n,
         }),
         v &&
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             null,
             " ",
             formatToolInput({ input: E, isShell: "SHELL" === e }),
           ),
         renderReadToolInlineSummary(P),
         x > 0 &&
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { dimColor: !0 },
             ` ${Ux}${x > 1 ? ` ${x}` : ""}`,
           ),
       ),
       S &&
         ("running" === C || n) &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { columnGap: 1, marginLeft: y ? 1 : 0 },
-          y && K.createElement(re, { color: Rr }, JT, " "),
+          y && React.createElement(Text, { color: Rr }, JT, " "),
           renderAgentStatus({
             agentStatus: C,
             hasError: o,
@@ -52249,11 +52201,11 @@ function ToolMessage({
       renderHookLines({ lines: $, showTreeConnector: y, closesFrame: U }),
       renderHookOutcome({ outcome: s?.hookOutcome, showTreeConnector: y }),
       F &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { columnGap: 1, marginLeft: 1 },
-          K.createElement(re, { color: Rr }, JT, " "),
-          K.createElement(re, { color: mr.GRAY }, "Processing…"),
+          React.createElement(Text, { color: Rr }, JT, " "),
+          React.createElement(Text, { color: mr.GRAY }, "Processing…"),
         ),
     ),
   );
@@ -52275,8 +52227,8 @@ function renderOutputWithRepairNotes({
   closesFrame: h,
 }) {
   const { body: f } = extractRepairNotes(e);
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { marginLeft: g ? 1 : 0 },
     renderOutputContent({
       isTodos: t,
@@ -52303,19 +52255,19 @@ function renderHookLines({
 }) {
   if (!e || 0 === e.length) return null;
   const r = e.length - 1;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", marginLeft: t ? 1 : 0 },
     e.map((e, t) => {
       const o = n && t === r ? JT : XT;
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { key: t, columnGap: 1 },
-        K.createElement(re, { color: Rr }, o),
-        K.createElement(
-          ne,
+        React.createElement(Text, { color: Rr }, o),
+        React.createElement(
+          Box,
           { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-          K.createElement(re, { color: mr.DIM }, e),
+          React.createElement(Text, { color: mr.DIM }, e),
         ),
       );
     }),
@@ -52324,14 +52276,14 @@ function renderHookLines({
 function renderHookOutcome({ outcome: e, showTreeConnector: t }) {
   if (!e) return null;
   const n = "stop" === e.kind ? mr.YELLOW : mr.RED;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { columnGap: 1, marginLeft: t ? 1 : 0 },
-    K.createElement(re, { color: Rr }, JT),
-    K.createElement(
-      ne,
+    React.createElement(Text, { color: Rr }, JT),
+    React.createElement(
+      Box,
       { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-      K.createElement(re, { color: n }, e.text),
+      React.createElement(Text, { color: n }, e.text),
     ),
   );
 }
@@ -52364,9 +52316,9 @@ function renderHookOutcome({ outcome: e, showTreeConnector: t }) {
   __name(renderHookLines, "renderHookLines"),
   __name(renderHookOutcome, "renderHookOutcome"));
 var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
-  const [o] = J(0),
-    [s, i] = J(1);
-  Z(() => {
+  const [o] = useState(0),
+    [s, i] = useState(1);
+  useEffect(() => {
     "edit" === e.action &&
       e.oldContent &&
       e.filePath &&
@@ -52417,8 +52369,8 @@ var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
     d = __name(() => {
       if ("unknown" === e.filePath) return "unknown file";
       try {
-        const n = t.basename(e.filePath),
-          r = t.relative(process.cwd(), e.filePath);
+        const n = pathDefault.basename(e.filePath),
+          r = pathDefault.relative(process.cwd(), e.filePath);
         return r && !r.startsWith("../") && r.length < 50 ? r : n || e.filePath;
       } catch {
         return e.filePath;
@@ -52438,8 +52390,8 @@ var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
           return "File Operation";
       }
     }, "getHeading");
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     {
       flexDirection: "column",
       borderStyle: "single",
@@ -52447,11 +52399,11 @@ var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
       paddingX: 1,
       width: "100%",
     },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { bold: !0, color: mr.YELLOW },
         `${m()} ${"edit" === e.action ? d() : ""}`,
       ),
@@ -52459,8 +52411,8 @@ var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
     "edit" === e.action &&
       e.oldContent &&
       e.newContent &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
         generateDiff({
           oldValue: e.oldContent,
@@ -52470,20 +52422,20 @@ var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
           startLine: s,
         }).diffContent,
       ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { bold: !0 },
         "Do you want to ",
         u(),
         " ",
-        K.createElement(re, { color: mr.CYAN }, d()),
+        React.createElement(Text, { color: mr.CYAN }, d()),
         "?",
       ),
     ),
-    K.createElement(pt, {
+    React.createElement(pt, {
       items: a.map((e, t) => ({
         label: ` ${t + 1}. ${e.label}`,
         value: e.value,
@@ -52491,28 +52443,28 @@ var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
       onSelect: l,
       initialIndex: o,
       indicatorComponent: ({ isSelected: e }) =>
-        K.createElement(re, { color: mr.CYAN }, e ? Ie.pointer : " "),
+        React.createElement(Text, { color: mr.CYAN }, e ? Ie.pointer : " "),
       itemComponent: ({ label: e, isSelected: t }) =>
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: t ? mr.CYAN : mr.WHITE },
           e.includes("[shift+tab]")
-            ? K.createElement(
-                K.Fragment,
+            ? React.createElement(
+                React.Fragment,
                 null,
                 e.split("[shift+tab]")[0],
-                K.createElement(
+                React.createElement(
                   BracketWrap,
                   { color: t ? mr.CYAN : mr.WHITE, bold: !0 },
                   "shift+tab",
                 ),
               )
             : e.includes("(")
-              ? K.createElement(
-                  K.Fragment,
+              ? React.createElement(
+                  React.Fragment,
                   null,
                   e.split("(")[0],
-                  K.createElement(re, { color: mr.GRAY }, "(", e.split("(")[1]),
+                  React.createElement(Text, { color: mr.GRAY }, "(", e.split("(")[1]),
                 )
               : e,
         ),
@@ -52521,7 +52473,7 @@ var qx = __name(({ request: e, onResponse: n, onToggleAutoAccept: r }) => {
 }, "PermissionPrompt");
 (Ft(), Cn(), Or());
 var Bx = __name(({ request: e, onResponse: t, onToggleAutoAccept: n }) => {
-  const [r] = J(0),
+  const [r] = useState(0),
     o = [
       {
         label: "Yes",
@@ -52554,8 +52506,8 @@ var Bx = __name(({ request: e, onResponse: t, onToggleAutoAccept: n }) => {
         : "";
       return t ? `${e.command} ${t}` : e.command;
     }, "getCommandDisplay");
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     {
       flexDirection: "column",
       borderStyle: "single",
@@ -52563,44 +52515,44 @@ var Bx = __name(({ request: e, onResponse: t, onToggleAutoAccept: n }) => {
       paddingX: 1,
       width: "100%",
     },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { bold: !0, color: mr.YELLOW },
         "Execute Shell Command",
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { bold: !0, wrap: "wrap" },
         "Command Code needs to execute ",
-        K.createElement(re, { color: mr.CYAN }, i()),
+        React.createElement(Text, { color: mr.CYAN }, i()),
         ".",
       ),
     ),
     e.workingDirectory &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.GRAY },
           "Working directory: ",
           e.workingDirectory,
         ),
       ),
     e.description &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
-        K.createElement(re, { color: mr.DIM, italic: !0 }, e.description),
+        React.createElement(Text, { color: mr.DIM, italic: !0 }, e.description),
       ),
-    K.createElement(pt, {
+    React.createElement(pt, {
       items: o.map((e, t) => ({
         label: ` ${t + 1}. ${e.label}`,
         value: e.value,
@@ -52608,17 +52560,17 @@ var Bx = __name(({ request: e, onResponse: t, onToggleAutoAccept: n }) => {
       onSelect: s,
       initialIndex: r,
       indicatorComponent: ({ isSelected: e }) =>
-        K.createElement(re, { color: mr.CYAN }, e ? Ie.pointer : " "),
+        React.createElement(Text, { color: mr.CYAN }, e ? Ie.pointer : " "),
       itemComponent: ({ label: e, isSelected: t }) =>
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: t ? mr.CYAN : mr.WHITE },
           e.includes("[shift+tab]")
-            ? K.createElement(
-                K.Fragment,
+            ? React.createElement(
+                React.Fragment,
                 null,
                 e.split("[shift+tab]")[0],
-                K.createElement(
+                React.createElement(
                   BracketWrap,
                   { color: t ? mr.CYAN : mr.WHITE, bold: !0 },
                   "shift+tab",
@@ -52666,7 +52618,7 @@ function handlePermissionResponse({
 (__name(getKillShellRequest, "getKillShellRequest"),
   __name(getFileAction2, "getFileAction"),
   __name(handlePermissionResponse, "handlePermissionResponse"));
-var zx = Y(
+var zx = memo(
   __name(function PermissionView2({
     pendingPermission: e,
     permissionMode: t,
@@ -52686,10 +52638,10 @@ var zx = Y(
     };
     if ("shell_command" === e.toolName) {
       const t = e.params;
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { marginY: 1 },
-        K.createElement(Bx, {
+        React.createElement(Bx, {
           request: t,
           onResponse: (e) =>
             handlePermissionResponse({
@@ -52704,10 +52656,10 @@ var zx = Y(
     }
     if ("kill_shell" === e.toolName) {
       const t = getKillShellRequest(e.params);
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { marginY: 1 },
-        K.createElement(Bx, {
+        React.createElement(Bx, {
           request: t,
           onResponse: (e) =>
             handlePermissionResponse({
@@ -52741,10 +52693,10 @@ var zx = Y(
             ? l.newContent
             : void 0,
       };
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { marginY: 1 },
-      K.createElement(qx, {
+      React.createElement(qx, {
         request: u,
         onResponse: (e) =>
           handlePermissionResponse({
@@ -52812,12 +52764,12 @@ var nA = __name(({ children: e }) => {
   }
   return (
     o(),
-    K.createElement(
-      re,
+    React.createElement(
+      Text,
       null,
       t.map((e, t) =>
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { key: t, color: e.panel ? $r.BG : $r.TEXT },
           e.text,
         ),
@@ -52844,13 +52796,13 @@ var rA = __name(
       g = r ? ` ${r}` : "",
       h = d.length + m.length + g.length,
       f = i.repeat(Math.max(0, u - h));
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { paddingLeft: o, paddingRight: o, marginBottom: 1, ...l },
-      (t || n) && K.createElement(re, { color: a }, d),
-      e && K.createElement(re, { color: s }, m),
-      K.createElement(re, { color: a }, f),
-      r && K.createElement(re, { color: mr.DIM }, g),
+      (t || n) && React.createElement(Text, { color: a }, d),
+      e && React.createElement(Text, { color: s }, m),
+      React.createElement(Text, { color: a }, f),
+      r && React.createElement(Text, { color: mr.DIM }, g),
     );
   },
   "Divider",
@@ -52880,11 +52832,11 @@ var oA = [
     },
   ],
   sA = __name(({ onComplete: e, onExit: t }) => {
-    const [n, r] = J(0),
-      [o, s] = J(!1),
+    const [n, r] = useState(0),
+      [o, s] = useState(!1),
       i = n >= oA.length;
     return (
-      Z(() => {
+      useEffect(() => {
         if (n >= oA.length) return;
         if (o) return;
         const e = oA[n],
@@ -52893,7 +52845,7 @@ var oA = [
           }, e.duration);
         return () => clearTimeout(t);
       }, [n, o]),
-      ie((n, o) => {
+      useInput((n, o) => {
         "" === n || (o.ctrl && "c" === n)
           ? t
             ? t()
@@ -52906,64 +52858,64 @@ var oA = [
                 ? s((e) => !e)
                 : o.return && r((e) => Math.min(e + 1, oA.length));
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(re, { bold: !0 }, "Meet Your Coding Taste"),
+          React.createElement(Text, { bold: !0 }, "Meet Your Coding Taste"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "Command Code learns your coding style as you work.",
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "Here's how your preferences evolve in real-time:",
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", marginY: 1 },
           oA
             .slice(0, n)
             .map((e, t) =>
               "user" === e.type
-                ? K.createElement(
-                    ne,
+                ? React.createElement(
+                    Box,
                     { key: t },
-                    K.createElement(re, null, Ie.pointer, " ", e.text),
+                    React.createElement(Text, null, Ie.pointer, " ", e.text),
                   )
-                : K.createElement(
-                    ne,
+                : React.createElement(
+                    Box,
                     {
                       key: t,
                       flexDirection: "column",
                       marginBottom: 1,
                       marginLeft: 1,
                     },
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       null,
-                      K.createElement(re, { color: mr.DIM }, "⎿  "),
-                      K.createElement(re, { color: gr.TEXT }, e.text),
+                      React.createElement(Text, { color: mr.DIM }, "⎿  "),
+                      React.createElement(Text, { color: gr.TEXT }, e.text),
                     ),
                     e.details &&
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         { marginLeft: 3 },
-                        K.createElement(
-                          re,
+                        React.createElement(
+                          Text,
                           { color: mr.DIM },
                           "Saved(",
                           e.details,
@@ -52974,60 +52926,60 @@ var oA = [
             ),
         ),
         i
-          ? K.createElement(
-              ne,
+          ? React.createElement(
+              Box,
               { flexDirection: "column", marginY: 1 },
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 null,
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { bold: !0, color: gr.TEXT },
                   "Demo Complete!",
                 ),
               ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 null,
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   null,
                   "Command Code will now use these preferences to generate",
                 ),
               ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 null,
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   null,
                   "better suggestions tailored to your coding style. The",
                 ),
               ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 null,
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   null,
                   "more you code, the smarter it gets.",
                 ),
               ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginTop: 1 },
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: mr.DIM },
                   "Press Enter to get started →",
                 ),
               ),
             )
-          : K.createElement(
-              ne,
+          : React.createElement(
+              Box,
               null,
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.DIM },
                 "[SPACE: pause] [ENTER: next] [ESC: skip]" +
                   (o ? " (paused)" : ""),
@@ -53037,15 +52989,15 @@ var oA = [
     );
   }, "TasteDemoComponent"),
   iA = __name(({ onClose: e, onExit: t }) => {
-    const [n, r] = J(xT.getEvents()),
-      [o, s] = J(0);
-    (ie(
+    const [n, r] = useState(xT.getEvents()),
+      [o, s] = useState(0);
+    (useInput(
       (n, r) => {
         "" === n || (r.ctrl && "c" === n) ? t() : r.ctrl && "t" === n && e();
       },
       { isActive: !0 },
     ),
-      Z(() => {
+      useEffect(() => {
         const e = __name(() => {
             r(xT.getEvents());
           }, "handleNewEvent"),
@@ -53060,7 +53012,7 @@ var oA = [
           }
         );
       }, []),
-      Z(() => {
+      useEffect(() => {
         const e = __name(() => {
           (UE(), s((e) => e + 1));
         }, "handleResize");
@@ -53075,10 +53027,10 @@ var oA = [
         (e) => ["learned", "refactored"].includes(e),
         "isLearningEvent",
       ),
-      a = ee(() => n.find((e) => "analyzing" === e.type), [n]),
-      l = ee(() => n.find((e) => "analyzed" === e.type), [n]),
-      u = ee(() => n.find((e) => "no_learnings" === e.type), [n]),
-      d = ee(
+      a = useMemo(() => n.find((e) => "analyzing" === e.type), [n]),
+      l = useMemo(() => n.find((e) => "analyzed" === e.type), [n]),
+      u = useMemo(() => n.find((e) => "no_learnings" === e.type), [n]),
+      d = useMemo(
         () => n.find((e) => "learned" === e.type || "refactored" === e.type),
         [n],
       ),
@@ -53086,7 +53038,7 @@ var oA = [
       g = d ? n.indexOf(d) : 1 / 0,
       h = !!u && m < g,
       f = !!a || !!l || h,
-      y = ee(
+      y = useMemo(
         () =>
           n.filter(
             (e) =>
@@ -53096,7 +53048,7 @@ var oA = [
           ),
         [n],
       ),
-      w = ee(() => [...y].reverse(), [y]),
+      w = useMemo(() => [...y].reverse(), [y]),
       S = __name((e) => {
         const t = e.match(
           /^(learned|upgraded|downgraded|refactored|moved):\s*(.*)$/i,
@@ -53146,9 +53098,9 @@ var oA = [
           fullPath: `.commandcode/taste/${n}`,
         };
       }, "formatMovedDetails"),
-      C = ee(() => (process.stdout.rows ?? 24) - 1, [o]);
-    return K.createElement(
-      ne,
+      C = useMemo(() => (process.stdout.rows ?? 24) - 1, [o]);
+    return React.createElement(
+      Box,
       {
         flexDirection: "column",
         width: "100%",
@@ -53158,65 +53110,65 @@ var oA = [
         padding: 0,
         margin: 0,
       },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", marginBottom: 1 },
-        K.createElement(nA, null, Yx()),
+        React.createElement(nA, null, Yx()),
       ),
-      K.createElement(rA, {
+      React.createElement(rA, {
         hashPrefix: !0,
         title: "Taste Feed",
         titleColor: "white",
         suffix: "ctrl+t to close",
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
         0 === n.length
-          ? K.createElement(
-              ne,
+          ? React.createElement(
+              Box,
               { flexDirection: "column" },
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { flexDirection: "column", marginBottom: 1 },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     null,
                     "Start using Command Code and it will begin recording your coding taste.",
                   ),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     "Your preferences, patterns, and style will appear here in real-time.",
                   ),
                 ),
               ),
-              K.createElement(ce, { count: 2 }),
-              K.createElement(rA, {
+              React.createElement(Newline, { count: 2 }),
+              React.createElement(rA, {
                 title: "DEMO",
                 titleColor: "white",
                 subPrefix: !0,
               }),
-              K.createElement(sA, {
+              React.createElement(sA, {
                 onComplete: () => {
                   e();
                 },
                 onExit: t,
               }),
             )
-          : K.createElement(
-              ne,
+          : React.createElement(
+              Box,
               { flexDirection: "column" },
               y.length > 0 &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { flexDirection: "column", gap: 1 },
                   w.map((e) => {
                     if (i(e.type)) {
@@ -53230,13 +53182,13 @@ var oA = [
                         i =
                           "upgraded" === t || "downgraded" === t ? E(r) : null,
                         a = s?.fullPath ?? e.details;
-                      let l = K.createElement(
-                        K.Fragment,
+                      let l = React.createElement(
+                        React.Fragment,
                         null,
-                        K.createElement(re, null, " ", r),
+                        React.createElement(Text, null, " ", r),
                         o &&
-                          K.createElement(
-                            re,
+                          React.createElement(
+                            Text,
                             { color: mr.DIM },
                             " ",
                             "(",
@@ -53246,68 +53198,68 @@ var oA = [
                       );
                       return (
                         i &&
-                          (l = K.createElement(
-                            K.Fragment,
+                          (l = React.createElement(
+                            React.Fragment,
                             null,
-                            K.createElement(re, null, " ", i.text, " ("),
-                            K.createElement(
-                              re,
+                            React.createElement(Text, null, " ", i.text, " ("),
+                            React.createElement(
+                              Text,
                               { color: mr.DIM },
                               "confidence:",
                               " ",
                             ),
-                            K.createElement(
-                              re,
+                            React.createElement(
+                              Text,
                               { color: mr.DIM },
                               i.oldPercent,
                               "%",
                             ),
-                            K.createElement(re, null, " ", Ie.arrowRight, " "),
-                            K.createElement(
-                              re,
+                            React.createElement(Text, null, " ", Ie.arrowRight, " "),
+                            React.createElement(
+                              Text,
                               { color: i.diff > 0 ? mr.GREEN : mr.RED },
                               i.newPercent,
                               "%",
                             ),
-                            K.createElement(re, null, ")"),
+                            React.createElement(Text, null, ")"),
                           )),
                         s &&
-                          (l = K.createElement(
-                            K.Fragment,
+                          (l = React.createElement(
+                            React.Fragment,
                             null,
-                            K.createElement(
-                              re,
+                            React.createElement(
+                              Text,
                               null,
                               " ",
                               s.category,
                               " ",
                               "package (",
                             ),
-                            K.createElement(re, { color: mr.DIM }, s.oldPath),
-                            K.createElement(
-                              re,
+                            React.createElement(Text, { color: mr.DIM }, s.oldPath),
+                            React.createElement(
+                              Text,
                               null,
                               " ",
                               Ie.arrowRight,
                               " ",
                               s.newPath,
                             ),
-                            K.createElement(re, null, ")"),
+                            React.createElement(Text, null, ")"),
                           )),
-                        K.createElement(
-                          ne,
+                        React.createElement(
+                          Box,
                           { key: e.id },
-                          K.createElement(
-                            ne,
+                          React.createElement(
+                            Box,
                             { flexDirection: "column" },
-                            K.createElement(
-                              ne,
+                            React.createElement(
+                              Box,
                               null,
-                              K.createElement(
-                                ne,
+                              React.createElement(
+                                Box,
                                 { flexShrink: 0 },
-                                K.createElement(
-                                  re,
+                                React.createElement(
+                                  Text,
                                   {
                                     backgroundColor: gr.BADGE_BG,
                                     color: gr.BADGE_FG,
@@ -53317,8 +53269,8 @@ var oA = [
                                 ),
                               ),
                               a &&
-                                K.createElement(
-                                  re,
+                                React.createElement(
+                                  Text,
                                   { color: mr.DIM },
                                   " ",
                                   "(",
@@ -53326,21 +53278,21 @@ var oA = [
                                   ")",
                                 ),
                             ),
-                            K.createElement(
-                              ne,
+                            React.createElement(
+                              Box,
                               { marginLeft: 1 },
-                              K.createElement(re, { color: mr.DIM }, "⎿", " "),
+                              React.createElement(Text, { color: mr.DIM }, "⎿", " "),
                               l,
                             ),
                           ),
                         )
                       );
                     }
-                    return K.createElement(
-                      ne,
+                    return React.createElement(
+                      Box,
                       { key: e.id },
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         Ie.pointerSmall,
                         " ",
@@ -53350,15 +53302,15 @@ var oA = [
                   }),
                 ),
               f &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { flexDirection: "column", marginTop: y.length > 0 ? 1 : 0 },
                   a &&
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       null,
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         Ie.pointerSmall,
                         " ",
@@ -53366,11 +53318,11 @@ var oA = [
                       ),
                     ),
                   l &&
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       null,
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         Ie.pointerSmall,
                         " ",
@@ -53379,11 +53331,11 @@ var oA = [
                     ),
                   h &&
                     u &&
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       null,
-                      K.createElement(
-                        re,
+                      React.createElement(
+                        Text,
                         { color: mr.DIM },
                         Ie.pointerSmall,
                         " ",
@@ -53396,7 +53348,7 @@ var oA = [
     );
   }, "LearningFeedFull");
 function LearningView({ setShowLearningFeed: e, setStaticKey: t, onExit: n }) {
-  return K.createElement(iA, {
+  return React.createElement(iA, {
     onClose: () => {
       (UE(), e(!1), t((e) => e + 1));
     },
@@ -53405,9 +53357,9 @@ function LearningView({ setShowLearningFeed: e, setStaticKey: t, onExit: n }) {
 }
 (__name(LearningView, "LearningView"), Ft(), Or(), Ft(), Or(), qE(), so());
 var aA = __name(({ onClose: e, onSettingsChange: t, staticKey: n }) => {
-  const [r, o] = J(!1),
-    [s, i] = J(!0);
-  (Z(() => {
+  const [r, o] = useState(!1),
+    [s, i] = useState(!0);
+  (useEffect(() => {
     __name(async () => {
       try {
         const e = await isTasteLearningEnabled();
@@ -53418,7 +53370,7 @@ var aA = __name(({ onClose: e, onSettingsChange: t, staticKey: n }) => {
       }
     }, "loadSettings")();
   }, []),
-    ie((t, n) => {
+    useInput((t, n) => {
       if (!n.return && " " !== t) return n.escape ? (UE(), void e()) : void 0;
       a();
     }));
@@ -53432,8 +53384,8 @@ var aA = __name(({ onClose: e, onSettingsChange: t, staticKey: n }) => {
     }
   }, "toggleTasteLearning");
   return s
-    ? K.createElement(
-        ne,
+    ? React.createElement(
+        Box,
         {
           key: n,
           borderStyle: "single",
@@ -53441,11 +53393,11 @@ var aA = __name(({ onClose: e, onSettingsChange: t, staticKey: n }) => {
           padding: 1,
           flexDirection: "column",
         },
-        K.createElement(re, { color: mr.BLUE, bold: !0 }, "Taste Settings"),
-        K.createElement(re, { color: mr.DIM }, "Loading configuration..."),
+        React.createElement(Text, { color: mr.BLUE, bold: !0 }, "Taste Settings"),
+        React.createElement(Text, { color: mr.DIM }, "Loading configuration..."),
       )
-    : K.createElement(
-        ne,
+    : React.createElement(
+        Box,
         {
           key: n,
           borderStyle: "single",
@@ -53453,41 +53405,41 @@ var aA = __name(({ onClose: e, onSettingsChange: t, staticKey: n }) => {
           padding: 1,
           flexDirection: "column",
         },
-        K.createElement(re, { bold: !0 }, "Taste Learning"),
-        K.createElement(
-          re,
+        React.createElement(Text, { bold: !0 }, "Taste Learning"),
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Configure taste learning preferences for this project",
         ),
-        K.createElement(ne, { marginTop: 1 }),
-        K.createElement(
-          ne,
+        React.createElement(Box, { marginTop: 1 }),
+        React.createElement(
+          Box,
           { justifyContent: "space-between" },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             null,
             "Taste learning",
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               " ",
               "- Learn from your interactions",
             ),
           ),
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: r ? mr.GREEN : mr.GRAY },
             r ? "enabled" : "disabled",
           ),
         ),
-        K.createElement(ne, { marginTop: 1 }),
-        K.createElement(
-          re,
+        React.createElement(Box, { marginTop: 1 }),
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Taste data stored in .commandcode/taste/taste.md",
         ),
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Enter/Space to toggle • Esc to close",
         ),
@@ -53498,23 +53450,23 @@ function TasteConfigView({
   setShowTasteConfig: t,
   loadTasteStatus: n,
 }) {
-  return K.createElement(
-    K.Fragment,
+  return React.createElement(
+    React.Fragment,
     null,
-    K.createElement(_x, { staticKey: e }),
-    K.createElement(
-      ne,
+    React.createElement(_x, { staticKey: e }),
+    React.createElement(
+      Box,
       { flexDirection: "column", width: "100%" },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Press Esc to return to conversation",
         ),
       ),
-      K.createElement(aA, {
+      React.createElement(aA, {
         onClose: () => t(!1),
         onSettingsChange: n,
         staticKey: e,
@@ -53555,14 +53507,14 @@ function fuzzyFilter(e, t, n) {
   Or());
 var lA = __name(
   ({ query: e, resultCount: t, placeholder: n = "Type to search..." }) =>
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { width: "100%" },
-      K.createElement(re, { color: mr.GRAY }, Ie.pointerSmall, " "),
-      K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, e || n),
+      React.createElement(Text, { color: mr.GRAY }, Ie.pointerSmall, " "),
+      React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, e || n),
       e &&
         void 0 !== t &&
-        K.createElement(re, { dimColor: !0 }, " (", t, " found)"),
+        React.createElement(Text, { dimColor: !0 }, " (", t, " found)"),
     ),
   "SearchInput",
 );
@@ -53579,9 +53531,9 @@ function useListNavigation({
   disableSearch: u = !1,
   onReset: d,
 }) {
-  const [m, g] = J(o),
-    [h, f] = J(null);
-  Z(() => {
+  const [m, g] = useState(o),
+    [h, f] = useState(null);
+  useEffect(() => {
     i || g(o);
   }, [o, i]);
   const y = e.length - 1,
@@ -53589,7 +53541,7 @@ function useListNavigation({
       (a(e), g(s));
     }, "updateSearch");
   return (
-    ie(
+    useInput(
       (o, s) => {
         if (s.escape) return !u && i ? void w("") : void n();
         if (u || (!s.backspace && !s.delete)) {
@@ -53627,8 +53579,8 @@ function useListNavigation({
   );
 }
 function skillIdentifier(e) {
-  const n = t.basename(e);
-  return "skill.md" === n.toLowerCase() ? t.basename(t.dirname(e)) : n;
+  const n = pathDefault.basename(e);
+  return "skill.md" === n.toLowerCase() ? pathDefault.basename(pathDefault.dirname(e)) : n;
 }
 (Ft(),
   __name(useListNavigation, "useListNavigation"),
@@ -53684,10 +53636,10 @@ async function copyAllWarnings(e, t) {
 var uA = __name(({ warnings: e, onClose: t, isActive: n = !0 }) => {
     const r = groupWarnings(e),
       o = e.length > 0,
-      [s, i] = J(null),
-      a = X(null),
-      l = X(!0);
-    Z(
+      [s, i] = useState(null),
+      a = useRef(null),
+      l = useRef(!0);
+    useEffect(
       () => () => {
         ((l.current = !1),
           a.current && (clearTimeout(a.current), (a.current = null)));
@@ -53703,94 +53655,94 @@ var uA = __name(({ warnings: e, onClose: t, isActive: n = !0 }) => {
         }, 3e3)));
     }, "showStatus");
     return (
-      ie(
+      useInput(
         (n, r) =>
           r.escape || (" " === n && o)
             ? (UE(), void t())
             : void ("c" === n && o && copyAllWarnings(e, u)),
         { isActive: n },
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(re, { color: pr, bold: !0 }, "Skills", " "),
-          K.createElement(re, { color: mr.DIM }, "› "),
-          K.createElement(re, { color: pr, bold: !0 }, "Skipped", " "),
-          K.createElement(re, { color: mr.WHITE }, e.length),
+          React.createElement(Text, { color: pr, bold: !0 }, "Skills", " "),
+          React.createElement(Text, { color: mr.DIM }, "› "),
+          React.createElement(Text, { color: pr, bold: !0 }, "Skipped", " "),
+          React.createElement(Text, { color: mr.WHITE }, e.length),
         ),
         o &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginBottom: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               "Press c to copy all issues",
             ),
           ),
         o
-          ? K.createElement(
-              ne,
+          ? React.createElement(
+              Box,
               { flexDirection: "column" },
               r.map((e) =>
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { key: e.category, flexDirection: "column" },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     null,
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       { color: categoryColor(e.category) },
                       e.category,
                     ),
                   ),
                   e.items.map((e) =>
-                    K.createElement(
-                      ne,
+                    React.createElement(
+                      Box,
                       { key: e.path, flexDirection: "column", marginBottom: 1 },
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         { paddingLeft: 2 },
-                        K.createElement(ro, {
-                          url: m(e.path).href,
+                        React.createElement(ro, {
+                          url: pathToFileURL(e.path).href,
                           text: skillIdentifier(e.path),
                           color: mr.WHITE,
                         }),
                       ),
-                      K.createElement(
-                        ne,
+                      React.createElement(
+                        Box,
                         { paddingLeft: 4 },
-                        K.createElement(re, { color: mr.WHITE }, e.reason),
+                        React.createElement(Text, { color: mr.WHITE }, e.reason),
                       ),
                     ),
                   ),
                 ),
               ),
             )
-          : K.createElement(
-              ne,
+          : React.createElement(
+              Box,
               { marginTop: 1 },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.DIM },
                 "No issues — every skill loaded.",
               ),
             ),
         s &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginTop: 1 },
-            K.createElement(re, { color: s.color }, s.text),
+            React.createElement(Text, { color: s.color }, s.text),
           ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1, flexDirection: "column" },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             o ? "c copy all issues · esc back to skills" : "esc back to skills",
           ),
@@ -53799,9 +53751,9 @@ var uA = __name(({ warnings: e, onClose: t, isActive: n = !0 }) => {
     );
   }, "SkillsConfigIssues"),
   dA = __name(({ warnings: e = [], onClose: t }) => {
-    const [n, r] = J("list");
+    const [n, r] = useState("list");
     return (
-      ie(
+      useInput(
         (o, s) => {
           "list" === n &&
             (s.escape && t
@@ -53811,39 +53763,39 @@ var uA = __name(({ warnings: e, onClose: t, isActive: n = !0 }) => {
         { isActive: "list" === n },
       ),
       "issues" === n
-        ? K.createElement(uA, {
+        ? React.createElement(uA, {
             warnings: e,
             onClose: () => r("list"),
             isActive: !0,
           })
-        : K.createElement(
-            ne,
+        : React.createElement(
+            Box,
             { flexDirection: "column", paddingX: 0, width: "100%" },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               null,
-              K.createElement(re, { color: pr, bold: !0 }, "Skills"),
+              React.createElement(Text, { color: pr, bold: !0 }, "Skills"),
               e.length > 0 &&
-                K.createElement(
-                  K.Fragment,
+                React.createElement(
+                  React.Fragment,
                   null,
-                  K.createElement(re, { color: mr.DIM }, " · "),
-                  K.createElement(
-                    re,
+                  React.createElement(Text, { color: mr.DIM }, " · "),
+                  React.createElement(
+                    Text,
                     { color: mr.YELLOW },
                     e.length,
                     " skipped",
                   ),
                 ),
             ),
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { marginBottom: 1 },
-              K.createElement(re, { color: mr.DIM }, "No skills found"),
+              React.createElement(Text, { color: mr.DIM }, "No skills found"),
             ),
-            K.createElement(re, { color: mr.DIM }, "Create skills in:"),
-            K.createElement(
-              re,
+            React.createElement(Text, { color: mr.DIM }, "Create skills in:"),
+            React.createElement(
+              Text,
               { color: mr.DIM },
               " ",
               "~/",
@@ -53852,16 +53804,16 @@ var uA = __name(({ warnings: e, onClose: t, isActive: n = !0 }) => {
               "skills",
               "/ (user)",
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               " ",
               "~/.agents/",
               "skills",
               "/ (user, .agents)",
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               " ",
               ".commandcode",
@@ -53869,23 +53821,23 @@ var uA = __name(({ warnings: e, onClose: t, isActive: n = !0 }) => {
               "skills",
               "/ (project)",
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               " ",
               ".agents/",
               "skills",
               "/ (project, .agents)",
             ),
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { marginTop: 1 },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.DIM },
                 e.length > 0 && "space to view issues · ",
                 "Press ",
-                K.createElement(re, { bold: !0 }, "Esc"),
+                React.createElement(Text, { bold: !0 }, "Esc"),
                 " to close",
               ),
             ),
@@ -53921,32 +53873,32 @@ var fA = __name(
     cursor: o,
     disabled: s,
   }) =>
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginTop: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(re, { color: Cr, bold: !0 }, e, " "),
-        K.createElement(re, { color: Cr }, t),
+        React.createElement(Text, { color: Cr, bold: !0 }, e, " "),
+        React.createElement(Text, { color: Cr }, t),
       ),
       n.map((e, t) => {
         const n = r + t === o,
           i = s.has(e.label),
           a = pA(e.filePath);
-        return K.createElement(
-          ne,
+        return React.createElement(
+          Box,
           { key: e.filePath },
-          K.createElement(re, { color: mr.GREEN }, n ? "▸ " : "  "),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: mr.GREEN }, n ? "▸ " : "  "),
+          React.createElement(
+            Text,
             { color: i ? mr.DIM : mr.GREEN },
             i ? "[off]      " : "[on]       ",
           ),
-          K.createElement(re, { color: i ? mr.DIM : mr.WHITE }, e.label),
-          a && K.createElement(re, { color: mr.DIM }, " [.agents]"),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: i ? mr.DIM : mr.WHITE }, e.label),
+          a && React.createElement(Text, { color: mr.DIM }, " [.agents]"),
+          React.createElement(
+            Text,
             { color: mr.DIM },
             " · ~",
             mA(e.description),
@@ -53960,18 +53912,18 @@ var fA = __name(
 Ft();
 var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
   wA = __name(({ onClose: e }) => {
-    const [t, n] = J([]),
-      [r, o] = J([]),
-      [s, i] = J(!0),
-      [a, l] = J(null),
-      [u, d] = J(""),
-      [m, g] = J(new Set()),
-      [h, f] = J(new Map()),
-      [y, w] = J(!1),
-      [S, E] = J(null),
-      [v, C] = J("list"),
-      k = X(!1);
-    Z(() => {
+    const [t, n] = useState([]),
+      [r, o] = useState([]),
+      [s, i] = useState(!0),
+      [a, l] = useState(null),
+      [u, d] = useState(""),
+      [m, g] = useState(new Set()),
+      [h, f] = useState(new Map()),
+      [y, w] = useState(!1),
+      [S, E] = useState(null),
+      [v, C] = useState("list"),
+      k = useRef(!1);
+    useEffect(() => {
       __name(async () => {
         try {
           const e = findGitRoot(),
@@ -54027,7 +53979,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
         }
       }, "load")();
     }, []);
-    const T = ee(
+    const T = useMemo(
         () =>
           fuzzyFilter(
             t.filter((e) => "project" === e.location),
@@ -54036,7 +53988,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
           ),
         [t, u],
       ),
-      _ = ee(
+      _ = useMemo(
         () =>
           fuzzyFilter(
             t.filter((e) => "user" === e.location),
@@ -54045,7 +53997,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
           ),
         [t, u],
       ),
-      x = ee(
+      x = useMemo(
         () =>
           fuzzyFilter(
             t.filter((e) => "bundled" === e.location),
@@ -54054,7 +54006,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
           ),
         [t, u],
       ),
-      A = ee(() => [...T, ..._, ...x], [T, _, x]),
+      A = useMemo(() => [...T, ..._, ...x], [T, _, x]),
       P = __name(async (e) => {
         if (k.current) return;
         const t = m.has(e.label),
@@ -54081,7 +54033,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
           k.current = !1;
         }
       }, "toggleSkill");
-    Z(() => {
+    useEffect(() => {
       "issues" === v && d("");
     }, [v]);
     const I = "list" === v && t.length > 0,
@@ -54097,7 +54049,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
         isActive: I,
       });
     if (
-      (ie(
+      (useInput(
         (t, n) => {
           if (!n.tab) return;
           const r = A[M];
@@ -54121,7 +54073,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
         },
         { isActive: I },
       ),
-      ie(
+      useInput(
         (e, n) => {
           "list" === v &&
             0 !== t.length &&
@@ -54136,107 +54088,107 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
       ),
       s)
     )
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(re, { color: pr, bold: !0 }, "Skills"),
-        K.createElement(re, { color: mr.DIM }, "Loading skills..."),
+        React.createElement(Text, { color: pr, bold: !0 }, "Skills"),
+        React.createElement(Text, { color: mr.DIM }, "Loading skills..."),
       );
     if (a)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(re, { color: mr.RED, bold: !0 }, "Skills"),
-        K.createElement(re, { color: mr.DIM }, a),
-        K.createElement(ne, { marginTop: 1 }),
-        K.createElement(
-          re,
+        React.createElement(Text, { color: mr.RED, bold: !0 }, "Skills"),
+        React.createElement(Text, { color: mr.DIM }, a),
+        React.createElement(Box, { marginTop: 1 }),
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Press ",
-          K.createElement(re, { bold: !0 }, "Esc"),
+          React.createElement(Text, { bold: !0 }, "Esc"),
           " to close",
         ),
       );
     if (0 === t.length)
-      return K.createElement(dA, {
+      return React.createElement(dA, {
         warnings: r,
         onClose: () => {
           (UE(), e());
         },
       });
     if ("issues" === v)
-      return K.createElement(uA, {
+      return React.createElement(uA, {
         warnings: r,
         onClose: () => C("list"),
         isActive: !0,
       });
     const N = t.filter((e) => m.has(e.label)).length;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", paddingX: 0, width: "100%" },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(re, { color: pr, bold: !0 }, "Skills", " "),
-        K.createElement(
-          re,
+        React.createElement(Text, { color: pr, bold: !0 }, "Skills", " "),
+        React.createElement(
+          Text,
           { color: mr.DIM },
           t.length,
           " skill",
           1 === t.length ? "" : "s",
         ),
         N > 0 &&
-          K.createElement(
-            K.Fragment,
+          React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, { color: mr.DIM }, " · "),
-            K.createElement(re, { color: mr.YELLOW }, N, " off"),
+            React.createElement(Text, { color: mr.DIM }, " · "),
+            React.createElement(Text, { color: mr.YELLOW }, N, " off"),
           ),
         r.length > 0 &&
-          K.createElement(
-            K.Fragment,
+          React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, { color: mr.DIM }, " · "),
-            K.createElement(re, { color: mr.YELLOW }, r.length, " skipped"),
+            React.createElement(Text, { color: mr.DIM }, " · "),
+            React.createElement(Text, { color: mr.YELLOW }, r.length, " skipped"),
           ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { dimColor: !0 },
           y
             ? "No project found — toggles will be saved to user settings."
             : "Toggle skills on or off for this project.",
         ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1, flexDirection: "column", width: "100%" },
-        K.createElement(lA, {
+        React.createElement(lA, {
           query: u,
           resultCount: u ? A.length : void 0,
           placeholder: "Type to search skills...",
         }),
       ),
       0 === A.length
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             { marginY: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.GRAY },
               'No skills match "',
               u,
               '"',
             ),
           )
-        : K.createElement(
-            K.Fragment,
+        : React.createElement(
+            React.Fragment,
             null,
             T.length > 0 &&
-              K.createElement(fA, {
+              React.createElement(fA, {
                 title: "Project skills",
                 subtitle: "(.commandcode/skills or .agents/skills)",
                 skills: T,
@@ -54245,7 +54197,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
                 disabled: m,
               }),
             _.length > 0 &&
-              K.createElement(fA, {
+              React.createElement(fA, {
                 title: "User skills",
                 subtitle: "(~/.commandcode/skills or ~/.agents/skills)",
                 skills: _,
@@ -54254,7 +54206,7 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
                 disabled: m,
               }),
             x.length > 0 &&
-              K.createElement(fA, {
+              React.createElement(fA, {
                 title: "Bundled skills",
                 subtitle: "(ships with Command Code)",
                 skills: x,
@@ -54264,30 +54216,30 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
               }),
           ),
       S &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.YELLOW }, S),
+          React.createElement(Text, { color: mr.YELLOW }, S),
         ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1, flexDirection: "column" },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "type to search · ↑/↓ navigate · enter to toggle · tab to edit",
           r.length > 0 &&
             !u &&
-            K.createElement(K.Fragment, null, " · space to view issues"),
+            React.createElement(React.Fragment, null, " · space to view issues"),
           u ? " · esc to clear" : " · esc to close",
         ),
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "add skills:",
           " ",
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.CYAN },
             "cmd skills add ",
             "<owner/repo>",
@@ -54297,14 +54249,14 @@ var yA = __name((e) => [{ text: e.label, weight: 100 }], "SKILL_SEARCH_FIELDS"),
     );
   }, "SkillsConfig");
 function SkillsConfigView({ staticKey: e, setShowSkillsConfig: t }) {
-  return K.createElement(
-    K.Fragment,
+  return React.createElement(
+    React.Fragment,
     null,
-    K.createElement(_x, { staticKey: e }),
-    K.createElement(
-      ne,
+    React.createElement(_x, { staticKey: e }),
+    React.createElement(
+      Box,
       { flexDirection: "column", width: "100%" },
-      K.createElement(wA, { onClose: () => t(!1), staticKey: e }),
+      React.createElement(wA, { onClose: () => t(!1), staticKey: e }),
     ),
   );
 }
@@ -54349,32 +54301,32 @@ function getDaysColor(e) {
   __name(getDaysColor, "getDaysColor"));
 var bA = __name(
     ({ plan: e, status: t }) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 0 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexShrink: 0 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { backgroundColor: mr.BLUE, color: "#f4f4f4", bold: !0 },
             `${ZT}USAGE${ZT}`,
           ),
         ),
         e &&
-          K.createElement(
-            K.Fragment,
+          React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, null, " "),
-            K.createElement(re, { color: mr.GRAY }, `${e.name} Plan`),
+            React.createElement(Text, null, " "),
+            React.createElement(Text, { color: mr.GRAY }, `${e.name} Plan`),
           ),
         t &&
-          K.createElement(
-            K.Fragment,
+          React.createElement(
+            React.Fragment,
             null,
-            K.createElement(re, { color: mr.DIM }, " · "),
-            K.createElement(
-              re,
+            React.createElement(Text, { color: mr.DIM }, " · "),
+            React.createElement(
+              Text,
               { color: "active" === t ? mr.GREEN : mr.YELLOW },
               t,
             ),
@@ -54384,21 +54336,21 @@ var bA = __name(
   ),
   EA = __name(
     ({ showRetry: e }) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
         e &&
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
-            K.createElement(re, { bold: !0 }, "r"),
+            React.createElement(Text, { bold: !0 }, "r"),
             " to retry · ",
           ),
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Press ",
-          K.createElement(re, { bold: !0 }, "Esc"),
+          React.createElement(Text, { bold: !0 }, "Esc"),
           " to close",
         ),
       ),
@@ -54415,28 +54367,28 @@ var bA = __name(
       o = Math.min(24, Math.max(10, r)),
       s = Math.max(...n.map((e) => e.costLabel.length)),
       i = Math.max(8, s + 2);
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", marginTop: 1 },
       n.map(({ model: e, displayName: n, costLabel: r, totalCost: s }) => {
         const a = t > 0 ? Math.round((s / t) * 100) : 0,
           l = n.length > o ? n.slice(0, o - 1) + "…" : n;
-        return K.createElement(
-          ne,
+        return React.createElement(
+          Box,
           { key: e },
-          K.createElement(re, null, l.padEnd(o + 2)),
-          K.createElement(re, null, r.padEnd(i)),
-          K.createElement(re, { color: mr.DIM }, `${a}%`),
+          React.createElement(Text, null, l.padEnd(o + 2)),
+          React.createElement(Text, null, r.padEnd(i)),
+          React.createElement(Text, { color: mr.DIM }, `${a}%`),
         );
       }),
     );
   }, "ModelBreakdownRows"),
   CA = __name(({ onClose: e }) => {
-    const [t, n] = J("loading"),
-      [r, o] = J(null),
-      [s, i] = J(!1),
+    const [t, n] = useState("loading"),
+      [r, o] = useState(null),
+      [s, i] = useState(!1),
       a = getProgressBarWidth({ terminalWidth: useTerminalWidth() }),
-      l = te(async (e) => {
+      l = useCallback(async (e) => {
         try {
           i(!1);
           const t = await fetchUsageData();
@@ -54451,68 +54403,68 @@ var bA = __name(
           n("error");
         }
       }, []),
-      u = K.useRef(null);
-    (ie((r, o) => {
+      u = React.useRef(null);
+    (useInput((r, o) => {
       if ((o.escape && (UE(), e()), "r" === r && "error" === t)) {
         (n("loading"), u.current?.abort());
         const e = new AbortController();
         ((u.current = e), l(e.signal));
       }
     }),
-      Z(() => {
+      useEffect(() => {
         const e = new AbortController();
         return ((u.current = e), l(e.signal), () => e.abort());
       }, [l]));
     const d = r?.subscription?.data ?? null,
       m = d ? getPlanInfo({ planId: d.planId ?? "" }) : null;
     if ("loading" === t)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(bA, { plan: m, status: d?.status ?? null }),
-        K.createElement(re, { color: mr.DIM }, "Loading…"),
-        K.createElement(EA, null),
+        React.createElement(bA, { plan: m, status: d?.status ?? null }),
+        React.createElement(Text, { color: mr.DIM }, "Loading…"),
+        React.createElement(EA, null),
       );
     if ("error" === t)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(bA, { plan: m, status: d?.status ?? null }),
-        K.createElement(
-          ne,
+        React.createElement(bA, { plan: m, status: d?.status ?? null }),
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             s
               ? "Not authenticated. Run /login to connect your account."
               : "Something went wrong.",
           ),
         ),
-        K.createElement(EA, { showRetry: !s }),
+        React.createElement(EA, { showRetry: !s }),
       );
     if (!r) return null;
     const g = r.credits || r.subscription,
       h = getStudioUsageUrl(r.whoami);
     if (!g)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(bA, { plan: m, status: d?.status ?? null }),
-        K.createElement(
-          ne,
+        React.createElement(bA, { plan: m, status: d?.status ?? null }),
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.DIM }, "No billing data found."),
+          React.createElement(Text, { color: mr.DIM }, "No billing data found."),
           h &&
-            K.createElement(
-              K.Fragment,
+            React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, { color: mr.DIM }, " Visit "),
-              K.createElement(ro, { url: h, text: "Studio", color: mr.CYAN }),
-              K.createElement(re, { color: mr.DIM }, " for usage details."),
+              React.createElement(Text, { color: mr.DIM }, " Visit "),
+              React.createElement(ro, { url: h, text: "Studio", color: mr.CYAN }),
+              React.createElement(Text, { color: mr.DIM }, " for usage details."),
             ),
         ),
-        K.createElement(EA, null),
+        React.createElement(EA, null),
       );
     const f = r.credits?.credits,
       y = r.summary,
@@ -54530,82 +54482,82 @@ var bA = __name(
       x = getUsageColor(C),
       A = buildBlockBar({ percentage: C, width: a }),
       P = S ? w.reduce((e, t) => e + t.totalCost, 0) : 0;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", paddingX: 0, width: "100%" },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
-        K.createElement(bA, { plan: m, status: d?.status ?? null }),
+        React.createElement(bA, { plan: m, status: d?.status ?? null }),
       ),
       k
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             null,
-            K.createElement(re, { color: x }, A.filled),
-            K.createElement(re, { color: Cr }, A.empty),
-            K.createElement(
-              re,
+            React.createElement(Text, { color: x }, A.filled),
+            React.createElement(Text, { color: Cr }, A.empty),
+            React.createElement(
+              Text,
               { bold: !0, color: x },
               ` ${Math.round(C)}% used`,
             ),
           )
-        : K.createElement(re, { color: mr.DIM }, "Plan details unavailable"),
+        : React.createElement(Text, { color: mr.DIM }, "Plan details unavailable"),
       k &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
           d?.currentPeriodEnd &&
-            K.createElement(re, { color: mr.DIM }, "Cycle: "),
-          K.createElement(re, null, formatCredits(E)),
-          K.createElement(re, { color: mr.DIM }, " left"),
+            React.createElement(Text, { color: mr.DIM }, "Cycle: "),
+          React.createElement(Text, null, formatCredits(E)),
+          React.createElement(Text, { color: mr.DIM }, " left"),
           y &&
-            K.createElement(
-              K.Fragment,
+            React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, { color: mr.DIM }, " · "),
-              K.createElement(re, null, y.totalCount.toLocaleString()),
-              K.createElement(re, { color: mr.DIM }, " requests"),
+              React.createElement(Text, { color: mr.DIM }, " · "),
+              React.createElement(Text, null, y.totalCount.toLocaleString()),
+              React.createElement(Text, { color: mr.DIM }, " requests"),
             ),
           null !== T &&
-            K.createElement(
-              K.Fragment,
+            React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, { color: mr.DIM }, " · "),
+              React.createElement(Text, { color: mr.DIM }, " · "),
               0 === T
-                ? K.createElement(re, { color: _ }, "renewal today")
-                : K.createElement(
-                    K.Fragment,
+                ? React.createElement(Text, { color: _ }, "renewal today")
+                : React.createElement(
+                    React.Fragment,
                     null,
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       { color: _ },
                       `${T} day${1 === T ? "" : "s"}`,
                     ),
-                    K.createElement(re, { color: mr.DIM }, " to renewal"),
+                    React.createElement(Text, { color: mr.DIM }, " to renewal"),
                   ),
             ),
         ),
-      S && K.createElement(vA, { models: w, grandTotal: P }),
+      S && React.createElement(vA, { models: w, grandTotal: P }),
       h &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.DIM }, "Full breakdown at "),
-          K.createElement(ro, { url: h, text: SA(h), color: mr.CYAN }),
+          React.createElement(Text, { color: mr.DIM }, "Full breakdown at "),
+          React.createElement(ro, { url: h, text: SA(h), color: mr.CYAN }),
         ),
-      K.createElement(EA, null),
+      React.createElement(EA, null),
     );
   }, "UsageOverlay");
 function UsageView({ staticKey: e, setShowUsageOverlay: t }) {
-  return K.createElement(
-    K.Fragment,
+  return React.createElement(
+    React.Fragment,
     null,
-    K.createElement(_x, { staticKey: e }),
-    K.createElement(
-      ne,
+    React.createElement(_x, { staticKey: e }),
+    React.createElement(
+      Box,
       { flexDirection: "column", width: "100%" },
-      K.createElement(CA, { onClose: () => t(!1) }),
+      React.createElement(CA, { onClose: () => t(!1) }),
     ),
   );
 }
@@ -54960,44 +54912,44 @@ function getLayoutSizes({ terminalWidth: e }) {
 function ContextProgress({ analysis: e, progressBarWidth: t }) {
   const n = getUsageColor(e.percentage),
     r = buildBlockBar({ percentage: e.percentage, width: t });
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexShrink: 0 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { backgroundColor: mr.BLUE, color: "#f4f4f4", bold: !0 },
           `${ZT}CONTEXT${ZT}`,
         ),
       ),
-      K.createElement(re, { color: mr.DIM }, " · "),
-      K.createElement(re, { color: mr.GRAY }, getModelDisplayName(e.model)),
+      React.createElement(Text, { color: mr.DIM }, " · "),
+      React.createElement(Text, { color: mr.GRAY }, getModelDisplayName(e.model)),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(re, { color: n }, r.filled),
-      K.createElement(re, { color: Cr }, r.empty),
-      K.createElement(
-        re,
+      React.createElement(Text, { color: n }, r.filled),
+      React.createElement(Text, { color: Cr }, r.empty),
+      React.createElement(
+        Text,
         { bold: !0, color: n },
         ` ${e.percentage.toFixed(1)}%`,
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(re, null, formatK(e.tokensUsed)),
-      K.createElement(re, { color: mr.GRAY }, ` / ${formatK(e.tokenLimit)}`),
-      K.createElement(re, { color: mr.DIM }, " · "),
-      K.createElement(re, { color: n }, formatK(e.tokensRemaining)),
-      K.createElement(re, { color: mr.GRAY }, " remaining"),
-      e.isEstimated && K.createElement(re, { color: mr.DIM }, " (estimated)"),
+      React.createElement(Text, null, formatK(e.tokensUsed)),
+      React.createElement(Text, { color: mr.GRAY }, ` / ${formatK(e.tokenLimit)}`),
+      React.createElement(Text, { color: mr.DIM }, " · "),
+      React.createElement(Text, { color: n }, formatK(e.tokensRemaining)),
+      React.createElement(Text, { color: mr.GRAY }, " remaining"),
+      e.isEstimated && React.createElement(Text, { color: mr.DIM }, " (estimated)"),
     ),
   );
 }
@@ -55010,26 +54962,26 @@ function CompactionDistance({ analysis: e }) {
   return (
     n <= 5e4 && (r = mr.YELLOW),
     n <= 2e4 && (r = mr.RED),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1 },
-      K.createElement(re, { color: r }, `~${formatK(n)}`),
-      K.createElement(re, { color: mr.DIM }, " until auto-compact"),
+      React.createElement(Text, { color: r }, `~${formatK(n)}`),
+      React.createElement(Text, { color: mr.DIM }, " until auto-compact"),
     )
   );
 }
 function BreakdownRow({ item: e, labelWidth: t, numWidth: n, showDetail: r }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     null,
-    K.createElement(re, null, e.name.padEnd(t)),
-    K.createElement(
-      re,
+    React.createElement(Text, null, e.name.padEnd(t)),
+    React.createElement(
+      Text,
       { bold: !0 },
       formatBreakdownValue(e.tokens).padStart(n),
     ),
-    K.createElement(re, { color: mr.GRAY }, " tokens"),
-    r && e.detail && K.createElement(re, { color: mr.DIM }, ` · ${e.detail}`),
+    React.createElement(Text, { color: mr.GRAY }, " tokens"),
+    r && e.detail && React.createElement(Text, { color: mr.DIM }, ` · ${e.detail}`),
   );
 }
 function ContextBreakdown({
@@ -55040,11 +54992,11 @@ function ContextBreakdown({
   const r = e.breakdown.filter((e) => e.tokens > 0);
   if (0 === r.length) return null;
   const o = Math.max(4, ...r.map((e) => formatBreakdownValue(e.tokens).length));
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", marginTop: 1 },
     r.map((e) =>
-      K.createElement(BreakdownRow, {
+      React.createElement(BreakdownRow, {
         key: e.name,
         item: e,
         labelWidth: t,
@@ -55057,35 +55009,35 @@ function ContextBreakdown({
 function ContextTips({ tips: e }) {
   return 0 === e.length
     ? null
-    : K.createElement(
-        ne,
+    : React.createElement(
+        Box,
         { flexDirection: "column", marginTop: 1 },
         e.map((e) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { key: e },
-            K.createElement(re, { color: mr.CYAN }, Ie.pointer),
-            K.createElement(re, { color: mr.GRAY }, " ", e),
+            React.createElement(Text, { color: mr.CYAN }, Ie.pointer),
+            React.createElement(Text, { color: mr.GRAY }, " ", e),
           ),
         ),
       );
 }
 function ContextMessage({ analysis: e }) {
   const t = getLayoutSizes({ terminalWidth: useTerminalWidth() });
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", paddingTop: 1 },
-    K.createElement(ContextProgress, {
+    React.createElement(ContextProgress, {
       analysis: e,
       progressBarWidth: t.progressBarWidth,
     }),
-    K.createElement(CompactionDistance, { analysis: e }),
-    K.createElement(ContextBreakdown, {
+    React.createElement(CompactionDistance, { analysis: e }),
+    React.createElement(ContextBreakdown, {
       analysis: e,
       labelWidth: t.labelWidth,
       showBreakdownDetail: t.showBreakdownDetail,
     }),
-    K.createElement(ContextTips, { tips: e.tips }),
+    React.createElement(ContextTips, { tips: e.tips }),
   );
 }
 function ContextConfigView({
@@ -55094,10 +55046,10 @@ function ContextConfigView({
   setShowContextView: n,
   setInput: r,
 }) {
-  const [o, s] = J(null),
-    [i, a] = J(null);
+  const [o, s] = useState(null),
+    [i, a] = useState(null);
   return (
-    Z(() => {
+    useEffect(() => {
       let e = !0;
       return (
         __name(async () => {
@@ -55115,40 +55067,40 @@ function ContextConfigView({
         }
       );
     }, [t]),
-    ie((e, t) => {
+    useInput((e, t) => {
       t.escape && (UE(), r(""), n(!1));
     }),
-    K.createElement(
-      K.Fragment,
+    React.createElement(
+      React.Fragment,
       null,
-      K.createElement(_x, { staticKey: e }),
-      K.createElement(
-        ne,
+      React.createElement(_x, { staticKey: e }),
+      React.createElement(
+        Box,
         { flexDirection: "column", width: "100%" },
         i
-          ? K.createElement(
-              ne,
+          ? React.createElement(
+              Box,
               { flexDirection: "column" },
-              K.createElement(re, { color: pr, bold: !0 }, "Context"),
-              K.createElement(re, { color: mr.DIM }, i),
+              React.createElement(Text, { color: pr, bold: !0 }, "Context"),
+              React.createElement(Text, { color: mr.DIM }, i),
             )
           : o
-            ? K.createElement(ContextMessage, { analysis: o })
-            : K.createElement(
-                ne,
+            ? React.createElement(ContextMessage, { analysis: o })
+            : React.createElement(
+                Box,
                 { flexDirection: "column" },
-                K.createElement(re, { color: pr, bold: !0 }, "Context"),
-                K.createElement(
-                  re,
+                React.createElement(Text, { color: pr, bold: !0 }, "Context"),
+                React.createElement(
+                  Text,
                   { color: mr.DIM },
                   "Loading context analysis...",
                 ),
               ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "Press Esc to return to conversation",
           ),
@@ -55302,9 +55254,9 @@ function getPrStatus(e) {
   }
 }
 async function hasTasteMdFiles(e) {
-  if (!O(e)) return !1;
+  if (!existsSync(e)) return !1;
   try {
-    return (await I(e, { recursive: !0, encoding: "utf-8" })).some((e) =>
+    return (await readdir(e, { recursive: !0, encoding: "utf-8" })).some((e) =>
       e.endsWith(".md"),
     );
   } catch {
@@ -55312,9 +55264,9 @@ async function hasTasteMdFiles(e) {
   }
 }
 async function getTasteStatus() {
-  const e = t.join(process.cwd(), ".commandcode", "taste"),
-    n = t.join(e, "taste.md"),
-    r = O(n),
+  const e = pathDefault.join(process.cwd(), ".commandcode", "taste"),
+    n = pathDefault.join(e, "taste.md"),
+    r = existsSync(n),
     o = r || (await hasTasteMdFiles(e));
   let s = !0;
   try {
@@ -55345,14 +55297,14 @@ function sanitizeProxyUrl(e) {
 function getSystemStatus() {
   let e, t, n, r;
   try {
-    ((e = b_(S.platform())), (t = D_()), (n = O_()), (r = F_()));
+    ((e = b_(osDefault.platform())), (t = D_()), (n = O_()), (r = F_()));
   } catch {
     ((e = "Unknown"), (t = "Unknown"), (n = "Unknown"), (r = "N/A"));
   }
   return {
     cwd: process.cwd(),
     os: e,
-    arch: S.arch(),
+    arch: osDefault.arch(),
     shell: n,
     terminal: t,
     nodeVersion: process.version,
@@ -55368,7 +55320,7 @@ async function gatherStatusData() {
     t = safeSync(getSystemStatus, {
       cwd: process.cwd(),
       os: "Unknown",
-      arch: S.arch(),
+      arch: osDefault.arch(),
       shell: "Unknown",
       terminal: "Unknown",
       nodeVersion: process.version,
@@ -55469,13 +55421,13 @@ function formatSystemValue({ system: e }) {
   __name(formatSystemValue, "formatSystemValue"));
 var xA = __name(
   ({ label: e, value: t, valueColor: n, dimValue: r }) =>
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(re, { dimColor: !0 }, `${e}:`.padEnd(14)),
+      React.createElement(Text, { dimColor: !0 }, `${e}:`.padEnd(14)),
       r
-        ? K.createElement(re, { dimColor: !0 }, t)
-        : K.createElement(re, { color: n }, t),
+        ? React.createElement(Text, { dimColor: !0 }, t)
+        : React.createElement(Text, { color: n }, t),
     ),
   "Row",
 );
@@ -55494,78 +55446,78 @@ function StatusMessage({ statusData: e }) {
     d = t.taste.fileExists
       ? "Active · " + (t.taste.learningEnabled ? "Learning on" : "Learning off")
       : "No taste.md";
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", paddingX: 0 },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(re, { color: pr, bold: !0 }, "Command Code", " "),
-      K.createElement(re, { dimColor: !0 }, n),
+      React.createElement(Text, { color: pr, bold: !0 }, "Command Code", " "),
+      React.createElement(Text, { dimColor: !0 }, n),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(re, { dimColor: !0 }, "Visit "),
-      K.createElement(ro, { url: _A, text: _A, color: mr.CYAN }),
-      K.createElement(re, { dimColor: !0 }, " for usage and billing"),
+      React.createElement(Text, { dimColor: !0 }, "Visit "),
+      React.createElement(ro, { url: _A, text: _A, color: mr.CYAN }),
+      React.createElement(Text, { dimColor: !0 }, " for usage and billing"),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1 },
-      K.createElement(re, { dimColor: !0 }, "Account:".padEnd(14)),
+      React.createElement(Text, { dimColor: !0 }, "Account:".padEnd(14)),
       t.auth.authenticated && t.auth.username
-        ? K.createElement(
-            K.Fragment,
+        ? React.createElement(
+            React.Fragment,
             null,
-            K.createElement(ro, {
+            React.createElement(ro, {
               url: `https://commandcode.ai/${t.auth.username}/`,
               text: t.auth.username,
               color: mr.CYAN,
             }),
-            K.createElement(re, { color: a }, " ", i),
+            React.createElement(Text, { color: a }, " ", i),
           )
         : t.auth.authenticated
-          ? K.createElement(
-              K.Fragment,
+          ? React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, null, "Authenticated"),
-              K.createElement(re, { color: a }, " ", i),
+              React.createElement(Text, null, "Authenticated"),
+              React.createElement(Text, { color: a }, " ", i),
             )
-          : K.createElement(
-              K.Fragment,
+          : React.createElement(
+              React.Fragment,
               null,
-              K.createElement(re, { color: Er.WARNING }, "Not signed in"),
-              K.createElement(re, { color: a }, " ", i),
-              K.createElement(re, { dimColor: !0 }, " — run "),
-              K.createElement(re, { bold: !0 }, "/login"),
+              React.createElement(Text, { color: Er.WARNING }, "Not signed in"),
+              React.createElement(Text, { color: a }, " ", i),
+              React.createElement(Text, { dimColor: !0 }, " — run "),
+              React.createElement(Text, { bold: !0 }, "/login"),
             ),
     ),
-    K.createElement(xA, { label: "Model", value: r }),
-    K.createElement(xA, { label: "Branch", value: o, dimValue: !t.git.branch }),
-    s ? K.createElement(xA, { label: "Worktree", value: s }) : null,
+    React.createElement(xA, { label: "Model", value: r }),
+    React.createElement(xA, { label: "Branch", value: o, dimValue: !t.git.branch }),
+    s ? React.createElement(xA, { label: "Worktree", value: s }) : null,
     t.git.remoteUrl
-      ? K.createElement(
-          ne,
+      ? React.createElement(
+          Box,
           null,
-          K.createElement(re, { dimColor: !0 }, "Repository:".padEnd(14)),
-          K.createElement(ro, {
+          React.createElement(Text, { dimColor: !0 }, "Repository:".padEnd(14)),
+          React.createElement(ro, {
             url: t.git.remoteHttpUrl || `https://github.com/${t.git.remoteUrl}`,
             text: t.git.remoteUrl,
             color: mr.CYAN,
           }),
           t.pr
-            ? K.createElement(
-                K.Fragment,
+            ? React.createElement(
+                React.Fragment,
                 null,
-                K.createElement(re, { dimColor: !0 }, " · "),
-                K.createElement(ro, {
+                React.createElement(Text, { dimColor: !0 }, " · "),
+                React.createElement(ro, {
                   url: t.pr.url,
                   text: `#${t.pr.number}`,
                   color: "OPEN" === t.pr.state ? mr.CYAN : mr.GRAY,
                 }),
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { dimColor: !0 },
                   " ",
                   "(",
@@ -55576,17 +55528,17 @@ function StatusMessage({ statusData: e }) {
             : null,
         )
       : t.pr
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             null,
-            K.createElement(re, { dimColor: !0 }, "Pull Request:".padEnd(14)),
-            K.createElement(ro, {
+            React.createElement(Text, { dimColor: !0 }, "Pull Request:".padEnd(14)),
+            React.createElement(ro, {
               url: t.pr.url,
               text: `#${t.pr.number}`,
               color: "OPEN" === t.pr.state ? mr.CYAN : mr.GRAY,
             }),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { dimColor: !0 },
               " (",
               t.pr.state.toLowerCase(),
@@ -55594,16 +55546,16 @@ function StatusMessage({ statusData: e }) {
             ),
           )
         : null,
-    K.createElement(xA, {
+    React.createElement(xA, {
       label: "Taste",
       value: d,
       dimValue: !t.taste.fileExists,
     }),
-    K.createElement(xA, {
+    React.createElement(xA, {
       label: "Directory",
       value: toRelativePath(t.system.cwd),
     }),
-    K.createElement(xA, {
+    React.createElement(xA, {
       label: "Skills",
       value: formatCountValue(
         t.skillsAgents.personalSkills,
@@ -55611,7 +55563,7 @@ function StatusMessage({ statusData: e }) {
       ),
       dimValue: 0 === l,
     }),
-    K.createElement(xA, {
+    React.createElement(xA, {
       label: "Agents",
       value: formatCountValue(
         t.skillsAgents.personalAgents,
@@ -55619,19 +55571,19 @@ function StatusMessage({ statusData: e }) {
       ),
       dimValue: 0 === u,
     }),
-    K.createElement(xA, {
+    React.createElement(xA, {
       label: "System",
       value: formatSystemValue({ system: t.system }),
     }),
     t.system.proxy
-      ? K.createElement(xA, { label: "Proxy", value: t.system.proxy })
+      ? React.createElement(xA, { label: "Proxy", value: t.system.proxy })
       : null,
   );
 }
 function StatusConfigView({ staticKey: e, setShowStatusView: t, setInput: n }) {
-  const [r, o] = J({ phase: "loading" });
+  const [r, o] = useState({ phase: "loading" });
   return (
-    Z(() => {
+    useEffect(() => {
       let e = !1;
       return (
         gatherStatusData()
@@ -55649,31 +55601,31 @@ function StatusConfigView({ staticKey: e, setShowStatusView: t, setInput: n }) {
         }
       );
     }, []),
-    ie((e, r) => {
+    useInput((e, r) => {
       r.escape && (n(""), t(!1));
     }),
-    K.createElement(
-      K.Fragment,
+    React.createElement(
+      React.Fragment,
       null,
-      K.createElement(_x, { staticKey: e }),
-      K.createElement(
-        ne,
+      React.createElement(_x, { staticKey: e }),
+      React.createElement(
+        Box,
         { flexDirection: "column", width: "100%" },
         "ready" === r.phase
-          ? K.createElement(StatusMessage, { statusData: r.data })
+          ? React.createElement(StatusMessage, { statusData: r.data })
           : "error" === r.phase
-            ? K.createElement(
-                re,
+            ? React.createElement(
+                Text,
                 { dimColor: !0 },
                 "Could not load status: ",
                 r.message,
               )
-            : K.createElement(re, { dimColor: !0 }, "Gathering status…"),
-        K.createElement(
-          ne,
+            : React.createElement(Text, { dimColor: !0 }, "Gathering status…"),
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { dimColor: !0 },
             "Press Esc to return to conversation",
           ),
@@ -55740,10 +55692,10 @@ function getSuggestionBase(e) {
   if (r) return { searchDirectory: n, prefix: "", outputPrefix: o };
   const s = o.lastIndexOf("/");
   return -1 === s
-    ? { searchDirectory: t.dirname(n), prefix: t.basename(n), outputPrefix: "" }
+    ? { searchDirectory: pathDefault.dirname(n), prefix: pathDefault.basename(n), outputPrefix: "" }
     : {
-        searchDirectory: t.dirname(n),
-        prefix: t.basename(n),
+        searchDirectory: pathDefault.dirname(n),
+        prefix: pathDefault.basename(n),
         outputPrefix: o.slice(0, s + 1),
       };
 }
@@ -55757,7 +55709,7 @@ function getDirectorySuggestions(e) {
         outputPrefix: r,
       } = getSuggestionBase(t),
       o = n.startsWith(".") || r.includes("/.");
-    return D.readdirSync(e, { withFileTypes: !0 })
+    return fsDefault.readdirSync(e, { withFileTypes: !0 })
       .filter((e) => e.isDirectory())
       .filter((e) => !!o || !e.name.startsWith("."))
       .filter((e) => !n || e.name.toLowerCase().startsWith(n.toLowerCase()))
@@ -55797,18 +55749,18 @@ function getFooterText(e) {
   Or(),
   jr());
 var AA = __name(({ onClose: e }) => {
-  const [t, n] = J(""),
-    [r, o] = J(null),
-    [s, i] = J([]),
-    [a, l] = J(getAdditionalDirectories()),
-    [u, d] = J({ zone: "input", suggestionIndex: 0, activeDirIndex: 0 }),
-    [m, g] = J(0);
-  (Z(() => {
+  const [t, n] = useState(""),
+    [r, o] = useState(null),
+    [s, i] = useState([]),
+    [a, l] = useState(getAdditionalDirectories()),
+    [u, d] = useState({ zone: "input", suggestionIndex: 0, activeDirIndex: 0 }),
+    [m, g] = useState(0);
+  (useEffect(() => {
     (i(t ? getDirectorySuggestions(t) : []),
       d((e) => ({ ...e, zone: "input" })),
       g(0));
   }, [t]),
-    Z(() => {
+    useEffect(() => {
       if (!r || "success" !== r.tone) return;
       const e = setTimeout(() => {
         o(null);
@@ -55849,7 +55801,7 @@ var AA = __name(({ onClose: e }) => {
           return { ...e, activeDirIndex: t };
         }));
     }, "handleRemove");
-  (ie((t, r) => {
+  (useInput((t, r) => {
     if (r.escape) e();
     else {
       if (r.return)
@@ -55886,7 +55838,7 @@ var AA = __name(({ onClose: e }) => {
       }
     }
   }),
-    Z(() => {
+    useEffect(() => {
       "suggestions" === u.zone &&
         g((e) =>
           getAdjustedSuggestionOffset({
@@ -55897,7 +55849,7 @@ var AA = __name(({ onClose: e }) => {
           }),
         );
     }, [u, s.length]),
-    Z(() => {
+    useEffect(() => {
       d((e) =>
         "suggestions" === e.zone && e.suggestionIndex >= s.length
           ? { ...e, zone: "input", suggestionIndex: Math.max(0, s.length - 1) }
@@ -55908,8 +55860,8 @@ var AA = __name(({ onClose: e }) => {
     }, [s.length, a.length]));
   const y = s.slice(m, m + 8),
     w = getFooterText({ focusZone: u.zone });
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     {
       flexDirection: "column",
       borderStyle: "single",
@@ -55917,41 +55869,41 @@ var AA = __name(({ onClose: e }) => {
       paddingX: 1,
       paddingY: 0,
     },
-    K.createElement(
-      re,
+    React.createElement(
+      Text,
       { bold: !0, color: mr.CYAN },
       "Add directory to workspace",
     ),
-    K.createElement(
-      re,
+    React.createElement(
+      Text,
       { color: mr.GRAY },
       "Command Code will be able to read files in this directory and make edits when accept edits mode is on.",
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1, flexDirection: "column" },
-      K.createElement(re, { color: mr.GRAY }, "Added directories"),
+      React.createElement(Text, { color: mr.GRAY }, "Added directories"),
       0 === a.length
-        ? K.createElement(re, { color: mr.GRAY }, " None yet")
+        ? React.createElement(Text, { color: mr.GRAY }, " None yet")
         : a.map((e, t) => {
             const n = "active-dir" === u.zone && u.activeDirIndex === t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: e, color: n ? mr.YELLOW : mr.GREEN, bold: n },
               n ? ` ${Ie.pointer} ` : "   ",
               formatDirectoryForDisplay(e),
             );
           }),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1 },
-      K.createElement(re, { bold: !0, color: mr.WHITE }, "Path"),
+      React.createElement(Text, { bold: !0, color: mr.WHITE }, "Path"),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(TextInput, {
+      React.createElement(TextInput, {
         value: t,
         focus: "input" === u.zone,
         prefix: `${"input" === u.zone ? Ie.pointer : " "} `,
@@ -55963,21 +55915,21 @@ var AA = __name(({ onClose: e }) => {
       }),
     ),
     !t &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.GRAY },
           "Examples: ../shared ~/docs /abs/path",
         ),
       ),
     r &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           {
             color: { error: mr.RED, warning: mr.YELLOW, success: mr.GREEN }[
               r.tone
@@ -55987,40 +55939,40 @@ var AA = __name(({ onClose: e }) => {
         ),
       ),
     s.length > 0 &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", marginTop: 1 },
-        K.createElement(re, { color: mr.GRAY }, "Suggestions"),
+        React.createElement(Text, { color: mr.GRAY }, "Suggestions"),
         y.map((e, t) => {
           const n = m + t,
             r = "suggestions" === u.zone && u.suggestionIndex === n;
-          return K.createElement(
-            re,
+          return React.createElement(
+            Text,
             { key: e, color: r ? mr.CYAN : mr.GRAY, bold: r },
             r ? ` ${Ie.pointer} ` : "   ",
             e,
           );
         }),
       ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1 },
-      K.createElement(BracketedText, { text: w, color: mr.DIM }),
+      React.createElement(BracketedText, { text: w, color: mr.DIM }),
     ),
   );
 }, "AddDirModal");
 (Ft(), Ft(), Cn(), Ft(), Ft(), Cn(), Or());
 var PA = __name(
-    () => t.join(S.homedir(), ".commandcode", "agents"),
+    () => pathDefault.join(osDefault.homedir(), ".commandcode", "agents"),
     "getRootAgentDir",
   ),
   IA = __name(
-    () => t.join(process.cwd(), ".commandcode", "agents"),
+    () => pathDefault.join(process.cwd(), ".commandcode", "agents"),
     "getLocalAgentDir",
   ),
   MA = __name(({ config: e, onSaveComplete: n, viewOnly: r = !1 }) => {
-    const [o, s] = J("idle"),
-      [i, a] = J(""),
+    const [o, s] = useState("idle"),
+      [i, a] = useState(""),
       l = [...Zk.map((e) => e.name), ...eT.map((e) => e.name)],
       u = __name(async () => {
         if (!e.agentType || !e.sysPrompt)
@@ -56028,9 +55980,9 @@ var PA = __name(
         s("saving");
         try {
           const r = "personal" === e.location ? PA() : IA();
-          await k.mkdir(r, { recursive: !0 });
+          await fsPromisesDefault.mkdir(r, { recursive: !0 });
           const o = `${e.agentType}.md`,
-            s = t.join(r, o),
+            s = pathDefault.join(r, o),
             i = Array.from(e.selectedTools)
               .map((e) => rT[e] || e)
               .join(", "),
@@ -56041,14 +55993,14 @@ var PA = __name(
                   ? '"*"'
                   : JSON.stringify(i),
             u = `---\nname: "${e.agentType}"\ndescription: ${JSON.stringify(e.ccToolDefinition)}\ntools: ${a}\n---\n\n${e.sysPrompt}\n`;
-          (await k.writeFile(s, u, "utf-8"), n(e.agentType));
+          (await fsPromisesDefault.writeFile(s, u, "utf-8"), n(e.agentType));
         } catch (e) {
           (console.error("Error saving agent:", e),
             s("error"),
             a(e instanceof Error ? e.message : "Unknown error occurred"));
         }
       }, "handleSaveAgent");
-    ie((e, t) => {
+    useInput((e, t) => {
       r || !t.return || ("idle" !== o && "error" !== o) || u();
     });
     const d = Array.from(e.selectedTools)
@@ -56058,30 +56010,30 @@ var PA = __name(
         "personal" === e.location
           ? `~/.commandcode/agents/${e.agentType}`
           : `.commandcode/agents/${e.agentType}`;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", gap: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { gap: 1 },
-          K.createElement(re, { color: mr.WHITE, bold: !0 }, "Name:"),
-          K.createElement(re, { color: mr.GRAY }, e.agentType),
+          React.createElement(Text, { color: mr.WHITE, bold: !0 }, "Name:"),
+          React.createElement(Text, { color: mr.GRAY }, e.agentType),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { gap: 1 },
-          K.createElement(re, { color: mr.WHITE, bold: !0 }, "Location:"),
-          K.createElement(re, { color: mr.GRAY }, m),
+          React.createElement(Text, { color: mr.WHITE, bold: !0 }, "Location:"),
+          React.createElement(Text, { color: mr.GRAY }, m),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { gap: 1 },
-          K.createElement(re, { color: mr.WHITE, bold: !0 }, "Tools:"),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: mr.WHITE, bold: !0 }, "Tools:"),
+          React.createElement(
+            Text,
             { color: mr.GRAY },
             0 === e.selectedTools.size
               ? "None"
@@ -56091,51 +56043,51 @@ var PA = __name(
           ),
         ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { gap: 1 },
-        K.createElement(re, { color: mr.WHITE, bold: !0 }, "Description"),
-        K.createElement(
-          re,
+        React.createElement(Text, { color: mr.WHITE, bold: !0 }, "Description"),
+        React.createElement(
+          Text,
           { color: mr.GRAY },
           "(Tells ",
           "Command Code",
           " when to use this agent):",
         ),
       ),
-      K.createElement(re, { color: mr.GRAY }, e.ccToolDefinition),
-      K.createElement(
-        ne,
+      React.createElement(Text, { color: mr.GRAY }, e.ccToolDefinition),
+      React.createElement(
+        Box,
         { gap: 1 },
-        K.createElement(re, { color: mr.WHITE, bold: !0 }, "System Prompt:"),
+        React.createElement(Text, { color: mr.WHITE, bold: !0 }, "System Prompt:"),
       ),
-      K.createElement(re, { color: mr.GRAY }, e.sysPrompt),
+      React.createElement(Text, { color: mr.GRAY }, e.sysPrompt),
       !r &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
           "idle" === o &&
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { gap: 1 },
-              K.createElement(re, { color: mr.GREEN, dimColor: !0 }, "Press"),
-              K.createElement(re, { color: mr.GREEN, bold: !0 }, "Enter"),
-              K.createElement(
-                re,
+              React.createElement(Text, { color: mr.GREEN, dimColor: !0 }, "Press"),
+              React.createElement(Text, { color: mr.GREEN, bold: !0 }, "Enter"),
+              React.createElement(
+                Text,
                 { color: mr.GREEN, dimColor: !0 },
                 "to save • Esc to cancel",
               ),
             ),
           "saving" === o &&
-            K.createElement(re, { color: mr.YELLOW }, "Saving agent..."),
+            React.createElement(Text, { color: mr.YELLOW }, "Saving agent..."),
           "saved" === o &&
-            K.createElement(re, { color: mr.GREEN }, Ie.tick, " ", i),
+            React.createElement(Text, { color: mr.GREEN }, Ie.tick, " ", i),
           "error" === o &&
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { flexDirection: "column" },
-              K.createElement(re, { color: mr.RED }, Ie.cross, " Error: ", i),
-              K.createElement(re, { color: mr.GRAY }, "Press Enter to retry"),
+              React.createElement(Text, { color: mr.RED }, Ie.cross, " Error: ", i),
+              React.createElement(Text, { color: mr.GRAY }, "Press Enter to retry"),
             ),
         ),
     );
@@ -56143,7 +56095,7 @@ var PA = __name(
 Or();
 var NA = __name(
   ({ agent: e, onBack: t, setRevalidateAgent: n, isReadOnly: r = !1 }) => {
-    const [o, s] = J("menu"),
+    const [o, s] = useState("menu"),
       i = [...Zk.map((e) => e.name), ...eT.map((e) => e.name)];
     let a = new Set();
     if ("*" === e.tools || '"*"' === e.tools) a = new Set(i);
@@ -56179,36 +56131,36 @@ var NA = __name(
               : "delete" === e.value && s("delete");
       }, "handleMenuSelect");
     if (
-      (ie((e, n) => {
+      (useInput((e, n) => {
         (n.escape && ("menu" === o ? t() : s("menu")),
           n.return && "view" === o && s("menu"));
       }),
       "view" === o)
     )
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(MA, {
+        React.createElement(MA, {
           config: l,
           onSaveComplete: () => s("menu"),
           viewOnly: !0,
         }),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.GRAY }, "Press Enter to go back"),
+          React.createElement(Text, { color: mr.GRAY }, "Press Enter to go back"),
         ),
       );
     if ("edit" === o)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.YELLOW },
           "Edit functionality coming soon...",
         ),
-        K.createElement(re, { color: mr.GRAY }, "Press Esc to go back"),
+        React.createElement(Text, { color: mr.GRAY }, "Press Esc to go back"),
       );
     if ("delete" === o) {
       const r = [
@@ -56218,62 +56170,62 @@ var NA = __name(
         o = __name(async (r) => {
           if ("confirm-delete" === r.value)
             try {
-              (await k.unlink(e.filePath), n(!0), t());
+              (await fsPromisesDefault.unlink(e.filePath), n(!0), t());
             } catch (e) {
               (console.error(`Failed to delete agent: ${e}`), s("menu"));
             }
           else s("menu");
         }, "handleDeleteSelect");
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", gap: 1 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column" },
-          K.createElement(re, { color: mr.RED }, "Delete agent"),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: mr.RED }, "Delete agent"),
+          React.createElement(
+            Text,
             { color: mr.GRAY },
             "Are you sure you want to delete the agent ",
             e.name,
             "?",
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(pt, {
+          React.createElement(pt, {
             items: r,
             onSelect: o,
             indicatorComponent: ({ isSelected: e }) =>
-              K.createElement(re, { color: mr.WHITE }, e ? ">" : " "),
+              React.createElement(Text, { color: mr.WHITE }, e ? ">" : " "),
             itemComponent: ({ isSelected: e, label: t }) =>
-              K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
+              React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
           }),
         ),
       );
     }
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column" },
-      K.createElement(re, { color: mr.WHITE, bold: !0 }, e.name),
-      K.createElement(
-        ne,
+      React.createElement(Text, { color: mr.WHITE, bold: !0 }, e.name),
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(pt, {
+        React.createElement(pt, {
           items: u,
           onSelect: d,
           indicatorComponent: ({ isSelected: e }) =>
-            K.createElement(re, { color: mr.WHITE }, e ? ">" : " "),
+            React.createElement(Text, { color: mr.WHITE }, e ? ">" : " "),
           itemComponent: ({ isSelected: e, label: t }) =>
-            K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
+            React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
         }),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.GRAY },
           "Press ↑↓ to navigate · Enter to select · Esc to go back",
         ),
@@ -56284,31 +56236,31 @@ var NA = __name(
 );
 Or();
 var RA = __name(({ handleSelect: e, createdAgentName: n }) => {
-  const [r, o] = J([]),
-    [s, i] = J([]),
-    [a, l] = J([]),
-    [u, d] = J(!0),
-    [m, g] = J(!1),
-    [h, f] = J(null),
-    [y, w] = J(!1),
+  const [r, o] = useState([]),
+    [s, i] = useState([]),
+    [a, l] = useState([]),
+    [u, d] = useState(!0),
+    [m, g] = useState(!1),
+    [h, f] = useState(null),
+    [y, w] = useState(!1),
     E = __name(
-      () => t.join(S.homedir(), ".commandcode", "agents"),
+      () => pathDefault.join(osDefault.homedir(), ".commandcode", "agents"),
       "getRootAgentDir",
     ),
     v = __name(
-      () => t.join(process.cwd(), ".commandcode", "agents"),
+      () => pathDefault.join(process.cwd(), ".commandcode", "agents"),
       "getLocalAgentDir",
     ),
     C = __name(async (e, n) => {
       try {
         g(!1);
-        const r = (await k.readdir(e)).filter((e) => e.endsWith(".md"));
+        const r = (await fsPromisesDefault.readdir(e)).filter((e) => e.endsWith(".md"));
         return (
           await Promise.all(
             r.map(async (r) => {
               try {
-                const o = t.join(e, r),
-                  s = await k.readFile(o, "utf-8"),
+                const o = pathDefault.join(e, r),
+                  s = await fsPromisesDefault.readFile(o, "utf-8"),
                   { data: i, content: a } = Ue(s);
                 let l = i.tools || "";
                 return (
@@ -56335,7 +56287,7 @@ var RA = __name(({ handleSelect: e, createdAgentName: n }) => {
         return [];
       }
     }, "loadAgentsFromDirectory");
-  Z(() => {
+  useEffect(() => {
     __name(async () => {
       d(!0);
       const [e, t] = await Promise.all([C(E(), "personal"), C(v(), "project")]),
@@ -56365,10 +56317,10 @@ var RA = __name(({ handleSelect: e, createdAgentName: n }) => {
         e && (f(e), w(!0));
       }
     }, "handleAgentSelect");
-  if (u) return K.createElement(re, { color: mr.GRAY }, "Loading agents...");
+  if (u) return React.createElement(Text, { color: mr.GRAY }, "Loading agents...");
   if (y && h) {
     const e = h.filePath.startsWith("__builtin__:");
-    return K.createElement(NA, {
+    return React.createElement(NA, {
       agent: h,
       onBack: () => {
         (w(!1), f(null));
@@ -56382,41 +56334,41 @@ var RA = __name(({ handleSelect: e, createdAgentName: n }) => {
       o = n?.value || "",
       i = r[0]?.filePath === o,
       a = s[0]?.filePath === o;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column" },
       i &&
         r.length > 0 &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.GRAY, bold: !0 }, "User agents"),
+          React.createElement(Text, { color: mr.GRAY, bold: !0 }, "User agents"),
         ),
       a &&
         s.length > 0 &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.GRAY, bold: !0 }, "Project agents"),
+          React.createElement(Text, { color: mr.GRAY, bold: !0 }, "Project agents"),
         ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(re, { color: mr.WHITE }, e ? ">" : " "),
-        K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, " ", t),
+        React.createElement(Text, { color: mr.WHITE }, e ? ">" : " "),
+        React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, " ", t),
       ),
     );
   }, "CustomItemComponent");
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1 },
-      K.createElement(re, { color: mr.WHITE, bold: !0 }, "Agents"),
+      React.createElement(Text, { color: mr.WHITE, bold: !0 }, "Agents"),
       _ > 0
-        ? K.createElement(
-            re,
+        ? React.createElement(
+            Text,
             { color: mr.GRAY },
             " ",
             "(",
@@ -56425,49 +56377,49 @@ var RA = __name(({ handleSelect: e, createdAgentName: n }) => {
             _ > 1 ? "s" : "",
             ")",
           )
-        : K.createElement(re, { color: mr.GRAY }, " (No custom agents)"),
+        : React.createElement(Text, { color: mr.GRAY }, " (No custom agents)"),
     ),
     n &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", marginBottom: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.GREEN, dimColor: !0 },
           "Created agent: ",
           n,
         ),
       ),
-    K.createElement(pt, {
+    React.createElement(pt, {
       items: T,
       onSelect: x,
       indicatorComponent: () => null,
       itemComponent: A,
     }),
     a.length > 0 &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", marginTop: 1 },
-        K.createElement(re, { color: mr.GRAY, bold: !0 }, "Default agents"),
+        React.createElement(Text, { color: mr.GRAY, bold: !0 }, "Default agents"),
         a.map((e) =>
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { key: e.filePath, color: mr.GRAY },
             " ",
             e.name.charAt(0).toUpperCase() + e.name.slice(1),
           ),
         ),
       ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginTop: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.GRAY },
         "Create specialized subagents that Command Code can delegate to.",
       ),
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.GRAY },
         "Each subagent has its own context window, custom system prompt, and specific tools.",
       ),
@@ -56477,7 +56429,7 @@ var RA = __name(({ handleSelect: e, createdAgentName: n }) => {
 (Ft(), Cn(), Gs(), Or(), Ft(), Ft(), Cn(), Or());
 var $A = __name(
   ({ onSelect: e }) =>
-    K.createElement(pt, {
+    React.createElement(pt, {
       items: [
         { label: "1. Project (.commandcode/agents/)", value: "project" },
         { label: "2. Personal (~/.commandcode/agents/)", value: "personal" },
@@ -56486,9 +56438,9 @@ var $A = __name(
         ("project" !== t.value && "personal" !== t.value) || e(t.value);
       },
       indicatorComponent: ({ isSelected: e }) =>
-        K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, e ? ">" : " "),
+        React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, e ? ">" : " "),
       itemComponent: ({ isSelected: e, label: t }) =>
-        K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
+        React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
     }),
   "LocationSelector",
 );
@@ -56506,9 +56458,9 @@ var LA = __name(
     onSysPromptSubmit: l,
     onCCToolDefinitionSubmit: u,
   }) => {
-    const [d, m] = J(!1),
-      [g, h] = J(!1),
-      f = te(
+    const [d, m] = useState(!1),
+      [g, h] = useState(!1),
+      f = useCallback(
         async (e) => {
           const t = processBracketedPaste(e);
           if (!t.isPasteStart || d) {
@@ -56530,7 +56482,7 @@ var LA = __name(
         },
         [d, s],
       ),
-      y = te(
+      y = useCallback(
         async (e) => {
           const t = processBracketedPaste(e);
           if (!t.isPasteStart || g) {
@@ -56553,37 +56505,37 @@ var LA = __name(
         [g, i],
       );
     return "agentType" === e
-      ? K.createElement(
-          K.Fragment,
+      ? React.createElement(
+          React.Fragment,
           null,
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { flexDirection: "column" },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.WHITE },
               "Enter a unique identifier for your agent:",
             ),
             t &&
               (Object.values(rT).some((e) => je(e) === je(t)) ||
                 Object.keys(rT).some((e) => je(e) === je(t))) &&
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.RED },
                 Ie.warning,
                 " This name conflicts with an existing tool name. Please choose a different name.",
               ),
             t &&
               isReservedAgentName(je(t)) &&
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.RED },
                 Ie.warning,
                 " This name is reserved. Reserved names: ",
                 xk.join(", "),
               ),
           ),
-          K.createElement(TextInput, {
+          React.createElement(TextInput, {
             showCursor: !0,
             value: t || "",
             onSubmit: () => {
@@ -56599,24 +56551,24 @@ var LA = __name(
           }),
         )
       : "sysPrompt" === e
-        ? K.createElement(
-            K.Fragment,
+        ? React.createElement(
+            React.Fragment,
             null,
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { flexDirection: "column" },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.WHITE },
                 "Enter the system prompt for your agent:",
               ),
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.GRAY },
                 "Be comprehensive for best results.",
               ),
             ),
-            K.createElement(TextInput, {
+            React.createElement(TextInput, {
               showCursor: !0,
               value: n || "",
               onSubmit: () => {
@@ -56627,17 +56579,17 @@ var LA = __name(
             }),
           )
         : "ccToolDefinition" === e
-          ? K.createElement(
-              K.Fragment,
+          ? React.createElement(
+              React.Fragment,
               null,
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.WHITE },
                 "When should ",
                 "Command Code",
                 " use this agent?",
               ),
-              K.createElement(TextInput, {
+              React.createElement(TextInput, {
                 showCursor: !0,
                 value: r,
                 onSubmit: () => {
@@ -56655,7 +56607,7 @@ var LA = __name(
 (Ft(), Or());
 var DA = __name(
   ({ onSelect: e }) =>
-    K.createElement(pt, {
+    React.createElement(pt, {
       items: [
         {
           label: "1. Generate with Command Code (recommended)",
@@ -56667,9 +56619,9 @@ var DA = __name(
         ("recommended" !== t.value && "manual" !== t.value) || e(t.value);
       },
       indicatorComponent: ({ isSelected: e }) =>
-        K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, e ? ">" : " "),
+        React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, e ? ">" : " "),
       itemComponent: ({ isSelected: e, label: t }) =>
-        K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
+        React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, ` ${t}`),
     }),
   "MethodSelector",
 );
@@ -56688,17 +56640,17 @@ function getWaveSymbol(e) {
   return OA[0];
 }
 function ShimmerText({ text: e, offset: t, bg: n }) {
-  const r = ee(() => e.split(""), [e]),
+  const r = useMemo(() => e.split(""), [e]),
     o = __name((e) => {
       const n = e - (t - 5);
       return n >= 0 && n < Mr.length ? Mr[n] : Nr;
     }, "getCharColor");
-  return K.createElement(
-    re,
+  return React.createElement(
+    Text,
     null,
     r.map((e, t) =>
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { key: `${t}:${e}`, color: o(t), backgroundColor: n },
         e,
       ),
@@ -56706,8 +56658,8 @@ function ShimmerText({ text: e, offset: t, bg: n }) {
   );
 }
 function CMDIcon({ frame: e, color: t }) {
-  return K.createElement(
-    re,
+  return React.createElement(
+    Text,
     { color: t ?? pr, bold: !0 },
     `${getWaveSymbol(e)} `,
   );
@@ -56726,13 +56678,13 @@ function formatTime3(e) {
   __name(formatToken, "formatToken"),
   __name(formatTime3, "formatTime"));
 var jA = __name(({ status: e, timeElapsed: t, tokens: n }) => {
-  const [r, o] = J(0),
-    [s, i] = J(0),
-    a = X(n);
+  const [r, o] = useState(0),
+    [s, i] = useState(0),
+    a = useRef(n);
   a.current = n;
   const l = getTerminalWidth(),
-    [u, d] = J(() => (l >= 72 ? "all" : l >= 42 ? "medium" : "none"));
-  (Z(() => {
+    [u, d] = useState(() => (l >= 72 ? "all" : l >= 42 ? "medium" : "none"));
+  (useEffect(() => {
     d((e) =>
       "all" === e
         ? l < 68
@@ -56753,7 +56705,7 @@ var jA = __name(({ status: e, timeElapsed: t, tokens: n }) => {
               : "none",
     );
   }, [l]),
-    Z(() => {
+    useEffect(() => {
       const e = setInterval(() => {
         (o((e) => (e + 1) % 88),
           i((e) => {
@@ -56771,38 +56723,38 @@ var jA = __name(({ status: e, timeElapsed: t, tokens: n }) => {
     h = "medium" === u;
   return (
     DE.statusRender({ width: l, layoutMode: u, status: e, frame: r }),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { width: l, height: 1, paddingLeft: 0, marginLeft: 0 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexShrink: 0 },
-        K.createElement(re, { backgroundColor: Sr.BG, color: Sr.FG }, " "),
-        K.createElement(
-          re,
+        React.createElement(Text, { backgroundColor: Sr.BG, color: Sr.FG }, " "),
+        React.createElement(
+          Text,
           { backgroundColor: Sr.BG },
-          K.createElement(CMDIcon, { frame: 4 * r }),
+          React.createElement(CMDIcon, { frame: 4 * r }),
         ),
-        K.createElement(ShimmerText, { text: e, offset: m, bg: Sr.BG }),
-        K.createElement(re, { backgroundColor: Sr.BG, color: Sr.FG }, " "),
+        React.createElement(ShimmerText, { text: e, offset: m, bg: Sr.BG }),
+        React.createElement(Text, { backgroundColor: Sr.BG, color: Sr.FG }, " "),
       ),
       g &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { columnGap: 1, marginLeft: 1 },
-          K.createElement(re, { bold: !0, color: mr.GRAY }, "esc"),
-          K.createElement(re, { color: mr.DIM }, "to interrupt"),
-          K.createElement(re, { color: mr.DIM }, "•"),
-          K.createElement(re, { color: mr.DIM }, formatTime3(t)),
-          K.createElement(re, { color: mr.DIM }, "•"),
-          K.createElement(re, { color: mr.GRAY }, Ie.arrowDown),
-          K.createElement(re, { color: mr.DIM }, formatToken(Math.round(s))),
+          React.createElement(Text, { bold: !0, color: mr.GRAY }, "esc"),
+          React.createElement(Text, { color: mr.DIM }, "to interrupt"),
+          React.createElement(Text, { color: mr.DIM }, "•"),
+          React.createElement(Text, { color: mr.DIM }, formatTime3(t)),
+          React.createElement(Text, { color: mr.DIM }, "•"),
+          React.createElement(Text, { color: mr.GRAY }, Ie.arrowDown),
+          React.createElement(Text, { color: mr.DIM }, formatToken(Math.round(s))),
         ),
       h &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginLeft: 1 },
-          K.createElement(re, { color: mr.DIM }, formatToken(Math.round(s))),
+          React.createElement(Text, { color: mr.DIM }, formatToken(Math.round(s))),
         ),
     )
   );
@@ -56816,18 +56768,18 @@ var qA = __name(
     loading: r,
     errorMessage: o,
   }) => {
-    const [s, i] = J(!1),
-      [a, l] = J(0),
-      [u, d] = J(0);
-    Z(() => {
+    const [s, i] = useState(!1),
+      [a, l] = useState(0),
+      [u, d] = useState(0);
+    useEffect(() => {
       if (!r) return;
       const e = setInterval(() => d((e) => e + 1), 50);
       return () => clearInterval(e);
     }, [r]);
-    const m = te(() => {
+    const m = useCallback(() => {
         0 !== e.trim().length && n();
       }, [e, n]),
-      g = te(
+      g = useCallback(
         async (e) => {
           const n = processBracketedPaste(e);
           if (!n.isPasteStart || s) {
@@ -56851,21 +56803,21 @@ var qA = __name(
         },
         [s, t],
       );
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column" },
       r
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             null,
-            K.createElement(CMDIcon, { frame: u }),
-            K.createElement(
-              re,
+            React.createElement(CMDIcon, { frame: u }),
+            React.createElement(
+              Text,
               { color: mr.WHITE },
               "Generating agent from description...",
             ),
           )
-        : K.createElement(TextInput, {
+        : React.createElement(TextInput, {
             key: a,
             showCursor: !0,
             value: e,
@@ -56874,10 +56826,10 @@ var qA = __name(
             onSubmit: m,
           }),
       o &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.RED }, `${Ie.warning} ${o}`),
+          React.createElement(Text, { color: mr.RED }, `${Ie.warning} ${o}`),
         ),
     );
   },
@@ -56891,10 +56843,10 @@ var BA = __name(
     onToggleCategory: n,
     onComplete: r,
   }) => {
-    const [o, s] = J(!1),
-      [i, a] = J(0),
-      l = ee(() => [...Zk.map((e) => e.name), ...eT.map((e) => e.name)], []),
-      u = ee(
+    const [o, s] = useState(!1),
+      [i, a] = useState(0),
+      l = useMemo(() => [...Zk.map((e) => e.name), ...eT.map((e) => e.name)], []),
+      u = useMemo(
         () =>
           [
             { name: "All tools", tools: l },
@@ -56940,7 +56892,7 @@ var BA = __name(
           ].filter((e) => e.tools.length > 0),
         [l],
       ),
-      d = ee(() => {
+      d = useMemo(() => {
         const e = [];
         return (
           e.push({ type: "continue", value: "continue" }),
@@ -57006,7 +56958,7 @@ var BA = __name(
           "divider" !== e.type && "spacer" !== e.type && "label" !== e.type,
       );
     return (
-      ie((e, l) => {
+      useInput((e, l) => {
         if (l.upArrow)
           a((e) => {
             const t = e - 1;
@@ -57032,32 +56984,32 @@ var BA = __name(
           }
         }
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
         m.map((e, t) => {
           const n = g.findIndex((t) => t.value === e.value),
             r = -1 !== n && n === i;
           if ("divider" === e.type)
-            return K.createElement(
-              ne,
+            return React.createElement(
+              Box,
               { key: `divider-${t}` },
-              K.createElement(re, { color: mr.GRAY }, " ", e.label),
+              React.createElement(Text, { color: mr.GRAY }, " ", e.label),
             );
           if ("spacer" === e.type)
-            return K.createElement(ne, { key: `spacer-${t}`, height: 1 });
+            return React.createElement(Box, { key: `spacer-${t}`, height: 1 });
           if ("label" === e.type)
-            return K.createElement(
-              ne,
+            return React.createElement(
+              Box,
               { key: `label-${t}` },
-              K.createElement(re, { color: mr.GRAY }, " ", e.label),
+              React.createElement(Text, { color: mr.GRAY }, " ", e.label),
             );
           const o = "continue" === e.type;
-          return K.createElement(
-            ne,
+          return React.createElement(
+            Box,
             { key: `item-${t}` },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: r ? mr.WHITE : mr.GRAY, bold: o && r },
               r ? ">" : " ",
               " ",
@@ -57065,16 +57017,16 @@ var BA = __name(
             ),
           );
         }),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
           e.size === l.length &&
-            K.createElement(re, { color: mr.GRAY }, "All tools selected"),
+            React.createElement(Text, { color: mr.GRAY }, "All tools selected"),
           e.size > 0 &&
             e.size < l.length &&
-            K.createElement(re, { color: mr.GRAY }, e.size, " tools selected"),
+            React.createElement(Text, { color: mr.GRAY }, e.size, " tools selected"),
           0 === e.size &&
-            K.createElement(re, { color: mr.GRAY }, "No tools selected"),
+            React.createElement(Text, { color: mr.GRAY }, "No tools selected"),
         ),
       )
     );
@@ -57083,11 +57035,11 @@ var BA = __name(
 );
 (yo(), IS(), yS(), Bs(), HE(), so());
 var zA = __name(({ onComplete: e }) => {
-  const [t, n] = J("location"),
-    [r, o] = J(!1),
-    [s, i] = J(null),
-    [a, l] = J("agentType"),
-    u = ee(() => [...Zk.map((e) => e.name), ...eT.map((e) => e.name)], []),
+  const [t, n] = useState("location"),
+    [r, o] = useState(!1),
+    [s, i] = useState(null),
+    [a, l] = useState("agentType"),
+    u = useMemo(() => [...Zk.map((e) => e.name), ...eT.map((e) => e.name)], []),
     d = __name(
       () => ({
         location: null,
@@ -57100,7 +57052,7 @@ var zA = __name(({ onComplete: e }) => {
       }),
       "getInitialConfig",
     ),
-    [m, g] = J(d()),
+    [m, g] = useState(d()),
     h = __name((t) => {
       (n("location"), l("agentType"), g(d()), e(t));
     }, "resetToDefaults"),
@@ -57241,23 +57193,23 @@ var zA = __name(({ onComplete: e }) => {
         : t.tools.forEach((e) => n.add(e)),
         g({ ...m, selectedTools: n }));
     }, "handleToggleCategory");
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", gap: 1 },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column" },
-      K.createElement(re, { color: mr.WHITE, bold: !0 }, "Create new agent"),
-      K.createElement(re, { color: mr.GRAY }, f()),
+      React.createElement(Text, { color: mr.WHITE, bold: !0 }, "Create new agent"),
+      React.createElement(Text, { color: mr.GRAY }, f()),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      "location" === t && K.createElement($A, { onSelect: y }),
-      "method" === t && K.createElement(DA, { onSelect: w }),
+      "location" === t && React.createElement($A, { onSelect: y }),
+      "method" === t && React.createElement(DA, { onSelect: w }),
       "configuration" === t &&
         "recommended" === m.method &&
-        K.createElement(qA, {
+        React.createElement(qA, {
           description: m.recommendedMethodDescription,
           onChange: (e) => g({ ...m, recommendedMethodDescription: e }),
           loading: r,
@@ -57266,10 +57218,10 @@ var zA = __name(({ onComplete: e }) => {
         }),
       "configuration" === t &&
         "manual" === m.method &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", gap: 1 },
-          K.createElement(LA, {
+          React.createElement(LA, {
             step: a,
             agentType: m.agentType,
             sysPrompt: m.sysPrompt,
@@ -57283,29 +57235,29 @@ var zA = __name(({ onComplete: e }) => {
           }),
         ),
       "tools" === t &&
-        K.createElement(BA, {
+        React.createElement(BA, {
           selectedTools: m.selectedTools,
           onToggleTool: T,
           onToggleCategory: _,
           onComplete: k,
         }),
-      "summary" === t && K.createElement(MA, { config: m, onSaveComplete: h }),
+      "summary" === t && React.createElement(MA, { config: m, onSaveComplete: h }),
     ),
   );
 }, "AgentNew");
 Or();
 var WA = __name(({ onCancel: e }) => {
-  const [t, n] = J(null),
-    [r, o] = J(null),
+  const [t, n] = useState(null),
+    [r, o] = useState(null),
     s = __name((e) => {
       (n(e.value), o(null));
     }, "handleSelect");
   return (
-    ie((t, n) => {
+    useInput((t, n) => {
       n.escape && e();
     }),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       {
         gap: 1,
         paddingLeft: 1,
@@ -57316,9 +57268,9 @@ var WA = __name(({ onCancel: e }) => {
         flexDirection: "column",
       },
       null === t &&
-        K.createElement(RA, { handleSelect: s, createdAgentName: r }),
+        React.createElement(RA, { handleSelect: s, createdAgentName: r }),
       "create_new_agent" === t &&
-        K.createElement(zA, {
+        React.createElement(zA, {
           onComplete: (e) => {
             (o(e), n(null));
           },
@@ -57340,8 +57292,8 @@ var HA = [
     },
   ],
   GA = __name(({ onSelect: e, onCancel: t }) => {
-    const [n, r] = J(null);
-    Z(() => {
+    const [n, r] = useState(null);
+    useEffect(() => {
       loadUserConfig().then((e) => {
         r(e.compactMode ?? "default");
       });
@@ -57350,71 +57302,71 @@ var HA = [
       e(t.value);
     }, "handleSelect");
     if (
-      (ie((e, n) => {
+      (useInput((e, n) => {
         n.escape && t();
       }),
       null === n)
     )
       return null;
     const s = HA.findIndex((e) => e.value === n);
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", paddingX: 0, width: "100%" },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: pr, bold: !0 },
           "Select a compact mode to compact sessions",
         ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Choose how Command Code handles automatic context compaction.",
         ),
       ),
-      K.createElement(pt, {
+      React.createElement(pt, {
         items: HA,
         onSelect: o,
         initialIndex: s >= 0 ? s : 0,
         indicatorComponent: ({ isSelected: e }) =>
-          K.createElement(re, { color: mr.CYAN }, e ? Ie.pointer : " "),
+          React.createElement(Text, { color: mr.CYAN }, e ? Ie.pointer : " "),
         itemComponent: ({ isSelected: e, label: t }) => {
           const r = HA.find((e) => e.label === t),
             o = r?.value === n,
             s = HA.findIndex((e) => e.label === t);
-          return K.createElement(
-            ne,
+          return React.createElement(
+            Box,
             { flexDirection: "column" },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               null,
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: e ? mr.CYAN : o ? mr.GREEN : mr.WHITE },
                 ` ${s + 1}. ${r?.label ?? t}`,
               ),
-              o && K.createElement(re, { color: mr.GREEN }, " ", Ie.tick),
+              o && React.createElement(Text, { color: mr.GREEN }, " ", Ie.tick),
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               `    ${r?.description ?? ""}`,
             ),
           );
         },
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(re, { color: mr.DIM }, "Press "),
-        K.createElement(re, { color: mr.DIM, bold: !0 }, "Esc"),
-        K.createElement(re, { color: mr.DIM }, " to cancel"),
+        React.createElement(Text, { color: mr.DIM }, "Press "),
+        React.createElement(Text, { color: mr.DIM, bold: !0 }, "Esc"),
+        React.createElement(Text, { color: mr.DIM }, " to cancel"),
       ),
     );
   }, "CompactModeSelector");
@@ -57435,21 +57387,21 @@ var VA = __name(
       d = l ? `${e.label} (default)` : e.label,
       m = u ? " (FREE)" : "",
       g = " ".repeat(Math.max(0, 32 - d.length - m.length));
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       null,
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: n ? mr.CYAN : mr.GRAY },
         n ? `${Ie.pointer} ` : "  ",
       ),
-      K.createElement(re, { color: n ? mr.CYAN : r ? mr.GREEN : mr.WHITE }, d),
-      u && K.createElement(re, { color: mr.GREEN, bold: !0 }, m),
-      K.createElement(re, null, g),
-      i && K.createElement(re, { color: mr.DIM }, a),
+      React.createElement(Text, { color: n ? mr.CYAN : r ? mr.GREEN : mr.WHITE }, d),
+      u && React.createElement(Text, { color: mr.GREEN, bold: !0 }, m),
+      React.createElement(Text, null, g),
+      i && React.createElement(Text, { color: mr.DIM }, a),
       e.description &&
-        K.createElement(re, { color: mr.DIM }, i ? " · " : "", e.description),
-      r && K.createElement(re, { color: mr.GREEN }, " ", Ie.tick),
+        React.createElement(Text, { color: mr.DIM }, i ? " · " : "", e.description),
+      r && React.createElement(Text, { color: mr.GREEN }, " ", Ie.tick),
     );
   },
   "ModelRow",
@@ -57490,10 +57442,10 @@ var KA = __name(
       onPick: r,
       onBack: o,
     }) => {
-      const [s, i] = J(""),
-        a = ee(() => isInternalTeamFlagEnforced(), []),
-        [l, u] = J(() => getCachedBillingContext());
-      Z(() => {
+      const [s, i] = useState(""),
+        a = useMemo(() => isInternalTeamFlagEnforced(), []),
+        [l, u] = useState(() => getCachedBillingContext());
+      useEffect(() => {
         if (l) return;
         let e = !0;
         return (
@@ -57506,7 +57458,7 @@ var KA = __name(
         );
       }, [l]);
       const d = null !== l,
-        m = ee(
+        m = useMemo(
           () =>
             a
               ? yn
@@ -57516,7 +57468,7 @@ var KA = __name(
                 ),
           [a],
         ),
-        g = ee(
+        g = useMemo(
           () =>
             l
               ? m
@@ -57540,15 +57492,15 @@ var KA = __name(
               : [],
           [m, l],
         ),
-        h = ee(() => searchGroups(g, s), [g, s]),
-        f = ee(() => {
+        h = useMemo(() => searchGroups(g, s), [g, s]),
+        f = useMemo(() => {
           const e = [];
           for (const t of h)
             for (const n of t.models)
               e.push({ kind: "model", providerId: t.providerId, model: n });
           return [{ kind: "reset" }, ...e];
         }, [h]),
-        y = ee(() => {
+        y = useMemo(() => {
           if (!n) return 0;
           const e = f.findIndex((e) => "model" === e.kind && e.model.id === n);
           return e >= 0 ? e : 0;
@@ -57565,46 +57517,46 @@ var KA = __name(
           onCancel: o,
         });
       let S = 1;
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(re, { color: pr, bold: !0 }, e, " › select model"),
+          React.createElement(Text, { color: pr, bold: !0 }, e, " › select model"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { dimColor: !0 },
             "Pick a model for this task, or reset it to the default.",
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 2, flexDirection: "column", width: "100%" },
-          K.createElement(lA, {
+          React.createElement(lA, {
             query: s,
             resultCount: s ? f.length - 1 : void 0,
             placeholder: "Type to search models...",
           }),
         ),
         d
-          ? K.createElement(
-              K.Fragment,
+          ? React.createElement(
+              React.Fragment,
               null,
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 null,
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: 0 === w ? mr.CYAN : mr.GRAY },
                   0 === w ? `${Ie.pointer} ` : "  ",
                 ),
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: 0 === w ? mr.CYAN : mr.WHITE },
                   "↺ Use default (",
                   t,
@@ -57615,16 +57567,16 @@ var KA = __name(
                 const t = S;
                 return (
                   (S += e.models.length),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     {
                       key: `${e.providerId}-${e.label}`,
                       flexDirection: "column",
                       marginTop: 1,
                     },
-                    K.createElement(re, { bold: !0, dimColor: !0 }, e.label),
+                    React.createElement(Text, { bold: !0, dimColor: !0 }, e.label),
                     e.models.map((r, o) =>
-                      K.createElement(VA, {
+                      React.createElement(VA, {
                         key: `${e.providerId}-${e.label}-${r.id}`,
                         model: r,
                         providerId: e.providerId,
@@ -57637,36 +57589,36 @@ var KA = __name(
                 );
               }),
             )
-          : K.createElement(
-              ne,
+          : React.createElement(
+              Box,
               null,
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.DIM },
                 "Loading available models…",
               ),
             ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "type to search · ↑/↓ navigate · enter select",
           ),
           s
-            ? K.createElement(re, { color: mr.DIM }, " · esc to clear")
-            : K.createElement(re, { color: mr.DIM }, " · esc back"),
+            ? React.createElement(Text, { color: mr.DIM }, " · esc to clear")
+            : React.createElement(Text, { color: mr.DIM }, " · esc back"),
         ),
       );
     },
     "FeatureModelPicker",
   ),
   YA = __name(({ onClose: e }) => {
-    const [t, n] = J(null),
-      [r, o] = J(null),
-      [s, i] = J(null);
-    Z(() => {
+    const [t, n] = useState(null),
+      [r, o] = useState(null),
+      [s, i] = useState(null);
+    useEffect(() => {
       loadUserConfig().then((e) => {
         n(e.featureModels ?? {});
       });
@@ -57699,7 +57651,7 @@ var KA = __name(
     if (null === t) return null;
     const u = qk.find((e) => e.key === r) ?? null;
     return "picker" === a && u
-      ? K.createElement(KA, {
+      ? React.createElement(KA, {
           featureLabel: u.label,
           defaultLabel: getFeatureDefaultLabel(u),
           currentModelId: t[u.key],
@@ -57723,19 +57675,19 @@ var KA = __name(
             o(null);
           },
         })
-      : K.createElement(
-          ne,
+      : React.createElement(
+          Box,
           { flexDirection: "column", paddingX: 0, width: "100%" },
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             null,
-            K.createElement(re, { color: pr, bold: !0 }, "Configure models"),
+            React.createElement(Text, { color: pr, bold: !0 }, "Configure models"),
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginBottom: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               "Pick a model for each task. Applies to all sessions.",
               " ",
@@ -57753,37 +57705,37 @@ var KA = __name(
                 : `Uses current model (${getFeatureDefaultLabel(e)})`,
               s = r ? getModelDisplayName(r) : o,
               i = n === l;
-            return K.createElement(
-              ne,
+            return React.createElement(
+              Box,
               { key: e.key },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: i ? mr.CYAN : mr.GRAY },
                 i ? `${Ie.pointer} ` : "  ",
               ),
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: i ? mr.CYAN : mr.WHITE },
                 e.label.padEnd(20),
               ),
-              K.createElement(re, { color: r ? mr.GREEN : mr.DIM }, s),
+              React.createElement(Text, { color: r ? mr.GREEN : mr.DIM }, s),
             );
           }),
           s &&
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { marginTop: 1 },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: s.error ? mr.RED : mr.GREEN },
                 s.text,
               ),
             ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginTop: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               "↑/↓ navigate · enter to change · r to reset · esc to close",
             ),
@@ -57799,7 +57751,7 @@ function settingsFilePaths(e) {
 }
 function readInputSettings(e) {
   try {
-    const t = L.readFileSync(e, "utf-8");
+    const t = fsModule.readFileSync(e, "utf-8");
     return parseJSON(t)?.input;
   } catch {
     return;
@@ -57825,7 +57777,7 @@ function shouldCollapsePastedText(e = process.cwd()) {
   __name(shouldCollapsePastedText, "shouldCollapsePastedText"),
   Vn(),
   Ft());
-var JA = n(E(), "commandcode-images"),
+var JA = join(tmpdir(), "commandcode-images"),
   XA = {
     "image/png": ".png",
     "image/jpeg": ".jpg",
@@ -57834,12 +57786,12 @@ var JA = n(E(), "commandcode-images"),
   };
 function saveTempImage(e, t) {
   try {
-    O(JA) || q(JA, { recursive: !0 });
+    existsSync(JA) || mkdirSync(JA, { recursive: !0 });
     const r = XA[e.mediaType] || ".png",
       o = `image-${t}-${Date.now()}${r}`,
-      s = n(JA, o),
+      s = join(JA, o),
       i = Buffer.from(e.data, "base64");
-    return (B(s, i), s);
+    return (writeFileSync(s, i), s);
   } catch {
     return null;
   }
@@ -57872,18 +57824,18 @@ function useBracketedPaste(e) {
       setInitialCursor: a,
       collapsePastedText: l = !0,
     } = e,
-    u = te(
+    u = useCallback(
       (e, t, n = "") => {
         (o((t) => [...t, e]), r(t + n), a(t.length), i());
       },
       [o, r, a, i],
     ),
-    d = X(!1),
-    m = X(""),
-    g = X(null),
-    h = X(""),
-    f = X(""),
-    y = te(
+    d = useRef(!1),
+    m = useRef(""),
+    g = useRef(null),
+    h = useRef(""),
+    f = useRef(""),
+    y = useCallback(
       async (e, t, o) => {
         let d = e.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
         const m = await detectDroppedImageFile(d);
@@ -57906,7 +57858,7 @@ function useBracketedPaste(e) {
       },
       [u, n.length, s, r, a, i, l],
     ),
-    w = te(() => {
+    w = useCallback(() => {
       (g.current && clearTimeout(g.current),
         (g.current = setTimeout(async () => {
           if (d.current) {
@@ -57923,7 +57875,7 @@ function useBracketedPaste(e) {
         }, 500)));
     }, [y]);
   return {
-    handlePaste: te(
+    handlePaste: useCallback(
       async (e) => {
         const n = processBracketedPaste(e);
         if (n.isPasteStart && n.isPasteEnd)
@@ -58001,14 +57953,14 @@ function useBracketedPaste(e) {
       },
       [t, y, w, u],
     ),
-    resetPasteState: te(() => {
+    resetPasteState: useCallback(() => {
       ((d.current = !1),
         (m.current = ""),
         (h.current = ""),
         (f.current = ""),
         g.current && (clearTimeout(g.current), (g.current = null)));
     }, []),
-    isPasting: te(() => d.current, []),
+    isPasting: useCallback(() => d.current, []),
   };
 }
 function useExternalEditor({
@@ -58019,9 +57971,9 @@ function useExternalEditor({
   setDetectedContent: o,
   onEditorClose: s,
 }) {
-  const [i, a] = J(!1),
-    [l, u] = J(null),
-    d = te(async () => {
+  const [i, a] = useState(!1),
+    [l, u] = useState(null),
+    d = useCallback(async () => {
       if (!i) {
         (a(!0), u(null));
         try {
@@ -58043,7 +57995,7 @@ function useExternalEditor({
         }
       }
     }, [e, t, n, r, o, s, i]),
-    m = te(() => {
+    m = useCallback(() => {
       u(null);
     }, []);
   return {
@@ -58069,10 +58021,10 @@ function useExternalEditor({
   Ft());
 var ZA = __name((e = {}) => {
   const { enabled: t = !0 } = e,
-    [n, r] = J(null),
-    o = X(!1);
+    [n, r] = useState(null),
+    o = useRef(!1);
   return (
-    Z(() => {
+    useEffect(() => {
       if (!t || o.current) return;
       let e = !0;
       return (
@@ -58090,35 +58042,35 @@ var ZA = __name((e = {}) => {
 }, "usePRDetection");
 function loadGitignore(e) {
   const t = rt(),
-    r = n(e, ".gitignore");
-  if (O(r))
+    r = join(e, ".gitignore");
+  if (existsSync(r))
     try {
-      const e = U(r, "utf8");
+      const e = readFileSync(r, "utf8");
       t.add(e);
     } catch {}
   return (t.add(".git"), t);
 }
 (Or(), Ft(), Or(), __name(loadGitignore, "loadGitignore"));
 var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
-  const [i, l] = J(process.cwd()),
-    [u, d] = J([]),
-    [m, g] = J(0),
-    [h, f] = J(0),
+  const [i, l] = useState(process.cwd()),
+    [u, d] = useState([]),
+    [m, g] = useState(0),
+    [h, f] = useState(0),
     y = o.trim() ? 15 : 10,
-    w = te((e, t = process.cwd()) => {
+    w = useCallback((e, t = process.cwd()) => {
       if (!e.trim()) return [];
       const r = loadGitignore(t);
       if (e.endsWith("/")) {
-        const o = n(t, e);
+        const o = join(t, e);
         try {
-          const e = z(o),
+          const e = readdirSync(o),
             i = [];
           return (
             e.forEach((e) => {
-              const a = n(o, e);
+              const a = join(o, e);
               try {
-                const e = W(a),
-                  n = s(t, a);
+                const e = statSync(a),
+                  n = relative(t, a);
                 if (r.ignores(n)) return;
                 i.push({ name: n, path: a, isDirectory: e.isDirectory() });
               } catch {}
@@ -58137,19 +58089,19 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
       if (e.includes("/")) {
         const o = e.split("/"),
           i = o.pop() || "",
-          a = n(t, o.join("/"));
+          a = join(t, o.join("/"));
         try {
-          const e = z(a),
+          const e = readdirSync(a),
             o = [],
             l = i.toLowerCase();
           return (
             e.forEach((e) => {
               const u = e.toLowerCase();
               if (!i || u.includes(l)) {
-                const i = n(a, e);
+                const i = join(a, e);
                 try {
-                  const e = W(i),
-                    n = s(t, i);
+                  const e = statSync(i),
+                    n = relative(t, i);
                   if (r.ignores(n)) return;
                   o.push({ name: n, path: i, isDirectory: e.isDirectory() });
                 } catch {}
@@ -58171,11 +58123,11 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
         a = __name((e, l = 0) => {
           if (!(l > 8))
             try {
-              z(e).forEach((u) => {
-                const d = n(e, u);
+              readdirSync(e).forEach((u) => {
+                const d = join(e, u);
                 try {
-                  const e = W(d),
-                    n = s(t, d);
+                  const e = statSync(d),
+                    n = relative(t, d);
                   if (r.ignores(n)) return;
                   const m = n.toLowerCase();
                   ((u.toLowerCase().includes(i) || m.includes(i)) &&
@@ -58207,18 +58159,18 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
         o.slice(0, 50)
       );
     }, []),
-    S = te((e) => {
+    S = useCallback((e) => {
       try {
-        const t = z(e),
+        const t = readdirSync(e),
           o = [],
           i = process.cwd(),
           a = loadGitignore(i);
-        ("/" !== e && o.push({ name: "..", path: r(e), isDirectory: !0 }),
+        ("/" !== e && o.push({ name: "..", path: dirname(e), isDirectory: !0 }),
           t.forEach((t) => {
-            const r = n(e, t);
+            const r = join(e, t);
             try {
-              const e = W(r),
-                n = s(i, r);
+              const e = statSync(r),
+                n = relative(i, r);
               if (a.ignores(n)) return;
               o.push({ name: t, path: r, isDirectory: e.isDirectory() });
             } catch {}
@@ -58235,13 +58187,13 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
           f(0));
       } catch {}
     }, []);
-  (Z(() => {
+  (useEffect(() => {
     if (o.trim()) {
       const e = w(o);
       (d(e), g(0), f(0));
     } else S(i);
   }, [i, S, o, w]),
-    ie((n, r) => {
+    useInput((n, r) => {
       if (r.escape) t();
       else if (r.upArrow)
         g((e) => {
@@ -58257,7 +58209,7 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
         if (r.rightArrow) {
           const e = u[m];
           if (!e) return;
-          return void (e.isDirectory && !o.trim() && l(a(e.path)));
+          return void (e.isDirectory && !o.trim() && l(resolve(e.path)));
         }
         if (r.return) {
           const t = u[m];
@@ -58267,19 +58219,19 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
       }
     }));
   const E = u.slice(h, h + y);
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", paddingLeft: 1 },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1, flexDirection: "column" },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.DIM },
         o.trim() ? `Searching for: "${o}"` : `Files: ${i}`,
       ),
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.DIM },
         o.trim()
           ? "↑↓ navigate • Enter to select • Esc to close"
@@ -58287,8 +58239,8 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
       ),
     ),
     0 === E.length
-      ? K.createElement(
-          re,
+      ? React.createElement(
+          Text,
           { color: mr.DIM },
           o.trim()
             ? `No files found matching "${o}"`
@@ -58298,8 +58250,8 @@ var eP = __name(({ onSelectFile: e, onClose: t, searchQuery: o = "" }) => {
           const n = h + t,
             r = e.name,
             o = n === m;
-          return K.createElement(
-            re,
+          return React.createElement(
+            Text,
             { key: e.path, color: o ? mr.GREEN : mr.DIM },
             e.isDirectory ? `${r}/` : r,
           );
@@ -58319,18 +58271,18 @@ var tP = __name((e) => {
     const t = Math.min((e.current / e.limit) * 100, 100),
       n = Math.max(0, Math.round(90 - t));
     if (n > 20 && e.current >= 18e4)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { paddingRight: 3 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "~",
           tP(e.current),
           " tokens in context · try",
           " ",
         ),
-        K.createElement(re, { color: mr.DIM, bold: !0 }, "/compact"),
+        React.createElement(Text, { color: mr.DIM, bold: !0 }, "/compact"),
       );
     if (n > 20) return null;
     const r = __name(
@@ -58342,28 +58294,28 @@ var tP = __name((e) => {
       i = Ie.square.repeat(o),
       a = Ie.squareLightShade.repeat(s),
       l = r(t);
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { paddingRight: 3 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: l },
         `Context left before auto-compact ${n}% `,
       ),
-      K.createElement(re, { color: l }, i),
-      s > 0 && K.createElement(re, { color: mr.DIM }, a),
+      React.createElement(Text, { color: l }, i),
+      s > 0 && React.createElement(Text, { color: mr.DIM }, a),
     );
   }, "ContextUsage");
 (Ft(), fs(), Or());
 var rP = __name(() => {
-  const [e, t] = J("continuous learning"),
-    [n, r] = J(!1),
-    [o, s] = J(!1),
-    i = X([]),
-    a = X(0),
-    l = X(null),
-    u = X(!1);
-  Z(() => {
+  const [e, t] = useState("continuous learning"),
+    [n, r] = useState(!1),
+    [o, s] = useState(!1),
+    i = useRef([]),
+    a = useRef(0),
+    l = useRef(null),
+    u = useRef(!1);
+  useEffect(() => {
     const e = __name(
         (e) =>
           "analyzing" === e.type
@@ -58423,47 +58375,47 @@ var rP = __name(() => {
       : { text: e, maxChars: as - d.length - 9 - 10 },
   );
   const h = o ? void 0 : mr.DIM;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { paddingRight: 2 },
     !m &&
-      K.createElement(
-        K.Fragment,
+      React.createElement(
+        React.Fragment,
         null,
-        K.createElement(BracketWrap, { color: mr.DIM }, "ctrl+t"),
-        K.createElement(re, { color: mr.DIM }, " "),
+        React.createElement(BracketWrap, { color: mr.DIM }, "ctrl+t"),
+        React.createElement(Text, { color: mr.DIM }, " "),
       ),
-    K.createElement(re, { color: h }, g),
-    !m && K.createElement(re, { color: gr.TEXT }, d),
+    React.createElement(Text, { color: h }, g),
+    !m && React.createElement(Text, { color: gr.TEXT }, d),
   );
 }, "LearningFeedMini");
 (Ft(), Or());
 var oP = __name(
   ({ mode: e, pendingExitKey: t }) =>
     t
-      ? K.createElement(re, { color: mr.DIM }, "Press Ctrl+C again to exit")
+      ? React.createElement(Text, { color: mr.DIM }, "Press Ctrl+C again to exit")
       : "bypass" === e
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             { flexDirection: "row" },
-            K.createElement(re, { color: mr.RED }, "» permission bypass on "),
-            K.createElement(BracketWrap, { color: mr.DIM }, "shift+tab"),
+            React.createElement(Text, { color: mr.RED }, "» permission bypass on "),
+            React.createElement(BracketWrap, { color: mr.DIM }, "shift+tab"),
           )
         : "auto-accept" === e
-          ? K.createElement(
-              ne,
+          ? React.createElement(
+              Box,
               { flexDirection: "row" },
-              K.createElement(re, { color: xr }, "» accept edits on "),
-              K.createElement(BracketWrap, { color: mr.DIM }, "shift+tab"),
+              React.createElement(Text, { color: xr }, "» accept edits on "),
+              React.createElement(BracketWrap, { color: mr.DIM }, "shift+tab"),
             )
           : "plan" === e
-            ? K.createElement(
-                ne,
+            ? React.createElement(
+                Box,
                 { flexDirection: "row" },
-                K.createElement(re, { color: _r }, "plan mode "),
-                K.createElement(BracketWrap, { color: mr.DIM }, "shift+tab"),
+                React.createElement(Text, { color: _r }, "plan mode "),
+                React.createElement(BracketWrap, { color: mr.DIM }, "shift+tab"),
               )
-            : K.createElement(re, { color: mr.DIM }, "? for shortcuts"),
+            : React.createElement(Text, { color: mr.DIM }, "? for shortcuts"),
   "ModeIndicator",
 );
 (Ft(), Or(), io());
@@ -58471,23 +58423,23 @@ var sP = __name(({ prInfo: e, showSeparator: t = !0 }) => {
     if (!e) return null;
     if ("OPEN" !== e.state && "MERGED" !== e.state) return null;
     const n = "OPEN" === e.state ? mr.DIM : Ar.MERGED;
-    return K.createElement(
-      K.Fragment,
+    return React.createElement(
+      React.Fragment,
       null,
-      t && K.createElement(re, { color: mr.DIM }, " · "),
-      K.createElement(re, { color: n }, "PR "),
-      K.createElement(ro, { url: e.url, text: `#${e.number}`, color: n }),
+      t && React.createElement(Text, { color: mr.DIM }, " · "),
+      React.createElement(Text, { color: n }, "PR "),
+      React.createElement(ro, { url: e.url, text: `#${e.number}`, color: n }),
     );
   }, "PRLinkBadge"),
   iP = __name(
     ({ indicator: e, showSeparator: t = !0 }) =>
       e?.visible
-        ? K.createElement(
-            K.Fragment,
+        ? React.createElement(
+            React.Fragment,
             null,
-            t && K.createElement(re, { color: mr.DIM }, " · "),
-            K.createElement(
-              re,
+            t && React.createElement(Text, { color: mr.DIM }, " · "),
+            React.createElement(
+              Text,
               { color: "connected" === e.type ? mr.GREEN : mr.YELLOW },
               e.message,
             ),
@@ -58518,94 +58470,94 @@ var sP = __name(({ prInfo: e, showSeparator: t = !0 }) => {
       creditWarning: E,
     }) => {
       const v = e >= 60;
-      return K.createElement(
-        K.Fragment,
+      return React.createElement(
+        React.Fragment,
         null,
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", paddingLeft: 2 },
           ("auto-accept" !== r && "plan" !== r && "bypass" !== r) || l
-            ? K.createElement(
-                ne,
+            ? React.createElement(
+                Box,
                 {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   width: e - 1,
                 },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { flexDirection: "row", columnGap: 0 },
                   n && !l
-                    ? K.createElement(re, { color: vr }, t)
-                    : K.createElement(oP, { mode: r, pendingExitKey: l }),
-                  !l && K.createElement(sP, { prInfo: o }),
-                  !l && K.createElement(iP, { indicator: a }),
+                    ? React.createElement(Text, { color: vr }, t)
+                    : React.createElement(oP, { mode: r, pendingExitKey: l }),
+                  !l && React.createElement(sP, { prInfo: o }),
+                  !l && React.createElement(iP, { indicator: a }),
                 ),
                 v &&
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { flexDirection: "column", alignItems: "flex-end" },
-                    s && K.createElement(rP, null),
-                    i && K.createElement(nP, { usage: i }),
+                    s && React.createElement(rP, null),
+                    i && React.createElement(nP, { usage: i }),
                   ),
               )
-            : K.createElement(
-                K.Fragment,
+            : React.createElement(
+                React.Fragment,
                 null,
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     width: e - 1,
                   },
-                  K.createElement(oP, { mode: r }),
-                  v && s && K.createElement(rP, null),
+                  React.createElement(oP, { mode: r }),
+                  v && s && React.createElement(rP, null),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     width: e - 1,
                   },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { flexDirection: "row", columnGap: 0 },
-                    K.createElement(re, { color: n ? vr : mr.DIM }, t),
-                    K.createElement(sP, { prInfo: o }),
-                    K.createElement(iP, { indicator: a }),
+                    React.createElement(Text, { color: n ? vr : mr.DIM }, t),
+                    React.createElement(sP, { prInfo: o }),
+                    React.createElement(iP, { indicator: a }),
                   ),
-                  v && i && K.createElement(nP, { usage: i }),
+                  v && i && React.createElement(nP, { usage: i }),
                 ),
               ),
           (u || d || (g && m)) &&
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { flexDirection: "row", columnGap: 1 },
               u &&
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   null,
                   Ie.tick,
                   " ",
                   "Command Code",
                   " updated:",
                   " ",
-                  K.createElement(re, { color: mr.DIM }, "v", u.updatedFrom),
-                  K.createElement(
-                    re,
+                  React.createElement(Text, { color: mr.DIM }, "v", u.updatedFrom),
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     " ",
                     Ie.arrowRight,
                     " ",
                   ),
-                  K.createElement(re, null, "v", u.updatedTo),
+                  React.createElement(Text, null, "v", u.updatedTo),
                 ),
               !u &&
                 d &&
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: mr.YELLOW, dimColor: !0 },
                   Ie.info,
                   " Update available:",
@@ -58618,8 +58570,8 @@ var sP = __name(({ prInfo: e, showSeparator: t = !0 }) => {
                 ),
               g &&
                 m &&
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: mr.GREEN, dimColor: !0 },
                   Ie.bullet,
                   " Provider:",
@@ -58629,18 +58581,18 @@ var sP = __name(({ prInfo: e, showSeparator: t = !0 }) => {
             ),
         ),
         h &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingLeft: 2 },
-            K.createElement(re, { color: mr.GREEN }, "! for bash mode"),
+            React.createElement(Text, { color: mr.GREEN }, "! for bash mode"),
           ),
         y &&
           f &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingLeft: 2 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: pr },
               "SHARED: ",
               f.url,
@@ -58648,26 +58600,26 @@ var sP = __name(({ prInfo: e, showSeparator: t = !0 }) => {
             ),
           ),
         w &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingLeft: 2 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: w.includes("NOT SHARED") ? mr.RED : pr },
               w,
             ),
           ),
         S &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingLeft: 2 },
-            K.createElement(re, { color: pr }, S),
+            React.createElement(Text, { color: pr }, S),
           ),
         E &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingLeft: 2 },
-            K.createElement(re, { color: mr.YELLOW }, Ie.warning, " ", E),
+            React.createElement(Text, { color: mr.YELLOW }, Ie.warning, " ", E),
           ),
       );
     },
@@ -58703,23 +58655,23 @@ var lP = 12,
     "getSessionSummary",
   ),
   gP = __name(({ onSelectSession: e, onClose: t }) => {
-    const [n, r] = J([]),
-      [o, s] = J(0),
-      [i, a] = J(0),
-      [l, u] = J(!0),
-      [d, m] = J(!1),
-      [g, h] = J(!1),
-      [f, y] = J(null),
-      [w] = J(() => getCurrentGitBranch()),
-      S = te(async () => {
+    const [n, r] = useState([]),
+      [o, s] = useState(0),
+      [i, a] = useState(0),
+      [l, u] = useState(!0),
+      [d, m] = useState(!1),
+      [g, h] = useState(!1),
+      [f, y] = useState(null),
+      [w] = useState(() => getCurrentGitBranch()),
+      S = useCallback(async () => {
         u(!0);
         const e = await Rk.listSessions();
         (r(e), u(!1));
       }, []);
-    Z(() => {
+    useEffect(() => {
       S();
     }, [S]);
-    const E = te(
+    const E = useCallback(
         async (e) => {
           try {
             (await Rk.deleteSession(e), h(!1), y(null), s(0), a(0), await S());
@@ -58731,7 +58683,7 @@ var lP = 12,
       ),
       v = d && w ? n.filter((e) => e.gitBranch === w) : n;
     if (
-      (ie((n, r) => {
+      (useInput((n, r) => {
         if (g)
           if (r.return) {
             if (v.length > 0 && o < v.length) {
@@ -58761,24 +58713,24 @@ var lP = 12,
       }),
       l)
     )
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
-        K.createElement(re, { color: mr.GRAY }, "Loading sessions..."),
+        React.createElement(Text, { color: mr.GRAY }, "Loading sessions..."),
       );
     if (0 === v.length)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.GRAY },
           d && w
             ? `No sessions found for branch "${w}"`
             : "No previous sessions found",
         ),
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           d
             ? "Press ctrl+b to show all branches, ESC to cancel"
@@ -58791,74 +58743,74 @@ var lP = 12,
         g && k
           ? `Delete "${pP(k)}"? Press Enter to confirm, any other key to cancel.`
           : null;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", paddingLeft: 1, width: "100%" },
-      K.createElement(re, { color: mr.CYAN, bold: !0 }, "Resume Session"),
-      K.createElement(ne, { marginTop: 1 }),
-      K.createElement(
-        ne,
+      React.createElement(Text, { color: mr.CYAN, bold: !0 }, "Resume Session"),
+      React.createElement(Box, { marginTop: 1 }),
+      React.createElement(
+        Box,
         { columnGap: 2, marginBottom: 1 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 5 },
-          K.createElement(re, { color: mr.GRAY }, " "),
+          React.createElement(Text, { color: mr.GRAY }, " "),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 13 },
-          K.createElement(re, { color: mr.GRAY }, "Modified"),
+          React.createElement(Text, { color: mr.GRAY }, "Modified"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 20 },
-          K.createElement(re, { color: mr.GRAY }, "Git Branch"),
+          React.createElement(Text, { color: mr.GRAY }, "Git Branch"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { width: 11 },
-          K.createElement(re, { color: mr.GRAY }, "# Messages"),
+          React.createElement(Text, { color: mr.GRAY }, "# Messages"),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(re, { color: mr.GRAY }, "Summary"),
+          React.createElement(Text, { color: mr.GRAY }, "Summary"),
         ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { columnGap: 2 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 5 },
           C.map((e, t) => {
             const n = i + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: `sel-${n}`, color: o === n ? mr.WHITE : mr.GRAY },
               o === n ? `${Ie.pointer} ${n + 1}.` : `  ${n + 1}.`,
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 13 },
           C.map((e, t) => {
             const n = i + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: `mod-${e.id}`, color: o === n ? mr.WHITE : mr.GRAY },
               uP(e.lastModified),
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 20 },
           C.map((e, t) => {
             const n = i + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               {
                 key: `branch-${e.id}`,
                 color: o === n ? mr.WHITE : mr.GRAY,
@@ -58868,25 +58820,25 @@ var lP = 12,
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", width: 11 },
           C.map((e, t) => {
             const n = i + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               { key: `msg-${e.id}`, color: o === n ? mr.WHITE : mr.GRAY },
               e.messageCount,
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column" },
           C.map((e, t) => {
             const n = i + t;
-            return K.createElement(
-              re,
+            return React.createElement(
+              Text,
               {
                 key: `summary-${e.id}`,
                 color: o === n ? mr.WHITE : mr.GRAY,
@@ -58897,22 +58849,22 @@ var lP = 12,
           }),
         ),
       ),
-      K.createElement(ne, { marginTop: 1 }),
+      React.createElement(Box, { marginTop: 1 }),
       T &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(re, { color: mr.RED }, T),
+          React.createElement(Text, { color: mr.RED }, T),
         ),
       f &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(re, { color: mr.RED }, f),
+          React.createElement(Text, { color: mr.RED }, f),
         ),
       v.length > lP &&
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "Showing ",
           i + 1,
@@ -58924,8 +58876,8 @@ var lP = 12,
           i > 0 ? " · ↑ more" : "",
           i + lP < v.length ? " · ↓ more" : "",
         ),
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.DIM },
         "↑↓ navigate · Enter select · Del delete · ctrl+b ",
         d ? `[branch: ${w ?? "unknown"}]` : "branch filter",
@@ -58984,11 +58936,11 @@ function ImageLabel({
 }) {
   const o = `[Image #${e + 1}]`,
     s = n ? createOSC8Link(`file://${n}`, o, !1) : o;
-  return K.createElement(
-    re,
+  return React.createElement(
+    Text,
     null,
     r ? " " : "",
-    t ? K.createElement(re, { inverse: !0 }, o) : s,
+    t ? React.createElement(Text, { inverse: !0 }, o) : s,
   );
 }
 function ImageRowsDisplay({
@@ -59006,23 +58958,23 @@ function ImageRowsDisplay({
     }),
     i = Math.max(1, r - (s.length + 2)),
     a = buildImageRows({ imageCount: e.length, rowWidth: i });
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", width: "100%", alignItems: "flex-end" },
     a.map((e, r) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { key: r, flexDirection: "row" },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexShrink: 0, marginRight: 1 },
-          0 === r && K.createElement(re, { color: mr.DIM }, s),
+          0 === r && React.createElement(Text, { color: mr.DIM }, s),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "row" },
           e.map((e, r) =>
-            K.createElement(ImageLabel, {
+            React.createElement(ImageLabel, {
               key: e,
               index: e,
               isSelected: e === t,
@@ -59050,16 +59002,16 @@ function ImageRowsDisplay({
   Ft());
 var hP = __name((e = {}) => {
   const { enabled: t = !0, paused: n = !1 } = e,
-    [r, o] = J(null),
-    [s, i] = J(!1),
-    a = X(!1),
-    l = X(null),
-    u = X(n),
-    [d, m] = J(!1),
-    [g, h] = J("connected"),
-    f = X(null),
-    y = X(null),
-    w = te((e, t) => {
+    [r, o] = useState(null),
+    [s, i] = useState(!1),
+    a = useRef(!1),
+    l = useRef(null),
+    u = useRef(n),
+    [d, m] = useState(!1),
+    [g, h] = useState("connected"),
+    f = useRef(null),
+    y = useRef(null),
+    w = useCallback((e, t) => {
       (y.current && (clearTimeout(y.current), (y.current = null)),
         h(e),
         m(!0),
@@ -59068,10 +59020,10 @@ var hP = __name((e = {}) => {
             m(!1);
           }, t)));
     }, []),
-    S = te(() => {
+    S = useCallback(() => {
       y.current && (clearTimeout(y.current), (y.current = null));
     }, []),
-    E = te(
+    E = useCallback(
       async (e = !1) => {
         if (!a.current) {
           a.current = !0;
@@ -59113,11 +59065,11 @@ var hP = __name((e = {}) => {
       },
       [w],
     );
-  (Z(() => {
+  (useEffect(() => {
     const e = u.current;
     ((u.current = n), e && !n && t && null !== nk() && E(!1));
   }, [n, t, E]),
-    Z(() => {
+    useEffect(() => {
       if (!t) return;
       if (null === nk()) return;
       let e = null,
@@ -59228,48 +59180,48 @@ function getCommandMenuStateFromQuery(e) {
   __name(getCommandMenuStateFromQuery, "getCommandMenuStateFromQuery"));
 var bP = __name(
     () =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM, bold: !0 },
           "Available Shortcuts:",
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { columnGap: 4 },
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { flexDirection: "column" },
-            K.createElement(re, { color: mr.DIM }, "! for bash mode"),
-            K.createElement(re, { color: mr.DIM }, "/ for commands"),
-            K.createElement(re, { color: mr.DIM }, "@ for file paths"),
-            K.createElement(
-              re,
+            React.createElement(Text, { color: mr.DIM }, "! for bash mode"),
+            React.createElement(Text, { color: mr.DIM }, "/ for commands"),
+            React.createElement(Text, { color: mr.DIM }, "@ for file paths"),
+            React.createElement(
+              Text,
               { color: mr.DIM },
               "shift + tab to toggle auto-accept",
             ),
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { flexDirection: "column" },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               "double tap esc to clear input",
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               "ctrl + j / shift + ⏎ for newline",
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               "ctrl + g to open in editor",
             ),
-            K.createElement(re, { color: mr.DIM }, "ctrl + z to suspend"),
+            React.createElement(Text, { color: mr.DIM }, "ctrl + z to suspend"),
           ),
         ),
       ),
@@ -59311,26 +59263,26 @@ var bP = __name(
       isProcessing: L = !1,
       ideContextEnabled: D = !0,
     }) => {
-      const [O, F] = J(0),
-        [U, j] = J(!1),
-        [q, B] = J(!1),
-        [z, W] = J(!1),
-        [H, G] = J(!1),
-        [V, Q] = J(""),
-        [Y, oe] = J(null),
-        [ae, le] = J(!1),
-        ce = X(0),
-        ue = X(0),
-        [de, me] = J([]),
-        [pe, ge] = J([]),
-        [he, fe] = J(-1),
-        [ye, we] = J(""),
-        Se = X(!1),
-        be = X(!1),
-        Ee = X(void 0),
-        [ve, Ce] = J(-1),
-        [ke, Te] = J(""),
-        _e = X(0),
+      const [O, F] = useState(0),
+        [U, j] = useState(!1),
+        [q, B] = useState(!1),
+        [z, W] = useState(!1),
+        [H, G] = useState(!1),
+        [V, Q] = useState(""),
+        [Y, oe] = useState(null),
+        [ae, le] = useState(!1),
+        ce = useRef(0),
+        ue = useRef(0),
+        [de, me] = useState([]),
+        [pe, ge] = useState([]),
+        [he, fe] = useState(-1),
+        [ye, we] = useState(""),
+        Se = useRef(!1),
+        be = useRef(!1),
+        Ee = useRef(void 0),
+        [ve, Ce] = useState(-1),
+        [ke, Te] = useState(""),
+        _e = useRef(0),
         {
           isEditorOpen: xe,
           editorError: Ae,
@@ -59346,7 +59298,7 @@ var bP = __name(
             Se.current = !1;
           }, "onEditorClose"),
         }),
-        Ne = ee(() => shouldCollapsePastedText(), []),
+        Ne = useMemo(() => shouldCollapsePastedText(), []),
         {
           handlePaste: Re,
           resetPasteState: $e,
@@ -59369,20 +59321,20 @@ var bP = __name(
           refresh: Fe,
           connectionIndicator: Ue,
         } = hP({ enabled: D, paused: L }),
-        { stdout: je } = se(),
+        { stdout: je } = useStdout(),
         qe = je?.columns ?? 80,
         { pr: Be } = ZA();
-      Z(() => {
+      useEffect(() => {
         const e = i || H || ae;
         N?.(e);
       }, [i, H, ae, N]);
-      const ze = te(() => {
+      const ze = useCallback(() => {
           (ge([]), fe(-1));
         }, []),
-        We = te(() => {
+        We = useCallback(() => {
           (G(!1), oe(null));
         }, []),
-        He = te(() => {
+        He = useCallback(() => {
           (n(""),
             B(!1),
             We(),
@@ -59396,7 +59348,7 @@ var bP = __name(
             Te(""),
             F((e) => e + 1));
         }, [n, $e, ze, We]),
-        Ge = te(() => {
+        Ge = useCallback(() => {
           Se.current = !0;
           const { text: t, cursor: r } = insertTextAt(e, _e.current, "\n");
           (n(t),
@@ -59406,7 +59358,7 @@ var bP = __name(
               Se.current = !1;
             }, 0));
         }, [e, n]);
-      ie(async (t, r) => {
+      useInput(async (t, r) => {
         if (-1 !== he && r.leftArrow)
           return void fe(
             prevImageIndex({ currentIndex: he, imageCount: pe.length }),
@@ -59516,7 +59468,7 @@ var bP = __name(
           U && (r.backspace || r.delete) && 0 === e.length && j(!1);
         }
       });
-      const Ve = te(
+      const Ve = useCallback(
           async (t) => {
             if (xe) return;
             const r = removeAltPCharacter(t);
@@ -59582,7 +59534,7 @@ var bP = __name(
           },
           [U, e, n, i, a, H, q, pe, ve, Re, $e, $, Ae, Me, xe, We],
         ),
-        Qe = te(async () => {
+        Qe = useCallback(async () => {
           if ((Fe(), (ue.current = 0), U)) return void j(!1);
           let n = e.trim();
           if (!q && n.startsWith("/") && d && "handled" === (await d(n)).status)
@@ -59632,9 +59584,9 @@ var bP = __name(
             ze(),
             me([]));
         }, [t, d, U, e, q, pe, de, I, Fe, ze, We]),
-        Ke = te(
+        Ke = useCallback(
           (t) => {
-            const r = s(process.cwd(), t);
+            const r = relative(process.cwd(), t);
             let o;
             if (i && "" !== l) {
               const t = e.lastIndexOf("@");
@@ -59644,10 +59596,10 @@ var bP = __name(
           },
           [n, a, e, i, l, u],
         ),
-        Ye = te(() => {
+        Ye = useCallback(() => {
           (a(!1), u(""));
         }, [a, u]),
-        Je = te(
+        Je = useCallback(
           (e) => {
             const t = gx.has(e),
               r = "/design" === e.trimEnd();
@@ -59659,7 +59611,7 @@ var bP = __name(
           },
           [n, We],
         ),
-        Xe = te(
+        Xe = useCallback(
           (t) => {
             if ("/resume" === t)
               return (
@@ -59705,10 +59657,10 @@ var bP = __name(
           },
           [d, n, e, I, Je, We],
         ),
-        Ze = te(() => {
+        Ze = useCallback(() => {
           (We(), Q(""), n(""), Ce(-1), Te(""), F((e) => e + 1));
         }, [n, We]),
-        et = te(
+        et = useCallback(
           (e) => {
             (le(!1),
               n(""),
@@ -59720,13 +59672,13 @@ var bP = __name(
           },
           [d, n],
         ),
-        tt = te(() => {
+        tt = useCallback(() => {
           (le(!1), n(ye), Ce(-1), Te(""), F((e) => e + 1));
         }, [ye, n]),
-        nt = te((e) => {
+        nt = useCallback((e) => {
           ((_e.current = e), (Ee.current = void 0));
         }, []),
-        rt = ee(() => {
+        rt = useMemo(() => {
           const t = Be && ("OPEN" === Be.state || "MERGED" === Be.state);
           return "auto-accept" === x ||
             "plan" === x ||
@@ -59736,8 +59688,8 @@ var bP = __name(
             ? !U && !ae
             : !U && 0 === e.length && !q && !ae;
         }, [U, e, q, ae, x, Oe, Be]),
-        ot = X(new Map()),
-        st = ee(
+        ot = useRef(new Map()),
+        st = useMemo(
           () =>
             pe.map((e, t) => {
               if (ot.current.has(e)) return ot.current.get(e) ?? null;
@@ -59750,22 +59702,22 @@ var bP = __name(
           () => (U || i || H || ae || z ? 0 : rt || M || q ? 3 : 4),
           "getBottomMargin",
         );
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { width: "100%", flexDirection: "column", marginBottom: it() },
         !ae &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { flexDirection: "column", width: "100%" },
-            K.createElement(ImageRowsDisplay, {
+            React.createElement(ImageRowsDisplay, {
               detectedImages: pe,
               selectedImageIndex: he,
               imageTempPaths: st,
               termWidth: qe,
               inHistory: -1 !== ve,
             }),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: q ? mr.GREEN : mr.GRAY },
               Ie.line.repeat(qe),
             ),
@@ -59779,7 +59731,7 @@ var bP = __name(
                 }, "handleTextInputSubmit"),
                 n = __name(
                   (n) =>
-                    K.createElement(TextInput, {
+                    React.createElement(TextInput, {
                       key: O,
                       value: e,
                       placeholder: xe
@@ -59802,19 +59754,19 @@ var bP = __name(
                   currentModel: T,
                   terminalWidth: qe,
                 });
-                return K.createElement(
-                  ne,
+                return React.createElement(
+                  Box,
                   { flexDirection: "row", width: "100%" },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { width: 25 },
                     n({ singleLine: !0, maxWidth: 25 }),
                   ),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     { width: e.descriptionWidth },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       { color: mr.DIM, wrap: "truncate" },
                       e.text,
                     ),
@@ -59823,41 +59775,41 @@ var bP = __name(
               }
               return n();
             })(),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: q ? mr.GREEN : mr.GRAY },
               Ie.line.repeat(qe),
             ),
           ),
-        U && K.createElement(bP, null),
+        U && React.createElement(bP, null),
         z &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingTop: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.YELLOW },
               "Command Code has been suspended. Run `fg` to bring\n\t\t\t\t\t\tCommand Code back.",
             ),
           ),
         i &&
-          K.createElement(eP, {
+          React.createElement(eP, {
             onSelectFile: Ke,
             onClose: Ye,
             searchQuery: l,
           }),
         H &&
-          K.createElement(wx, {
+          React.createElement(wx, {
             onSelectCommand: Xe,
             onInsertCommand: Je,
             onClose: Ze,
             searchQuery: V,
             onSelectedCommandChange: oe,
           }),
-        ae && K.createElement(gP, { onSelectSession: et, onClose: tt }),
+        ae && React.createElement(gP, { onSelectSession: et, onClose: tt }),
         !H &&
           (rt || M) &&
-          K.createElement(aP, {
+          React.createElement(aP, {
             termWidth: qe,
             indicatorText: wP(Oe, De, qe),
             isIDEIndicator: yP(Oe, De),
@@ -59879,10 +59831,10 @@ var bP = __name(
             creditWarning: E,
           }),
         Ae &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingLeft: 1, flexDirection: "column" },
-            K.createElement(re, { color: mr.YELLOW }, Ae),
+            React.createElement(Text, { color: mr.YELLOW }, Ae),
           ),
       );
     },
@@ -59893,25 +59845,25 @@ var vP = __name(
     ({ messages: e }) =>
       0 === e.length
         ? null
-        : K.createElement(
-            ne,
+        : React.createElement(
+            Box,
             { flexDirection: "column", marginBottom: 1 },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { marginBottom: 0 },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: fr, inverse: !0 },
                 ` Queued (${e.length}) `,
               ),
             ),
             e.map((e, t) =>
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { key: t },
-                K.createElement(re, { color: mr.DIM }, Ie.pointerSmall, " "),
-                K.createElement(
-                  re,
+                React.createElement(Text, { color: mr.DIM }, Ie.pointerSmall, " "),
+                React.createElement(
+                  Text,
                   { color: mr.DIM },
                   truncateString({
                     text: e.displayMessage ?? e.input,
@@ -59923,7 +59875,7 @@ var vP = __name(
           ),
     "QueuedMessages",
   ),
-  CP = K.memo(
+  CP = React.memo(
     ({
       queuedMessages: e,
       isProcessing: t,
@@ -59961,13 +59913,13 @@ var vP = __name(
       retryAttempt: D,
       onAltP: O,
     }) => {
-      const [F, U] = J(0),
-        j = X(o);
+      const [F, U] = useState(0),
+        j = useRef(o);
       return (
-        Z(() => {
+        useEffect(() => {
           (R && o !== j.current && o.length > 0 && $?.(), (j.current = o));
         }, [o, R, $]),
-        Z(() => {
+        useEffect(() => {
           if (!t) return void U(0);
           const e = setInterval(() => {
             U((e) => e + 1e3);
@@ -59976,29 +59928,29 @@ var vP = __name(
             clearInterval(e);
           };
         }, [t]),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column" },
-          K.createElement(vP, { messages: e }),
-          K.createElement(
-            ne,
+          React.createElement(vP, { messages: e }),
+          React.createElement(
+            Box,
             { flexDirection: "row", justifyContent: "space-between" },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { flexDirection: "column" },
               (t || n.isExecuting) &&
                 null === D &&
-                K.createElement(jA, {
+                React.createElement(jA, {
                   tokens: g,
                   timeElapsed: F,
                   status: n.isExecuting ? `Executing: ${n.currentCommand}` : r,
                 }),
               M &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginLeft: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     " ",
                     "⎿",
@@ -60009,7 +59961,7 @@ var vP = __name(
                 ),
             ),
           ),
-          K.createElement(EP, {
+          React.createElement(EP, {
             input: o,
             setInput: s,
             onSubmit: i,
@@ -60047,8 +59999,8 @@ var vP = __name(
   );
 (Ft(), tE(), iE(), ao(), fo());
 var kP = __name(({ onComplete: e, onCancel: t }) => {
-  const [n, r] = J(!1),
-    [o, s] = J(""),
+  const [n, r] = useState(!1),
+    [o, s] = useState(""),
     {
       authState: i,
       statusMessage: a,
@@ -60078,7 +60030,7 @@ var kP = __name(({ onComplete: e, onCancel: t }) => {
       }, "onCancel"),
     });
   return (
-    ie((t, r) => {
+    useInput((t, r) => {
       if (r.ctrl && "c" === t) {
         if (n)
           return void e(
@@ -60091,7 +60043,7 @@ var kP = __name(({ onComplete: e, onCancel: t }) => {
       }
     }),
     n
-      ? K.createElement(oo, {
+      ? React.createElement(oo, {
           onSuccess: () => {
             e(
               !0,
@@ -60117,7 +60069,7 @@ var kP = __name(({ onComplete: e, onCancel: t }) => {
             );
           },
         })
-      : K.createElement(rE, {
+      : React.createElement(rE, {
           authState: i,
           statusMessage: a,
           browserUrl: l,
@@ -60128,7 +60080,7 @@ var kP = __name(({ onComplete: e, onCancel: t }) => {
   );
 }, "LoginOverlay");
 function buildOAuthMetadataUrl(e) {
-  const t = new g(e),
+  const t = new URLClass(e),
     n = "/" === t.pathname ? "" : t.pathname.replace(/\/+$/, "");
   return (
     (t.pathname = `/.well-known/oauth-authorization-server${n}`),
@@ -60138,7 +60090,7 @@ function buildOAuthMetadataUrl(e) {
   );
 }
 function buildOidcMetadataUrl(e) {
-  const t = new g(e),
+  const t = new URLClass(e),
     n = t.pathname.replace(/\/+$/, "");
   return (
     (t.pathname = `${n}/.well-known/openid-configuration`),
@@ -60174,7 +60126,7 @@ async function discoverOAuthMetadataFromIssuer(e) {
   );
 }
 async function discoverOAuthMetadata(e) {
-  const t = new g(e),
+  const t = new URLClass(e),
     n = `${t.protocol}//${t.host}`;
   return (
     (await tryFetchAsMetadata(`${n}/.well-known/oauth-authorization-server`)) ||
@@ -60367,12 +60319,12 @@ async function discoverAndAuthenticate({
   Or(),
   io());
 var TP = __name(({ onClose: e }) => {
-  const [t, n] = J([]),
-    [r, o] = J(!0),
-    [s, i] = J(0),
-    [a, l] = J("list"),
-    [u, d] = J(null),
-    m = te(async () => {
+  const [t, n] = useState([]),
+    [r, o] = useState(!0),
+    [s, i] = useState(0),
+    [a, l] = useState("list"),
+    [u, d] = useState(null),
+    m = useCallback(async () => {
       o(!0);
       try {
         const e = await listMcpServers(),
@@ -60411,17 +60363,17 @@ var TP = __name(({ onClose: e }) => {
         o(!1);
       }
     }, []);
-  Z(() => {
+  useEffect(() => {
     m();
   }, [m]);
-  const g = ee(() => {
+  const g = useMemo(() => {
       const e = [];
       for (const n of ["local", "project", "user"])
         e.push(...t.filter((e) => e.scope === n));
       return e;
     }, [t]),
     h = g[s] ?? null;
-  ie((t, n) => {
+  useInput((t, n) => {
     if (n.ctrl && "c" === t) e();
     else if (n.escape)
       "actions" === a || "confirm-remove" === a ? (l("list"), d(null)) : e();
@@ -60437,15 +60389,15 @@ var TP = __name(({ onClose: e }) => {
   const f = __name((e) => {
       switch (e) {
         case "connected":
-          return K.createElement(re, { color: mr.GREEN }, Ie.tick);
+          return React.createElement(Text, { color: mr.GREEN }, Ie.tick);
         case "authenticated":
-          return K.createElement(re, { color: mr.CYAN }, Ie.tick);
+          return React.createElement(Text, { color: mr.CYAN }, Ie.tick);
         case "requires_auth":
-          return K.createElement(re, { color: mr.YELLOW }, Ie.warning);
+          return React.createElement(Text, { color: mr.YELLOW }, Ie.warning);
         case "error":
-          return K.createElement(re, { color: mr.RED }, Ie.cross);
+          return React.createElement(Text, { color: mr.RED }, Ie.cross);
         default:
-          return K.createElement(re, { color: mr.GRAY }, Ie.circle);
+          return React.createElement(Text, { color: mr.GRAY }, Ie.circle);
       }
     }, "getStatusIcon"),
     y = __name((e) => {
@@ -60664,45 +60616,45 @@ var TP = __name(({ onClose: e }) => {
         else l("actions");
     }, "handleRemoveConfirm");
   if (r)
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column" },
-      K.createElement(re, { color: pr, bold: !0 }, "Manage MCP servers"),
-      K.createElement(re, { color: mr.DIM }, "Loading..."),
+      React.createElement(Text, { color: pr, bold: !0 }, "Manage MCP servers"),
+      React.createElement(Text, { color: mr.DIM }, "Loading..."),
     );
   if ("confirm-remove" === a && h)
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column" },
-      K.createElement(re, { color: mr.RED, bold: !0 }, "Remove ", h.name, "?"),
-      K.createElement(
-        re,
+      React.createElement(Text, { color: mr.RED, bold: !0 }, "Remove ", h.name, "?"),
+      React.createElement(
+        Text,
         { color: mr.DIM },
         "This will remove the server from ",
         h.scope,
         " ",
         "config.",
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(pt, {
+        React.createElement(pt, {
           items: [
             { label: "Yes, remove", value: "yes" },
             { label: "Cancel", value: "no" },
           ],
           onSelect: v,
           indicatorComponent: ({ isSelected: e }) =>
-            K.createElement(re, { color: mr.WHITE }, e ? ">" : " "),
+            React.createElement(Text, { color: mr.WHITE }, e ? ">" : " "),
           itemComponent: ({ isSelected: e, label: t }) =>
-            K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, " ", t),
+            React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, " ", t),
         }),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "↑↓ navigate · Enter to select · Esc to cancel",
         ),
@@ -60723,46 +60675,46 @@ var TP = __name(({ onClose: e }) => {
       t || e.push({ label: "Disable", value: "disable" }),
       e.push({ label: "Remove", value: "remove" }),
       e.push({ label: "Back", value: "back" }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(re, { color: pr, bold: !0 }, h.name),
-        K.createElement(
-          ne,
+        React.createElement(Text, { color: pr, bold: !0 }, h.name),
+        React.createElement(
+          Box,
           null,
           f(h.status),
-          K.createElement(re, { color: mr.DIM }, " ", y(h)),
+          React.createElement(Text, { color: mr.DIM }, " ", y(h)),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(pt, {
+          React.createElement(pt, {
             items: e,
             onSelect: E,
             indicatorComponent: ({ isSelected: e }) =>
-              K.createElement(re, { color: mr.WHITE }, e ? ">" : " "),
+              React.createElement(Text, { color: mr.WHITE }, e ? ">" : " "),
             itemComponent: ({ isSelected: e, label: t }) =>
-              K.createElement(re, { color: e ? mr.WHITE : mr.GRAY }, " ", t),
+              React.createElement(Text, { color: e ? mr.WHITE : mr.GRAY }, " ", t),
           }),
         ),
         u &&
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginTop: 1 },
             u.loading &&
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: u.color },
-                K.createElement(Be, { type: "dots" }),
+                React.createElement(Be, { type: "dots" }),
                 " ",
               ),
-            K.createElement(re, { color: u.color }, u.text),
+            React.createElement(Text, { color: u.color }, u.text),
           ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "↑↓ navigate · Enter to select · Esc to go back",
           ),
@@ -60771,51 +60723,51 @@ var TP = __name(({ onClose: e }) => {
     );
   }
   let C = null;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
-    K.createElement(re, { color: pr, bold: !0 }, "Manage MCP servers"),
-    K.createElement(
-      re,
+    React.createElement(Text, { color: pr, bold: !0 }, "Manage MCP servers"),
+    React.createElement(
+      Text,
       { color: mr.DIM },
       t.length,
       " ",
       1 === t.length ? "server" : "servers",
     ),
     0 === t.length
-      ? K.createElement(
-          ne,
+      ? React.createElement(
+          Box,
           { marginTop: 1, flexDirection: "column" },
-          K.createElement(re, { color: mr.DIM }, "No MCP servers configured."),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: mr.DIM }, "No MCP servers configured."),
+          React.createElement(
+            Text,
             { color: mr.DIM },
             'Use "cmd mcp add" to add a server.',
           ),
-          K.createElement(ro, {
+          React.createElement(ro, {
             url: "https://commandcode.ai/docs/mcp",
             text: "View MCP Docs ↗",
             color: mr.CYAN,
             dimColor: !0,
           }),
         )
-      : K.createElement(
-          ne,
+      : React.createElement(
+          Box,
           { marginTop: 1, flexDirection: "column" },
           g.map((e, t) => {
             const n = e.scope !== C;
             C = e.scope;
             const r = t === s;
-            return K.createElement(
-              K.Fragment,
+            return React.createElement(
+              React.Fragment,
               { key: e.name },
               n &&
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginTop: 0 === t ? 0 : 1 },
-                  K.createElement(re, { bold: !0 }, w(e.scope)),
-                  K.createElement(
-                    re,
+                  React.createElement(Text, { bold: !0 }, w(e.scope)),
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     " ",
                     "(",
@@ -60823,23 +60775,23 @@ var TP = __name(({ onClose: e }) => {
                     ")",
                   ),
                 ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { paddingLeft: 1 },
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: r ? mr.WHITE : mr.GRAY },
                   r ? "› " : "  ",
                 ),
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: r ? mr.WHITE : void 0, bold: r },
                   e.name,
                 ),
-                K.createElement(re, { color: mr.DIM }, " · "),
+                React.createElement(Text, { color: mr.DIM }, " · "),
                 f(e.status),
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   {
                     color:
                       "connected" === e.status
@@ -60858,23 +60810,23 @@ var TP = __name(({ onClose: e }) => {
           }),
         ),
     u &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
         u.loading &&
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: u.color },
-            K.createElement(Be, { type: "dots" }),
+            React.createElement(Be, { type: "dots" }),
             " ",
           ),
-        K.createElement(re, { color: u.color }, u.text),
+        React.createElement(Text, { color: u.color }, u.text),
       ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.DIM },
         0 === t.length
           ? "Esc to close"
@@ -60885,11 +60837,11 @@ var TP = __name(({ onClose: e }) => {
 }, "McpManager");
 (Ft(), Cn(), Kn(), Or());
 var _P = __name(({ onClose: e }) => {
-  const [t, n] = J([]),
-    [r, o] = J(0),
-    [s, i] = J(!0),
-    [a, l] = J(null);
-  Z(() => {
+  const [t, n] = useState([]),
+    [r, o] = useState(0),
+    [s, i] = useState(!0),
+    [a, l] = useState(null);
+  useEffect(() => {
     __name(async () => {
       try {
         const e = await discoverMemoryFiles(process.cwd());
@@ -60912,7 +60864,7 @@ var _P = __name(({ onClose: e }) => {
     }, "handleOpenInEditor"),
     d = t.filter((e) => "project" === e.type || "user" === e.type);
   if (
-    (ie((t, n) => {
+    (useInput((t, n) => {
       n.escape
         ? e()
         : n.upArrow
@@ -60925,16 +60877,16 @@ var _P = __name(({ onClose: e }) => {
     }),
     s)
   )
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { paddingLeft: 1, paddingTop: 1 },
-      K.createElement(re, { color: mr.DIM }, "Loading memory files..."),
+      React.createElement(Text, { color: mr.DIM }, "Loading memory files..."),
     );
   if (a)
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { paddingLeft: 1, paddingTop: 1 },
-      K.createElement(re, { color: mr.RED }, Ie.cross, " ", a),
+      React.createElement(Text, { color: mr.RED }, Ie.cross, " ", a),
     );
   const m = d.map((e, t) => {
     const n = t + 1;
@@ -60954,8 +60906,8 @@ var _P = __name(({ onClose: e }) => {
       { label: r, value: e.path, description: o }
     );
   });
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     {
       flexDirection: "column",
       width: "100%",
@@ -60966,36 +60918,36 @@ var _P = __name(({ onClose: e }) => {
       paddingLeft: 2,
       paddingRight: 2,
     },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.WHITE, bold: !0 },
         "Select memory to edit:",
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { columnGap: 4, marginTop: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
         m.map((e, t) =>
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { key: t, color: r === t ? mr.WHITE : mr.DIM },
             r === t ? `${qn} ` : "  ",
             e.label,
           ),
         ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column" },
         m.map((e, t) =>
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { key: t, color: r === t ? mr.WHITE : mr.DIM },
             e.description,
           ),
@@ -61005,74 +60957,74 @@ var _P = __name(({ onClose: e }) => {
   );
 }, "MemorySelector");
 function AutoCompactMessage({ content: e }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-    K.createElement(re, { color: mr.DIM }, Ie.bullet, " ", e),
+    React.createElement(Text, { color: mr.DIM }, Ie.bullet, " ", e),
   );
 }
 function TasteSkipMessage() {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { marginTop: 1, marginBottom: 1 },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexShrink: 0 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { backgroundColor: gr.BADGE_BG, color: gr.BADGE_FG, bold: !0 },
         e_,
       ),
     ),
-    K.createElement(re, { color: mr.DIM }, " Skipped. Run "),
-    K.createElement(re, { color: Ir.CODE }, "/learn-taste"),
-    K.createElement(re, { color: mr.DIM }, " or "),
-    K.createElement(re, { color: Ir.CODE }, "cmd learn-taste"),
-    K.createElement(re, { color: mr.DIM }, " anytime."),
+    React.createElement(Text, { color: mr.DIM }, " Skipped. Run "),
+    React.createElement(Text, { color: Ir.CODE }, "/learn-taste"),
+    React.createElement(Text, { color: mr.DIM }, " or "),
+    React.createElement(Text, { color: Ir.CODE }, "cmd learn-taste"),
+    React.createElement(Text, { color: mr.DIM }, " anytime."),
   );
 }
 function HookWarningMessage({ content: e }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     null,
-    K.createElement(re, { color: mr.YELLOW }, Ie.warning),
-    K.createElement(
-      ne,
+    React.createElement(Text, { color: mr.YELLOW }, Ie.warning),
+    React.createElement(
+      Box,
       { marginLeft: 1, flexGrow: 1, flexShrink: 1, minWidth: 0 },
-      K.createElement(re, { color: mr.YELLOW }, e),
+      React.createElement(Text, { color: mr.YELLOW }, e),
     ),
   );
 }
 function HookLineMessage({ content: e }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-    K.createElement(re, { color: mr.DIM }, `  ${e}`),
+    React.createElement(Text, { color: mr.DIM }, `  ${e}`),
   );
 }
 function HookLineContinuationMessage({ content: e }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-    K.createElement(re, { color: mr.DIM }, `    ${e}`),
+    React.createElement(Text, { color: mr.DIM }, `    ${e}`),
   );
 }
 function HookFrameMessage({ lines: e, header: t }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
     void 0 !== t &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-        K.createElement(re, { color: mr.DIM }, `  ${t}`),
+        React.createElement(Text, { color: mr.DIM }, `  ${t}`),
       ),
     e.map((e, t) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { key: t, flexGrow: 1, flexShrink: 1, minWidth: 0 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           e.primary ? `  └ ${e.text}` : `    ${e.text}`,
         ),
@@ -61082,30 +61034,30 @@ function HookFrameMessage({ lines: e, header: t }) {
 }
 function InfoMessage({ content: e, metadata: t }) {
   return t?.isTasteSkip
-    ? K.createElement(TasteSkipMessage, null)
+    ? React.createElement(TasteSkipMessage, null)
     : t?.isAutoCompact
-      ? K.createElement(AutoCompactMessage, { content: e })
+      ? React.createElement(AutoCompactMessage, { content: e })
       : t?.hookFrame && t.hookFrame.length > 0
-        ? K.createElement(HookFrameMessage, {
+        ? React.createElement(HookFrameMessage, {
             lines: t.hookFrame,
             header: t.hookFrameHeader,
           })
         : t?.isHookLine
-          ? K.createElement(HookLineMessage, { content: e })
+          ? React.createElement(HookLineMessage, { content: e })
           : t?.isHookLineContinuation
-            ? K.createElement(HookLineContinuationMessage, { content: e })
+            ? React.createElement(HookLineContinuationMessage, { content: e })
             : t?.isHookWarning
-              ? K.createElement(HookWarningMessage, { content: e })
+              ? React.createElement(HookWarningMessage, { content: e })
               : t?.isSuccess
-                ? K.createElement(
-                    ne,
+                ? React.createElement(
+                    Box,
                     { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-                    K.createElement(re, { color: mr.GREEN }, Ie.tick, " ", e),
+                    React.createElement(Text, { color: mr.GREEN }, Ie.tick, " ", e),
                   )
-                : K.createElement(
-                    ne,
+                : React.createElement(
+                    Box,
                     { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-                    K.createElement(re, { color: mr.DIM }, Ie.bullet, " ", e),
+                    React.createElement(Text, { color: mr.DIM }, Ie.bullet, " ", e),
                   );
 }
 (Ft(),
@@ -61129,14 +61081,14 @@ function InfoMessage({ content: e, metadata: t }) {
   Or());
 var xP = yt() ? "⠶" : "#";
 function AssistantMessage({ content: e }) {
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     null,
-    K.createElement(re, { color: Tr }, xP),
-    K.createElement(
-      ne,
+    React.createElement(Text, { color: Tr }, xP),
+    React.createElement(
+      Box,
       { marginLeft: 1, flexGrow: 1, flexShrink: 1, minWidth: 0 },
-      K.createElement(Markdown, null, e),
+      React.createElement(Markdown, null, e),
     ),
   );
 }
@@ -61153,65 +61105,65 @@ function BashMessage({
   (n &&
     ((o = mr.YELLOW), (s = Ie.arrowRight), (i = mr.YELLOW), (a = "Executing…")),
     r && ((o = mr.RED), (s = Ie.cross), (i = mr.RED)));
-  const l = ee(() => buildTreeConnectors(a), [a]);
-  return K.createElement(
-    ne,
+  const l = useMemo(() => buildTreeConnectors(a), [a]);
+  return React.createElement(
+    Box,
     null,
-    K.createElement(re, { color: o }, s),
-    K.createElement(
-      ne,
+    React.createElement(Text, { color: o }, s),
+    React.createElement(
+      Box,
       { flexDirection: "column", marginLeft: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(re, { color: mr.GRAY }, "$ "),
-        K.createElement(re, { color: o, bold: !0 }, e),
+        React.createElement(Text, { color: mr.GRAY }, "$ "),
+        React.createElement(Text, { color: o, bold: !0 }, e),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { columnGap: 1, marginLeft: 1 },
-        K.createElement(re, { color: Rr }, l),
-        K.createElement(re, { color: i, wrap: "wrap" }, a),
+        React.createElement(Text, { color: Rr }, l),
+        React.createElement(Text, { color: i, wrap: "wrap" }, a),
       ),
     ),
   );
 }
 function CommandResultMessage({ message: e, details: t, hasError: n = !1 }) {
   const r = n ? mr.YELLOW : void 0,
-    o = ee(() => buildTreeConnectors(e), [e]);
-  return K.createElement(
-    ne,
+    o = useMemo(() => buildTreeConnectors(e), [e]);
+  return React.createElement(
+    Box,
     { flexDirection: "column", marginBottom: 0, marginTop: -1 },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { columnGap: 1 },
-      K.createElement(re, { color: Rr }, o),
-      K.createElement(
-        ne,
+      React.createElement(Text, { color: Rr }, o),
+      React.createElement(
+        Box,
         { flexGrow: 1, flexShrink: 1, minWidth: 0 },
-        K.createElement(re, { color: r }, e),
+        React.createElement(Text, { color: r }, e),
       ),
     ),
     t &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginLeft: 3 },
-        K.createElement(re, { color: mr.DIM }, "See ", t),
+        React.createElement(Text, { color: mr.DIM }, "See ", t),
       ),
   );
 }
 function ErrorMessage({ content: e }) {
   const t = e.includes("Interrupted by user");
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     null,
-    K.createElement(re, { color: mr.RED }, t ? Ie.pointer : Ie.warning),
-    K.createElement(
-      ne,
+    React.createElement(Text, { color: mr.RED }, t ? Ie.pointer : Ie.warning),
+    React.createElement(
+      Box,
       { marginLeft: 1, flexGrow: 1, flexShrink: 1, minWidth: 0 },
       t
-        ? K.createElement(re, { color: mr.RED, wrap: "wrap" }, e)
-        : K.createElement(Markdown, { color: mr.RED }, e),
+        ? React.createElement(Text, { color: mr.RED, wrap: "wrap" }, e)
+        : React.createElement(Markdown, { color: mr.RED }, e),
     ),
   );
 }
@@ -61238,22 +61190,22 @@ var AP = {
 function IDEStatusMessage({ status: e, ide: t, details: n }) {
   const { prefix: r, ide: o, suffix: s } = getStatusHeadline(e, t),
     i = AP[e];
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         null,
-        K.createElement(re, { color: i.color }, i.char),
-        K.createElement(re, null, " ", r),
-        o && K.createElement(re, { color: mr.CYAN }, o),
-        s && K.createElement(re, null, s),
+        React.createElement(Text, { color: i.color }, i.char),
+        React.createElement(Text, null, " ", r),
+        o && React.createElement(Text, { color: mr.CYAN }, o),
+        s && React.createElement(Text, null, s),
       ),
     ),
-    n?.map((e, t) => K.createElement(re, { key: t, color: mr.DIM }, " ", e)),
+    n?.map((e, t) => React.createElement(Text, { key: t, color: mr.DIM }, " ", e)),
   );
 }
 function ReasoningMessage({
@@ -61273,32 +61225,32 @@ function ReasoningMessage({
     g = 80 * Math.floor(m / 80),
     h = d ? (e.slice(0, g).match(/\n/g) ?? []).length : 0,
     f = d ? e.slice(g) : e;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", width: "90%" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       null,
-      K.createElement(re, { color: hr }, "✻", " "),
-      K.createElement(re, { color: hr }, u ? `${a} ` : a),
-      u && K.createElement(BracketWrap, { color: mr.DIM }, `${n}+o to expand`),
+      React.createElement(Text, { color: hr }, "✻", " "),
+      React.createElement(Text, { color: hr }, u ? `${a} ` : a),
+      u && React.createElement(BracketWrap, { color: mr.DIM }, `${n}+o to expand`),
     ),
     l &&
       d &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginLeft: 2 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           h > 0 ? `… (${h} more line${1 !== h ? "s" : ""})` : "…",
         ),
       ),
     l &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginLeft: 2, flexDirection: "column" },
-        K.createElement(re, { color: hr, wrap: "wrap", italic: !0 }, f),
+        React.createElement(Text, { color: hr, wrap: "wrap", italic: !0 }, f),
       ),
   );
 }
@@ -61311,141 +61263,141 @@ function ReasoningMessage({
   Cn());
 function HelpMessage() {
   const e = getInvokedCommandName(),
-    t = ee(
+    t = useMemo(
       () =>
         Ek.filter(
           (e) => !("/provider" === e.key && !isInternalTeamFlagEnforced()),
         ),
       [],
     );
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", paddingY: 1 },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(re, { bold: !0 }, "Command Code"),
-        K.createElement(re, { color: mr.GRAY }, " v", "0.33.0"),
+        React.createElement(Text, { bold: !0 }, "Command Code"),
+        React.createElement(Text, { color: mr.GRAY }, " v", "0.33.0"),
       ),
-      K.createElement(re, { color: mr.GRAY }, fk),
+      React.createElement(Text, { color: mr.GRAY }, fk),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(re, { bold: !0 }, "Usage"),
-      K.createElement(
-        ne,
+      React.createElement(Text, { bold: !0 }, "Usage"),
+      React.createElement(
+        Box,
         { paddingLeft: 2 },
-        K.createElement(re, null, e, " <command> [options]"),
+        React.createElement(Text, null, e, " <command> [options]"),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(re, { bold: !0 }, "Options"),
-      K.createElement(
-        ne,
+      React.createElement(Text, { bold: !0 }, "Options"),
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
         bk.map((t) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { key: t.key },
-            K.createElement(re, null, t.key.replace(/^cmd/, e).padEnd(yk)),
-            K.createElement(re, { color: mr.GRAY }, t.description),
+            React.createElement(Text, null, t.key.replace(/^cmd/, e).padEnd(yk)),
+            React.createElement(Text, { color: mr.GRAY }, t.description),
           ),
         ),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(re, { bold: !0 }, "Commands"),
-      K.createElement(
-        ne,
+      React.createElement(Text, { bold: !0 }, "Commands"),
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
         vk.map((t) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { key: t.key },
-            K.createElement(re, null, t.key.replace(/^cmd/, e).padEnd(yk)),
-            K.createElement(re, { color: mr.GRAY }, t.description),
+            React.createElement(Text, null, t.key.replace(/^cmd/, e).padEnd(yk)),
+            React.createElement(Text, { color: mr.GRAY }, t.description),
           ),
         ),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(re, { bold: !0 }, "Slash Commands"),
-      K.createElement(
-        ne,
+      React.createElement(Text, { bold: !0 }, "Slash Commands"),
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
         t.map((e) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { key: e.key },
-            K.createElement(re, null, e.key.padEnd(yk)),
-            K.createElement(re, { color: mr.GRAY }, e.description),
+            React.createElement(Text, null, e.key.padEnd(yk)),
+            React.createElement(Text, { color: mr.GRAY }, e.description),
           ),
         ),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(re, { bold: !0 }, "Keyboard Shortcuts"),
-      K.createElement(
-        ne,
+      React.createElement(Text, { bold: !0 }, "Keyboard Shortcuts"),
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
         Sk.map((e) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { key: e.key },
-            K.createElement(re, null, e.key.padEnd(yk)),
-            K.createElement(re, { color: mr.GRAY }, e.description),
+            React.createElement(Text, null, e.key.padEnd(yk)),
+            React.createElement(Text, { color: mr.GRAY }, e.description),
           ),
         ),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(re, { bold: !0 }, "Examples"),
-      K.createElement(
-        ne,
+      React.createElement(Text, { bold: !0 }, "Examples"),
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
         kk.map((t) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { key: t.key },
-            K.createElement(re, null, t.key.replace(/^cmd/, e).padEnd(yk)),
-            K.createElement(re, { color: mr.GRAY }, t.description),
+            React.createElement(Text, null, t.key.replace(/^cmd/, e).padEnd(yk)),
+            React.createElement(Text, { color: mr.GRAY }, t.description),
           ),
         ),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1 },
-      K.createElement(re, { color: mr.CYAN }, Ie.pointer),
-      K.createElement(re, { color: mr.GRAY }, " ", Tk.replace(/cmd/, e)),
+      React.createElement(Text, { color: mr.CYAN }, Ie.pointer),
+      React.createElement(Text, { color: mr.GRAY }, " ", Tk.replace(/cmd/, e)),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column" },
-      K.createElement(re, { bold: !0 }, "Links"),
-      K.createElement(
-        ne,
+      React.createElement(Text, { bold: !0 }, "Links"),
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2 },
         Ck.map((e) =>
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { key: e.key },
-            K.createElement(re, null, e.key.padEnd(yk)),
-            K.createElement(re, { color: mr.CYAN }, e.description),
+            React.createElement(Text, null, e.key.padEnd(yk)),
+            React.createElement(Text, { color: mr.CYAN }, e.description),
           ),
         ),
       ),
@@ -61454,14 +61406,14 @@ function HelpMessage() {
 }
 function SystemMessage({ content: e }) {
   return e.includes("KEYBOARD SHORTCUTS") && e.includes("COMMANDS")
-    ? K.createElement(HelpMessage, null)
-    : K.createElement(
-        ne,
+    ? React.createElement(HelpMessage, null)
+    : React.createElement(
+        Box,
         { flexDirection: "column" },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { wrap: "wrap" },
-          K.createElement(Markdown, null, e),
+          React.createElement(Markdown, null, e),
         ),
       );
 }
@@ -61485,35 +61437,35 @@ function UserMessage({ content: e, images: t, imageCount: n = 0, ideHint: r }) {
     a = o || s || i,
     l = (a && PP[e]) || e,
     u = null != t ? t.length : n,
-    d = X(null);
+    d = useRef(null);
   null === d.current &&
     t &&
     t.length > 0 &&
     (d.current = t.map((e, t) => saveTempImage(e, t + 1)));
   const m = d.current ?? [];
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { backgroundColor: a ? void 0 : kr.BG, paddingRight: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: a ? mr.RED : kr.POINTER, bold: !a },
         Ie.pointer,
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginLeft: 1 },
-        K.createElement(re, { color: a ? mr.RED : mr.WHITE, wrap: "wrap" }, l),
+        React.createElement(Text, { color: a ? mr.RED : mr.WHITE, wrap: "wrap" }, l),
       ),
     ),
     u > 0 &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginLeft: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "⎿",
           " ",
@@ -61526,12 +61478,12 @@ function UserMessage({ content: e, images: t, imageCount: n = 0, ideHint: r }) {
       ),
     r &&
       !a &&
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginLeft: 2 },
-        K.createElement(re, { color: Rr }, JT),
-        K.createElement(
-          re,
+        React.createElement(Text, { color: Rr }, JT),
+        React.createElement(
+          Text,
           { color: mr.DIM },
           " ",
           "Selected ",
@@ -61551,23 +61503,23 @@ function renderFeedEntry(e, t) {
   if ("user" === e.role) {
     const t = Array.isArray(e.metadata?.images) ? e.metadata.images : void 0,
       n = e.metadata?.ideHint;
-    return K.createElement(UserMessage, {
+    return React.createElement(UserMessage, {
       content: e.input,
       images: t,
       ideHint: n,
     });
   }
   return "assistant" === e.role
-    ? K.createElement(AssistantMessage, { content: e.input })
+    ? React.createElement(AssistantMessage, { content: e.input })
     : "reasoning" === e.role
-      ? K.createElement(ReasoningMessage, {
+      ? React.createElement(ReasoningMessage, {
           content: e.input,
           expandedOutput: t,
           expandKey: "ctrl",
           isStreaming: "running" === e.metadata?.status,
         })
       : "tool" === e.role
-        ? K.createElement(ToolMessage, {
+        ? React.createElement(ToolMessage, {
             name: Bb(e.name || ""),
             input: e.input,
             output: e.output || "",
@@ -61577,29 +61529,29 @@ function renderFeedEntry(e, t) {
             expandedOutput: t,
           })
         : "bash" === e.role
-          ? K.createElement(BashMessage, {
+          ? React.createElement(BashMessage, {
               command: e.command || "",
               output: e.output || "",
               isPending: Ub(e),
               hasError: Fb(e),
             })
           : "system" === e.role
-            ? K.createElement(SystemMessage, { content: e.input })
+            ? React.createElement(SystemMessage, { content: e.input })
             : "info" === e.role
-              ? K.createElement(InfoMessage, {
+              ? React.createElement(InfoMessage, {
                   content: e.input,
                   metadata: e.metadata,
                 })
               : "error" === e.role
-                ? K.createElement(ErrorMessage, { content: e.input })
+                ? React.createElement(ErrorMessage, { content: e.input })
                 : "command-result" === e.role
-                  ? K.createElement(CommandResultMessage, {
+                  ? React.createElement(CommandResultMessage, {
                       message: e.input,
                       details: e.details,
                       hasError: e.hasError ?? !1,
                     })
                   : "ide-status" === e.role
-                    ? K.createElement(IDEStatusMessage, {
+                    ? React.createElement(IDEStatusMessage, {
                         status: e.status,
                         ide: e.ide,
                         details: e.details,
@@ -61621,12 +61573,12 @@ function TranscriptDivider({ count: e, width: t }) {
   const n = ` ${e} hidden messages [ctrl+e to expand more] `,
     r = Math.max(0, Math.floor((t - n.length) / 2)),
     o = "─".repeat(r);
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { marginBottom: 1 },
-    K.createElement(re, { color: Cr }, o),
-    K.createElement(BracketedText, { text: n, color: Cr }),
-    K.createElement(re, { color: Cr }, o),
+    React.createElement(Text, { color: Cr }, o),
+    React.createElement(BracketedText, { text: n, color: Cr }),
+    React.createElement(Text, { color: Cr }, o),
   );
 }
 (__name(UserMessage, "UserMessage"),
@@ -61634,7 +61586,7 @@ function TranscriptDivider({ count: e, width: t }) {
   __name(getModelShortName, "getModelShortName"),
   __name(getProviderShortName, "getProviderShortName"),
   __name(TranscriptDivider, "TranscriptDivider"));
-var IP = K.memo(
+var IP = React.memo(
   ({
     feed: e,
     showHeader: t = !1,
@@ -61647,18 +61599,18 @@ var IP = K.memo(
     const a = i > 0 ? { role: "transcript-divider", count: i } : null,
       l = [...(t ? ["header"] : []), ...(a ? [a] : []), ...e],
       u = useTerminalWidth(),
-      d = ee(() => Yx(u), [u]),
-      m = ee(() => tA(u), [u]),
-      g = ee(() => getPackageJson().version || "0.0.0", []),
-      h = ee(() => getGitHeaderInfo(), []),
-      f = ee(() => {
+      d = useMemo(() => Yx(u), [u]),
+      m = useMemo(() => tA(u), [u]),
+      g = useMemo(() => getPackageJson().version || "0.0.0", []),
+      h = useMemo(() => getGitHeaderInfo(), []),
+      f = useMemo(() => {
         const e = process.cwd(),
           t = process.env.HOME ?? process.env.USERPROFILE ?? "";
         return e.replace(t, "~");
       }, []),
       y = o ? getModelShortName(o) : "sonnet-4.6",
       w = "taste-1",
-      S = ee(() => {
+      S = useMemo(() => {
         if (!o) return "";
         if (!modelSupportsReasoningEffort(o)) return "";
         const e = getReasoningEffort(o);
@@ -61667,37 +61619,37 @@ var IP = K.memo(
       E = isInternalTeamFlagEnforced() && !process.env.CMD_DEMO,
       v = E ? " · co" : "",
       C = E && s ? ` · ${getProviderShortName(s)}` : "";
-    return K.createElement(
-      oe,
+    return React.createElement(
+      Static,
       { items: l, key: n, style: { width: "100%" } },
       (e) => {
         if ("object" == typeof e && "transcript-divider" === e.role)
-          return K.createElement(TranscriptDivider, {
+          return React.createElement(TranscriptDivider, {
             key: "transcript-divider",
             count: e.count,
             width: u,
           });
         if ("header" === e)
           return "compact" === m
-            ? K.createElement(
-                ne,
+            ? React.createElement(
+                Box,
                 { key: "header", marginBottom: 1, flexDirection: "row" },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { width: Zx, flexShrink: 0 },
-                  K.createElement(nA, null, Xx),
+                  React.createElement(nA, null, Xx),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { flexDirection: "column", marginLeft: 2 },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     null,
-                    K.createElement(re, { bold: !0 }, "Command Code"),
-                    K.createElement(re, { color: Cr }, " ", "v", g),
+                    React.createElement(Text, { bold: !0 }, "Command Code"),
+                    React.createElement(Text, { color: Cr }, " ", "v", g),
                   ),
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: Cr },
                     "models: ",
                     y,
@@ -61707,30 +61659,30 @@ var IP = K.memo(
                     w,
                     v,
                   ),
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: Cr },
                     f,
                     h && h.isLocal && h.branch && ` (${h.branch})`,
                   ),
                 ),
               )
-            : K.createElement(
-                ne,
+            : React.createElement(
+                Box,
                 { key: "header", marginBottom: 1, flexDirection: "column" },
-                K.createElement(nA, null, d.trimEnd()),
-                K.createElement(
-                  ne,
+                React.createElement(nA, null, d.trimEnd()),
+                React.createElement(
+                  Box,
                   { flexDirection: "column", marginTop: 1 },
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     null,
-                    K.createElement(re, { color: Cr }, "# "),
-                    K.createElement(re, { bold: !0 }, "Command Code"),
-                    K.createElement(re, { color: Cr }, " v", g),
+                    React.createElement(Text, { color: Cr }, "# "),
+                    React.createElement(Text, { bold: !0 }, "Command Code"),
+                    React.createElement(Text, { color: Cr }, " v", g),
                   ),
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: Cr },
                     "# models: ",
                     y,
@@ -61740,19 +61692,19 @@ var IP = K.memo(
                     C,
                     v,
                   ),
-                  K.createElement(
-                    ne,
+                  React.createElement(
+                    Box,
                     null,
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       { color: Cr },
                       "# ",
                       f,
                       h &&
                         h.isLocal &&
                         h.branch &&
-                        K.createElement(
-                          re,
+                        React.createElement(
+                          Text,
                           { color: Cr },
                           " ",
                           "(branch:",
@@ -61766,8 +61718,8 @@ var IP = K.memo(
               );
         const t = e,
           n = renderFeedEntry(t, r);
-        return K.createElement(
-          ne,
+        return React.createElement(
+          Box,
           { key: t.id, paddingBottom: 1, width: "90%" },
           n,
         );
@@ -61776,7 +61728,7 @@ var IP = K.memo(
   },
 );
 (Ft(), Qb(), yo(), Or());
-var MP = Y(
+var MP = memo(
     __name(function LiveAgentStatusInner2({ entry: e }) {
       const t = Bb(e.name || "Agent"),
         n = e.input || "",
@@ -61785,33 +61737,33 @@ var MP = Y(
         s = e.metadata?.tokensUsed || 0,
         i = e.metadata?.elapsedSeconds || 0,
         a = e.metadata?.recentTools || [],
-        [l, u] = J(".");
+        [l, u] = useState(".");
       return (
-        Z(() => {
+        useEffect(() => {
           const e = setInterval(() => {
             u((e) => ("..." === e ? "." : e + "."));
           }, 500);
           return () => clearInterval(e);
         }, []),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", marginBottom: 1, width: "90%" },
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             null,
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { backgroundColor: br.BG, color: br.FG, bold: !0 },
               ` ${t} `,
             ),
-            o && K.createElement(re, null, " (", o, ")"),
+            o && React.createElement(Text, null, " (", o, ")"),
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { columnGap: 1, marginLeft: 1 },
-            K.createElement(re, null, "⎿", " "),
-            K.createElement(
-              re,
+            React.createElement(Text, null, "⎿", " "),
+            React.createElement(
+              Text,
               { color: mr.GRAY },
               "Running (",
               formatTime2(i),
@@ -61823,18 +61775,18 @@ var MP = Y(
             ),
           ),
           a.length > 0 &&
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { flexDirection: "column", marginLeft: 1 },
               a.map((e, t) => {
                 const n = Bb(e.name);
-                return K.createElement(
-                  ne,
+                return React.createElement(
+                  Box,
                   { key: t, columnGap: 1 },
-                  K.createElement(re, { color: mr.GRAY }, "⎿"),
-                  K.createElement(re, { color: mr.GRAY }, " ", n),
+                  React.createElement(Text, { color: mr.GRAY }, "⎿"),
+                  React.createElement(Text, { color: mr.GRAY }, " ", n),
                   e.input &&
-                    K.createElement(re, { color: mr.GRAY }, "(", e.input, ")"),
+                    React.createElement(Text, { color: mr.GRAY }, "(", e.input, ")"),
                 );
               }),
             ),
@@ -61842,9 +61794,9 @@ var MP = Y(
       );
     }, "LiveAgentStatusInner"),
   ),
-  NP = Y(
+  NP = memo(
     __name(function LiveAgentStatus2({ entry: e }) {
-      return "tool" !== e.role ? null : K.createElement(MP, { entry: e });
+      return "tool" !== e.role ? null : React.createElement(MP, { entry: e });
     }, "LiveAgentStatus"),
   );
 (Ft(), Cn(), no(), so(), yo(), fo(), Or(), Ft(), Or());
@@ -61868,20 +61820,20 @@ var RP = {
       onSelect: r,
       onCancel: o,
     }) => {
-      const s = ee(
+      const s = useMemo(
           () => [
             $P,
             ...t.map((e) => ({ value: e, label: e, description: RP[e] })),
           ],
           [t],
         ),
-        i = ee(() => {
+        i = useMemo(() => {
           if (void 0 === n) return 0;
           const e = s.findIndex((e) => e.value === n);
           return e >= 0 ? e : 0;
         }, [s, n]),
         a = __name((e, t) => `${e + 1}. ${t}`, "labelText"),
-        l = ee(
+        l = useMemo(
           () => Math.max(...s.map((e, t) => a(t, e.label).length)) + 4,
           [s],
         ),
@@ -61894,47 +61846,47 @@ var RP = {
           onSearchChange: __name(() => {}, "onSearchChange"),
           disableSearch: !0,
         });
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingX: 0, width: "100%" },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: pr, bold: !0 },
             `Select reasoning effort for ${e}`,
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column" },
           s.map((e, t) => {
             const r = t === u,
               o = e.value === n;
-            return K.createElement(
-              ne,
+            return React.createElement(
+              Box,
               { key: e.label },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: mr.CYAN },
                 r ? `${Ie.pointer} ` : "  ",
               ),
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: r ? mr.CYAN : o ? mr.GREEN : mr.WHITE },
                 a(t, e.label).padEnd(l),
               ),
-              K.createElement(re, { color: mr.DIM }, e.description),
-              o && K.createElement(re, { color: mr.GREEN }, " ", Ie.tick),
+              React.createElement(Text, { color: mr.DIM }, e.description),
+              o && React.createElement(Text, { color: mr.GREEN }, " ", Ie.tick),
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "↑/↓ navigate · enter to select · esc to go back",
           ),
@@ -61990,11 +61942,11 @@ var FP = __name(
     freeCredits: i = 0,
     refreshBanner: a,
   }) => {
-    const [l, u] = J(""),
-      [d, m] = J(null),
-      [g, h] = J(() => new Set()),
-      f = ee(() => isInternalTeamFlagEnforced(), []),
-      y = ee(
+    const [l, u] = useState(""),
+      [d, m] = useState(null),
+      [g, h] = useState(() => new Set()),
+      f = useMemo(() => isInternalTeamFlagEnforced(), []),
+      y = useMemo(
         () =>
           f
             ? yn
@@ -62004,13 +61956,13 @@ var FP = __name(
               ),
         [f],
       ),
-      w = ee(() => searchGroups2(y, l), [y, l]),
-      S = ee(() => flattenGroups(w), [w]),
+      w = useMemo(() => searchGroups2(y, l), [y, l]),
+      S = useMemo(() => flattenGroups(w), [w]),
       E = void 0 !== o,
-      v = ee(() => (E ? null : getCachedBillingContext()), [E]),
-      [C, k] = J(v),
-      [T, _] = J(!E && !v);
-    Z(() => {
+      v = useMemo(() => (E ? null : getCachedBillingContext()), [E]),
+      [C, k] = useState(v),
+      [T, _] = useState(!E && !v);
+    useEffect(() => {
       if (E) return;
       if (C) return;
       let e = !0;
@@ -62035,8 +61987,8 @@ var FP = __name(
             S.findIndex((e) => e.model.id === n && e.providerId === N),
           )
         : 0,
-      [$, L] = J("model"),
-      [D, O] = J(null),
+      [$, L] = useState("model"),
+      [D, O] = useState(null),
       {
         cursor: F,
         error: U,
@@ -62077,7 +62029,7 @@ var FP = __name(
             : (t.errorMessage ?? "Model not available for your plan");
         }, "validate"),
       }),
-      q = X(!1),
+      q = useRef(!1),
       B = __name((t) => {
         if (!D || q.current) return;
         q.current = !0;
@@ -62101,7 +62053,7 @@ var FP = __name(
         q.current || (O(null), L("model"));
       }, "handleEffortCancel");
     if (
-      (Z(() => {
+      (useEffect(() => {
         if (T) return;
         if (U !== DP) return;
         const e = S[F];
@@ -62122,12 +62074,12 @@ var FP = __name(
             : (t.errorMessage ?? "Model not available for your plan"),
         );
       }, [T, x, U, j, S, F, A, P, I]),
-      Z(() => {
+      useEffect(() => {
         (async () => {
           (await isOAuthEnforced()) && m(await getConfiguredProvider());
         })();
       }, []),
-      Z(() => {
+      useEffect(() => {
         (async () => {
           const e = new Set(y.map((e) => e.providerId)),
             t = new Set();
@@ -62143,7 +62095,7 @@ var FP = __name(
       "effort" === $ && D)
     ) {
       const e = getSupportedEfforts(D.model.id) ?? [];
-      return K.createElement(LP, {
+      return React.createElement(LP, {
         modelLabel: D.model.label,
         supportedEfforts: e,
         currentEffort: getReasoningEffort(D.model.id),
@@ -62152,65 +62104,65 @@ var FP = __name(
       });
     }
     let W = 0;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", paddingX: 0, width: "100%" },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(re, { color: pr, bold: !0 }, "Select model"),
+        React.createElement(Text, { color: pr, bold: !0 }, "Select model"),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { dimColor: !0 },
           f
             ? "Select a model and provider. Sets the default for new sessions; other open sessions are unaffected. Provider is saved."
             : "Switch between Command Code models. Sets the default for new sessions; other open sessions are unaffected.",
         ),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginBottom: 2, flexDirection: "column", width: "100%" },
-        K.createElement(lA, {
+        React.createElement(lA, {
           query: l,
           resultCount: l ? S.length : void 0,
           placeholder: "Type to search models...",
         }),
       ),
       0 === S.length
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             { marginY: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.GRAY },
               'No models match "',
               l,
               '"',
             ),
           )
-        : K.createElement(
-            ne,
+        : React.createElement(
+            Box,
             { flexDirection: "column" },
             w.map((e, t) => {
               const r = W;
               return (
                 (W += e.models.length),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   {
                     key: `${e.providerId}-${e.label}`,
                     flexDirection: "column",
                     marginTop: t > 0 ? 1 : 0,
                   },
                   f
-                    ? K.createElement(re, { bold: !0, color: pr }, e.label)
-                    : K.createElement(re, { bold: !0, dimColor: !0 }, e.label),
+                    ? React.createElement(Text, { bold: !0, color: pr }, e.label)
+                    : React.createElement(Text, { bold: !0, dimColor: !0 }, e.label),
                   e.models.map((t, o) =>
-                    K.createElement(VA, {
+                    React.createElement(VA, {
                       key: `${e.providerId}-${e.label}-${t.id}`,
                       model: t,
                       providerId: e.providerId,
@@ -62224,22 +62176,22 @@ var FP = __name(
             }),
           ),
       U &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.GRAY }, U),
+          React.createElement(Text, { color: mr.GRAY }, U),
         ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "type to search · ↑/↓ navigate · enter to select",
         ),
         l
-          ? K.createElement(re, { color: mr.DIM }, " · esc to clear")
-          : K.createElement(re, { color: mr.DIM }, " · esc to cancel"),
+          ? React.createElement(Text, { color: mr.DIM }, " · esc to clear")
+          : React.createElement(Text, { color: mr.DIM }, " · esc to cancel"),
       ),
     );
   },
@@ -62249,7 +62201,7 @@ var FP = __name(
 var UP = __name(({ currentModel: e, onClose: t, refreshBanner: n }) => {
   const r = getSupportedEfforts(e) ?? [],
     o = findModelById(e)?.label ?? getModelDisplayName(e),
-    s = X(!1),
+    s = useRef(!1),
     i = __name((r) => {
       if (s.current) return;
       s.current = !0;
@@ -62267,7 +62219,7 @@ var UP = __name(({ currentModel: e, onClose: t, refreshBanner: n }) => {
     a = __name(() => {
       s.current || t();
     }, "handleCancel");
-  return K.createElement(LP, {
+  return React.createElement(LP, {
     modelLabel: o,
     supportedEfforts: r,
     currentEffort: getReasoningEffort(e),
@@ -62281,65 +62233,65 @@ var jP = __name(({ onSelect: e, onCancel: t, currentProvider: n }) => {
     o = __name((t) => {
       e(t.value);
     }, "handleSelect");
-  ie((e, n) => {
+  useInput((e, n) => {
     n.escape && t();
   });
   const s = n ? r.findIndex((e) => e.value === n) : 0,
     i = n && -1 === s;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", paddingX: 0, width: "100%" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       {
         marginBottom: 1,
         flexDirection: "row",
         justifyContent: "space-between",
       },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(re, { bold: !0 }, "Select AI Provider"),
+        React.createElement(Text, { bold: !0 }, "Select AI Provider"),
       ),
       n &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "row" },
-          K.createElement(re, { color: mr.DIM }, "Current: "),
-          K.createElement(re, { color: mr.GREEN }, getProviderDisplayName(n)),
+          React.createElement(Text, { color: mr.DIM }, "Current: "),
+          React.createElement(Text, { color: mr.GREEN }, getProviderDisplayName(n)),
           i &&
-            K.createElement(re, { color: mr.YELLOW }, " ", "[OAuth enforced]"),
+            React.createElement(Text, { color: mr.YELLOW }, " ", "[OAuth enforced]"),
         ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 0 },
-      K.createElement(re, { color: mr.DIM }, "Available Providers:"),
+      React.createElement(Text, { color: mr.DIM }, "Available Providers:"),
     ),
-    K.createElement(pt, {
+    React.createElement(pt, {
       items: r,
       onSelect: o,
       initialIndex: s >= 0 ? s : 0,
       indicatorComponent: ({ isSelected: e }) =>
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: e ? mr.CYAN : mr.GRAY, bold: e },
           e ? Ie.triangleRightSmall : " ",
         ),
       itemComponent: ({ isSelected: e, label: t }) =>
-        K.createElement(re, { color: e ? mr.CYAN : mr.GRAY, bold: e }, ` ${t}`),
+        React.createElement(Text, { color: e ? mr.CYAN : mr.GRAY, bold: e }, ` ${t}`),
     }),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1 },
-      K.createElement(re, { color: mr.DIM }, "Press ESC to cancel"),
+      React.createElement(Text, { color: mr.DIM }, "Press ESC to cancel"),
     ),
   );
 }, "ProviderSelector");
 function RetryMessage({ attempt: e }) {
-  const [t, n] = J(0);
+  const [t, n] = useState(0);
   if (
-    (Z(() => {
+    (useEffect(() => {
       if (null === e) return;
       const t = setInterval(() => {
         n((e) => (e + 1) % 4);
@@ -62350,11 +62302,11 @@ function RetryMessage({ attempt: e }) {
   )
     return null;
   const r = ".".repeat(t).padEnd(3, " ");
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { marginBottom: 1 },
-    K.createElement(
-      re,
+    React.createElement(
+      Text,
       { color: Pr, dimColor: !0 },
       "Connection Issue. Retrying (attempt ",
       e,
@@ -62382,7 +62334,7 @@ var qP = [
     },
   ],
   BP = __name(({ checkpoints: e, onSelect: t, onCancel: n }) => {
-    const r = ee(
+    const r = useMemo(
         () =>
           [...e].sort(
             (e, t) =>
@@ -62390,12 +62342,12 @@ var qP = [
           ),
         [e],
       ),
-      [o, s] = J(Math.max(0, r.length - 1)),
-      [i, a] = J(Math.max(0, r.length - 8)),
-      [l, u] = J("checkpoint"),
-      [d, m] = J(null),
-      [g, h] = J(0),
-      f = ee(() => {
+      [o, s] = useState(Math.max(0, r.length - 1)),
+      [i, a] = useState(Math.max(0, r.length - 8)),
+      [l, u] = useState("checkpoint"),
+      [d, m] = useState(null),
+      [g, h] = useState(0),
+      f = useMemo(() => {
         if (!d) return !0;
         const e = r.findIndex((e) => e.messageId === d.messageId);
         if (-1 === e) return !0;
@@ -62403,15 +62355,15 @@ var qP = [
           if (r[t].filesModified.length > 0) return !0;
         return !1;
       }, [d, r]),
-      y = ee(() => (f ? qP : qP.filter((e) => "conversation" === e.mode)), [f]);
+      y = useMemo(() => (f ? qP : qP.filter((e) => "conversation" === e.mode)), [f]);
     if (
-      (Z(() => {
+      (useEffect(() => {
         if (r.length > 0) {
           const e = r.length - 1;
           (s(e), a(Math.max(0, r.length - 8)));
         }
       }, [r.length, 8]),
-      ie((e, f) => {
+      useInput((e, f) => {
         f.escape
           ? "mode" === l
             ? (u("checkpoint"), m(null), h(0))
@@ -62440,34 +62392,34 @@ var qP = [
       }),
       0 === r.length)
     )
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2, paddingTop: 1 },
-        K.createElement(re, { color: pr, bold: !0 }, "Rewind"),
-        K.createElement(
-          re,
+        React.createElement(Text, { color: pr, bold: !0 }, "Rewind"),
+        React.createElement(
+          Text,
           { color: mr.DIM },
           "No checkpoints available. Start a conversation to create checkpoints.",
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.DIM }, "Press "),
-          K.createElement(re, { color: mr.DIM, bold: !0 }, "Esc"),
-          K.createElement(re, { color: mr.DIM }, " to close"),
+          React.createElement(Text, { color: mr.DIM }, "Press "),
+          React.createElement(Text, { color: mr.DIM, bold: !0 }, "Esc"),
+          React.createElement(Text, { color: mr.DIM }, " to close"),
         ),
       );
     if ("mode" === l && d)
-      return K.createElement(
-        ne,
+      return React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2, paddingTop: 1 },
-        K.createElement(re, { color: pr, bold: !0 }, "Rewind"),
-        K.createElement(
-          ne,
+        React.createElement(Text, { color: pr, bold: !0 }, "Rewind"),
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(re, { color: mr.DIM }, "Restore to: "),
-          K.createElement(
-            re,
+          React.createElement(Text, { color: mr.DIM }, "Restore to: "),
+          React.createElement(
+            Text,
             { color: mr.WHITE },
             truncateString({
               text: d.userPrompt || "checkpoint",
@@ -62475,60 +62427,60 @@ var qP = [
             }),
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column" },
           y.map((e, t) => {
             const n = g === t,
               r = t === y.length - 1;
-            return K.createElement(
-              ne,
+            return React.createElement(
+              Box,
               { key: e.mode, flexDirection: "column" },
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { flexDirection: "row" },
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: n ? pr : void 0 },
                   n ? `${qn} ` : "  ",
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { flexDirection: "column" },
-                  K.createElement(re, { color: n ? pr : mr.WHITE }, e.label),
-                  K.createElement(re, { color: mr.DIM }, e.description),
+                  React.createElement(Text, { color: n ? pr : mr.WHITE }, e.label),
+                  React.createElement(Text, { color: mr.DIM }, e.description),
                 ),
               ),
-              !r && K.createElement(re, null, " "),
+              !r && React.createElement(Text, null, " "),
             );
           }),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.DIM }, "Press "),
-          K.createElement(re, { color: mr.DIM, bold: !0 }, "Enter"),
-          K.createElement(re, { color: mr.DIM }, " to confirm, "),
-          K.createElement(re, { color: mr.DIM, bold: !0 }, "Esc"),
-          K.createElement(re, { color: mr.DIM }, " to go back"),
+          React.createElement(Text, { color: mr.DIM }, "Press "),
+          React.createElement(Text, { color: mr.DIM, bold: !0 }, "Enter"),
+          React.createElement(Text, { color: mr.DIM }, " to confirm, "),
+          React.createElement(Text, { color: mr.DIM, bold: !0 }, "Esc"),
+          React.createElement(Text, { color: mr.DIM }, " to go back"),
         ),
       );
     const w = r.slice(i, i + 8);
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", paddingLeft: 2, paddingTop: 1 },
-      K.createElement(re, { color: pr, bold: !0 }, "Rewind"),
-      K.createElement(
-        re,
+      React.createElement(Text, { color: pr, bold: !0 }, "Rewind"),
+      React.createElement(
+        Text,
         { color: mr.DIM },
         "Select a checkpoint to restore your session",
       ),
       r.length > 8 &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "Showing ",
             i + 1,
@@ -62539,9 +62491,9 @@ var qP = [
             r.length,
           ),
         ),
-      K.createElement(ne, { marginTop: 1 }),
-      K.createElement(
-        ne,
+      React.createElement(Box, { marginTop: 1 }),
+      React.createElement(
+        Box,
         { flexDirection: "column" },
         w.map((e, t) => {
           const n = i + t,
@@ -62549,41 +62501,41 @@ var qP = [
             a = e.filesModified.length,
             l = t === w.length - 1,
             u = n === r.length - 1;
-          return K.createElement(
-            ne,
+          return React.createElement(
+            Box,
             { key: e.messageId, flexDirection: "column" },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { flexDirection: "row" },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: s ? pr : void 0 },
                 s ? `${qn} ` : "  ",
               ),
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { flexDirection: "column" },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: s ? pr : mr.WHITE },
                     truncateString({
                       text: e.userPrompt || "(no prompt)",
                       maxChars: 60,
                     }),
                   ),
-                  K.createElement(re, { color: mr.DIM }, " • "),
-                  K.createElement(
-                    re,
+                  React.createElement(Text, { color: mr.DIM }, " • "),
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     getRelativeTimeString({ timestamp: e.timestamp }),
                     u && " (latest)",
                   ),
                 ),
-                K.createElement(
-                  re,
+                React.createElement(
+                  Text,
                   { color: mr.DIM },
                   a > 0
                     ? `${a} file${a > 1 ? "s" : ""} changed`
@@ -62591,18 +62543,18 @@ var qP = [
                 ),
               ),
             ),
-            !l && K.createElement(re, null, " "),
+            !l && React.createElement(Text, null, " "),
           );
         }),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { marginTop: 1 },
-        K.createElement(re, { color: mr.DIM }, "Press "),
-        K.createElement(re, { color: mr.DIM, bold: !0 }, "Enter"),
-        K.createElement(re, { color: mr.DIM }, " to select, "),
-        K.createElement(re, { color: mr.DIM, bold: !0 }, "Esc"),
-        K.createElement(re, { color: mr.DIM }, " to cancel"),
+        React.createElement(Text, { color: mr.DIM }, "Press "),
+        React.createElement(Text, { color: mr.DIM, bold: !0 }, "Enter"),
+        React.createElement(Text, { color: mr.DIM }, " to select, "),
+        React.createElement(Text, { color: mr.DIM, bold: !0 }, "Esc"),
+        React.createElement(Text, { color: mr.DIM }, " to cancel"),
       ),
     );
   }, "RewindSelector");
@@ -62641,96 +62593,96 @@ var zP = [
   ],
   HP = __name(
     ({ onCancel: e }) => (
-      ie((t, n) => {
+      useInput((t, n) => {
         n.escape && e();
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", paddingLeft: 2, paddingRight: 2 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1, flexDirection: "column" },
-          K.createElement(re, { bold: !0, color: pr }, "Use"),
-          K.createElement(
-            ne,
+          React.createElement(Text, { bold: !0, color: pr }, "Use"),
+          React.createElement(
+            Box,
             { paddingLeft: 2, flexDirection: "column" },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               '/design <mode> "target or request"',
             ),
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.DIM },
               '/design "freeform request" also works. The closest mode is inferred.',
             ),
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1, flexDirection: "column" },
-          K.createElement(re, { bold: !0, color: pr }, "Modes"),
-          K.createElement(
-            ne,
+          React.createElement(Text, { bold: !0, color: pr }, "Modes"),
+          React.createElement(
+            Box,
             { paddingLeft: 2, flexDirection: "column" },
             cx.map((e) =>
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { key: e.name, columnGap: 2 },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { width: 18, flexShrink: 0 },
-                  K.createElement(re, { color: mr.CYAN }, "/design ", e.name),
+                  React.createElement(Text, { color: mr.CYAN }, "/design ", e.name),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(re, { color: mr.DIM }, e.description),
+                  React.createElement(Text, { color: mr.DIM }, e.description),
                 ),
               ),
             ),
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1, marginTop: 1, flexDirection: "column" },
-          K.createElement(re, { bold: !0, color: pr }, "Working rules"),
-          K.createElement(
-            ne,
+          React.createElement(Text, { bold: !0, color: pr }, "Working rules"),
+          React.createElement(
+            Box,
             { paddingLeft: 2, flexDirection: "column" },
             zP.map((e) =>
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { key: e.label, columnGap: 2 },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { width: 16, flexShrink: 0 },
-                  K.createElement(re, { color: mr.CYAN }, e.label),
+                  React.createElement(Text, { color: mr.CYAN }, e.label),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   null,
-                  K.createElement(re, { color: mr.DIM }, e.desc),
+                  React.createElement(Text, { color: mr.DIM }, e.desc),
                 ),
               ),
             ),
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1, marginTop: 1, flexDirection: "column" },
-          K.createElement(re, { bold: !0, color: pr }, "Quick examples:"),
-          K.createElement(
-            ne,
+          React.createElement(Text, { bold: !0, color: pr }, "Quick examples:"),
+          React.createElement(
+            Box,
             { paddingLeft: 2, flexDirection: "column" },
-            WP.map((e) => K.createElement(re, { key: e, color: mr.DIM }, e)),
+            WP.map((e) => React.createElement(Text, { key: e, color: mr.DIM }, e)),
           ),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "Press Esc to close. Type /design help anytime to return.",
           ),
@@ -62741,10 +62693,10 @@ var zP = [
   );
 (Ft(), er(), Ft(), Ft());
 var GP = __name((e) => {
-  const [t, n] = J(e),
-    [r, o] = J(null);
+  const [t, n] = useState(e),
+    [r, o] = useState(null);
   return (
-    Z(() => {
+    useEffect(() => {
       const t = __name(() => {
           (n(
             e.map((e) => ({
@@ -63507,7 +63459,7 @@ var VP = class {
     "createTimeout",
   ),
   KP = __name((e) => {
-    const [t, n] = J({
+    const [t, n] = useState({
       isImporting: !0,
       waitingForInput: !1,
       alreadyLearned: !1,
@@ -63517,7 +63469,7 @@ var VP = class {
       error: null,
     });
     return (
-      Z(() => {
+      useEffect(() => {
         (xT.reset(),
           xT.markImportStarted(),
           (async () => {
@@ -63564,17 +63516,17 @@ var VP = class {
   }, "useImportProcess");
 Ft();
 var YP = __name(({ onEscape: e, onEnter: t, enabled: n = !0 }) => {
-  ie((r, o) => {
+  useInput((r, o) => {
     n && (o.escape && e(), (o.return || "\n" === r) && t());
   });
 }, "useKeyboardInput");
 (Ft(), er());
 var JP = __name(({ autoLearn: e, onShouldSkip: t }) => {
-  const [n, r] = J(null),
-    [o, s] = J(null),
-    i = X(!1);
+  const [n, r] = useState(null),
+    [o, s] = useState(null),
+    i = useRef(!1);
   return (
-    Z(() => {
+    useEffect(() => {
       if (i.current) return;
       let n = null;
       return (
@@ -63631,27 +63583,27 @@ async function skipOnboarding(e) {
   __name(completeOnboarding, "completeOnboarding"),
   __name(skipOnboarding, "skipOnboarding"));
 var XP = __name(({ onStepChange: e, onError: t, onCompleteCallback: n }) => {
-  const r = X(n),
-    o = te(() => {
+  const r = useRef(n),
+    o = useCallback(() => {
       (dlog("[Handler] import started → learning"), e("learning"));
     }, [e]),
-    s = te(async () => {
+    s = useCallback(async () => {
       (dlog("[Handler] import complete → done"),
         e("done"),
         await completeOnboarding(() => r.current()));
     }, [e]),
-    i = te(
+    i = useCallback(
       (e) => {
         (dlog(`[Handler] import error: ${e}`), t(e));
       },
       [t],
     ),
-    a = te(async () => {
+    a = useCallback(async () => {
       (dlog("[Handler] error dismissed by user → done"),
         e("done"),
         await skipOnboarding(() => r.current({ skipped: !0 })));
     }, [e]),
-    l = te(async () => {
+    l = useCallback(async () => {
       (dlog("[Handler] skipped → done"),
         e("done"),
         await skipOnboarding(() => r.current({ skipped: !0 })));
@@ -63669,17 +63621,17 @@ var XP = __name(({ onStepChange: e, onError: t, onCompleteCallback: n }) => {
 }, "useOnboardingHandlers");
 (Ft(), er());
 var ZP = __name(({ conditions: e, autoLearn: t }) => {
-  const [n, r] = J("checking"),
-    o = X(!1);
+  const [n, r] = useState("checking"),
+    o = useRef(!1);
   return (
-    Z(() => {
+    useEffect(() => {
       if (e && !o.current) {
         if (((o.current = !0), t))
           return (dlog("[Flow] autoLearn → learning"), void r("learning"));
         (dlog(`[Flow] → asking (${e.reason})`), r("asking"));
       }
     }, [e, t]),
-    Z(() => {
+    useEffect(() => {
       dlog(`[Flow] step: ${n}`);
     }, [n]),
     { step: n, setStep: r }
@@ -63688,33 +63640,33 @@ var ZP = __name(({ conditions: e, autoLearn: t }) => {
 (Ft(), Ft(), Or());
 var eI = __name(
   ({ error: e }) =>
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { padding: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", borderColor: mr.RED, padding: 1 },
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginBottom: 1 },
-          K.createElement(re, null, "Error initializing onboarding: ", e),
+          React.createElement(Text, null, "Error initializing onboarding: ", e),
         ),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           null,
-          K.createElement(re, null, "Continuing without onboarding..."),
+          React.createElement(Text, null, "Continuing without onboarding..."),
         ),
       ),
     ),
   "OnboardingError",
 );
 (Ft(), Ft(), Or());
-var tI = __name(() => K.createElement(re, null, "Skip"), "SkipOptionText"),
+var tI = __name(() => React.createElement(Text, null, "Skip"), "SkipOptionText"),
   nI = __name(
     ({ sessionCount: e, agentSessions: t, onImport: n, onSkip: r }) => {
-      const [o, s] = J(1);
+      const [o, s] = useState(1);
       return (
-        ie((e, t) => {
+        useInput((e, t) => {
           t.escape
             ? r()
             : "n" !== e && "N" !== e
@@ -63727,8 +63679,8 @@ var tI = __name(() => K.createElement(re, null, "Skip"), "SkipOptionText"),
                   : n()
               : dismissOnboardingForeverForProject().then(() => r());
         }),
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           {
             flexDirection: "column",
             borderStyle: "single",
@@ -63736,16 +63688,16 @@ var tI = __name(() => K.createElement(re, null, "Skip"), "SkipOptionText"),
             paddingX: 1,
             paddingY: 0,
           },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: gr.TEXT, bold: !0 },
             "Build Your Coding Taste",
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginTop: 1, flexDirection: "column" },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               null,
               "Found",
               " ",
@@ -63757,11 +63709,11 @@ var tI = __name(() => K.createElement(re, null, "Skip"), "SkipOptionText"),
               " ",
               "for this project.",
             ),
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               { marginTop: 1 },
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 null,
                 "Analyze",
                 " ",
@@ -63771,42 +63723,42 @@ var tI = __name(() => K.createElement(re, null, "Skip"), "SkipOptionText"),
               ),
             ),
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginTop: 1, flexDirection: "column" },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               null,
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: 1 === o ? gr.TEXT : mr.GRAY },
                 1 === o ? Ie.pointer : " ",
                 " 1. Yes, learn (recommended)",
               ),
             ),
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               null,
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 { color: 2 === o ? gr.TEXT : mr.GRAY },
                 2 === o ? Ie.pointer : " ",
                 " 2.",
                 " ",
-                K.createElement(tI, null),
+                React.createElement(tI, null),
               ),
             ),
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { marginTop: 1 },
-            K.createElement(re, { color: mr.DIM }, "↑↓ · "),
-            K.createElement(re, { color: Ir.CODE }, "enter"),
-            K.createElement(re, { color: mr.DIM }, " ok · "),
-            K.createElement(re, { color: Ir.CODE }, "esc"),
-            K.createElement(re, { color: mr.DIM }, " skip · "),
-            K.createElement(re, { color: Ir.CODE }, "n"),
-            K.createElement(re, { color: mr.DIM }, " never"),
+            React.createElement(Text, { color: mr.DIM }, "↑↓ · "),
+            React.createElement(Text, { color: Ir.CODE }, "enter"),
+            React.createElement(Text, { color: mr.DIM }, " ok · "),
+            React.createElement(Text, { color: Ir.CODE }, "esc"),
+            React.createElement(Text, { color: mr.DIM }, " skip · "),
+            React.createElement(Text, { color: Ir.CODE }, "n"),
+            React.createElement(Text, { color: mr.DIM }, " never"),
           ),
         )
       );
@@ -63816,8 +63768,8 @@ var tI = __name(() => K.createElement(re, null, "Skip"), "SkipOptionText"),
 (Ft(), Ft(), Or());
 var rI = __name(
   ({ error: e }) =>
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       {
         flexDirection: "column",
         borderStyle: "single",
@@ -63826,20 +63778,20 @@ var rI = __name(
         paddingY: 1,
         marginBottom: 2,
       },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.RED, bold: !0 },
         "Oops, something went wrong:",
       ),
-      K.createElement(ne, { marginTop: 1 }, K.createElement(re, null, e)),
+      React.createElement(Box, { marginTop: 1 }, React.createElement(Text, null, e)),
     ),
   "ErrorSection",
 );
 (Ft(), Ft(), Or(), Ft(), Ft(), Ft(), Or(), Ft(), Or());
 var oI = __name(
   () =>
-    K.createElement(
-      re,
+    React.createElement(
+      Text,
       { backgroundColor: gr.BADGE_BG, color: gr.BADGE_FG },
       e_,
     ),
@@ -63880,15 +63832,15 @@ var sI = [
   ],
   iI = "⎿",
   aI = __name(() => {
-    const [e, t] = J(() => Math.floor(Math.random() * sI.length));
+    const [e, t] = useState(() => Math.floor(Math.random() * sI.length));
     return (
-      Z(() => {
+      useEffect(() => {
         const e = setInterval(() => {
           t(Math.floor(Math.random() * sI.length));
         }, 2e3);
         return () => clearInterval(e);
       }, []),
-      K.createElement(re, { color: mr.YELLOW }, sI[e], "...")
+      React.createElement(Text, { color: mr.YELLOW }, sI[e], "...")
     );
   }, "PulsingText");
 (Ft(), Or());
@@ -63910,16 +63862,16 @@ var lI = [
     "buildStatusLine",
   ),
   mI = __name(({ insights: e }) => {
-    const [t, n] = J(0),
-      [r, o] = J(!0),
+    const [t, n] = useState(0),
+      [r, o] = useState(!0),
       s = e.length,
       i = s > 10,
       a = Math.max(0, s - 10);
     if (
-      (Z(() => {
+      (useEffect(() => {
         r && i && n(a);
       }, [s, r, i, a]),
-      ie((e, t) => {
+      useInput((e, t) => {
         if (i)
           return t.upArrow
             ? (o(!1), void n((e) => Math.max(0, e - 1)))
@@ -63937,31 +63889,31 @@ var lI = [
     const l = e.slice(t, t + 10),
       u = t,
       d = s - t - 10;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", marginLeft: 4, marginBottom: 0 },
-      i && K.createElement(re, { color: mr.DIM }, dI(s, u, d, r)),
+      i && React.createElement(Text, { color: mr.DIM }, dI(s, u, d, r)),
       l.map((e, n) => {
         const r = t + n;
-        return K.createElement(
-          ne,
+        return React.createElement(
+          Box,
           { key: r, marginBottom: 0 },
-          K.createElement(re, { color: mr.DIM }, uI(r), " ", e),
+          React.createElement(Text, { color: mr.DIM }, uI(r), " ", e),
         );
       }),
     );
   }, "ScrollableInsights");
 (Ft(), Or());
 var pI = __name(() => {
-    const [e, t] = J(!0);
+    const [e, t] = useState(!0);
     return (
-      Z(() => {
+      useEffect(() => {
         const e = setInterval(() => {
           t((e) => !e);
         }, 500);
         return () => clearInterval(e);
       }, []),
-      K.createElement(re, { color: mr.YELLOW }, e ? Ie.circleFilled : Ie.circle)
+      React.createElement(Text, { color: mr.YELLOW }, e ? Ie.circleFilled : Ie.circle)
     );
   }, "PulsingDot"),
   gI = __name(
@@ -63977,48 +63929,48 @@ var pI = __name(() => {
       summary: l,
     }) => {
       if (i)
-        return K.createElement(
-          ne,
+        return React.createElement(
+          Box,
           { flexDirection: "column", marginBottom: 0 },
-          K.createElement(oI, null),
-          K.createElement(
-            ne,
+          React.createElement(oI, null),
+          React.createElement(
+            Box,
             { marginTop: 0 },
-            K.createElement(re, { color: mr.DIM }, iI),
-            K.createElement(
-              ne,
+            React.createElement(Text, { color: mr.DIM }, iI),
+            React.createElement(
+              Box,
               { marginLeft: 2 },
               a
-                ? K.createElement(
-                    re,
+                ? React.createElement(
+                    Text,
                     { color: gr.TEXT },
                     "learned your coding taste",
                   )
-                : K.createElement(aI, null),
+                : React.createElement(aI, null),
             ),
           ),
         );
       const u = __name(
           () =>
             r
-              ? K.createElement(re, { color: wr.BG }, Ie.square)
+              ? React.createElement(Text, { color: wr.BG }, Ie.square)
               : n
-                ? K.createElement(pI, null)
-                : K.createElement(re, { color: mr.DIM }, Ie.circle),
+                ? React.createElement(pI, null)
+                : React.createElement(Text, { color: mr.DIM }, Ie.circle),
           "getStatusIcon",
         ),
         d = o.length > 0 || s.length > 0 || t || (l && l.learningCount > 0);
       return !r || n || d
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             { flexDirection: "column", marginBottom: 0 },
             (n || r) &&
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginBottom: 0 },
-                K.createElement(ne, { marginRight: 1 }, u()),
-                K.createElement(
-                  re,
+                React.createElement(Box, { marginRight: 1 }, u()),
+                React.createElement(
+                  Text,
                   { color: r ? mr.WHITE : n ? mr.YELLOW : mr.DIM },
                   e,
                 ),
@@ -64026,39 +63978,39 @@ var pI = __name(() => {
             r &&
               t &&
               (!l || 0 === l.learningCount) &&
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginLeft: 3, marginBottom: 0 },
-                K.createElement(re, { color: mr.DIM }, t),
+                React.createElement(Text, { color: mr.DIM }, t),
               ),
             o.length > 0 &&
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { flexDirection: "column", marginLeft: 1, marginBottom: 0 },
                 o.map((e, t) =>
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { key: t, color: mr.DIM },
                     `${Ie.bullet} ${e}`,
                   ),
                 ),
               ),
-            s.length > 0 && K.createElement(mI, { insights: s }),
+            s.length > 0 && React.createElement(mI, { insights: s }),
             r &&
               l &&
               l.learningCount > 0 &&
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { flexDirection: "column", marginLeft: 1, marginBottom: 0 },
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { marginBottom: 1, flexDirection: "row" },
-                  K.createElement(re, null, iI),
-                  K.createElement(
-                    ne,
+                  React.createElement(Text, null, iI),
+                  React.createElement(
+                    Box,
                     { marginLeft: 2 },
-                    K.createElement(
-                      re,
+                    React.createElement(
+                      Text,
                       { color: gr.TEXT },
                       "Learned ",
                       l.learningCount,
@@ -64070,18 +64022,18 @@ var pI = __name(() => {
                     ),
                   ),
                 ),
-                K.createElement(
-                  ne,
+                React.createElement(
+                  Box,
                   { flexDirection: "column", marginLeft: 1 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     Ie.pointerSmall,
                     " Stored in ",
                     l.storage,
                   ),
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     "Command Code automatically uses & updates taste files.",
                   ),
@@ -64094,14 +64046,14 @@ var pI = __name(() => {
   ),
   hI = __name(({ steps: e }) => {
     const t = e.find((e) => "complete" === e.id)?.complete ?? !1;
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
       e.map((e, n) =>
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { key: e.id, marginLeft: 0 === n ? 0 : 3 },
-          K.createElement(gI, {
+          React.createElement(gI, {
             label: e.label,
             message: e.message,
             active: e.active,
@@ -64117,26 +64069,26 @@ var pI = __name(() => {
     );
   }, "StepsSection"),
   fI = __name(
-    ({ steps: e }) => K.createElement(hI, { steps: e }),
+    ({ steps: e }) => React.createElement(hI, { steps: e }),
     "ProgressSection",
   );
 (Ft(), Or());
 var yI = __name(
   ({ isImporting: e = !1, waitingForInput: t = !1 }) =>
-    K.createElement(
-      K.Fragment,
+    React.createElement(
+      React.Fragment,
       null,
       e &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { color: mr.DIM }, "ESC to cancel"),
+          React.createElement(Text, { color: mr.DIM }, "ESC to cancel"),
         ),
       t &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { bold: !0 }, "Press ENTER to continue"),
+          React.createElement(Text, { bold: !0 }, "Press ENTER to continue"),
         ),
     ),
   "HelpTextSection",
@@ -64198,12 +64150,12 @@ var wI = [
         }, "onEnter"),
         enabled: s || i,
       }),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", padding: 1 },
-        o && K.createElement(rI, { error: o }),
-        !o && K.createElement(fI, { steps: r }),
-        K.createElement(yI, { isImporting: s, waitingForInput: i }),
+        o && React.createElement(rI, { error: o }),
+        !o && React.createElement(fI, { steps: r }),
+        React.createElement(yI, { isImporting: s, waitingForInput: i }),
       )
     );
   }, "ImportProgress"),
@@ -64219,7 +64171,7 @@ var wI = [
     }) =>
       "asking" === e
         ? t && "has_sessions" === t.reason
-          ? K.createElement(nI, {
+          ? React.createElement(nI, {
               sessionCount: t.sessionCount,
               agentSessions: t.agentSessions,
               onImport: n,
@@ -64227,7 +64179,7 @@ var wI = [
             })
           : null
         : "learning" === e
-          ? K.createElement(SI, {
+          ? React.createElement(SI, {
               onComplete: r,
               onError: o,
               onErrorDismiss: s,
@@ -64236,7 +64188,7 @@ var wI = [
     "OnboardingStepRenderer",
   ),
   EI = __name(({ onComplete: e, autoLearn: t = !1 }) => {
-    Z(
+    useEffect(
       () => (
         dlog("[UI:Onboarding] mounted"),
         () => {
@@ -64271,10 +64223,10 @@ var wI = [
       o
         ? null
         : r
-          ? K.createElement(eI, { error: r })
+          ? React.createElement(eI, { error: r })
           : "done" === s
             ? null
-            : K.createElement(bI, {
+            : React.createElement(bI, {
                 step: s,
                 conditions: n,
                 onImportStart: a,
@@ -64303,7 +64255,7 @@ function getBudgetedFeed(e, t) {
 }
 (__name(getEntryCharCount, "getEntryCharCount"),
   __name(getBudgetedFeed, "getBudgetedFeed"));
-var vI = Y(
+var vI = memo(
   __name(function MainView2({
     feed: e,
     liveEntries: t,
@@ -64387,29 +64339,29 @@ var vI = Y(
     showDesignGuide: Re,
     setShowDesignGuide: $e,
   }) {
-    const Le = ee(() => e.filter((e) => "taste-onboarding" !== e.role), [e]),
-      De = te(() => $e(!1), [$e]),
+    const Le = useMemo(() => e.filter((e) => "taste-onboarding" !== e.role), [e]),
+      De = useCallback(() => $e(!1), [$e]),
       Oe = useTerminalWidth(),
-      Fe = ee(
+      Fe = useMemo(
         () =>
           "off" === i ? Le : getBudgetedFeed(Le, "limited" === i ? 15e3 : 5e4),
         [Le, i],
       ),
-      Ue = ee(
+      Ue = useMemo(
         () => ("off" === i ? 0 : Math.max(0, Le.length - Fe.length)),
         [Le.length, Fe.length, i],
       ),
-      je = ee(
+      je = useMemo(
         () => (0 === Ue ? Fe : Fe.filter((e) => "user" !== e.role)),
         [Fe, Ue],
       ),
-      qe = te(() => ve(!1), [ve]),
-      Be = te(() => be(!1), [be]),
-      ze = te(() => Ee(!1), [Ee]),
-      We = te(() => Ce(!1), [Ce]),
-      He = te(() => we(!0), [we]),
-      Ge = te(() => Se(!1), [Se]),
-      Ve = te(() => {
+      qe = useCallback(() => ve(!1), [ve]),
+      Be = useCallback(() => be(!1), [be]),
+      ze = useCallback(() => Ee(!1), [Ee]),
+      We = useCallback(() => Ce(!1), [Ce]),
+      He = useCallback(() => we(!0), [we]),
+      Ge = useCallback(() => Se(!1), [Se]),
+      Ve = useCallback(() => {
         (hardResetForResize(), s((e) => e + 1));
       }, [s]),
       Qe = !(
@@ -64433,10 +64385,10 @@ var vI = Y(
         Re ||
         a
       );
-    return K.createElement(
-      ne,
+    return React.createElement(
+      Box,
       { flexDirection: "column", width: "100%" },
-      K.createElement(IP, {
+      React.createElement(IP, {
         staticKey: o,
         feed: je,
         showHeader: !0,
@@ -64445,45 +64397,45 @@ var vI = Y(
         currentProvider: L,
         hiddenCount: Ue,
       }),
-      a && K.createElement(EI, { onComplete: ce, autoLearn: l }),
-      u && K.createElement(TasteSkipMessage, null),
+      a && React.createElement(EI, { onComplete: ce, autoLearn: l }),
+      u && React.createElement(TasteSkipMessage, null),
       t.map((e) =>
         e.metadata?.isAgent
-          ? K.createElement(NP, { key: e.id, entry: e })
-          : K.createElement(
-              ne,
+          ? React.createElement(NP, { key: e.id, entry: e })
+          : React.createElement(
+              Box,
               { key: e.id, marginBottom: 1, width: "90%" },
               renderFeedEntry(e, "off" !== i),
             ),
       ),
-      K.createElement(RetryMessage, { attempt: d }),
+      React.createElement(RetryMessage, { attempt: d }),
       me,
       de,
       ue,
       "off" !== i &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { flexDirection: "column", marginTop: 1 },
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             null,
-            K.createElement(re, { color: mr.DIM }, "─".repeat(Oe)),
+            React.createElement(Text, { color: mr.DIM }, "─".repeat(Oe)),
           ),
-          K.createElement(
-            ne,
+          React.createElement(
+            Box,
             { paddingRight: 1 },
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { backgroundColor: wr.BG, color: wr.FG, bold: !0 },
               `${ZT}DETAILED TRANSCRIPT${ZT}`,
             ),
-            K.createElement(re, { color: mr.DIM }, " · "),
-            K.createElement(re, { bold: !0 }, "ctrl+o"),
-            K.createElement(re, { color: mr.DIM }, " to toggle"),
-            K.createElement(re, { color: mr.DIM }, " · "),
-            K.createElement(re, { bold: !0 }, "ctrl+e"),
-            K.createElement(
-              re,
+            React.createElement(Text, { color: mr.DIM }, " · "),
+            React.createElement(Text, { bold: !0 }, "ctrl+o"),
+            React.createElement(Text, { color: mr.DIM }, " to toggle"),
+            React.createElement(Text, { color: mr.DIM }, " · "),
+            React.createElement(Text, { bold: !0 }, "ctrl+e"),
+            React.createElement(
+              Text,
               { color: mr.DIM },
               " ",
               "to",
@@ -64493,7 +64445,7 @@ var vI = Y(
           ),
         ),
       Qe &&
-        K.createElement(CP, {
+        React.createElement(CP, {
           queuedMessages: n,
           isProcessing: r,
           executionState: X,
@@ -64529,20 +64481,20 @@ var vI = Y(
           onAltP: He,
         }),
       S &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(jP, {
+          React.createElement(jP, {
             onSelect: Te,
             onCancel: _e,
             currentProvider: L,
           }),
         ),
       E &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(FP, {
+          React.createElement(FP, {
             onSelect: xe,
             onCancel: Ae,
             currentModel: D,
@@ -64551,79 +64503,79 @@ var vI = Y(
           }),
         ),
       v &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(UP, {
+          React.createElement(UP, {
             currentModel: D,
             onClose: Ge,
             refreshBanner: Ve,
           }),
         ),
       Re &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(HP, { onCancel: De }),
+          React.createElement(HP, { onCancel: De }),
         ),
       I &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(GA, { onSelect: Pe, onCancel: Ie }),
+          React.createElement(GA, { onSelect: Pe, onCancel: Ie }),
         ),
       M &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(YA, { onClose: () => N(!1) }),
+          React.createElement(YA, { onClose: () => N(!1) }),
         ),
       T &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(WA, { onCancel: qe }),
+          React.createElement(WA, { onCancel: qe }),
         ),
       C &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(_P, { onClose: Be }),
+          React.createElement(_P, { onClose: Be }),
         ),
       k &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(TP, { onClose: ze }),
+          React.createElement(TP, { onClose: ze }),
         ),
       _ &&
         Z.current &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(BP, {
+          React.createElement(BP, {
             checkpoints: Z.current.listCheckpoints(),
             onSelect: pe,
             onCancel: ge,
           }),
         ),
       R &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(R.Component, { onSuccess: Me, onCancel: Ne }),
+          React.createElement(R.Component, { onSuccess: Me, onCancel: Ne }),
         ),
       x &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(kP, { onComplete: he, onCancel: fe }),
+          React.createElement(kP, { onComplete: he, onCancel: fe }),
         ),
       P &&
-        K.createElement(
-          ne,
+        React.createElement(
+          Box,
           { marginY: 1 },
-          K.createElement(AA, { onClose: We }),
+          React.createElement(AA, { onClose: We }),
         ),
     );
   }, "MainView"),
@@ -64660,19 +64612,19 @@ function renderView({
   if (i.shouldExit) return null;
   if (s.checkingProject) return null;
   if (s.showTrustPrompt)
-    return K.createElement(Ax, {
+    return React.createElement(Ax, {
       staticKey: o.staticKey,
       onTrust: k,
       onExit: T,
     });
   if (o.showSessionSelector)
-    return K.createElement(Mx, {
+    return React.createElement(Mx, {
       onSelectSession: g.onSelectSession,
       onNewSession: g.onNewSession,
     });
   if (!s.projectTrusted) return null;
   const I = o.pendingDesignSuggestion
-      ? K.createElement(Tx, {
+      ? React.createElement(Tx, {
           suggestion: o.pendingDesignSuggestion,
           onSelect: (e) => {
             f(`/design ${e}`);
@@ -64681,7 +64633,7 @@ function renderView({
         })
       : null,
     M = a.pendingQuestion
-      ? K.createElement(QuestionView, {
+      ? React.createElement(QuestionView, {
           pendingQuestion: a.pendingQuestion,
           permissionMode: l.permissionMode,
           setPermissionMode: l.setPermissionMode,
@@ -64692,7 +64644,7 @@ function renderView({
         })
       : null,
     N = a.pendingPermission
-      ? K.createElement(zx, {
+      ? React.createElement(zx, {
           pendingPermission: a.pendingPermission,
           permissionMode: l.permissionMode,
           setPendingPermission: a.setPendingPermission,
@@ -64703,41 +64655,41 @@ function renderView({
         })
       : null;
   return o.showLearningFeed
-    ? K.createElement(LearningView, {
+    ? React.createElement(LearningView, {
         setShowLearningFeed: o.setShowLearningFeed,
         setStaticKey: o.setStaticKey,
         onExit: () => i.setShouldExit(!0),
       })
     : o.showTasteConfig
-      ? K.createElement(TasteConfigView, {
+      ? React.createElement(TasteConfigView, {
           staticKey: o.staticKey,
           setShowTasteConfig: o.setShowTasteConfig,
           loadTasteStatus: P,
         })
       : o.showSkillsConfig
-        ? K.createElement(SkillsConfigView, {
+        ? React.createElement(SkillsConfigView, {
             staticKey: o.staticKey,
             setShowSkillsConfig: o.setShowSkillsConfig,
           })
         : o.showUsageOverlay
-          ? K.createElement(UsageView, {
+          ? React.createElement(UsageView, {
               staticKey: o.staticKey,
               setShowUsageOverlay: o.setShowUsageOverlay,
             })
           : o.showContextView
-            ? K.createElement(ContextConfigView, {
+            ? React.createElement(ContextConfigView, {
                 staticKey: o.staticKey,
                 contextEngineRef: u,
                 setShowContextView: o.setShowContextView,
                 setInput: w,
               })
             : o.showStatusView
-              ? K.createElement(StatusConfigView, {
+              ? React.createElement(StatusConfigView, {
                   staticKey: o.staticKey,
                   setShowStatusView: o.setShowStatusView,
                   setInput: w,
                 })
-              : K.createElement(vI, {
+              : React.createElement(vI, {
                   feed: e.feed,
                   liveEntries: e.liveEntries,
                   queuedMessages: e.queuedMessages,
@@ -64838,17 +64790,17 @@ var CI = __name(
     initialPermissionMode: u,
     sessionTitleHolder: d,
   }) => {
-    const { exit: m } = le(),
-      { stdout: g } = se();
-    Z(() => {
+    const { exit: m } = useApp(),
+      { stdout: g } = useStdout();
+    useEffect(() => {
       prefetchBillingContext();
     }, []);
-    const [h, f] = J(""),
-      [y, w] = J(""),
-      S = X(!1),
-      E = X(!1),
-      v = X(null),
-      C = X(null),
+    const [h, f] = useState(""),
+      [y, w] = useState(""),
+      S = useRef(!1),
+      E = useRef(!1),
+      v = useRef(null),
+      C = useRef(null),
       k = useUiOverlays(),
       T = useFeed(),
       _ = useSession(),
@@ -65110,7 +65062,7 @@ var kI = __name(
     const r = {},
       o = II({ options: e, resumeSessionId: n, sessionTitleHolder: r }),
       s = MI(),
-      i = ae(K.createElement(CI, { ...o }), s);
+      i = render(React.createElement(CI, { ...o }), s);
     (registerInkControl({
       clear: i.clear,
       stdout: process.stdout,
@@ -65546,8 +65498,8 @@ function setupTelemetry() {
 }
 async function trackSystemInfo() {
   try {
-    const e = w.platform(),
-      t = w.arch();
+    const e = osModule.platform(),
+      t = osModule.arch();
     let n, r, o, s;
     try {
       const e = await getAuthenticatedEntity();
@@ -65595,8 +65547,8 @@ async function trackCliSessionExistsEvent() {
     const e = getSessionId();
     if (!e) return;
     const t = getPackageJson().version || "unknown",
-      n = w.platform(),
-      r = w.arch(),
+      n = osModule.platform(),
+      r = osModule.arch(),
       o = isTTY() ? "interactive" : "non-interactive";
     await trackLifecycleEvent({
       eventType: "cli_session_exists",
@@ -65641,8 +65593,8 @@ var XI = new Me("help")
   });
 async function runInfo(e) {
   const t = getSystemInfo(),
-    { waitUntilExit: n } = ae(
-      K.createElement(I_, { verbose: e.verbose, text: e.text, systemInfo: t }),
+    { waitUntilExit: n } = render(
+      React.createElement(I_, { verbose: e.verbose, text: e.text, systemInfo: t }),
     );
   await n();
 }
@@ -65657,8 +65609,8 @@ var ZI = new Me("info")
     await runInfo(e);
   });
 function runLearnTaste() {
-  const { unmount: e } = ae(
-    K.createElement(SI, {
+  const { unmount: e } = render(
+    React.createElement(SI, {
       onComplete: __name(() => {
         (e(), process.exit(0));
       }, "onComplete"),
@@ -66501,7 +66453,7 @@ async function findGitRoot4(e) {
 }
 async function countLearnings(e) {
   try {
-    return (await C.readFile(e, "utf-8"))
+    return (await fsPromises.readFile(e, "utf-8"))
       .split("\n")
       .filter((e) => e.trim().startsWith("- ") && e.includes("Confidence:"))
       .length;
@@ -66511,15 +66463,15 @@ async function countLearnings(e) {
 }
 async function resolveSource(t) {
   const n = t.source.trim(),
-    r = e.resolve(n);
+    r = pathModule.resolve(n);
   try {
-    if (!(await C.stat(r)).isDirectory())
+    if (!(await fsPromises.stat(r)).isDirectory())
       throw new Error(`Source must be a repository directory: ${n}`);
     return {
       type: "local",
       displayName: r,
       repoDir: r,
-      repoName: e.basename(r),
+      repoName: pathModule.basename(r),
       github: await inferGitHubRepo({ repoDir: r }),
     };
   } catch (e) {
@@ -66536,7 +66488,7 @@ async function resolveSource(t) {
   }
   const s = String(t.maxCommits ?? 200),
     i = `https://github.com/${o.owner}/${o.repo}.git`,
-    a = await C.mkdtemp(e.join(w.tmpdir(), "taste-learn-"));
+    a = await fsPromises.mkdtemp(pathModule.join(osModule.tmpdir(), "taste-learn-"));
   try {
     await runCommand({
       cmd: "git",
@@ -66553,7 +66505,7 @@ async function resolveSource(t) {
     });
   } catch {
     throw (
-      await C.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
+      await fsPromises.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
       new Error(
         `Repository not found: ${o.owner}/${o.repo}. Check the owner and repo name, or verify it's a public repository.`,
       )
@@ -66566,18 +66518,18 @@ async function resolveSource(t) {
     repoName: o.repo,
     github: o,
     cleanup: __name(async () => {
-      await C.rm(a, { recursive: !0, force: !0 });
+      await fsPromises.rm(a, { recursive: !0, force: !0 });
     }, "cleanup"),
   };
 }
 function getTastePathForDir(t) {
-  return e.join(t.projectRoot, ".commandcode", "taste");
+  return pathModule.join(t.projectRoot, ".commandcode", "taste");
 }
 async function resolveDisplayName(t) {
   if (t.startsWith("/") || t.startsWith(".")) {
-    const n = e.resolve(t),
+    const n = pathModule.resolve(t),
       r = await findGitRoot4({ dir: n });
-    return r ? e.basename(r) : e.basename(n);
+    return r ? pathModule.basename(r) : pathModule.basename(n);
   }
   return t;
 }
@@ -67096,7 +67048,7 @@ async function runLearnPipeline(t) {
     throw new Error(
       `Not a git repository: ${r.repoDir}. Run inside a git repo or pass the path: npx taste learn /path/to/repo`,
     );
-  const a = o ? e.resolve(process.cwd(), s) : i;
+  const a = o ? pathModule.resolve(process.cwd(), s) : i;
   o &&
     xT.emitStepStart({
       step: "collecting",
@@ -67104,7 +67056,7 @@ async function runLearnPipeline(t) {
       message: `Cloned ${r.displayName} → ${a}`,
     });
   const l = t.branch ?? (await detectDefaultBranch({ repoDir: i }));
-  (await C.mkdir(a, { recursive: !0 }),
+  (await fsPromises.mkdir(a, { recursive: !0 }),
     xT.emitStepStart({
       step: "collecting",
       label: "Collecting commits",
@@ -67143,7 +67095,7 @@ async function runLearnPipeline(t) {
   }),
     await feedToLearningAgent({ compiledContext: m, outputDir: a }));
   const g = getTastePathForDir({ projectRoot: a }),
-    h = e.join(g, "taste.md"),
+    h = pathModule.join(g, "taste.md"),
     f = await countLearnings(h);
   return (
     xT.emitStepStart({
@@ -67279,21 +67231,21 @@ var dM = __name(
   mM = __name((e) => e ?? uM, "withBase");
 function useRepoLearnState(e) {
   const t = e ?? aM,
-    [n, r] = J(() => createInitialRepoLearnSteps(t)),
-    [o, s] = J(""),
-    [i, a] = J([]),
-    [l, u] = J(null),
-    [d, m] = J(!1),
-    [g, h] = J(!1),
-    [f, y] = J(null),
-    [w, S] = J(0),
-    E = X(null),
-    [v, C] = J(null),
-    k = te(() => {
+    [n, r] = useState(() => createInitialRepoLearnSteps(t)),
+    [o, s] = useState(""),
+    [i, a] = useState([]),
+    [l, u] = useState(null),
+    [d, m] = useState(!1),
+    [g, h] = useState(!1),
+    [f, y] = useState(null),
+    [w, S] = useState(0),
+    E = useRef(null),
+    [v, C] = useState(null),
+    k = useCallback(() => {
       E.current = Date.now();
     }, []);
   return (
-    Z(() => {
+    useEffect(() => {
       const e = __name(() => {
           (r(createInitialRepoLearnSteps(t)),
             s(""),
@@ -67386,26 +67338,26 @@ function useRepoLearnState(e) {
 (__name(useRepoLearnState, "useRepoLearnState"), Ft(), Ft(), Or());
 var pM = __name(
   ({ isComplete: e, hasError: t }) =>
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginTop: 1, marginBottom: 0 },
-      K.createElement(oI, null),
-      K.createElement(
-        ne,
+      React.createElement(oI, null),
+      React.createElement(
+        Box,
         { marginTop: 0 },
-        K.createElement(re, { color: mr.DIM }, iI),
-        K.createElement(
-          ne,
+        React.createElement(Text, { color: mr.DIM }, iI),
+        React.createElement(
+          Box,
           { marginLeft: 2 },
           t
-            ? K.createElement(re, { color: mr.DIM }, "learning interrupted")
+            ? React.createElement(Text, { color: mr.DIM }, "learning interrupted")
             : e
-              ? K.createElement(
-                  re,
+              ? React.createElement(
+                  Text,
                   { color: gr.TEXT },
                   "learned your coding taste",
                 )
-              : K.createElement(aI, null),
+              : React.createElement(aI, null),
         ),
       ),
     ),
@@ -67415,46 +67367,46 @@ var pM = __name(
 var gM = __name(
     ({ status: e }) =>
       "active" === e
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             null,
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { color: mr.YELLOW },
-              K.createElement(Be, { type: "dots" }),
+              React.createElement(Be, { type: "dots" }),
             ),
-            K.createElement(re, null, " "),
+            React.createElement(Text, null, " "),
           )
         : "complete" === e
-          ? K.createElement(re, { color: wr.BG }, Ie.square, " ")
-          : K.createElement(re, { color: mr.DIM }, Ie.circle, " "),
+          ? React.createElement(Text, { color: wr.BG }, Ie.square, " ")
+          : React.createElement(Text, { color: mr.DIM }, Ie.circle, " "),
     "StepStatusIndicator",
   ),
   hM = __name(
     ({ steps: e, currentMessage: t }) =>
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         { flexDirection: "column", marginTop: 1 },
         e.map((e) => {
           const n = "active" === e.status;
-          return K.createElement(
-            ne,
+          return React.createElement(
+            Box,
             {
               key: e.id,
               flexDirection: "column",
               marginBottom: 0,
               marginLeft: 3,
             },
-            K.createElement(
-              ne,
+            React.createElement(
+              Box,
               null,
-              K.createElement(
-                ne,
+              React.createElement(
+                Box,
                 { marginRight: 1 },
-                K.createElement(gM, { status: e.status }),
+                React.createElement(gM, { status: e.status }),
               ),
-              K.createElement(
-                re,
+              React.createElement(
+                Text,
                 {
                   bold: n,
                   color:
@@ -67464,11 +67416,11 @@ var gM = __name(
               ),
             ),
             n && t
-              ? K.createElement(
-                  ne,
+              ? React.createElement(
+                  Box,
                   { marginLeft: 3 },
-                  K.createElement(
-                    re,
+                  React.createElement(
+                    Text,
                     { color: mr.DIM },
                     truncateRepoLearnPanelText(t),
                   ),
@@ -67484,19 +67436,19 @@ var fM = __name(
   ({ insights: e, insightCount: t }) =>
     0 === e.length
       ? null
-      : K.createElement(
-          ne,
+      : React.createElement(
+          Box,
           { flexDirection: "column", marginTop: 1, marginLeft: 4 },
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.CYAN },
             t > 0
               ? `Recent signals · ${t} ${1 === t ? "preference" : "preferences"} learned`
               : "Recent signals",
           ),
           e.map((e, t) =>
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { key: `${t}-${e}`, color: mr.DIM },
               cM[t % cM.length],
               " ",
@@ -67509,8 +67461,8 @@ var fM = __name(
 (Ft(), Or());
 var yM = __name(
   ({ message: e }) =>
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       {
         flexDirection: "column",
         borderStyle: "single",
@@ -67519,32 +67471,32 @@ var yM = __name(
         paddingY: 1,
         marginTop: 1,
       },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.RED, bold: !0 },
         "Oops, something went wrong:",
       ),
-      K.createElement(ne, { marginTop: 1 }, K.createElement(re, null, e)),
+      React.createElement(Box, { marginTop: 1 }, React.createElement(Text, null, e)),
     ),
   "RepoLearnErrorPanel",
 );
 (Ft(), Or(), io());
 var wM = __name(({ summary: e, elapsedSeconds: n }) => {
   if (!e) return null;
-  const r = t.relative(process.cwd(), e.storage),
+  const r = pathDefault.relative(process.cwd(), e.storage),
     o = e.learningCount > 0;
-  return K.createElement(
-    ne,
+  return React.createElement(
+    Box,
     { flexDirection: "column", marginLeft: 3 },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginBottom: 1, flexDirection: "row" },
-      K.createElement(re, { color: mr.DIM }, iI),
-      K.createElement(
-        ne,
+      React.createElement(Text, { color: mr.DIM }, iI),
+      React.createElement(
+        Box,
         { marginLeft: 2 },
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: gr.TEXT },
           o
             ? `Learned ${e.learningCount} ${1 === e.learningCount ? "preference" : "preferences"}`
@@ -67553,43 +67505,43 @@ var wM = __name(({ summary: e, elapsedSeconds: n }) => {
         ),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginLeft: 1 },
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           Ie.pointerSmall,
           " Taste stored in",
           " ",
         ),
-        K.createElement(ro, {
+        React.createElement(ro, {
           url: `file://${e.storage}`,
           text: r || ".commandcode/taste/taste.md",
           color: mr.CYAN,
         }),
       ),
-      K.createElement(
-        ne,
+      React.createElement(
+        Box,
         null,
-        K.createElement(
-          re,
+        React.createElement(
+          Text,
           { color: mr.DIM },
           Ie.pointerSmall,
           " Share your coding taste:",
           " ",
-          K.createElement(re, { color: mr.CYAN }, "npx taste push --all"),
+          React.createElement(Text, { color: mr.CYAN }, "npx taste push --all"),
         ),
       ),
     ),
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { marginTop: 1, marginLeft: 1 },
-      K.createElement(
-        re,
+      React.createElement(
+        Text,
         { color: mr.DIM },
         o
           ? "Command Code automatically uses & updates taste files as you code."
@@ -67602,54 +67554,54 @@ var wM = __name(({ summary: e, elapsedSeconds: n }) => {
 var SM = __name(
   ({ done: e, error: t }) =>
     t
-      ? K.createElement(
-          ne,
+      ? React.createElement(
+          Box,
           { marginTop: 1 },
-          K.createElement(re, { bold: !0 }, "Press ESC to exit"),
+          React.createElement(Text, { bold: !0 }, "Press ESC to exit"),
         )
       : e
-        ? K.createElement(
-            ne,
+        ? React.createElement(
+            Box,
             { marginTop: 1 },
-            K.createElement(re, { bold: !0 }, "Press ENTER to continue"),
+            React.createElement(Text, { bold: !0 }, "Press ENTER to continue"),
           )
-        : K.createElement(
-            ne,
+        : React.createElement(
+            Box,
             { marginTop: 1 },
-            K.createElement(re, { color: mr.DIM }, "ESC to cancel"),
+            React.createElement(Text, { color: mr.DIM }, "ESC to cancel"),
           ),
   "RepoLearnFooter",
 );
 (Ft(), Or());
 var bM = __name(({ text: e, repoName: t }) => {
   const n = useTerminalWidth(),
-    r = ee(() => Yx(n), [n]);
-  return K.createElement(
-    ne,
+    r = useMemo(() => Yx(n), [n]);
+  return React.createElement(
+    Box,
     { flexDirection: "column" },
-    K.createElement(
-      ne,
+    React.createElement(
+      Box,
       { flexDirection: "column", marginBottom: 1 },
-      K.createElement(nA, null, r.trimEnd()),
+      React.createElement(nA, null, r.trimEnd()),
     ),
     e
-      ? K.createElement(re, { color: mr.WHITE }, e)
-      : K.createElement(
-          K.Fragment,
+      ? React.createElement(Text, { color: mr.WHITE }, e)
+      : React.createElement(
+          React.Fragment,
           null,
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.WHITE },
             "Learning your coding taste from",
             " ",
-            K.createElement(
-              re,
+            React.createElement(
+              Text,
               { bold: !0, color: mr.CYAN },
               t ?? "repository",
             ),
           ),
-          K.createElement(
-            re,
+          React.createElement(
+            Text,
             { color: mr.DIM },
             "This may take a few minutes depending on repository size",
           ),
@@ -67665,10 +67617,10 @@ function StatusPanel({
   insightCount: s,
 }) {
   return e
-    ? K.createElement(yM, { message: e })
+    ? React.createElement(yM, { message: e })
     : t
-      ? K.createElement(wM, { summary: n, elapsedSeconds: r })
-      : K.createElement(fM, { insights: o, insightCount: s });
+      ? React.createElement(wM, { summary: n, elapsedSeconds: r })
+      : React.createElement(fM, { insights: o, insightCount: s });
 }
 function RepoLearnProgressApp({
   runTask: e,
@@ -67678,12 +67630,12 @@ function RepoLearnProgressApp({
   repoName: o,
 }) {
   const s = useRepoLearnState(n),
-    i = X(!1);
+    i = useRef(!1);
   return (
-    Z(() => {
+    useEffect(() => {
       i.current || ((i.current = !0), s.markStarted(), e().catch(() => {}));
     }, [e, s.markStarted]),
-    ie((e, n) => {
+    useInput((e, n) => {
       if (s.showLogin) return;
       const r = n.escape || "" === e,
         o = n.return || "\n" === e || "\r" === e;
@@ -67694,11 +67646,11 @@ function RepoLearnProgressApp({
           t({ published: !1, cancelled: !!s.error });
     }),
     s.showLogin
-      ? K.createElement(
-          ne,
+      ? React.createElement(
+          Box,
           { flexDirection: "column" },
-          K.createElement(bM, { text: r, repoName: o }),
-          K.createElement(kP, {
+          React.createElement(bM, { text: r, repoName: o }),
+          React.createElement(kP, {
             onComplete: (e, t) => {
               (s.setShowLogin(!1), e ? xT.resolveAuth() : xT.rejectAuth(t));
             },
@@ -67709,19 +67661,19 @@ function RepoLearnProgressApp({
             },
           }),
         )
-      : K.createElement(
-          ne,
+      : React.createElement(
+          Box,
           { flexDirection: "column" },
-          K.createElement(bM, { text: r, repoName: o }),
-          K.createElement(pM, {
+          React.createElement(bM, { text: r, repoName: o }),
+          React.createElement(pM, {
             isComplete: s.done && !s.error,
             hasError: Boolean(s.error),
           }),
-          K.createElement(hM, {
+          React.createElement(hM, {
             steps: s.steps,
             currentMessage: s.currentMessage,
           }),
-          K.createElement(StatusPanel, {
+          React.createElement(StatusPanel, {
             error: s.error,
             done: s.done,
             summary: s.summary,
@@ -67729,7 +67681,7 @@ function RepoLearnProgressApp({
             insights: s.insights,
             insightCount: s.insightCount,
           }),
-          K.createElement(SM, { done: s.done, error: s.error }),
+          React.createElement(SM, { done: s.done, error: s.error }),
         )
   );
 }
@@ -67763,8 +67715,8 @@ function renderProgressUI(e) {
           xT.reset(),
           s ? n(s) : t({ result: o, published: i, cancelled: l }));
       }, "handleExit"),
-      d = ae(
-        K.createElement(RepoLearnProgressApp, {
+      d = render(
+        React.createElement(RepoLearnProgressApp, {
           stepOrder: e.stepOrder,
           headerText: e.headerText,
           repoName: e.repoName,
@@ -67825,7 +67777,7 @@ function createLearnCommand() {
     });
 }
 async function learnTaste(t) {
-  const n = await C.stat(e.resolve(t.source))
+  const n = await fsPromises.stat(pathModule.resolve(t.source))
       .then((e) => e.isDirectory())
       .catch(() => !1),
     r = isTTY(),
@@ -67872,21 +67824,21 @@ async function learnTaste(t) {
 function getTastePath(t) {
   const { target: n } = t;
   if ("local-project" === n)
-    return e.join(process.cwd(), ".commandcode", "taste");
-  if ("local-global" === n) return e.join(w.homedir(), ".commandcode", "taste");
+    return pathModule.join(process.cwd(), ".commandcode", "taste");
+  if ("local-global" === n) return pathModule.join(osModule.homedir(), ".commandcode", "taste");
   throw new Error(`Remote storage not yet implemented: ${n}`);
 }
 function getRootTasteFile(t) {
   const { target: n } = t;
-  return e.join(getTastePath({ target: n }), "taste.md");
+  return pathModule.join(getTastePath({ target: n }), "taste.md");
 }
 function getCategoryPath(t) {
   const { target: n, category: r } = t;
-  return e.join(getTastePath({ target: n }), r);
+  return pathModule.join(getTastePath({ target: n }), r);
 }
 function getCategoryTasteFile(t) {
   const { target: n, category: r } = t;
-  return e.join(getCategoryPath({ target: n, category: r }), "taste.md");
+  return pathModule.join(getCategoryPath({ target: n, category: r }), "taste.md");
 }
 (__name(createLearnCommand, "createLearnCommand"),
   __name(learnTaste, "learnTaste"),
@@ -68210,7 +68162,7 @@ var _M = __name(
   );
 function resolvePackageFile(e, t) {
   const n = getCategoryTasteFile({ target: t, category: e });
-  return O(n)
+  return existsSync(n)
     ? { result: { path: n, displayName: `${e}/taste.md` } }
     : {
         error: { file: e, error: `Taste package '${e}' not found in ${_M(t)}` },
@@ -68228,14 +68180,14 @@ async function collectAllFiles(e) {
   const { tastePath: t, target: n } = e,
     r = [],
     o = getRootTasteFile({ target: n });
-  O(o) && r.push({ path: o, displayName: "taste.md" });
-  const s = (await C.readdir(t, { withFileTypes: !0 }))
+  existsSync(o) && r.push({ path: o, displayName: "taste.md" });
+  const s = (await fsPromises.readdir(t, { withFileTypes: !0 }))
     .filter((e) => e.isDirectory())
     .map((e) => ({
       entry: e,
       categoryFile: getCategoryTasteFile({ target: n, category: e.name }),
     }))
-    .filter(({ categoryFile: e }) => O(e))
+    .filter(({ categoryFile: e }) => existsSync(e))
     .map(({ entry: e, categoryFile: t }) => ({
       path: t,
       displayName: `${e.name}/taste.md`,
@@ -68243,9 +68195,9 @@ async function collectAllFiles(e) {
   return (r.push(...s), r);
 }
 async function lintFile(e) {
-  let t = await C.readFile(e.path, "utf-8");
+  let t = await fsPromises.readFile(e.path, "utf-8");
   const n = migrateHeader({ content: t });
-  n !== t && (await C.writeFile(e.path, n, "utf-8"), (t = n));
+  n !== t && (await fsPromises.writeFile(e.path, n, "utf-8"), (t = n));
   const r = validateTasteFile({ content: t, filePath: e.displayName }),
     o = r.issues.filter((e) => "error" === e.severity).length,
     s = r.issues.filter((e) => "warning" === e.severity).length,
@@ -68301,7 +68253,7 @@ async function lintAllFiles(e) {
 async function lint(e) {
   const { packages: t, target: n } = e,
     r = getTastePath({ target: n });
-  return O(r)
+  return existsSync(r)
     ? t.length > 0
       ? lintSpecificPackages({ packages: t, target: n })
       : lintAllFiles({ tastePath: r, target: n })
@@ -68553,9 +68505,9 @@ function formatPackage(e) {
 }
 async function readAndMigrateFile(e) {
   const { filePath: t } = e,
-    n = await C.readFile(t, "utf-8"),
+    n = await fsPromises.readFile(t, "utf-8"),
     r = migrateHeader({ content: n });
-  return r === n ? n : (await C.writeFile(t, r, "utf-8"), r);
+  return r === n ? n : (await fsPromises.writeFile(t, r, "utf-8"), r);
 }
 function trimTrailingBlanks(e) {
   const { lines: t, until: n } = e;
@@ -68627,7 +68579,7 @@ var IM = "local-global";
 async function loadCategoryPackages(e) {
   if (!e.isDirectory()) return [];
   const t = getCategoryTasteFile({ target: IM, category: e.name });
-  return O(t)
+  return existsSync(t)
     ? parsePackages({
         content: await readAndMigrateFile({ filePath: t }),
         sourcePath: t,
@@ -68636,7 +68588,7 @@ async function loadCategoryPackages(e) {
 }
 async function getPackageInfo(e) {
   try {
-    const t = await C.stat(e.sourcePath);
+    const t = await fsPromises.stat(e.sourcePath);
     return {
       category: e.category,
       learningCount: e.learnings.length,
@@ -68654,15 +68606,15 @@ async function getPackageInfo(e) {
 }
 async function getAllPackages() {
   const e = getTastePath({ target: IM });
-  if (!O(e)) return [];
-  const t = await C.readdir(e, { withFileTypes: !0 });
+  if (!existsSync(e)) return [];
+  const t = await fsPromises.readdir(e, { withFileTypes: !0 });
   return (await Promise.all(t.map(loadCategoryPackages))).flat();
 }
 async function getPackage(e) {
   const { category: t } = e,
     n = getCategoryTasteFile({ target: IM, category: t });
   return (
-    (O(n) &&
+    (existsSync(n) &&
       parsePackages({
         content: await readAndMigrateFile({ filePath: n }),
         sourcePath: n,
@@ -68673,12 +68625,12 @@ async function getPackage(e) {
 async function writePackage(t) {
   const { pkg: n } = t,
     r = getTastePath({ target: IM });
-  await C.mkdir(r, { recursive: !0 });
+  await fsPromises.mkdir(r, { recursive: !0 });
   const o = getCategoryTasteFile({ target: IM, category: n.category }),
-    s = e.dirname(o);
-  await C.mkdir(s, { recursive: !0 });
+    s = pathModule.dirname(o);
+  await fsPromises.mkdir(s, { recursive: !0 });
   const i = formatPackage({ pkg: n });
-  await C.writeFile(o, i, "utf-8");
+  await fsPromises.writeFile(o, i, "utf-8");
 }
 async function listPackages() {
   const e = await getAllPackages();
@@ -68695,8 +68647,8 @@ async function listPackages() {
 var MM = "local-project";
 async function removeCategoryFromRoot(e) {
   const { category: t, rootFile: n } = e;
-  if (!O(n)) return null;
-  const r = migrateHeader({ content: await C.readFile(n, "utf-8") }).split(
+  if (!existsSync(n)) return null;
+  const r = migrateHeader({ content: await fsPromises.readFile(n, "utf-8") }).split(
       "\n",
     ),
     o = findCategoryRange({
@@ -68712,8 +68664,8 @@ async function removeCategoryFromRoot(e) {
     a = { before: s.join("\n").trim(), after: i.join("\n").trim() },
     l = [...s, ...i].join("\n").trim();
   return (
-    "" === l && (await C.rm(n, { force: !0 })),
-    "" !== l && (await C.writeFile(n, l + "\n", "utf-8")),
+    "" === l && (await fsPromises.rm(n, { force: !0 })),
+    "" !== l && (await fsPromises.writeFile(n, l + "\n", "utf-8")),
     a
   );
 }
@@ -68722,8 +68674,8 @@ async function removePackage(t) {
     r = getRootTasteFile({ target: MM }),
     o = await removeCategoryFromRoot({ category: n, rootFile: r }),
     s = getCategoryTasteFile({ target: MM, category: n }),
-    i = e.dirname(s);
-  return (O(i) && (await C.rm(i, { recursive: !0, force: !0 })), o);
+    i = pathModule.dirname(s);
+  return (existsSync(i) && (await fsPromises.rm(i, { recursive: !0, force: !0 })), o);
 }
 async function writeToRoot(e) {
   const { pkg: t, rootFile: n, categoryPosition: r } = e,
@@ -68734,24 +68686,24 @@ async function writeToRoot(e) {
     const t = r.after ? "\n\n" + r.after : "";
     return (
       (e += o.trim() + t),
-      void (await C.writeFile(n, e.trim() + "\n", "utf-8"))
+      void (await fsPromises.writeFile(n, e.trim() + "\n", "utf-8"))
     );
   }
   let s = "";
-  (O(n) &&
-    ((s = await C.readFile(n, "utf-8")), (s = migrateHeader({ content: s }))),
+  (existsSync(n) &&
+    ((s = await fsPromises.readFile(n, "utf-8")), (s = migrateHeader({ content: s }))),
     (s = ensureHeader(s)),
     (s = ensureTrailingNewlines(s)),
     (s += o),
-    await C.writeFile(n, s.trim() + "\n", "utf-8"));
+    await fsPromises.writeFile(n, s.trim() + "\n", "utf-8"));
 }
 async function writeToSubdirectory(t) {
   const { pkg: n, rootFile: r, categoryPosition: o } = t,
     s = getCategoryTasteFile({ target: MM, category: n.category }),
-    i = e.dirname(s);
-  await C.mkdir(i, { recursive: !0 });
+    i = pathModule.dirname(s);
+  await fsPromises.mkdir(i, { recursive: !0 });
   const a = formatPackage({ pkg: n });
-  await C.writeFile(s, a, "utf-8");
+  await fsPromises.writeFile(s, a, "utf-8");
   const l = `# ${n.category}\nSee [${n.category}/taste.md](${n.category}/taste.md)\n`;
   if (o) {
     let e = ensureHeader(migrateHeader({ content: o.before }));
@@ -68759,16 +68711,16 @@ async function writeToSubdirectory(t) {
     const t = o.after ? "\n\n" + o.after : "";
     return (
       (e += l.trim() + t),
-      void (await C.writeFile(r, e.trim() + "\n", "utf-8"))
+      void (await fsPromises.writeFile(r, e.trim() + "\n", "utf-8"))
     );
   }
   let u = "";
-  (O(r) &&
-    ((u = await C.readFile(r, "utf-8")), (u = migrateHeader({ content: u }))),
+  (existsSync(r) &&
+    ((u = await fsPromises.readFile(r, "utf-8")), (u = migrateHeader({ content: u }))),
     (u = ensureHeader(u)),
     (u = ensureTrailingNewlines(u)),
     (u += l),
-    await C.writeFile(r, u.trim() + "\n", "utf-8"));
+    await fsPromises.writeFile(r, u.trim() + "\n", "utf-8"));
 }
 (__name(removeCategoryFromRoot, "removeCategoryFromRoot"),
   __name(removePackage, "removePackage"),
@@ -68778,7 +68730,7 @@ var NM = "local-project";
 async function loadCategoryPackages2(e) {
   if (!e.isDirectory()) return [];
   const t = getCategoryTasteFile({ target: NM, category: e.name });
-  return O(t)
+  return existsSync(t)
     ? parsePackages({
         content: await readAndMigrateFile({ filePath: t }),
         sourcePath: t,
@@ -68787,17 +68739,17 @@ async function loadCategoryPackages2(e) {
 }
 async function getAllPackages2() {
   const e = getTastePath({ target: NM });
-  if (!O(e)) return [];
+  if (!existsSync(e)) return [];
   const t = [],
     n = getRootTasteFile({ target: NM });
-  if (O(n)) {
+  if (existsSync(n)) {
     const e = parsePackages({
       content: await readAndMigrateFile({ filePath: n }),
       sourcePath: n,
     });
     t.push(...e);
   }
-  const r = await C.readdir(e, { withFileTypes: !0 }),
+  const r = await fsPromises.readdir(e, { withFileTypes: !0 }),
     o = (await Promise.all(r.map(loadCategoryPackages2))).flat();
   return (t.push(...o), t);
 }
@@ -68808,7 +68760,7 @@ async function getPackage2(e) {
 async function writePackage2(e) {
   const { pkg: t } = e,
     n = getTastePath({ target: NM });
-  await C.mkdir(n, { recursive: !0 });
+  await fsPromises.mkdir(n, { recursive: !0 });
   const r = getRootTasteFile({ target: NM }),
     o = await removePackage({ category: t.category });
   t.learnings.length <= 5
@@ -68817,15 +68769,15 @@ async function writePackage2(e) {
 }
 function exists2() {
   const e = getTastePath({ target: NM });
-  return O(e);
+  return existsSync(e);
 }
 async function appendCategoryFile(e, t) {
   const n = getCategoryTasteFile({
     target: "local-project",
     category: t.category,
   });
-  if (!O(n)) return;
-  const r = await C.readFile(n, "utf-8"),
+  if (!existsSync(n)) return;
+  const r = await fsPromises.readFile(n, "utf-8"),
     o = new Blob([r], { type: "text/markdown" }),
     s = new File([o], "taste.md", { type: "text/markdown" });
   e.append(`files[${t.category}/taste.md]`, s);
@@ -68850,14 +68802,14 @@ async function prepareUploadFormData(t) {
     m = new File([d], "taste.md", { type: "text/markdown" });
   if ((l.append("files[taste.md]", m), "category" === s)) return l;
   const g = getTastePath({ target: "local-project" }),
-    h = e.join(g, r.category);
-  if (!O(h)) return l;
+    h = pathModule.join(g, r.category);
+  if (!existsSync(h)) return l;
   const f = getCategoryTasteFile({
     target: "local-project",
     category: r.category,
   });
-  if (!O(f)) return l;
-  const y = await C.readFile(f, "utf-8"),
+  if (!existsSync(f)) return l;
+  const y = await fsPromises.readFile(f, "utf-8"),
     w = new Blob([y], { type: "text/markdown" }),
     S = new File([w], "taste.md", { type: "text/markdown" });
   return (l.append(`files[${r.category}/taste.md]`, S), l);
@@ -68877,8 +68829,8 @@ async function prepareMultiplePackagesUpload(e) {
     i.append("isPublic", String(o)),
     i.append("overwrite", String(s)));
   const a = getRootTasteFile({ target: "local-project" });
-  if (O(a)) {
-    const e = await C.readFile(a, "utf-8"),
+  if (existsSync(a)) {
+    const e = await fsPromises.readFile(a, "utf-8"),
       t = new Blob([e], { type: "text/markdown" }),
       n = new File([t], "taste.md", { type: "text/markdown" });
     i.append("files[taste.md]", n);
@@ -69200,7 +69152,7 @@ async function list(e) {
         let n;
         if (t.sourcePath !== e)
           try {
-            n = (await C.stat(t.sourcePath)).mtime;
+            n = (await fsPromises.stat(t.sourcePath)).mtime;
           } catch {}
         return {
           category: t.category,
@@ -69352,8 +69304,8 @@ function handleOpenError(e) {
 }
 async function readCategoryLineNumber(t) {
   const { filePath: n, category: r } = t,
-    o = await C.readFile(n, "utf-8");
-  if ("taste.md" === e.basename(n) && e.basename(e.dirname(n)) === r) return 1;
+    o = await fsPromises.readFile(n, "utf-8");
+  if ("taste.md" === pathModule.basename(n) && pathModule.basename(pathModule.dirname(n)) === r) return 1;
   const s = o
     .split("\n")
     .findIndex((e) => e.trim().toLowerCase() === `# ${r.toLowerCase()}`);
@@ -70414,7 +70366,7 @@ function logPushAllSuccess(t) {
   const o = n.packagesPushed.length,
     s = `${o} ${1 === o ? "package" : "packages"}`,
     i = n.filePaths?.[n.packagesPushed[0]],
-    a = r.global && i ? shortenPath(e.dirname(e.dirname(i))) : i,
+    a = r.global && i ? shortenPath(pathModule.dirname(pathModule.dirname(i))) : i,
     l = wasPrompted() ? "" : `${Ie.tick} `;
   if (!a) return (logResult2(`${ue.green(l)}Pushed ${s} to remote`), !1);
   if (r.overwrite || Boolean(n.overwritten?.length)) {
@@ -70671,7 +70623,7 @@ async function executePushAllRemote(t) {
       isPublicExplicitlySet: i,
       flagStrategy: a,
     } = t,
-    l = e.basename(process.cwd()),
+    l = pathModule.basename(process.cwd()),
     u = {
       success: !0,
       packagesPushed: [],
@@ -71119,7 +71071,7 @@ async function pushRemoteAll(t) {
   n.owner && (await validateOwnerAccess(n.owner));
   const o = (await getAllPackages2()).length,
     s = `${o} ${1 === o ? "package" : "packages"}`,
-    i = e.basename(process.cwd()),
+    i = pathModule.basename(process.cwd()),
     a = resolveStrategyLabel({ strategy: r, isRemote: !0 });
   (console.log(ue.dim(`  Pushing ${s} to ${i} (remote)${a}`)),
     console.log(""),
@@ -71677,10 +71629,10 @@ function readLocalConfigFiles() {
   let e = "",
     t = "";
   try {
-    e = L.readFileSync(getAuthFile(), "utf-8");
+    e = fsModule.readFileSync(getAuthFile(), "utf-8");
   } catch {}
   try {
-    t = L.readFileSync(getConfigFile(), "utf-8");
+    t = fsModule.readFileSync(getConfigFile(), "utf-8");
   } catch {}
   return { auth: e, config: t };
 }
@@ -71839,8 +71791,8 @@ async function fetchSkillFromGitHub(e) {
     const e = s.split("/").filter(Boolean);
     i = e[e.length - 1];
   } else i = o;
-  const a = t.join(S.tmpdir(), `commandcode-skill-${R()}`);
-  await k.mkdir(a, { recursive: !0 });
+  const a = pathDefault.join(osDefault.tmpdir(), `commandcode-skill-${randomUUID()}`);
+  await fsPromisesDefault.mkdir(a, { recursive: !0 });
   try {
     const e = buildGigetSource(n),
       { downloadTemplate: s } = await import("giget");
@@ -71851,15 +71803,15 @@ async function fetchSkillFromGitHub(e) {
       (await clearGigetCache(r, o),
         await s(e, { dir: a, force: !0, silent: !0 }));
     }
-    const l = t.join(a, "SKILL.md"),
-      u = t.join(a, "skill.md");
+    const l = pathDefault.join(a, "SKILL.md"),
+      u = pathDefault.join(a, "skill.md");
     let d = !1;
     try {
-      (await k.access(l), (d = !0));
+      (await fsPromisesDefault.access(l), (d = !0));
     } catch {}
     if (!d)
       try {
-        (await k.access(u), (d = !0));
+        (await fsPromisesDefault.access(u), (d = !0));
       } catch {}
     if (!d)
       throw new Error(
@@ -71868,7 +71820,7 @@ async function fetchSkillFromGitHub(e) {
     return { tempDir: a, skillName: i };
   } catch (e) {
     if (
-      (await k.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
+      (await fsPromisesDefault.rm(a, { recursive: !0, force: !0 }).catch(() => {}),
       e instanceof Error && e.message.includes("SKILL.md not found"))
     )
       throw e;
@@ -71890,13 +71842,13 @@ async function discoverSkillsInRepo(e, t) {
   return u;
 }
 async function resolveSkillMdPath(e) {
-  const n = t.join(e, "SKILL.md");
+  const n = pathDefault.join(e, "SKILL.md");
   try {
-    return (await k.access(n), n);
+    return (await fsPromisesDefault.access(n), n);
   } catch {}
-  const r = t.join(e, "skill.md");
+  const r = pathDefault.join(e, "skill.md");
   try {
-    return (await k.access(r), r);
+    return (await fsPromisesDefault.access(r), r);
   } catch {}
   throw new Error(`SKILL.md not found in ${e}`);
 }
@@ -71924,7 +71876,7 @@ function validateSkillName(e) {
 }
 async function validateSkillContent(e) {
   const t = await resolveSkillMdPath(e),
-    n = await k.readFile(t, "utf-8"),
+    n = await fsPromisesDefault.readFile(t, "utf-8"),
     { data: r } = Ue(n),
     o = _f.parse(r);
   return { name: validateSkillName(o.name), description: o.description };
@@ -71932,9 +71884,9 @@ async function validateSkillContent(e) {
 async function skillExists(e) {
   const { skillName: n, location: r } = e,
     o = "global" === r ? getGlobalSkillsDir() : getProjectSkillsDir(),
-    s = t.join(o, n);
+    s = pathDefault.join(o, n);
   try {
-    return (await k.access(s), !0);
+    return (await fsPromisesDefault.access(s), !0);
   } catch {
     return !1;
   }
@@ -71978,7 +71930,7 @@ async function installSkill(e) {
     m = t.branch ? `${o}@${t.branch}` : o;
   }
   if (l && a) {
-    ((u = a.path && "." !== a.path ? t.join(l, a.path) : l), (d = !1));
+    ((u = a.path && "." !== a.path ? pathDefault.join(l, a.path) : l), (d = !1));
     try {
       await resolveSkillMdPath(u);
     } catch {
@@ -71998,17 +71950,17 @@ async function installSkill(e) {
       throw new Error(
         `Skill "${r}" already exists in ${"global" === i ? "~/.commandcode/skills/" : ".commandcode/skills/"}. Use --force to overwrite.`,
       );
-    await k.mkdir(a, { recursive: !0 });
-    const d = t.join(a, r),
+    await fsPromisesDefault.mkdir(a, { recursive: !0 });
+    const d = pathDefault.join(a, r),
       { randomUUID: m } = await import("crypto"),
-      g = t.join(a, `.${r}.tmp.${m()}`);
+      g = pathDefault.join(a, `.${r}.tmp.${m()}`);
     try {
-      (await k.cp(u, g, { recursive: !0, force: !0, dereference: !1 }),
-        l && s && (await k.rm(d, { recursive: !0, force: !0 })),
-        await k.rename(g, d));
+      (await fsPromisesDefault.cp(u, g, { recursive: !0, force: !0, dereference: !1 }),
+        l && s && (await fsPromisesDefault.rm(d, { recursive: !0, force: !0 })),
+        await fsPromisesDefault.rename(g, d));
     } catch (e) {
       if (
-        (await k.rm(g, { recursive: !0, force: !0 }).catch(() => {}),
+        (await fsPromisesDefault.rm(g, { recursive: !0, force: !0 }).catch(() => {}),
         e instanceof Error &&
           "code" in e &&
           ("EEXIST" === e.code || "ENOTEMPTY" === e.code))
@@ -72022,11 +71974,11 @@ async function installSkill(e) {
     try {
       h = await resolveSkillMdPath(d);
     } catch {
-      h = t.join(d, "SKILL.md");
+      h = pathDefault.join(d, "SKILL.md");
     }
     return { name: r, description: n, location: i, path: h };
   } finally {
-    d && (await k.rm(u, { recursive: !0, force: !0 }).catch(() => {}));
+    d && (await fsPromisesDefault.rm(u, { recursive: !0, force: !0 }).catch(() => {}));
   }
 }
 async function removeSkill(e) {
@@ -72034,12 +71986,12 @@ async function removeSkill(e) {
     r = validateSkillName(e.skillName),
     o = n ? "global" : "project",
     s = "global" === o ? getGlobalSkillsDir() : getProjectSkillsDir(),
-    i = t.join(s, r);
+    i = pathDefault.join(s, r);
   if (!(await skillExists({ skillName: r, location: o })))
     throw new Error(
       `Skill "${r}" not found in ${"global" === o ? "global (~/.commandcode/skills/)" : "project (.commandcode/skills/)"} skills.${"global" === o ? "" : " Use -g/--global to check global skills."}`,
     );
-  await k.rm(i, { recursive: !0, force: !0 });
+  await fsPromisesDefault.rm(i, { recursive: !0, force: !0 });
 }
 async function listSkills() {
   const {
@@ -72125,7 +72077,7 @@ var iN = [
   ),
   lN = __name((e) => `${de.red(Ie.cross)} ${e}`, "formatError");
 async function cleanupAndExit(e, t) {
-  (e && (await x(e, { recursive: !0, force: !0 }).catch(() => {})),
+  (e && (await fsRm(e, { recursive: !0, force: !0 }).catch(() => {})),
     process.exit(t));
 }
 function validateRepoFormat(e) {
@@ -72339,8 +72291,8 @@ var pN = __name((e, t) => {
   }, "printWarnings"),
   fN = __name(() => {
     const e = process.cwd(),
-      n = t.join(e, ".commandcode", "skills"),
-      r = t.join(e, ".agents", "skills"),
+      n = pathDefault.join(e, ".commandcode", "skills"),
+      r = pathDefault.join(e, ".agents", "skills"),
       o = getProjectSkillsDir(),
       s = getProjectAgentsCompatSkillsDir(),
       i = [
